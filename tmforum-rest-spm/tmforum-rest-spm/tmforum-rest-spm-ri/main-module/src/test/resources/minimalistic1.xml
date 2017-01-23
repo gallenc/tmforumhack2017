@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+     http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <!-- key section -->
+  <key id="label" for="all" attr.name="label" attr.type="string"></key>
+  <key id="namespace" for="graph" attr.name="namespace" attr.type="string"></key>
+
+  <key id="foreignSource" for="node" attr.name="foreignSource" attr.type="string"></key>
+  <key id="foreignID" for="node" attr.name="foreignID" attr.type="string"></key>
+  <key id="nodeID" for="node" attr.name="nodeID" attr.type="int"></key>
+  <key id="focus-strategy" for="graph" attr.name="focus-strategy" attr.type="string"></key>
+
+  <!-- shows up in the menu -->
+  <data key="label">Minimalistic GraphML Topology Provider</data>
+  <graph id="minicmalistic" edgedefault="undirected" >
+    <data key="namespace">minimalistic</data>
+
+    <node id="node2-camera">
+      <!-- <data key="label">North by north west</data> -->
+      <data key="foreignSource">opennms-test</data>
+      <data key="foreignID">1483632606160</data>
+    </node>
+    <node id="node1">
+      <!-- <data key="label">North by north west</data> -->
+      <data key="foreignSource">opennms-test</data>
+      <data key="foreignID">1483632521267</data>
+    </node>
+
+    <node id="node10" >
+          <!-- <data key="label">North by north west</data> -->
+      <data key="nodeID">10</data>
+    </node>
+
+    <node id="node4" />
+  </graph>
+</graphml>
+

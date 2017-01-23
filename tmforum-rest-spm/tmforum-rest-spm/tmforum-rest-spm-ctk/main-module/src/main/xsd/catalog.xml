@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <system systemId="http://graphml.graphdrawing.org/xmlns/1.1/graphml-structure.xsd" uri="./graphml-structure.xsd" />
+ <system systemId="http://www.w3.org/1999/xlink" uri="./xlink.xsd" />
+
+
+<!-- <xs:import namespace="http://www.w3.org/1999/xlink"  -->
+<!--            schemaLocation="http://graphml.graphdrawing.org/xmlns/1.1/xlink.xsd"> -->
+<!--   <system systemId="http://www.w3.org/2007/schema-for-xslt20.xsd" uri="./graphml-parseinfo.xsd" /> -->
+<!--   <system systemId="http://www.w3.org/2007/schema-for-xslt20.xsd" uri="./graphml-attributes.xsd" /> -->
+</catalog>

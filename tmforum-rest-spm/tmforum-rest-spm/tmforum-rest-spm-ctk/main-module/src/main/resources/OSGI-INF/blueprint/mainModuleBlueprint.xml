@@ -1,0 +1,57 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+  xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0"
+  xsi:schemaLocation="
+		http://www.osgi.org/xmlns/blueprint/v1.0.0
+		http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		
+		http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+		http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd
+		
+		http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0
+		http://aries.apache.org/schemas/blueprint-ext/blueprint-ext-1.1.xsd
+">
+
+  <!-- print startup message to karaf consol -->
+  <bean id="sayHello" class="org.opennms.plugins.graphml.asset.SayHello" destroy-method="destroyMethod">
+  </bean>
+
+  <!-- Configuration properties -->
+  <!-- <cm:property-placeholder id="esEventForwarderProperties" persistent-id="org.opennms.plugin.elasticsearch.rest.forwarder" -->
+  <!-- update-strategy="reload"> -->
+  <!-- <cm:default-properties> -->
+  <!-- <cm:property name="elasticsearchUrl" value="http://localhost:9200" /> -->
+  <!-- <cm:property name="esusername" value="" /> -->
+  <!-- <cm:property name="espassword" value="" /> -->
+  <!-- <cm:property name="logEventDescription" value="true" /> -->
+  <!-- <cm:property name="archiveRawEvents" value="true" /> -->
+  <!-- <cm:property name="archiveAlarms" value="true" /> -->
+  <!-- <cm:property name="archiveAlarmChangeEvents" value="true" /> -->
+  <!-- <cm:property name="archiveOldAlarmValues" value="true" /> -->
+  <!-- <cm:property name="archiveNewAlarmValues" value="true" /> -->
+  <!-- <cm:property name="maxQueueLength" value="1000" /> -->
+  <!-- <cm:property name="blockWhenFull" value="true" /> -->
+  <!-- <cm:property name="cache_max_ttl" value="0" /> set to zero to disable TTL -->
+  <!-- <cm:property name="cache_max_size" value="10000" /> set to zero to disable max size -->
+  <!-- </cm:default-properties> -->
+  <!-- </cm:property-placeholder> -->
+
+  <reference id="nodeDao" interface="org.opennms.netmgt.dao.api.NodeDao" availability="mandatory" />
+  <reference id="transactionOperations" interface="org.springframework.transaction.support.TransactionOperations" availability="mandatory" />
+
+  <bean id="nodeInfoRepository" class="org.opennms.plugins.graphml.asset.NodeInfoRepository">
+    <property name="nodeDao" ref="nodeDao" />
+    <property name="transactionOperations" ref="transactionOperations" />
+  </bean>
+
+  <bean id="eventIpcManager" class="org.opennms.netmgt.events.api.EventIpcManagerFactory" factory-method="getIpcManager" />
+
+  <bean id="assetPluginController" class="org.opennms.plugins.graphml.asset.AssetPluginController" init-method="init" destroy-method="destroy">
+    <property name="eventIpcManager" ref="eventIpcManager" />
+    <property name="nodeInfoRepository" ref="nodeInfoRepository" />
+  </bean>
+
+
+
+
+
+</blueprint>
