@@ -8,35 +8,43 @@
 
   <!-- Feature Definition -->
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>tmforum-rest-spm-ri</artifactId>
+  <artifactId>tmforum-rest-spm-ri.assembly</artifactId>
   <name>tmforum-rest-spm-ri</name>
-  <description>Feature definition for tmforum-rest-spm-ri</description>
-  <packaging>pom</packaging>
+  <description>assembly test for tmforum-rest-spm-ri</description>
+  <packaging>kar</packaging>
 
   <build>
 
     <plugins>
       <plugin>
-        <groupId>org.opennms.maven.plugins</groupId>
-        <artifactId>features-maven-plugin</artifactId>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>4.0.4</version>
         <executions>
           <execution>
-            <id>features.xml</id>
-            <phase>process-resources</phase>
+            <id>run</id>
             <goals>
-              <goal>generate-features-xml</goal>
+              <goal>run</goal>
             </goals>
             <configuration>
-              <bundles>
-                <!-- <bundle>wrap:mvn:io.searchbox/jest-common/${jestVersion}</bundle> -->
-                <!-- <bundle>wrap:mvn:io.searchbox/jest/${jestVersion}</bundle> -->
-                <!-- <bundle>wrap:mvn:io.searchbox/jest-complete-osgi/${jestVersion}</bundle> -->
+              <karafDistribution>mvn:org.apache.karaf/apache-karaf/${minionKarafVersion}/zip</karafDistribution>
+              <keepRunning>false</keepRunning>
+              <deployProjectArtifact>false</deployProjectArtifact>
+            </configuration>
+          </execution>
 
-                <!-- <bundle>wrap:mvn:org.apache.httpcomponents/httpcore-nio/${httpcoreVersion}</bundle> -->
-                <!-- <bundle>wrap:mvn:org.apache.httpcomponents/httpasyncclient/4.1.1</bundle> -->
-                <!-- <bundle>wrap:mvn:org.apache.httpcomponents/httpasyncclient/${httpclientVersion}</bundle> -->
 
-              </bundles>
+          <execution>
+            <id>generate</id>
+            <phase>package</phase>
+            <goals>
+              <goal>archive</goal>
+            </goals>
+            <configuration>
+              <destDir>${project.build.directory}</destDir>
+              <targetServerDirectory>${project.build.directory}/assembly</targetServerDirectory>
+              <targetFile>${project.file}</targetFile>
             </configuration>
           </execution>
         </executions>
@@ -52,6 +60,7 @@
       <artifactId>${productName}.main-module</artifactId>
       <version>${project.version}</version>
     </dependency>
+    
 
     <dependency>
       <groupId>org.apache.karaf.shell</groupId>
@@ -103,17 +112,23 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
-      <scope>provided</scope>
+<!--       <scope>provided</scope> -->
       <version>2.5</version>
     </dependency>
 
-
+    
 
 <!--     <dependency> -->
-<!--       <groupId>com.googlecode.json-simple</groupId> -->
-<!--       <artifactId>json-simple</artifactId> -->
-<!--       <version>${json-simpleVersion}</version> -->
+<!--       <groupId>org.openoss.karaf.features</groupId> -->
+<!--       <artifactId>tmforum-rest-spm-ri</artifactId> -->
+<!--       <version>0.0.1-SNAPSHOT</version> -->
 <!--     </dependency> -->
+
+    <!-- <dependency> -->
+    <!-- <groupId>com.googlecode.json-simple</groupId> -->
+    <!-- <artifactId>json-simple</artifactId> -->
+    <!-- <version>${json-simpleVersion}</version> -->
+    <!-- </dependency> -->
 
   </dependencies>
 

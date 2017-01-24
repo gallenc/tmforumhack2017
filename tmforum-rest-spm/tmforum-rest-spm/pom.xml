@@ -28,6 +28,7 @@
     <osgiVersion>5.0.0</osgiVersion>
     <slf4jVersion>1.7.21</slf4jVersion>
     <log4j2Version>2.5</log4j2Version>
+    <minionKarafVersion>4.0.5</minionKarafVersion>
 
   </properties>
 
@@ -176,6 +177,31 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junitVersion}</version>
+      </dependency>
+      
+           <!-- opennms Jersey implementation in Lib directory -->
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-server</artifactId>
+        <version>${jerseyVersion}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-servlet</artifactId>
+        <version>${jerseyVersion}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-core</artifactId>
+        <version>${jerseyVersion}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-client</artifactId>
+        <version>${jerseyVersion}</version>
       </dependency>
 
 
