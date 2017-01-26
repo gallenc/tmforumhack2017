@@ -1,0 +1,1 @@
+mvn archetype:generate -DarchetypeArtifactId=jersey-heroku-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=com.example -DartifactId=simple-heroku-webapp -Dpackage=com.example -DarchetypeVersion=2.25.1
