@@ -1,0 +1,52 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>org.openoss.karaf.features</groupId>
+    <artifactId>tmforum-rest-spm.parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <!-- Feature Definition -->
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>tmforum-rest-spm.karaf-assembly</artifactId>
+  <name>tmforum-rest-spm.karaf-assembly</name>
+  <description>assemble karaf for running kar files</description>
+  <packaging>pom</packaging>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.apache.karaf.tooling</groupId>
+        <artifactId>karaf-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>${minionKarafVersion}</version>
+
+        <executions>
+
+          <execution>
+            <id>run</id>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <karafDistribution>mvn:org.apache.karaf/apache-karaf/${minionKarafVersion}/zip</karafDistribution>
+              <keepRunning>false</keepRunning>
+              <deployProjectArtifact>false</deployProjectArtifact>
+            </configuration>
+          </execution>
+
+        </executions>
+      </plugin>
+    </plugins>
+
+  </build>
+
+  <dependencies>
+
+
+  </dependencies>
+
+
+</project>

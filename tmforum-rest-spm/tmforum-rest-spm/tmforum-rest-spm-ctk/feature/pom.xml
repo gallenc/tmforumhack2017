@@ -27,16 +27,25 @@
               <goal>generate-features-xml</goal>
             </goals>
             <configuration>
-              <bundles>
-                <!-- <bundle>wrap:mvn:io.searchbox/jest-common/${jestVersion}</bundle> -->
-                <!-- <bundle>wrap:mvn:io.searchbox/jest/${jestVersion}</bundle> -->
-                <!-- <bundle>wrap:mvn:io.searchbox/jest-complete-osgi/${jestVersion}</bundle> -->
+              <!-- <bundles> -->
+              <!-- <bundle>mvn:com.sun.jersey/jersey-server/${jerseyVersion}</bundle> -->
+              <!-- <bundle>mvn:com.sun.jersey/jersey-servlet/${jerseyVersion}</bundle> -->
+              <!-- <bundle>mvn:com.sun.jersey/jersey-core/${jerseyVersion}</bundle> -->
+              <!-- <bundle>mvn:com.sun.jersey/jersey-client/${jerseyVersion}</bundle> -->
+              <!-- <bundle>mvn:javax.ws.rs/jsr311-api/1.1.1</bundle> -->
+              <!-- <bundle>mvn:org.openoss.karaf.features/tmforum-rest-spm-ri/${project.version}</bundle> -->
+              <!-- </bundles> -->
+              <repositories>
+                <!-- <repository>mvn:org.apache.karaf.features/standard/${karafVersion}/xml/features</repository> -->
+                <repository>mvn:org.apache.karaf.features/standard/${minionKarafVersion}/xml/features</repository>
 
-                <!-- <bundle>wrap:mvn:org.apache.httpcomponents/httpcore-nio/${httpcoreVersion}</bundle> -->
-                <!-- <bundle>wrap:mvn:org.apache.httpcomponents/httpasyncclient/4.1.1</bundle> -->
-                <!-- <bundle>wrap:mvn:org.apache.httpcomponents/httpasyncclient/${httpclientVersion}</bundle> -->
-
-              </bundles>
+              </repositories>
+              <descriptor></descriptor>
+              <features>
+                <feature>http</feature>
+                <feature>http-whiteboard</feature>
+              </features>
+              
             </configuration>
           </execution>
         </executions>
@@ -53,27 +62,68 @@
       <version>${project.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.karaf.shell</groupId>
+      <artifactId>org.apache.karaf.shell.console</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
-<!--     <dependency> -->
-<!--       <groupId>com.googlecode.json-simple</groupId> -->
-<!--       <artifactId>json-simple</artifactId> -->
-<!--       <version>${json-simpleVersion}</version> -->
-<!--     </dependency> -->
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.compendium</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Jersey Dependencies -->
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-server</artifactId>
+      <!-- <scope>provided</scope> -->
+    </dependency>
+
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-servlet</artifactId>
+      <!-- <scope>provided</scope> -->
+    </dependency>
+
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-core</artifactId>
+      <!-- <scope>provided</scope> -->
+    </dependency>
+
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-client</artifactId>
+      <!-- <scope>provided</scope> -->
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>jsr311-api</artifactId>
+      <!-- <scope>provided</scope> -->
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+
+
+    <!-- <dependency> -->
+    <!-- <groupId>com.googlecode.json-simple</groupId> -->
+    <!-- <artifactId>json-simple</artifactId> -->
+    <!-- <version>${json-simpleVersion}</version> -->
+    <!-- </dependency> -->
 
   </dependencies>
 
-  <pluginRepositories>
-    <pluginRepository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <id>opennms-repo</id>
-      <name>OpenNMS Repository</name>
-      <url>http://maven.opennms.org/content/groups/opennms.org-release</url>
-    </pluginRepository>
-  </pluginRepositories>
 
 </project>
