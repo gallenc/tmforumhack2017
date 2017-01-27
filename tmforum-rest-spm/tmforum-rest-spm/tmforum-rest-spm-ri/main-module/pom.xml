@@ -25,7 +25,7 @@
             <!-- org.apache.felix.service.command, -->
             <!-- * -->
             <!-- </Import-Package> -->
-            <Export-Package>org.openoss.karaf.features.spm</Export-Package>
+            <Export-Package>org.openoss.karaf.features.tmforum.spm</Export-Package>
           </instructions>
         </configuration>
       </plugin>

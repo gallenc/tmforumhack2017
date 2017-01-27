@@ -1,4 +1,4 @@
-package org.openoss.karaf.features.spm.client.test.manual;
+package org.openoss.karaf.features.tmforum.spm.ri.client.test.manual;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.junit.Test;
-import org.openoss.karaf.features.spm.ri.client.SPMRestJerseyClient;
+import org.openoss.karaf.features.tmforum.spm.ri.client.SPMRestJerseyClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

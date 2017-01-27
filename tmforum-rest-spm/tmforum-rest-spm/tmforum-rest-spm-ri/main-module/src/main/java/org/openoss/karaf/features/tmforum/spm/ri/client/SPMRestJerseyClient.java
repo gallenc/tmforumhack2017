@@ -26,7 +26,7 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.openoss.karaf.features.spm.ri.client;
+package org.openoss.karaf.features.tmforum.spm.ri.client;
 
 import java.io.StringReader;
 

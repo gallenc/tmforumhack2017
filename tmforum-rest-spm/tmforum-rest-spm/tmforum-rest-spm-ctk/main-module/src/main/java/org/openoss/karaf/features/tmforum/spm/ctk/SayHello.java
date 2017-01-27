@@ -26,7 +26,7 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.plugins.graphml.asset;
+package org.openoss.karaf.features.tmforum.spm.ctk;
 
 /**
  * simple class to print startup message to karaf consol
@@ -36,10 +36,10 @@ package org.opennms.plugins.graphml.asset;
 public class SayHello {
 	public SayHello(){
 		super();
-		System.out.println("Hello - Asset Topology Pugin started 1");
+		System.out.println("Hello - Tmforum Service Problem Management (SPM) ReST CTK started");
 	}
 	
 	public void destroyMethod(){
-		System.out.println("Goodbye - Asset Topology Pugin stopped");
+		System.out.println("Goodbye - Tmforum Service Problem Management (SPM) ReST CTK stopped");
 	}
 }

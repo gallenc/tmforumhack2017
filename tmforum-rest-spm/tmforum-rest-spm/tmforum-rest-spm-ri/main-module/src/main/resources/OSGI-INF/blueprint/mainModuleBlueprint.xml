@@ -12,7 +12,7 @@
 ">
 
   <!-- print startup message to karaf consol -->
-  <bean id="sayHello" class="org.openoss.karaf.features.spm.ri.SayHello" destroy-method="destroyMethod">
+  <bean id="sayHello" class="org.openoss.karaf.features.tmforum.spm.ri.SayHello" destroy-method="destroyMethod">
   </bean>
 
   <!-- Configuration properties -->
@@ -38,14 +38,14 @@
 <!--   <reference id="nodeDao" interface="org.opennms.netmgt.dao.api.NodeDao" availability="mandatory" /> -->
 <!--   <reference id="transactionOperations" interface="org.springframework.transaction.support.TransactionOperations" availability="mandatory" /> -->
 
-<!--   <bean id="nodeInfoRepository" class="org.openoss.karaf.features.spm.ri.NodeInfoRepository"> -->
+<!--   <bean id="nodeInfoRepository" class="org.openoss.karaf.features.tmforum.spm.ri.NodeInfoRepository"> -->
 <!--     <property name="nodeDao" ref="nodeDao" /> -->
 <!--     <property name="transactionOperations" ref="transactionOperations" /> -->
 <!--   </bean> -->
 
 <!--   <bean id="eventIpcManager" class="org.opennms.netmgt.events.api.EventIpcManagerFactory" factory-method="getIpcManager" /> -->
 
-<!--   <bean id="assetPluginController" class="org.openoss.karaf.features.spm.ri.AssetPluginController" init-method="init" destroy-method="destroy"> -->
+<!--   <bean id="assetPluginController" class="org.openoss.karaf.features.tmforum.spm.ri.AssetPluginController" init-method="init" destroy-method="destroy"> -->
 <!--     <property name="eventIpcManager" ref="eventIpcManager" /> -->
 <!--     <property name="nodeInfoRepository" ref="nodeInfoRepository" /> -->
 <!--   </bean> -->

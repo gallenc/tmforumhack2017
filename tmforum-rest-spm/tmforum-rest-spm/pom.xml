@@ -147,6 +147,25 @@
                     <ignore />
                   </action>
                 </pluginExecution>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>org.apache.karaf.tooling</groupId>
+                    <artifactId>karaf-maven-plugin</artifactId>
+                    <versionRange>[1.0,)</versionRange>
+                    <goals>
+                      <goal>kar</goal>
+                      <goal>command</goal>
+                      <goal>deploy</goal>
+                      <goal>verify</goal>
+                      <goal>features-add-to-repository</goal>
+                      <goal>features-generate-descriptor</goal>
+                      <goal>run</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore />
+                  </action>
+                </pluginExecution>
               </pluginExecutions>
             </lifecycleMappingMetadata>
           </configuration>
@@ -257,7 +276,7 @@
         <artifactId>servlet-api</artifactId>
         <version>2.5</version>
       </dependency>
-      
+
     </dependencies>
   </dependencyManagement>
 

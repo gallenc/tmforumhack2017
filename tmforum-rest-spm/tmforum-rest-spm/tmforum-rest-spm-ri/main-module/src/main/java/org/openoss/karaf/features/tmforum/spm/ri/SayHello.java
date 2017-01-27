@@ -26,7 +26,7 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.openoss.karaf.features.spm.ri;
+package org.openoss.karaf.features.tmforum.spm.ri;
 
 /**
  * simple class to print startup message to karaf consol
@@ -36,10 +36,10 @@ package org.openoss.karaf.features.spm.ri;
 public class SayHello {
 	public SayHello(){
 		super();
-		System.out.println("Hello - Asset Topology Pugin started 1");
+		System.out.println("Hello - Tmforum Service Problem Management (SPM) ReST RI started");
 	}
 	
 	public void destroyMethod(){
-		System.out.println("Goodbye - Asset Topology Pugin stopped");
+		System.out.println("Goodbye - Tmforum Service Problem Management (SPM) ReST RI stopped");
 	}
 }
