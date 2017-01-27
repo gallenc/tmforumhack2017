@@ -35,22 +35,30 @@
   <!-- </cm:default-properties> -->
   <!-- </cm:property-placeholder> -->
 
-  <reference id="nodeDao" interface="org.opennms.netmgt.dao.api.NodeDao" availability="mandatory" />
-  <reference id="transactionOperations" interface="org.springframework.transaction.support.TransactionOperations" availability="mandatory" />
+<!--   <reference id="nodeDao" interface="org.opennms.netmgt.dao.api.NodeDao" availability="mandatory" /> -->
+<!--   <reference id="transactionOperations" interface="org.springframework.transaction.support.TransactionOperations" availability="mandatory" /> -->
 
-  <bean id="nodeInfoRepository" class="org.opennms.plugins.graphml.asset.NodeInfoRepository">
-    <property name="nodeDao" ref="nodeDao" />
-    <property name="transactionOperations" ref="transactionOperations" />
+<!--   <bean id="nodeInfoRepository" class="org.opennms.plugins.graphml.asset.NodeInfoRepository"> -->
+<!--     <property name="nodeDao" ref="nodeDao" /> -->
+<!--     <property name="transactionOperations" ref="transactionOperations" /> -->
+<!--   </bean> -->
+
+<!--   <bean id="eventIpcManager" class="org.opennms.netmgt.events.api.EventIpcManagerFactory" factory-method="getIpcManager" /> -->
+
+<!--   <bean id="assetPluginController" class="org.opennms.plugins.graphml.asset.AssetPluginController" init-method="init" destroy-method="destroy"> -->
+<!--     <property name="eventIpcManager" ref="eventIpcManager" /> -->
+<!--     <property name="nodeInfoRepository" ref="nodeInfoRepository" /> -->
+<!--   </bean> -->
+
+
+ <!-- Maps in the test resource files for serving basic test pages used for swagger -->
+  <!-- swagger api -->
+  <bean id="testResourceMapping" class="org.ops4j.pax.web.extender.whiteboard.runtime.DefaultResourceMapping">
+    <property name="alias" value="/tmforumsla/diagnostics" />
+    <property name="path" value="/diagnostics" />
   </bean>
 
-  <bean id="eventIpcManager" class="org.opennms.netmgt.events.api.EventIpcManagerFactory" factory-method="getIpcManager" />
-
-  <bean id="assetPluginController" class="org.opennms.plugins.graphml.asset.AssetPluginController" init-method="init" destroy-method="destroy">
-    <property name="eventIpcManager" ref="eventIpcManager" />
-    <property name="nodeInfoRepository" ref="nodeInfoRepository" />
-  </bean>
-
-
+  <service id="testResources" ref="testResourceMapping" interface="org.ops4j.pax.web.extender.whiteboard.ResourceMapping" />
 
 
 
