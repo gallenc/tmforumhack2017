@@ -1,9 +1,9 @@
-package org.openoss.karaf.features.tmforum.spm.model;
+package org.openoss.karaf.features.tmforum.spm.model.entity;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class OriginatorPartyRef {
+public class ResponsiblePartyRef {
 
 	private String href = null;
 

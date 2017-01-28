@@ -1,4 +1,4 @@
-package org.openoss.karaf.features.tmforum.spm.model;
+package org.openoss.karaf.features.tmforum.spm.model.entity;
 
 import java.util.Date;
 

@@ -30,29 +30,29 @@
         </configuration>
       </plugin>
 
-<!--       <plugin> -->
-<!--         <groupId>org.codehaus.mojo</groupId> -->
-<!--         <artifactId>jaxb2-maven-plugin</artifactId> -->
-<!--         <version>1.6</version> -->
-<!--         <executions> -->
-<!--           <execution> -->
-<!--             <id>xjc</id> -->
-<!--             <goals> -->
-<!--               <goal>xjc</goal> -->
-<!--             </goals> -->
-<!--           </execution> -->
-<!--         </executions> -->
-<!--         <configuration> -->
-<!--           <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory> -->
-<!--           Set the package of the generated code -->
-<!--           <packageName>org.opennms.plugin.graphdrawing.graphml</packageName> -->
-<!--           <sourceType>xsd</sourceType> -->
-<!--           <sources> -->
-<!--             <source>src/main/xsd</source> -->
-<!--           </sources> -->
-<!--           <catalog>src/main/catalog.xml</catalog> -->
-<!--         </configuration> -->
-<!--       </plugin> -->
+      <!-- <plugin> -->
+      <!-- <groupId>org.codehaus.mojo</groupId> -->
+      <!-- <artifactId>jaxb2-maven-plugin</artifactId> -->
+      <!-- <version>1.6</version> -->
+      <!-- <executions> -->
+      <!-- <execution> -->
+      <!-- <id>xjc</id> -->
+      <!-- <goals> -->
+      <!-- <goal>xjc</goal> -->
+      <!-- </goals> -->
+      <!-- </execution> -->
+      <!-- </executions> -->
+      <!-- <configuration> -->
+      <!-- <outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory> -->
+      <!-- Set the package of the generated code -->
+      <!-- <packageName>org.opennms.plugin.graphdrawing.graphml</packageName> -->
+      <!-- <sourceType>xsd</sourceType> -->
+      <!-- <sources> -->
+      <!-- <source>src/main/xsd</source> -->
+      <!-- </sources> -->
+      <!-- <catalog>src/main/catalog.xml</catalog> -->
+      <!-- </configuration> -->
+      <!-- </plugin> -->
 
 
       <plugin>
@@ -122,12 +122,12 @@
 
 
 
-<!--     <dependency> -->
-<!--       <groupId>com.googlecode.json-simple</groupId> -->
-<!--       <artifactId>json-simple</artifactId> -->
-<!--       <version>${json-simpleVersion}</version> -->
-<!--       <scope>provided</scope> -->
-<!--     </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>com.googlecode.json-simple</groupId> -->
+    <!-- <artifactId>json-simple</artifactId> -->
+    <!-- <version>${json-simpleVersion}</version> -->
+    <!-- <scope>provided</scope> -->
+    <!-- </dependency> -->
 
     <dependency>
       <groupId>com.sun.jersey</groupId>
@@ -137,6 +137,16 @@
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-client</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-server</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-json</artifactId>
       <scope>provided</scope>
     </dependency>
     <dependency>

@@ -35,23 +35,40 @@
   <!-- </cm:default-properties> -->
   <!-- </cm:property-placeholder> -->
 
-<!--   <reference id="nodeDao" interface="org.opennms.netmgt.dao.api.NodeDao" availability="mandatory" /> -->
-<!--   <reference id="transactionOperations" interface="org.springframework.transaction.support.TransactionOperations" availability="mandatory" /> -->
+  <!-- <reference id="nodeDao" interface="org.opennms.netmgt.dao.api.NodeDao" availability="mandatory" /> -->
+  <!-- <reference id="transactionOperations" interface="org.springframework.transaction.support.TransactionOperations" availability="mandatory" /> -->
 
-<!--   <bean id="nodeInfoRepository" class="org.openoss.karaf.features.tmforum.spm.ri.NodeInfoRepository"> -->
-<!--     <property name="nodeDao" ref="nodeDao" /> -->
-<!--     <property name="transactionOperations" ref="transactionOperations" /> -->
-<!--   </bean> -->
+  <!-- <bean id="nodeInfoRepository" class="org.openoss.karaf.features.tmforum.spm.ri.NodeInfoRepository"> -->
+  <!-- <property name="nodeDao" ref="nodeDao" /> -->
+  <!-- <property name="transactionOperations" ref="transactionOperations" /> -->
+  <!-- </bean> -->
 
-<!--   <bean id="eventIpcManager" class="org.opennms.netmgt.events.api.EventIpcManagerFactory" factory-method="getIpcManager" /> -->
+  <!-- <bean id="eventIpcManager" class="org.opennms.netmgt.events.api.EventIpcManagerFactory" factory-method="getIpcManager" /> -->
 
-<!--   <bean id="assetPluginController" class="org.openoss.karaf.features.tmforum.spm.ri.AssetPluginController" init-method="init" destroy-method="destroy"> -->
-<!--     <property name="eventIpcManager" ref="eventIpcManager" /> -->
-<!--     <property name="nodeInfoRepository" ref="nodeInfoRepository" /> -->
-<!--   </bean> -->
+  <!-- <bean id="assetPluginController" class="org.openoss.karaf.features.tmforum.spm.ri.AssetPluginController" init-method="init" destroy-method="destroy"> -->
+  <!-- <property name="eventIpcManager" ref="eventIpcManager" /> -->
+  <!-- <property name="nodeInfoRepository" ref="nodeInfoRepository" /> -->
+  <!-- </bean> -->
 
+  <!-- ReST Servelet configuration -->
 
+  <service interface="javax.servlet.http.HttpServlet">
+    <service-properties>
+      <entry key="alias" value="/serviceProblemManagement/rest/v1-0" />
+    </service-properties>
+    <bean class="com.sun.jersey.spi.container.servlet.ServletContainer">
+      <argument ref="serviceProblemRestApplication" />
+    </bean>
+  </service>
 
+  <bean id="serviceProblemRestApplication" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemRestApplication" />
+
+  <!-- setServiceProblemService(ServiceProblemService serviceProblemService) -->
+  <bean id="serviceLoader" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceLoader">
+    <argument ref="serviceProblemServiceImpl" />
+  </bean>
+
+  <bean id="serviceProblemServiceImpl" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService" />
 
 
 </blueprint>
