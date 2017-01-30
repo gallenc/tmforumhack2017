@@ -54,6 +54,50 @@
       <!-- </configuration> -->
       <!-- </plugin> -->
 
+      <plugin>
+        <groupId>com.github.kongchen</groupId>
+        <artifactId>swagger-maven-plugin</artifactId>
+        <version>${swagger-maven-plugin-version}</version>
+        <configuration>
+          <apiSources>
+
+            <apiSource>
+              <springmvc>false</springmvc>
+              <locations>
+                <location>org.openoss.karaf.features.tmforum.spm.model.service</location>
+              </locations>
+              <info>
+                <title>Service problem Management Rest</title>
+                <version>v1</version>
+                <description>Service problem Management Swagger Generation</description>
+                <termsOfService>
+
+                </termsOfService>
+                <contact>
+                  <email>cgallen@opennms.org</email>
+                  <name>Craig</name>
+                  <url>opennms.co.uk</url>
+                </contact>
+                <license>
+                  <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+                  <name>Apache 2.0</name>
+                </license>
+              </info>
+              <swaggerDirectory>${project.build.directory}/generated/swagger-ui</swaggerDirectory>
+            </apiSource>
+
+          </apiSources>
+        </configuration>
+
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -153,6 +197,20 @@
       <groupId>javax.ws.rs</groupId>
       <artifactId>jsr311-api</artifactId>
       <scope>provided</scope>
+    </dependency>
+
+    <!-- used for swagger annotations -->
+    <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-core</artifactId>
+      <scope>provided</scope>
+      <version>${swaggerVersion}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.ws.rs</groupId>
+          <artifactId>jsr311-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
   </dependencies>

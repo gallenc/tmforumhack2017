@@ -7,6 +7,7 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -14,9 +15,29 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import io.swagger.annotations.*;
+
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem;
 
+@Api(value="/serviceProblem", description = "Service Problem Management Api")
 public interface ServiceProblemRestService {
+
+	/**
+	 * GET /api/serviceProblem/{id}
+	 * 
+	 * Query Entities. GET must be used to retrieve a representation of a resource.
+
+	 * @param 
+	 * @return
+	 */
+	@ApiOperation(value = "GET ServiceProblem",
+			notes = "request for service problem",
+			position = 1)
+	@GET
+	@Path("/api/serviceProblem/{id}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response getServiceProblem(@ApiParam(value = "id of serviceProblem to return") @PathParam("id") String id);
 
 	/**
 	 * GET /api/serviceProblem/?{filter}&{attributeSelector}
@@ -30,11 +51,14 @@ public interface ServiceProblemRestService {
 	 * @param licence
 	 * @return
 	 */
+	@ApiOperation(value = "GET ServiceProblems",
+			notes = "query request for service problems",
+			position = 2)
 	@GET
-	@Path("/api/serviceProblem/")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getServiceProblem(@Context UriInfo info, @HeaderParam("Range") String range);
+	@Path("/api/serviceProblem")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response getServiceProblems(@Context UriInfo info, @HeaderParam("Range") String range);
 
 	/**
 	 * POST api/serviceProblem/
@@ -45,11 +69,14 @@ public interface ServiceProblemRestService {
 	 *            )
 	 * @return
 	 */
+	@ApiOperation(value = "POST ServiceProblem",
+			notes = "create new service problem",
+			position = 3)
 	@POST
 	@Path("/api/serviceProblem/")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response postServiceProblem(ServiceProblem serviceProblem);
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response postServiceProblem(@ApiParam(value = "service problem") ServiceProblem serviceProblem);
 
 	/**
 	 * PUT api/serviceProblem/{ID}
@@ -58,11 +85,14 @@ public interface ServiceProblemRestService {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation(value = "PUT ServiceProblems",
+			notes = "update service problem",
+			position = 4)
 	@PUT
-	@Path("/api/serviceProblem/")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response putServiceProblem(@QueryParam("id") String id, ServiceProblem serviceProblem);
+	@Path("/api/serviceProblem/{id}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response putServiceProblem(@ApiParam(value = "id of serviceProblem to return") @PathParam("id") String id,  ServiceProblem serviceProblem);
 
 	/**
 	 * PATCH api/serviceProblem/{ID}
@@ -78,10 +108,10 @@ public interface ServiceProblemRestService {
 	 * @return
 	 */
 	//@PATCH
-//	@Path("/api/serviceProblem/")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public Response patchServiceProblem(@QueryParam("id") String id, ServiceProblem serviceProblem);
+	//	@Path("/api/serviceProblem/{id}")
+	//	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	//	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	//	public Response patchServiceProblem(@PathParam("id") String id,  ServiceProblem serviceProblem);
 
 	/**
 	 * DELETE api/serviceProblem/{ID}
@@ -91,11 +121,15 @@ public interface ServiceProblemRestService {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation(value = "DELETE ServiceProblem",
+			notes = "delete service problem identified by id",
+			position = 6)
 	@DELETE
-	@Path("/api/serviceProblem/")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteServiceProblem(@QueryParam("id") String id);
+	@Path("/api/serviceProblem/{id}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+
+	public Response deleteServiceProblem(@ApiParam(value = "id of serviceProblem to return") @PathParam("id") String id);
 
 	/**
 	 * POST api/serviceProblem/ack
@@ -105,10 +139,13 @@ public interface ServiceProblemRestService {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation(value = "Acknowledge ServiceProblems",
+			notes = "acknowledge a list of service problems",
+			position = 6)
 	@POST
 	@Path("/api/serviceProblem/ack")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response ackServiceProblem(@QueryParam("id") String id);
 
 	/**
@@ -117,10 +154,13 @@ public interface ServiceProblemRestService {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation(value = "Unacknowledge ServiceProblems",
+			notes = "unacknowledge a list of service problems",
+			position = 7)
 	@POST
 	@Path("/api/serviceProblem/unack")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response unackServiceProblem(@QueryParam("id") String id);
 
 	/**
@@ -129,10 +169,13 @@ public interface ServiceProblemRestService {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation(value = "Group (correlate) ServiceProblems",
+			notes = "correlate service problems to a parent service problem problems",
+			position = 8)
 	@POST
 	@Path("/api/serviceProblem/group")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response groupServiceProblem();
 
 	/**
@@ -141,10 +184,13 @@ public interface ServiceProblemRestService {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation(value = "Ungroup (correlate) ServiceProblems",
+			notes = "correlate service problems to a parent service problem problems",
+			position = 9)
 	@POST
 	@Path("/api/serviceProblem/ungroup")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response ungroupServiceProblem();
 
 	/**
@@ -156,11 +202,27 @@ public interface ServiceProblemRestService {
 	 * parameter selector comma seperated list
 	 * List<String> ids = info.getQueryParameters().get("id");
 	 */
+	@ApiOperation(value = "get ServiceProblemEventRecord",
+			notes = "query for a list of ServiceProblemEventRecords",
+			position = 10)
 	@GET
 	@Path("/api/serviceProblem/serviceProblemEventRecord")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response getServiceProblemEventRecord(@Context UriInfo info, @HeaderParam("Range") String range);
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response getServiceProblemEventRecords(@Context UriInfo info, @HeaderParam("Range") String range);
+
+	/**
+	 * GET /api/serviceProblem/serviceProblemEventRecord/{id}
+	 * 
+	 */
+	@ApiOperation(value = "get ServiceProblemEventRecord",
+			notes = "retrieve a given ServiceProblemEventRecord",
+			position = 11)
+	@GET
+	@Path("/api/serviceProblem/serviceProblemEventRecord/{id}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response getServiceProblemEventRecord(@ApiParam(value = "id of ServiceProblemEventRecord to return") @PathParam("id") String id);
 
 
 

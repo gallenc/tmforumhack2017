@@ -32,7 +32,8 @@ public class ServiceProblemRestApplication extends Application {
 		Set<Class<?>> s = new HashSet<Class<?>>();
 		//s.add(LicenceServiceRestImpl.class);
 		//s.add(ServiceProblemRestService.class); //interface may be needed dont know
-		s.add(ServiceProblemRestServiceImpl.class);
+		s.add(ServiceProblemRestServiceImpl.class); 
+
 
 		//s.add(ProductPublisherRestImpl.class);
 		//s.add(ProductRegisterRestImpl.class);
