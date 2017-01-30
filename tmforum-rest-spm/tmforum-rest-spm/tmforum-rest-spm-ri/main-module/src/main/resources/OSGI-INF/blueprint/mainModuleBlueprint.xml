@@ -68,7 +68,16 @@
     <argument ref="serviceProblemServiceImpl" />
   </bean>
 
-  <bean id="serviceProblemServiceImpl" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService" />
+   <bean id="serviceProblemServiceImpl" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService" />
+  
+ <!-- Maps in the test resource files for serving basic test pages -->
+  <!-- swagger api -->
+  <bean id="testResourceMapping" class="org.ops4j.pax.web.extender.whiteboard.runtime.DefaultResourceMapping">
+    <property name="alias" value="/tmforum-spm-ri/diagnostics" />
+    <property name="path" value="/diagnostics" />
+  </bean>
+
+  <service id="testResources" ref="testResourceMapping" interface="org.ops4j.pax.web.extender.whiteboard.ResourceMapping" />
 
 
 </blueprint>

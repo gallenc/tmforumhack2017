@@ -54,7 +54,7 @@
  <!-- Maps in the test resource files for serving basic test pages used for swagger -->
   <!-- swagger api -->
   <bean id="testResourceMapping" class="org.ops4j.pax.web.extender.whiteboard.runtime.DefaultResourceMapping">
-    <property name="alias" value="/tmforumsla/diagnostics" />
+    <property name="alias" value="/tmforum-spm-ctk/diagnostics" />
     <property name="path" value="/diagnostics" />
   </bean>
 

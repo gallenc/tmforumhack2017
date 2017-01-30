@@ -33,6 +33,7 @@ public interface ServiceProblemRestService {
 	@GET
 	@Path("/api/serviceProblem/")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getServiceProblem(@Context UriInfo info, @HeaderParam("Range") String range);
 
 	/**
@@ -158,6 +159,7 @@ public interface ServiceProblemRestService {
 	@GET
 	@Path("/api/serviceProblem/serviceProblemEventRecord")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getServiceProblemEventRecord(@Context UriInfo info, @HeaderParam("Range") String range);
 
 
