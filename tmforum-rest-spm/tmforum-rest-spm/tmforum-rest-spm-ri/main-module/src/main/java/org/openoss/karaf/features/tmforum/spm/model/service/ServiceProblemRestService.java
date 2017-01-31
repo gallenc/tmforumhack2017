@@ -146,7 +146,7 @@ public interface ServiceProblemRestService {
 	@Path("/api/serviceProblem/ack")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response ackServiceProblem(@QueryParam("id") String id);
+	public Response ackServiceProblem(ServiceProblemAckRequest serviceProblemAckRequest);
 
 	/**
 	 * POST api/serviceProblem/unack
@@ -161,7 +161,7 @@ public interface ServiceProblemRestService {
 	@Path("/api/serviceProblem/unack")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response unackServiceProblem(@QueryParam("id") String id);
+	public Response unackServiceProblem(ServiceProblemUnAckRequest serviceProblemUnAckRequest);
 
 	/**
 	 * POST api/serviceProblem/group
@@ -176,7 +176,7 @@ public interface ServiceProblemRestService {
 	@Path("/api/serviceProblem/group")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response groupServiceProblem();
+	public Response groupServiceProblem(ServiceProblemGroupRequest groupRequest);
 
 	/**
 	 * POST api/serviceProblem/ungroup
@@ -191,7 +191,7 @@ public interface ServiceProblemRestService {
 	@Path("/api/serviceProblem/ungroup")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response ungroupServiceProblem();
+	public Response ungroupServiceProblem(ServiceProblemUngroupRequest ungroupRequest);
 
 	/**
 	 * GET /api/serviceProblem/serviceProblemEventRecord?{filter}&{attributeSelector}

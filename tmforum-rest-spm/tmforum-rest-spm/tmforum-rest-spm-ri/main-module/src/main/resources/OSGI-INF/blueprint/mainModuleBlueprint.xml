@@ -55,6 +55,10 @@
   <service interface="javax.servlet.http.HttpServlet">
     <service-properties>
       <entry key="alias" value="/serviceProblemManagement/rest/v1-0" />
+      <!-- The init-prefix property sets the prefix for all servlet properties to init. -->
+      <!-- This is analogous to using init-param elements in the web.xml configuration for WAR -->
+      <entry key="init-prefix" value="init." />
+      <entry key="init.com.sun.jersey.api.json.POJOMappingFeature" value="true" />
     </service-properties>
     <bean class="com.sun.jersey.spi.container.servlet.ServletContainer">
       <argument ref="serviceProblemRestApplication" />
@@ -68,9 +72,9 @@
     <argument ref="serviceProblemServiceImpl" />
   </bean>
 
-   <bean id="serviceProblemServiceImpl" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService" />
-  
- <!-- Maps in the test resource files for serving basic test pages -->
+  <bean id="serviceProblemServiceImpl" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService" />
+
+  <!-- Maps in the test resource files for serving basic test pages -->
   <!-- swagger api -->
   <bean id="testResourceMapping" class="org.ops4j.pax.web.extender.whiteboard.runtime.DefaultResourceMapping">
     <property name="alias" value="/tmforum-spm-ri/diagnostics" />

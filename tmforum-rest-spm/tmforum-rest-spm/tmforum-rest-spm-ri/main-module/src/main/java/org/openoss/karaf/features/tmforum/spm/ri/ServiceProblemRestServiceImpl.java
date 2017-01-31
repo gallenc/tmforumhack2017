@@ -36,9 +36,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.codehaus.jettison.json.JSONArray;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblemEventRecord;
+import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemAckRequest;
+import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemAckResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemGroupRequest;
+import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemGroupResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemUnAckResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemUngroupRequest;
 import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemRestService;
+import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemUnAckRequest;
+import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemUngroupResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemsResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -99,16 +109,31 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 		ServiceProblem sp2 = new ServiceProblem();
 		sp2.setId(Integer.toString(11));
 		sp2.setHref("serviceProblem/"+11);
-		
+
 		List<ServiceProblem> splist= new ArrayList<ServiceProblem>();
 		splist.add(sp);
 		splist.add(sp2);
-		
+
+
+		ServiceProblemsResponse serviceProblemResponse= new ServiceProblemsResponse();
+		serviceProblemResponse.setProblems(splist);
+
+		return Response.status(200).entity(serviceProblemResponse).build();
+
 		// see http://stackoverflow.com/questions/27643822/marshal-un-marshal-list-objects-in-jersey-jax-rs-using-jaxb
 		// does this work with json?
-		GenericEntity<List<ServiceProblem>> gelist = new GenericEntity<List<ServiceProblem>>(splist) {};
-		
-		return Response.status(200).entity(gelist).build();
+//		GenericEntity<List<ServiceProblem>> gelist = new GenericEntity<List<ServiceProblem>>(splist) {};
+//		return Response.status(200).entity(gelist).build();
+
+		//or try array http://stackoverflow.com/questions/10849526/return-jsonarray-instead-of-jsonobject-jersey-jax-rs
+		//ServiceProblem[] sparray= (ServiceProblem[]) splist.toArray();
+		//return Response.status(200).entity(sparray).build();
+		//		JSONArray arr = new JSONArray();
+		//		for (ServiceProblem sprob : splist) {
+		//		  arr.put(sprob);
+		//		}
+		//		
+		//		return Response.status(200).entity(arr).build();
 	}
 
 	/**
@@ -128,7 +153,10 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	public Response postServiceProblem(ServiceProblem serviceProblem) {
 		LOG.debug("postServiceProblem called");
 		// TODO Auto-generated method stub
-		return Response.status(500).entity("error not implimented").build();
+		// change id
+		ServiceProblem newServiceProblem = serviceProblem;
+		
+		return Response.status(201).entity(newServiceProblem).build();
 	}
 
 
@@ -148,7 +176,9 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	public Response putServiceProblem(String id, ServiceProblem serviceProblem) {
 		LOG.debug("putServiceProblem id="+id);
 		// TODO Auto-generated method stub
-		return Response.status(500).entity("error not implimented").build();
+		ServiceProblem newServiceProblem = serviceProblem;
+		
+		return Response.status(201).entity(newServiceProblem).build();
 	}
 
 
@@ -191,7 +221,7 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response deleteServiceProblem(@PathParam("id") String id){
-		LOG.debug("deleteServiceProblem called");
+		LOG.debug("deleteServiceProblem called for id="+id);
 		// TODO Auto-generated method stub
 		return Response.status(200).build();
 	}
@@ -209,10 +239,26 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
-	public Response ackServiceProblem(String id) {
+	public Response ackServiceProblem(ServiceProblemAckRequest serviceProblemAckRequest) {
 		LOG.debug("ackServiceProblem called");
+
 		// TODO Auto-generated method stub
-		return Response.status(200).build();
+		ServiceProblem sp = new ServiceProblem();
+		sp.setId(Integer.toString(10));
+		sp.setHref("serviceProblem/"+10);
+		ServiceProblem sp2 = new ServiceProblem();
+		sp2.setId(Integer.toString(11));
+		sp2.setHref("serviceProblem/"+11);
+
+		List<ServiceProblem> splist= new ArrayList<ServiceProblem>();
+		splist.add(sp);
+		splist.add(sp2);
+
+
+		ServiceProblemAckResponse serviceProblemAckResponse= new ServiceProblemAckResponse();
+		serviceProblemAckResponse.setProblems(splist);
+
+		return Response.status(200).entity(serviceProblemAckResponse).build();
 	}
 
 
@@ -227,10 +273,26 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
-	public Response unackServiceProblem(String id) {
+	public Response unackServiceProblem(ServiceProblemUnAckRequest serviceProblemUnAckRequest) {
 		LOG.debug("unackServiceProblem called");
 		// TODO Auto-generated method stub
-		return Response.status(200).build();
+		// TODO Auto-generated method stub
+		ServiceProblem sp = new ServiceProblem();
+		sp.setId(Integer.toString(10));
+		sp.setHref("serviceProblem/"+10);
+		ServiceProblem sp2 = new ServiceProblem();
+		sp2.setId(Integer.toString(11));
+		sp2.setHref("serviceProblem/"+11);
+
+		List<ServiceProblem> splist= new ArrayList<ServiceProblem>();
+		splist.add(sp);
+		splist.add(sp2);
+
+
+		ServiceProblemUnAckResponse serviceProblemUnAckResponse= new ServiceProblemUnAckResponse();
+		serviceProblemUnAckResponse.setProblems(splist);
+
+		return Response.status(200).entity(serviceProblemUnAckResponse).build();
 	}
 
 	/**
@@ -244,10 +306,12 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
-	public Response groupServiceProblem() {
+	public Response groupServiceProblem(ServiceProblemGroupRequest groupRequest) {
 		LOG.debug("groupServiceProblem called");
 		// TODO Auto-generated method stub
-		return Response.status(200).build();
+		
+		ServiceProblemGroupResponse serviceProblemGroupResponse = new ServiceProblemGroupResponse();
+		return Response.status(200).entity(serviceProblemGroupResponse).build();
 	}
 
 	/**
@@ -261,10 +325,12 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
-	public Response ungroupServiceProblem() {
+	public Response ungroupServiceProblem(ServiceProblemUngroupRequest unGroupRequest) {
 		LOG.debug("ungroupServiceProblem called");
 		// TODO Auto-generated method stub
-		return Response.status(200).build();
+		ServiceProblemUngroupResponse serviceProblemUngroupResponse = new ServiceProblemUngroupResponse();
+		return Response.status(200).entity(serviceProblemUngroupResponse).build();
+
 	}
 
 	/**
