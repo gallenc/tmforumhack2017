@@ -3,12 +3,14 @@ package org.openoss.karaf.features.tmforum.spm.model.entity;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class LocationRef {
+public class RelatedPartyRef {
 
 	private String href = null;
 
 	private String id = null;
 
+	private String role = null;
+	
 	public String getHref() {
 		return href;
 	}
@@ -24,5 +26,15 @@ public class LocationRef {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
 
 }

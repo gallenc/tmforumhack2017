@@ -1,12 +1,14 @@
 package org.openoss.karaf.features.tmforum.spm.model.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ServiceProblem {
-
+	
+	// properties
 	private String href = null;
 	private String id = null;
 
@@ -24,7 +26,46 @@ public class ServiceProblem {
 	private String statusChangeReason = null;
 	private String reason = null;
 	
+	// associations
+	private ImpactPattern impactPattern=null;
 	
+	private List<EventRef> relatedEvent =null; 
+	
+	private Extensionlnfo exensioninfo=null;
+	
+	private FirstAlert firstAlert = null;
+	
+	private List<TrackingRecord> trackingId=null;
+	
+	private List<Comment> comment=null;
+	
+	private List<RelatedServiceProblemRef> parentProblem=null;
+	private List<RelatedServiceProblemRef> underlyingProblem=null;
+	
+	private OriginatorPartyRef originatorParty=null;
+	
+	private List<RelatedPartyRef> relatedParty=null;
+	
+	private ResponsiblePartyRef responsibleParty=null;
+	
+	private List<LocationRef> affectedLocation=null;
+	
+	private List<ResourceRef> affectedResource=null;
+	private List<ResourceRef> rootCauseResource =null;
+	
+	
+	private List<ServiceRef> affectedService=null;
+	private List<ServiceRef> rootCauseService=null;
+	
+	private List<RelatedObjectRef> relatedObject=null;	
+	
+	private List<TroubleTicketRef> associatedTroubleTicket=null;
+	
+	private List<ResourceAlarmRef> underLyingAlarm=null;
+	
+	private List<SLAviolationRef> associatedSLAviolation=null;
+	
+	// getters and setters
 	
 	public String getHref() {
 		return href;
@@ -115,6 +156,129 @@ public class ServiceProblem {
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	public ImpactPattern getImpactPattern() {
+		return impactPattern;
+	}
+	public void setImpactPattern(ImpactPattern impactPattern) {
+		this.impactPattern = impactPattern;
+	}
+	public List<EventRef> getRelatedEvent() {
+		return relatedEvent;
+	}
+	public void setRelatedEvent(List<EventRef> relatedEvent) {
+		this.relatedEvent = relatedEvent;
+	}
+	public Extensionlnfo getExensioninfo() {
+		return exensioninfo;
+	}
+	public void setExensioninfo(Extensionlnfo exensioninfo) {
+		this.exensioninfo = exensioninfo;
+	}
+	public FirstAlert getFirstAlert() {
+		return firstAlert;
+	}
+	public void setFirstAlert(FirstAlert firstAlert) {
+		this.firstAlert = firstAlert;
+	}
+	public List<TrackingRecord> getTrackingId() {
+		return trackingId;
+	}
+	public void setTrackingId(List<TrackingRecord> trackingId) {
+		this.trackingId = trackingId;
+	}
+	public List<Comment> getComment() {
+		return comment;
+	}
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
+	}
+	public List<RelatedServiceProblemRef> getParentProblem() {
+		return parentProblem;
+	}
+	public void setParentProblem(List<RelatedServiceProblemRef> parentProblem) {
+		this.parentProblem = parentProblem;
+	}
+	public List<RelatedServiceProblemRef> getUnderlyingProblem() {
+		return underlyingProblem;
+	}
+	public void setUnderlyingProblem(
+			List<RelatedServiceProblemRef> underlyingProblem) {
+		this.underlyingProblem = underlyingProblem;
+	}
+	public OriginatorPartyRef getOriginatorParty() {
+		return originatorParty;
+	}
+	public void setOriginatorParty(OriginatorPartyRef originatorParty) {
+		this.originatorParty = originatorParty;
+	}
+	public List<RelatedPartyRef> getRelatedParty() {
+		return relatedParty;
+	}
+	public void setRelatedParty(List<RelatedPartyRef> relatedParty) {
+		this.relatedParty = relatedParty;
+	}
+	public ResponsiblePartyRef getResponsibleParty() {
+		return responsibleParty;
+	}
+	public void setResponsibleParty(ResponsiblePartyRef responsibleParty) {
+		this.responsibleParty = responsibleParty;
+	}
+	public List<LocationRef> getAffectedLocation() {
+		return affectedLocation;
+	}
+	public void setAffectedLocation(List<LocationRef> affectedLocation) {
+		this.affectedLocation = affectedLocation;
+	}
+	public List<ResourceRef> getAffectedResource() {
+		return affectedResource;
+	}
+	public void setAffectedResource(List<ResourceRef> affectedResource) {
+		this.affectedResource = affectedResource;
+	}
+	public List<ResourceRef> getRootCauseResource() {
+		return rootCauseResource;
+	}
+	public void setRootCauseResource(List<ResourceRef> rootCauseResource) {
+		this.rootCauseResource = rootCauseResource;
+	}
+	public List<ServiceRef> getAffectedService() {
+		return affectedService;
+	}
+	public void setAffectedService(List<ServiceRef> affectedService) {
+		this.affectedService = affectedService;
+	}
+	public List<ServiceRef> getRootCauseService() {
+		return rootCauseService;
+	}
+	public void setRootCauseService(List<ServiceRef> rootCauseService) {
+		this.rootCauseService = rootCauseService;
+	}
+	public List<RelatedObjectRef> getRelatedObject() {
+		return relatedObject;
+	}
+	public void setRelatedObject(List<RelatedObjectRef> relatedObject) {
+		this.relatedObject = relatedObject;
+	}
+	public List<TroubleTicketRef> getAssociatedTroubleTicket() {
+		return associatedTroubleTicket;
+	}
+	public void setAssociatedTroubleTicket(
+			List<TroubleTicketRef> associatedTroubleTicket) {
+		this.associatedTroubleTicket = associatedTroubleTicket;
+	}
+	public List<ResourceAlarmRef> getUnderLyingAlarm() {
+		return underLyingAlarm;
+	}
+	public void setUnderLyingAlarm(List<ResourceAlarmRef> underLyingAlarm) {
+		this.underLyingAlarm = underLyingAlarm;
+	}
+	public List<SLAviolationRef> getAssociatedSLAviolation() {
+		return associatedSLAviolation;
+	}
+	public void setAssociatedSLAviolation(
+			List<SLAviolationRef> associatedSLAviolation) {
+		this.associatedSLAviolation = associatedSLAviolation;
 	}
 	
 	

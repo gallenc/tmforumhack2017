@@ -24,5 +24,72 @@ public class ChangeRequest {
 	// impactedEntity. Entity
 	// changeRequestSpecification: speciﬁcation
 	// changeRequestCharacteristic: characteristic
+	
+	public String getHref() {
+		return href;
+	}
+	public void setHref(String href) {
+		this.href = href;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getExternalId() {
+		return externalId;
+	}
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
+	}
+	public Date getScheduledDate() {
+		return scheduledDate;
+	}
+	public void setScheduledDate(Date scheduledDate) {
+		this.scheduledDate = scheduledDate;
+	}
+	public Date getCompetionDate() {
+		return competionDate;
+	}
+	public void setCompetionDate(Date competionDate) {
+		this.competionDate = competionDate;
+	}
+	public Date getPlannedStartTime() {
+		return plannedStartTime;
+	}
+	public void setPlannedStartTime(Date plannedStartTime) {
+		this.plannedStartTime = plannedStartTime;
+	}
+	public Date getPlannedEndTime() {
+		return plannedEndTime;
+	}
+	public void setPlannedEndTime(Date plannedEndTime) {
+		this.plannedEndTime = plannedEndTime;
+	}
+	public Date getActualStartTime() {
+		return actualStartTime;
+	}
+	public void setActualStartTime(Date actualStartTime) {
+		this.actualStartTime = actualStartTime;
+	}
+	public Date getActualEndTime() {
+		return actualEndTime;
+	}
+	public void setActualEndTime(Date actualEndTime) {
+		this.actualEndTime = actualEndTime;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }
