@@ -1,4 +1,4 @@
-package org.openoss.karaf.features.tmforum.spm.model.service;
+package org.openoss.karaf.features.tmforum.spm.model.service.rest;
 
 import java.util.List;
 

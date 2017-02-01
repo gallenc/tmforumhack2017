@@ -15,6 +15,8 @@
 
 package org.openoss.karaf.features.tmforum.spm.ri;
 
+import org.openoss.karaf.features.tmforum.spm.api.service.ServiceProblemService;
+
 /** used to statically pass service references to Jersey ReST classes
  * 
  * @author cgallen

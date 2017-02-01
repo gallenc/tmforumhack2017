@@ -1,4 +1,4 @@
-package org.openoss.karaf.features.tmforum.spm.model.service;
+package org.openoss.karaf.features.tmforum.spm.model.service.rest;
 
 import java.util.List;
 
@@ -6,18 +6,19 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.openoss.karaf.features.tmforum.spm.api.service.ErrorMessage;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem;
 import org.openoss.karaf.features.tmforum.spm.model.entity.TrackingRecord;
 
+
 @XmlRootElement()
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class ServiceProblemAckRequest {
+public class ServiceProblemsResponse {
 
 	List<ServiceProblem> problems=null;
-	TrackingRecord trackingRecord=null;
-	
 
 	public List<ServiceProblem> getProblems() {
 		return problems;
@@ -29,14 +30,18 @@ public class ServiceProblemAckRequest {
 	public void setProblems(List<ServiceProblem> problems) {
 		this.problems = problems;
 	}
+    
+	// NOT IN STANDARD
+	ErrorMessage reportedError=null;
+	
 
-	public TrackingRecord getTrackingRecord() {
-		return trackingRecord;
+	public ErrorMessage getReportedError() {
+		return reportedError;
 	}
 
-	@XmlElementRef()
-	public void setTrackingRecord(TrackingRecord trackingRecord) {
-		this.trackingRecord = trackingRecord;
+	@XmlElement()
+	public void setReportedError(ErrorMessage reportedError) {
+		this.reportedError = reportedError;
 	}
 	
 }

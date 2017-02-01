@@ -64,7 +64,7 @@
             <apiSource>
               <springmvc>false</springmvc>
               <locations>
-                <location>org.openoss.karaf.features.tmforum.spm.model.service</location>
+                <location>org.openoss.karaf.features.tmforum.spm.model.service.rest</location>
               </locations>
               <info>
                 <title>Service problem Management Rest</title>

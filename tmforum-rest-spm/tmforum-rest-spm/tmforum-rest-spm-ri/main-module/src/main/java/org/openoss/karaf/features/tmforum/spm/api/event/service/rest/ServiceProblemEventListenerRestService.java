@@ -1,4 +1,4 @@
-package org.openoss.karaf.features.tmforum.spm.model.event.service;
+package org.openoss.karaf.features.tmforum.spm.api.event.service.rest;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;

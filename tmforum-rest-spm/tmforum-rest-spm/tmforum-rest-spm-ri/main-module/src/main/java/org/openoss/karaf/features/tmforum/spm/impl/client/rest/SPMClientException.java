@@ -1,4 +1,4 @@
-package org.openoss.karaf.features.tmforum.spm.ri.client;
+package org.openoss.karaf.features.tmforum.spm.impl.client.rest;
 
 public class SPMClientException extends Exception {
 

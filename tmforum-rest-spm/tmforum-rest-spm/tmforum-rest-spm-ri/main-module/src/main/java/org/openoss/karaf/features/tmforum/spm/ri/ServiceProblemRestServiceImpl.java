@@ -33,22 +33,23 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.codehaus.jettison.json.JSONArray;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblemEventRecord;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemAckRequest;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemAckResponse;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemGroupRequest;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemGroupResponse;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemUnAckResponse;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemUngroupRequest;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemRestService;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemUnAckRequest;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemUngroupResponse;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemsResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemAckRequest;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemAckResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemGroupRequest;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemGroupResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemRestService;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUnAckRequest;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUnAckResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUngroupRequest;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUngroupResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemsResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,13 +59,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 
 	// curl -H Accept:application/json http://localhost:8181/serviceProblemManagement/rest/v1-0/spm/api/serviceProblem/10
 
-	/**
-	 * GET /api/serviceProblem/{id}
-	 * 
-	 * Query Entities. GET must be used to retrieve a representation of a resource.
-
-	 * @param 
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#getServiceProblem(java.lang.String)
 	 */
 	@GET
 	@Path("/api/serviceProblem/{id}")
@@ -82,17 +78,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 
 	// curl -H Accept:application/json http://localhost:8181/serviceProblemManagement/rest/v1-0/spm/api/serviceProblem/?id=10
 
-	/**
-	 * GET /api/serviceProblem/?{filter}&{attributeSelector}
-	 * 
-	 * Query Entities. GET must be used to retrieve a representation of a resource.
-	 * 
-	 * see example https://www.mkyong.com/webservices/jax-rs/jax-rs-queryparam-example/
-	 * String fields = info.getQueryParameters().getFirst("fields");
-	 * parameter selector comma seperated list
-	 * List<String> ids = info.getQueryParameters().get("id");
-	 * @param licence
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#getServiceProblems(javax.ws.rs.core.UriInfo, java.lang.String)
 	 */
 	@GET
 	@Path("/api/serviceProblem/")
@@ -102,6 +89,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	public Response getServiceProblems(@Context UriInfo info, @HeaderParam("Range") String range) {
 		LOG.debug("getServiceProblems range="+range+" requestUri="+info.getRequestUri());
 
+		MultivaluedMap<String, String> queryParams = info.getQueryParameters();
+		
 		// TODO Auto-generated method stub
 		ServiceProblem sp = new ServiceProblem();
 		sp.setId(Integer.toString(10));
@@ -136,14 +125,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 		//		return Response.status(200).entity(arr).build();
 	}
 
-	/**
-	 * POST api/serviceProblem/
-	 * 
-	 * Create Entity POST must be used to create a new resource
-	 * 
-	 * @param serviceProblem
-	 *            )
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#postServiceProblem(org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem)
 	 */
 	@POST
 	@Path("/api/serviceProblem/")
@@ -161,12 +144,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 
 
 
-	/**
-	 * PUT api/serviceProblem/{ID}
-	 * Complete Update of an Entity PUT must be used to completely update a resource identified by its resource URI
-	 * 
-	 * @param id
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#putServiceProblem(java.lang.String, org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem)
 	 */
 	@PUT
 	@Path("/api/serviceProblem/")
@@ -207,13 +186,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//		return Response.status(200).build();
 	//	}
 
-	/**
-	 * DELETE api/serviceProblem/{ID}
-	 * 
-	 * Remove an Entity DELETE must be used to remove a resource
-	 * 
-	 * @param id
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#deleteServiceProblem(java.lang.String)
 	 */
 	@DELETE
 	@Path("/api/serviceProblem/{id}")
@@ -226,13 +200,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 		return Response.status(200).build();
 	}
 
-	/**
-	 * POST api/serviceProblem/ack
-	 * 
-	 * Execute an Action on an Entity POST must be used to execute Task Resources
-	 * 
-	 * @param id
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#ackServiceProblem(org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemAckRequest)
 	 */
 	@POST
 	@Path("/api/serviceProblem/ack")
@@ -262,11 +231,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	}
 
 
-	/**
-	 * POST api/serviceProblem/unack
-	 * 
-	 * @param id
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#unackServiceProblem(org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUnAckRequest)
 	 */
 	@POST
 	@Path("/api/serviceProblem/unack")
@@ -295,11 +261,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 		return Response.status(200).entity(serviceProblemUnAckResponse).build();
 	}
 
-	/**
-	 * POST api/serviceProblem/group
-	 * 
-	 * @param id
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#groupServiceProblem(org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemGroupRequest)
 	 */
 	@POST
 	@Path("/api/serviceProblem/group")
@@ -314,11 +277,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 		return Response.status(200).entity(serviceProblemGroupResponse).build();
 	}
 
-	/**
-	 * POST api/serviceProblem/ungroup
-	 * 
-	 * @param id
-	 * @return
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#ungroupServiceProblem(org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUngroupRequest)
 	 */
 	@POST
 	@Path("/api/serviceProblem/ungroup")
@@ -333,14 +293,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 
 	}
 
-	/**
-	 * GET /api/serviceProblem/serviceProblemEventRecord?{filter}&{attributeSelector}
-	 * 
-	 * see example
-	 * https://www.mkyong.com/webservices/jax-rs/jax-rs-queryparam-example/
-	 * String fields = info.getQueryParameters().getFirst("fields");
-	 * parameter selector comma seperated list
-	 * List<String> ids = info.getQueryParameters().get("id");
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#getServiceProblemEventRecords(javax.ws.rs.core.UriInfo, java.lang.String)
 	 */
 	@GET
 	@Path("/api/serviceProblem/serviceProblemEventRecord")
@@ -356,9 +310,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 		return Response.status(200).entity(sper).build();
 	}
 
-	/**
-	 * GET /api/serviceProblem/serviceProblemEventRecord/{id}
-	 * 
+	/* (non-Javadoc)
+	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#getServiceProblemEventRecord(java.lang.String)
 	 */
 	@GET
 	@Path("/api/serviceProblem/serviceProblemEventRecord/{id}")

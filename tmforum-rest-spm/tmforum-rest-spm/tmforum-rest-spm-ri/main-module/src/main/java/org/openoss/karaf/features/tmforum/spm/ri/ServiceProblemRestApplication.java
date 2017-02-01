@@ -20,7 +20,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemRestService;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemRestService;
 
 public class ServiceProblemRestApplication extends Application {
 

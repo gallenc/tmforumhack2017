@@ -17,7 +17,7 @@ import org.openoss.karaf.features.tmforum.spm.model.entity.ResponsiblePartyRef;
 import org.openoss.karaf.features.tmforum.spm.model.entity.SLAviolationRef;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem;
 import org.openoss.karaf.features.tmforum.spm.model.entity.TroubleTicketRef;
-import org.openoss.karaf.features.tmforum.spm.model.service.ServiceProblemRestService;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemRestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
