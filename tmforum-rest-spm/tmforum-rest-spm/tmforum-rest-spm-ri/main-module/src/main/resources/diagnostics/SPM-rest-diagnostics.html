@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!--  Copyright 2014 OpenNMS Group Inc., Entimoss ltd. -->
+<!--  Licensed under the Apache License, Version 2.0 (the "License"); -->
+<!--  you may not use this file except in compliance with the License. -->
+<!--  You may obtain a copy of the License at -->
+<!-- -->
+<!--     http://www.apache.org/licenses/LICENSE-2.0 -->
+<!-- -->
+<!--  Unless required by applicable law or agreed to in writing, software -->
+<!--  distributed under the License is distributed on an "AS IS" BASIS, -->
+<!--  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. -->
+<!--  See the License for the specific language governing permissions and -->
+<!--  limitations under the License. -->
+<html>
+<head>
+<title>Licence Manager Test Page</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<!-- https://code.google.com/p/javascriptbase64/ MIT licence -->
+<script src="../diagnostics/base64.js"></script>
+<script>
+	function onLoad() {
+		// default values for test page
+		var user = "admin";
+		var password = "admin";
+		var base_url = "http://localhost:8181/serviceProblemManagement/rest/v1-0"
+
+		var getURL_1_url = "/spm/api/serviceProblem/{id}";
+		var getURL_1_data = "NOT DEFINED";
+
+		var deleteURL_1_url = "/spm/api/serviceProblem/{id}";
+		var deleteURL_1_data = "NOT DEFINED";
+
+		var postURL_1_url = "/spm/api/serviceProblem/{id}";
+		var postURL_1_data = "TBD3";
+
+		var putURL_1_url = "/spm/api/serviceProblem/{id}";
+		var putURL_1_data = "TBD4";
+
+		var patchURL_1_url = "/spm/api/serviceProblem/{id}";
+		var patchURL_1_data = "TBD5";
+
+		// username password default
+		document.getElementById('user').value = user;
+		document.getElementById('password').value = password;
+		document.getElementById('base_url').value = base_url;
+
+		//post command values
+		document.getElementById('getURL_1').value = getURL_1_url;
+		document.getElementById('deleteURL_1').value = deleteURL_1_url;
+		document.getElementById('postURL_1').value = postURL_1_url;
+		document.getElementById('putURL_1').value = putURL_1_url;
+		document.getElementById('patchURL_1').value = patchURL_1_url;
+
+	}
+
+	// uses HTML POST to send an xml message and asynchronouly receive a reply
+	function sendPOSTXMLDoc(postRequest, xmlMessage) {
+		sendCOMMANDXmlDoc(postRequest, xmlMessage, "POST")
+	}
+
+	// uses HTML GET to send an xml message and asynchronouly receive a reply
+	function sendGETXMLDoc(postRequest, xmlMessage) {
+		sendCOMMANDXmlDoc(postRequest, xmlMessage, "GET")
+	}
+
+	// uses HTML PUT to send an xml message and asynchronouly receive a reply
+	function sendPUTXMLDoc(postRequest, xmlMessage) {
+		sendCOMMANDXmlDoc(postRequest, xmlMessage, "PUT")
+	}
+
+	// uses HTML PATCH to send an xml message and asynchronouly receive a reply
+	function sendPATCHXMLDoc(postRequest, xmlMessage) {
+		sendCOMMANDXmlDoc(postRequest, xmlMessage, "PATCH")
+	}
+
+	function sendCOMMANDXmlDoc(postRequest, xmlMessage, commandtype) {
+
+		//clear response panel
+		document.getElementById("eventResponse").value = "";
+		document.getElementById("httpresponsecode").value = "";
+
+		var user = document.getElementById('user').value;
+		var password = document.getElementById('password').value;
+
+		var xmlhttp;
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+		
+		// code for IE6, IE5 not implimented
+
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				document.getElementById("httpresponsecode").value = xmlhttp.status;
+				document.getElementById("httpresponsetype").value = xmlhttp.responseType;
+              	document.getElementById("eventResponse").value = xmlhttp.responseText;
+			} else if (xmlhttp.readyState == 4) {
+				document.getElementById("httpresponsecode").value = xmlhttp.status;
+				document.getElementById("httpresponsetype").value = xmlhttp.responseType;
+              	document.getElementById("eventResponse").value = xmlhttp.responseText;
+			}
+		};
+
+		xmlhttp.open(commandtype, postRequest, true);
+		xmlhttp.setRequestHeader('Accept', 'application/json');
+		xmlhttp.setRequestHeader("Content-type", "application/json");
+		xmlhttp.setRequestHeader("Authorization", "Basic "
+				+ Base64.encode(user + ":" + password));
+		xmlhttp.send(JSON.stringify(xmlMessage));
+	}
+
+	// button specific post requests
+
+	function getURL_1_button() {
+		var base_url = document.getElementById('base_url').value;
+		var postRequest = base_url+document.getElementById('getURL_1').value;
+		var xmlMessage = "";
+		sendGETXMLDoc(postRequest, xmlMessage);
+	}
+
+	function deleteURL_1_button() {
+		var base_url = document.getElementById('base_url').value;
+		var postRequest = base_url+document.getElementById('deleteURL_1').value;
+		var xmlMessage = "";
+		sendGETXMLDoc(postRequest, xmlMessage);
+	}
+
+	function postURL_1_button() {
+		var base_url = document.getElementById('base_url').value;
+		var postRequest = base_url+document.getElementById('postURL_1').value;
+		var xmlMessage = document.getElementById('postURL_1_data').value;
+		sendPOSTXMLDoc(postRequest, xmlMessage);
+	}
+
+	function putURL_1_button() {
+		var base_url = document.getElementById('base_url').value;
+		var postRequest = base_url+document.getElementById('putURL_1').value;
+		var xmlMessage = document.getElementById('putURL_1_data').value;
+		sendPUTXMLDoc(postRequest, xmlMessage);
+	}
+
+	function patchURL_1_button() {
+		var base_url = document.getElementById('base_url').value;
+		var postRequest = base_url+document.getElementById('patchURL_1').value;
+		var xmlMessage = document.getElementById('patchURL_1_data').value;
+		sendPATCHXMLDoc(postRequest, xmlMessage);
+	}
+</script>
+<!-- This positions the response text always visible on the right when scrolling -->
+<style type="text/css">
+#main-container {
+	width: 990px;
+	font-size: xx-small;
+}
+
+#left-column {
+	width: 500px;
+	float: left;
+	margin-left: 15px;
+}
+
+#right-column {
+	position: fixed;
+	left: 850px;
+	top: 20px;
+}
+</style>
+</head>
+<body onload="onLoad()">
+  <div id="main-container">
+    <div id="left-column">
+      <h1>SPM interface ReST Test Page</h1>
+      <p>This page provides very simple tests for the SPM interface</p>
+
+      <form name="usrform">
+        <p>
+          <input type="text" id="base_url" style="width: 600px"> interface base url
+        </p>
+        <p>
+          <input type="text" id="user"> user (http basic authentication user name)
+        </p>
+        <p>
+          <input type="text" id="password"> password (http basic authentication password)
+        </p>
+      </form>
+
+      <h2>Service Problem</h2>
+      <p>Service problem interface</p>
+      <table border=1>
+        <tr>
+          <th style="width: 300px">Command</th>
+          <th style="width: 300px">Example</th>
+        </tr>
+        <tr>
+          <td>
+            <p>GET /api/serviceProblem/{id}</p>
+            <p>GET /api/serviceProblem/?{filter}&{attributeSelector}</p>
+          </td>
+          <td>
+            <p>URL parameters</p> <textarea rows="1" cols="75" id="getURL_1" form="usrform" style="resize: none;"></textarea>
+            <button type="button" onclick="getURL_1_button()">GET Service Problem</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>DELETE api/serviceProblem/{ID}</td>
+          <td>
+            <p>URL parameters</p> <textarea rows="1" cols="75" id="deleteURL_1" form="usrform" style="resize: none;"></textarea>
+            <button type="button" onclick="deleteURL_1_button()">DELETE Service Problem</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>POST api/serviceProblem/</td>
+          <td>
+            <p>URL parameters</p> <textarea rows="1" cols="75" id="postURL_1" form="usrform" style="resize: none;"></textarea>
+            <p>Service Problem</p> <textarea rows="15" cols="75" id="postURL_1_data" form="usrform" style="resize: none;"></textarea>
+            <button type="button" onclick="postURL_1_button()">POST Service Problem</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>PUT api/serviceProblem/{ID}</td>
+          <td>
+            <p>URL parameters</p> <textarea rows="1" cols="75" id="putURL_1" form="usrform" style="resize: none;"></textarea>
+            <p>Service Problem</p> <textarea rows="15" cols="75" id="putURL_1_data" form="usrform" style="resize: none;"></textarea>
+            <button type="button" onclick="putURL_1_button()">PUT Service Problem</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>PATCH api/serviceProblem/{ID}</td>
+          <td>
+            <p>URL parameters</p> <textarea rows="1" cols="75" id="patchURL_1" form="usrform" style="resize: none;"></textarea>
+            <p>Service Problem</p> <textarea rows="15" cols="75" id="patchURL_1_data" form="usrform" style="resize: none;"></textarea>
+            <button type="button" onclick="patchURL_1_button()">PATCH Service Problem</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>not implemented</td>
+          <td>
+            <p>POST api/serviceProblem/ack</p>
+            <p>POST api/serviceProblem/unack</p>
+            <p>POST api/serviceProblem/group</p>
+            <p>POST api/serviceProblem/ungroup</p>
+            <p>GET /api/serviceProblem/serviceProblemEventRecord?{filter}&{attributeSelector}</p>
+            <p>GET /api/serviceProblem/serviceProblemEventRecord/{id}</p>
+          </td>
+        </tr>
+      </table>
+
+
+    </div>
+
+    <div id="right-column">
+      <h2>Command Response</h2>
+      <h3>Http response code</h3>
+      <textarea rows="1" cols="10" id="httpresponsecode" style="resize: none;"></textarea>
+      <h3>Http response type</h3>
+      <textarea rows="1" cols="10" id="httpresponsetype" style="resize: none;"></textarea>
+      <h3>Http response content</h3>
+      <textarea rows="20" cols="50" id="eventResponse"></textarea>
+      <BR>
+    </div>
+
+  </div>
+</body>
+</html>

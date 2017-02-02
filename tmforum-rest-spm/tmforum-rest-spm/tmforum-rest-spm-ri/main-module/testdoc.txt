@@ -1,0 +1,174 @@
+{
+  "id" : "problemxxxx0000",
+  "correlationId": "xxxxxx",
+  "originatingSystem": "System_001",
+  "category": "supplier.originated",
+  "href" : "http://api/serviceProblem/problemxxxx0000",
+"impactImportanceFactor" : "0",
+"priority" : "1",
+"description" : "connection failure between Tokyo and Osaka",
+  "problemEscalation": "0",
+  "timeRaised" : "2016-07-20 xx:xx:xx.xxx",
+  "timeChanged" : "2016-07-20 xx:xx:xx.xxx",
+  "statusChangeDate" : "2016-07-20 xx:xx:xx.xxx",
+  "statusChangeReason": "problem analysis has been completed in NP1",
+  "resolutionDate" : "2016-07-21 xx:xx:xx.xxx ",
+  "status" : "resolved",
+  "reason": "Failure of resource ‘NP1_Resource_1’ in NP1",
+  "affectedServiceNumber": "2",
+  "firstAlert": {
+      "type": "Trouble Ticket",
+      "id" : "NP1_TT_0000000",
+      "href" : "http://api/troubletiket/NP1_TT_000000"
+},
+  "responsibleParty" : {
+"role" : "Network Provider",
+"id" : "NP1",
+"href": "http://api/party/NP1"
+  },
+  "originatorParty" : {
+"role" : "Network Provider",
+"id" : "NP1",
+"href": "http://api/party/NP1"
+},
+  "relatedParty" : [
+{
+      "role" : "Network Provider",
+      "id" : "NP1",
+      "href": "http://api/party/NP1"
+    },
+{
+      "role" : "Service Provider",
+      "id" : "SP1",
+      "href": "http://api/party/SP1"
+    },
+{
+      "role" : "Service Provider",
+      "id" : "SP3",
+      "href": "http://api/party/SP3"
+    }
+   ],
+  "affectedService" : [
+    {
+      "id" : "NP1_Tokyo_Osaka",
+      "href" : " http://api/NP1/service/NW1_Tokyo_Osaka",
+    },
+{
+      "id" : "NP1_Tokyo_xxxx",
+      "href" : " http://api/NP1/service/NW1_Tokyo_xxxx",
+    }
+  ],
+  "affectedResource" : [
+    {
+      "id" : "NP1_RES_0001",
+      "href" : "http://api/NP1/resource/NW1_RES_0001"
+    },
+  ],
+"affectedLocation" : [
+    {
+     "id" : "Loc000000",
+     "href" : "http://api/location/Loc000000/"
+    },
+    {
+     "id" : "Loc000001",
+     "href" : "http://api/location/Loc000001/"
+    }
+  ],
+"associatedTroubleTicket" : [
+    {
+      "id" : "NP1_TT_0000000",
+      "href" : "http://api/troubletiket/NP1_TT_000000"
+    }
+  ],
+"underlyingAlarm" : [
+{
+"id" : "NP1_A_0000000",
+  "href" : "http://api/alarm/NP1_A_000000"
+}
+],
+"associatedSLAViolation" : [
+{
+"id" : "NP1_SLA_0000000",
+  "href" : "http://api/slaviolation/NP1_SLA_000000"
+}
+],
+"relatedEvent": [
+      {
+           "eventType": "prediction",
+           "eventId": "prediction_0001",
+           "eventTime": "2014-12-20T17:00:00Z",
+    "event": { … }
+      }
+  ],
+"relatedObject" : [
+{
+      "id" : "product0001",
+      "involvement": "affected product",
+      "href" : "http://api/productinventory/product0001"
+     }
+   ],
+  "rootCauseService" : [
+    {
+      "id" : "NP1_Tokyo_Osaka",
+      "href" : " http://api/NP1/service/NW1_Tokyo_Osaka",
+    }
+  ],
+  "rootCauseResource" : [
+    {
+      "id" : "NP1_Resource_1",
+      "href" : " http://api/NP1/resource/NP1_Resource_1",
+    },
+  ],
+"parentProblem" : [
+{
+      "id" : "problemxxxx0001",
+      "correlationId": "xxxxxxxx",
+      "href" : "http://api/serviceproblem/problemxxxx0001"
+     }
+   ],
+"underlyingProblem" : [
+{
+      "id" : "problemxxxx0001",
+      "correlationId": "xxxxxxxx",
+      "href" : "http://api/serviceproblem/problemxxxx0001"
+     }
+   ],
+   
+ "trackingRecord" : [
+{
+      "description" : "yyy cleared the problem",
+      "systemId": "xxxx",
+      "time": "2016-xx-xx xx:xx:xx",
+      "user": {
+         "id" : "NP1",
+         "href": "http://api/party/NP1"
+     }
+  ],
+  "comment" : [
+{
+  "user: {
+     "id": "SPM_handler_01",
+     "href": "http://api/party/SPM_handler_01",
+},
+  "time": "2016-xx-xx xx:xx:xx",
+  "systemId": "System_002",
+  "comment": "receive trouble ticket from NP1, and create this Service Problem" 
+    },
+{
+  "user": {
+    "id": "NP1",
+    "href": "http://api/party/NP1"
+},
+  "time": "2016-xx-xx xx:xx:xx",
+  "systemId": "System_002",
+  "comment": "status changed to Progress-Held"
+    }
+  ],
+  "impactPatterns": "",
+  "extensionInfo": [
+     {
+        "name": "",
+        "value": ""
+     }
+  ]
+}
