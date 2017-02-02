@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.openoss.karaf.features.tmforum.spm.ri;
+package org.openoss.karaf.features.tmforum.spm.impl.service.rest;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -89,7 +89,9 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	public Response getServiceProblems(@Context UriInfo info, @HeaderParam("Range") String range) {
 		LOG.debug("getServiceProblems range="+range+" requestUri="+info.getRequestUri());
 
-		MultivaluedMap<String, String> queryParams = info.getQueryParameters();
+		//MultivaluedMap<String, String> queryParams = info.getQueryParameters();
+		
+		
 		
 		// TODO Auto-generated method stub
 		ServiceProblem sp = new ServiceProblem();
@@ -332,15 +334,15 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//	@Override()
 	//	public Response addLicenceSpec(LicenceSpecification licenceSpec){
 	//
-	//		LicencePublisher licencePublisher= ServiceLoader.getLicencePublisher();
-	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoader.getLicencePublisher() cannot be null.");
+	//		LicencePublisher licencePublisher= ServiceLoaderOld.getLicencePublisher();
+	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoaderOld.getLicencePublisher() cannot be null.");
 	//
 	//		try{
 	//			if (licenceSpec == null) throw new RuntimeException("licenceSpec cannot be null.");
 	//			licencePublisher.addLicenceSpec(licenceSpec);
 	//		} catch (Exception exception){
 	//			//return status 400 Error
-	//			return Response.status(400).entity(new ErrorMessage(400, 0, "Unable to add licence specification", null, exception)).build();
+	//			return Response.status(400).entity(new StatusMessage(400, 0, "Unable to add licence specification", null, exception)).build();
 	//		}
 	//
 	//		ReplyMessage reply= new ReplyMessage();
@@ -358,18 +360,18 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//	@Override()
 	//	public Response removeLicenceSpec(@QueryParam("productId") String productId){
 	//
-	//		LicencePublisher licencePublisher= ServiceLoader.getLicencePublisher();
-	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoader.getLicencePublisher() cannot be null.");
+	//		LicencePublisher licencePublisher= ServiceLoaderOld.getLicencePublisher();
+	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoaderOld.getLicencePublisher() cannot be null.");
 	//
 	//		Boolean removed = null;
 	//		try{
 	//			if (productId == null) throw new RuntimeException("productId cannot be null.");
 	//			removed = licencePublisher.removeLicenceSpec(productId);
 	//			String devMessage=null;
-	//			if (!removed) return Response.status(400).entity(new ErrorMessage(400, 0, "Licence Specification not found to remove for productId="+productId, null, devMessage)).build();
+	//			if (!removed) return Response.status(400).entity(new StatusMessage(400, 0, "Licence Specification not found to remove for productId="+productId, null, devMessage)).build();
 	//		} catch (Exception exception){
 	//			//return status 400 Error
-	//			return Response.status(400).entity(new ErrorMessage(400, 0, "Unable to remove licence specification", null, exception)).build();
+	//			return Response.status(400).entity(new StatusMessage(400, 0, "Unable to remove licence specification", null, exception)).build();
 	//		}
 	//
 	//		ReplyMessage reply= new ReplyMessage();
@@ -387,18 +389,18 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//	@Override()
 	//	public Response getLicenceSpec(@QueryParam("productId") String productId){
 	//
-	//		LicencePublisher licencePublisher= ServiceLoader.getLicencePublisher();
-	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoader.getLicencePublisher() cannot be null.");
+	//		LicencePublisher licencePublisher= ServiceLoaderOld.getLicencePublisher();
+	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoaderOld.getLicencePublisher() cannot be null.");
 	//
 	//		LicenceSpecification licenceSpec=null;
 	//		try{
 	//			if (productId == null) throw new RuntimeException("productId cannot be null.");
 	//			licenceSpec = licencePublisher.getLicenceSpec(productId);
 	//			String devMessage=null;
-	//			if (licenceSpec==null) return Response.status(400).entity(new ErrorMessage(400, 0, "Licence Specification not found for productId="+productId, null, devMessage)).build();
+	//			if (licenceSpec==null) return Response.status(400).entity(new StatusMessage(400, 0, "Licence Specification not found for productId="+productId, null, devMessage)).build();
 	//		} catch (Exception exception){
 	//			//return status 400 Error
-	//			return Response.status(400).entity(new ErrorMessage(400, 0, "Unable to get licence specification", null, exception)).build();
+	//			return Response.status(400).entity(new StatusMessage(400, 0, "Unable to get licence specification", null, exception)).build();
 	//		}
 	//		
 	//		ReplyMessage reply= new ReplyMessage();
@@ -417,18 +419,18 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//	@Override()
 	//	public Response getLicenceMetadata(@QueryParam("productId") String productId){
 	//
-	//		LicencePublisher licencePublisher= ServiceLoader.getLicencePublisher();
-	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoader.getLicencePublisher() cannot be null.");
+	//		LicencePublisher licencePublisher= ServiceLoaderOld.getLicencePublisher();
+	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoaderOld.getLicencePublisher() cannot be null.");
 	//
 	//		LicenceSpecification licenceSpec=null;
 	//		try{
 	//			if (productId == null) throw new RuntimeException("productId cannot be null.");
 	//			licenceSpec = licencePublisher.getLicenceSpec(productId);
 	//			String devMessage=null;
-	//			if (licenceSpec==null) return Response.status(400).entity(new ErrorMessage(400, 0, "Licence Metadata not found for productId="+productId, null, devMessage)).build();
+	//			if (licenceSpec==null) return Response.status(400).entity(new StatusMessage(400, 0, "Licence Metadata not found for productId="+productId, null, devMessage)).build();
 	//		} catch (Exception exception){
 	//			//return status 400 Error
-	//			return Response.status(400).entity(new ErrorMessage(400, 0, "Unable to get Licence Metadata", null, exception)).build();
+	//			return Response.status(400).entity(new StatusMessage(400, 0, "Unable to get Licence Metadata", null, exception)).build();
 	//		}
 	//		
 	//		ReplyMessage reply= new ReplyMessage();
@@ -444,15 +446,15 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//	@Override()
 	//	public Response getLicenceSpecList(){
 	//
-	//		LicencePublisher licencePublisher= ServiceLoader.getLicencePublisher();
-	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoader.getLicencePublisher() cannot be null.");
+	//		LicencePublisher licencePublisher= ServiceLoaderOld.getLicencePublisher();
+	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoaderOld.getLicencePublisher() cannot be null.");
 	//
 	//		Map<String, LicenceSpecification> lcnceSpecMap=null;
 	//		try{
 	//			lcnceSpecMap = licencePublisher.getLicenceSpecMap();
 	//		} catch (Exception exception){
 	//			//return status 400 Error
-	//			return Response.status(400).entity(new ErrorMessage(400, 0, "Unable to get licence specification map", null, exception)).build();
+	//			return Response.status(400).entity(new StatusMessage(400, 0, "Unable to get licence specification map", null, exception)).build();
 	//		}
 	//		
 	//		LicenceSpecList licenceSpecList= new LicenceSpecList();
@@ -473,15 +475,15 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//	@Override()
 	//	public Response getLicenceMetadataList(){
 	//
-	//		LicencePublisher licencePublisher= ServiceLoader.getLicencePublisher();
-	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoader.getLicencePublisher() cannot be null.");
+	//		LicencePublisher licencePublisher= ServiceLoaderOld.getLicencePublisher();
+	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoaderOld.getLicencePublisher() cannot be null.");
 	//
 	//		Map<String, LicenceSpecification> lcnceSpecMap=null;
 	//		try{
 	//			lcnceSpecMap = licencePublisher.getLicenceSpecMap();
 	//		} catch (Exception exception){
 	//			//return status 400 Error
-	//			return Response.status(400).entity(new ErrorMessage(400, 0, "Unable to get licence specification map", null, exception)).build();
+	//			return Response.status(400).entity(new StatusMessage(400, 0, "Unable to get licence specification map", null, exception)).build();
 	//		}
 	//		
 	//		LicenceMetadataList licenceMetadataList= new LicenceMetadataList();
@@ -503,15 +505,15 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//	@Override()
 	//	public Response deleteLicenceSpecifications(@QueryParam("confirm") String confirm){
 	//
-	//		LicencePublisher licencePublisher= ServiceLoader.getLicencePublisher();
-	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoader.getLicencePublisher() cannot be null.");
+	//		LicencePublisher licencePublisher= ServiceLoaderOld.getLicencePublisher();
+	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoaderOld.getLicencePublisher() cannot be null.");
 	//
 	//		try{
 	//			if (!"true".equals(confirm)) throw new IllegalArgumentException("Will only delete specs if paramater confirm=true");
 	//			licencePublisher.deleteLicenceSpecifications();
 	//		} catch (Exception exception){
 	//			//return status 400 Error
-	//			return Response.status(400).entity(new ErrorMessage(400, 0, "Unable to delete licence specifications", null, exception)).build();
+	//			return Response.status(400).entity(new StatusMessage(400, 0, "Unable to delete licence specifications", null, exception)).build();
 	//		}
 	//
 	//		ReplyMessage reply= new ReplyMessage();
@@ -528,8 +530,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//	@Override()
 	//	public Response createLicenceInstanceStr(LicenceMetadata licenceMetadata){
 	//
-	//		LicencePublisher licencePublisher= ServiceLoader.getLicencePublisher();
-	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoader.getLicencePublisher() cannot be null.");
+	//		LicencePublisher licencePublisher= ServiceLoaderOld.getLicencePublisher();
+	//		if (licencePublisher == null) throw new RuntimeException("ServiceLoaderOld.getLicencePublisher() cannot be null.");
 	//
 	//		String licenceInstanceStr=null;
 	//		try{
@@ -537,7 +539,7 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	//			licenceInstanceStr = licencePublisher.createLicenceInstanceStr(licenceMetadata);
 	//		} catch (Exception exception){
 	//			//return status 400 Error
-	//			return Response.status(400).entity(new ErrorMessage(400, 0, "Unable to create licence instance", null, exception)).build();
+	//			return Response.status(400).entity(new StatusMessage(400, 0, "Unable to create licence instance", null, exception)).build();
 	//		}
 	//
 	//		ReplyMessage reply= new ReplyMessage();

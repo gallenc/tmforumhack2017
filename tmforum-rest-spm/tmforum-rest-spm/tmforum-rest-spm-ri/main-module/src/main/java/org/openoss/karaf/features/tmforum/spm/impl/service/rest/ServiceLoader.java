@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.openoss.karaf.features.tmforum.spm.ri;
+package org.openoss.karaf.features.tmforum.spm.impl.service.rest;
 
 import org.openoss.karaf.features.tmforum.spm.api.service.ServiceProblemService;
 

@@ -11,8 +11,10 @@
 		http://aries.apache.org/schemas/blueprint-ext/blueprint-ext-1.1.xsd
 ">
 
-  <!-- print startup message to karaf consol -->
-  <bean id="sayHello" class="org.openoss.karaf.features.tmforum.spm.ri.SayHello" destroy-method="destroyMethod">
+  <!-- print startup and shutdown messages to karaf consol -->
+  <bean id="sayHello" class="org.openoss.karaf.features.tmforum.spm.ri.SayHello" init-method="initMethod" destroy-method="destroyMethod">
+    <property name="helloMessage" value="Hello - Tmforum Service Problem Management (SPM) ReST RI started" />
+    <property name="goodbyeMessage" value="Goodbye - Tmforum Service Problem Management (SPM) ReST RI stopped" />
   </bean>
 
   <!-- Configuration properties -->
@@ -65,14 +67,14 @@
     </bean>
   </service>
 
-  <bean id="serviceProblemRestApplication" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemRestApplication" />
+  <bean id="serviceProblemRestApplication" class="org.openoss.karaf.features.tmforum.spm.impl.service.rest.ServiceProblemRestApplication" />
 
   <!-- setServiceProblemService(ServiceProblemService serviceProblemService) -->
-  <bean id="serviceLoader" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceLoader">
+  <bean id="serviceLoader" class="org.openoss.karaf.features.tmforum.spm.impl.service.rest.ServiceLoader">
     <argument ref="serviceProblemServiceImpl" />
   </bean>
 
-  <bean id="serviceProblemServiceImpl" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService" />
+  <bean id="serviceProblemServiceImpl" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemServiceImpl" />
 
   <!-- Maps in the test resource files for serving basic test pages -->
   <!-- swagger api -->

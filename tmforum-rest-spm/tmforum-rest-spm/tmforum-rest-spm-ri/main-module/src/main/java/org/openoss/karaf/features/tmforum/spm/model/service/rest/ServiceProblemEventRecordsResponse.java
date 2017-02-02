@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.openoss.karaf.features.tmforum.spm.api.service.ErrorMessage;
+import org.openoss.karaf.features.tmforum.spm.api.service.StatusMessage;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblemEventRecord;
 
 
@@ -31,15 +31,15 @@ public class ServiceProblemEventRecordsResponse {
 
     
 	// NOT IN STANDARD
-	ErrorMessage reportedError=null;
+	StatusMessage reportedError=null;
 	
 
-	public ErrorMessage getReportedError() {
+	public StatusMessage getReportedError() {
 		return reportedError;
 	}
 
 	@XmlElement()
-	public void setReportedError(ErrorMessage reportedError) {
+	public void setReportedError(StatusMessage reportedError) {
 		this.reportedError = reportedError;
 	}
 

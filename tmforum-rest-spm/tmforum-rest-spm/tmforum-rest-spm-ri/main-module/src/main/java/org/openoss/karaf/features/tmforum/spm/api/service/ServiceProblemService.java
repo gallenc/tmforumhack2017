@@ -15,7 +15,7 @@ import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemU
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUngroupRequest;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUngroupResponse;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemsResponse;
-import org.openoss.karaf.features.tmforum.spm.api.service.ErrorMessage;
+import org.openoss.karaf.features.tmforum.spm.api.service.StatusMessage;
 
 
 public interface ServiceProblemService {
@@ -53,7 +53,7 @@ public interface ServiceProblemService {
 	 *            )
 	 * @return
 	 */
-	ErrorMessage postServiceProblem(ServiceProblem serviceProblem);
+	StatusMessage postServiceProblem(ServiceProblem serviceProblem);
 
 	/**
 	 * PUT api/serviceProblem/{ID}
@@ -62,7 +62,7 @@ public interface ServiceProblemService {
 	 * @param id
 	 * @return
 	 */
-	ErrorMessage putServiceProblem(String id, ServiceProblem serviceProblem);
+	StatusMessage putServiceProblem(String id, ServiceProblem serviceProblem);
 
 	/**
 	 * DELETE api/serviceProblem/{ID}
@@ -72,7 +72,7 @@ public interface ServiceProblemService {
 	 * @param id
 	 * @return
 	 */
-	ErrorMessage deleteServiceProblem(String id);
+	StatusMessage deleteServiceProblem(String id);
 
 	/**
 	 * POST api/serviceProblem/ack

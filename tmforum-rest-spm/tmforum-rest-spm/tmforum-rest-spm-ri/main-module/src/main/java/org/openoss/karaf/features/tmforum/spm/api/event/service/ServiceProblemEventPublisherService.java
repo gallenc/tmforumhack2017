@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.core.MultivaluedMap;
 
-import org.openoss.karaf.features.tmforum.spm.api.service.ErrorMessage;
+import org.openoss.karaf.features.tmforum.spm.api.service.StatusMessage;
 
 
 public interface ServiceProblemEventPublisherService {
@@ -14,7 +14,7 @@ public interface ServiceProblemEventPublisherService {
 	 * 
 	 * @return
 	 */
-	public 	ErrorMessage registerListener(MultivaluedMap<String, String> queryParams, List<String> fields);
+	public 	StatusMessage registerListener(MultivaluedMap<String, String> queryParams, List<String> fields);
 	
 	
 	/**
@@ -22,6 +22,6 @@ public interface ServiceProblemEventPublisherService {
 	 * 
 	 * @return
 	 */
-	public ErrorMessage unregisterListener(String id);
+	public StatusMessage unregisterListener(String id);
 	
 }

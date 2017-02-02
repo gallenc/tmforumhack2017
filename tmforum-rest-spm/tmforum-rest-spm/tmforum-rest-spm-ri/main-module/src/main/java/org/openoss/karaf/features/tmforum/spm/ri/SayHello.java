@@ -28,18 +28,49 @@
 
 package org.openoss.karaf.features.tmforum.spm.ri;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * simple class to print startup message to karaf consol
+ * simple class to print startup and shutdown messages to karaf consol
  * @author admin
  *
  */
 public class SayHello {
+	private static final Logger LOG = LoggerFactory.getLogger(SayHello.class);
+	
+	private String helloMessage=SayHello.class.getName()+" Started (hello message not set)";
+	private String goodbyeMessage=SayHello.class.getName()+" Stopped (goodbye message not set)";
+
 	public SayHello(){
 		super();
-		System.out.println("Hello - Tmforum Service Problem Management (SPM) ReST RI started");
+	}
+	
+	public void initMethod(){
+		System.out.println(helloMessage);
+		LOG.info(helloMessage);
 	}
 	
 	public void destroyMethod(){
-		System.out.println("Goodbye - Tmforum Service Problem Management (SPM) ReST RI stopped");
+		System.out.println(goodbyeMessage);
+		LOG.info(goodbyeMessage);
 	}
+
+	public String getHelloMessage() {
+		return helloMessage;
+	}
+
+	public void setHelloMessage(String helloMessage) {
+		this.helloMessage = helloMessage;
+	}
+
+	public String getGoodbyeMessage() {
+		return goodbyeMessage;
+	}
+
+	public void setGoodbyeMessage(String goodbyeMessage) {
+		this.goodbyeMessage = goodbyeMessage;
+	}
+
+
 }

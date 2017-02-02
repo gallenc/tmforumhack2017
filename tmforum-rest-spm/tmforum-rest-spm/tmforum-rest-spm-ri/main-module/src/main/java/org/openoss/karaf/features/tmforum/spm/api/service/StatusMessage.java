@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType (propOrder={"status","message","code","link","developerMessage"})
-public class ErrorMessage {
+public class StatusMessage {
 	
 
 
@@ -51,7 +51,7 @@ public class ErrorMessage {
 	 *       switched on and could potentially contain stack trace information or something similar
 	 * @return EventGatewayErrorMessage jaxb object to include in the xml reply
 	 */
-	public ErrorMessage(int status,int code, String message, String link, String developerMessage)	{
+	public StatusMessage(int status,int code, String message, String link, String developerMessage)	{
 		super();
 		this.status=status;
 		this.code=code;
@@ -69,9 +69,9 @@ public class ErrorMessage {
 	 * @param message short description of the error, what might have cause it and possibly a â€œfixingâ€� proposal
 	 * @param link points to an online resource, where more details can be found about the error
 	 * @param exception is converted to stacktrace and appended as developer message
-	 * @return EventGatewayErrorMessage jaxb object to include in the xml reply
+	 * @return StatusMessage jaxb object to include in the xml reply
 	 */
-	public ErrorMessage(int status,int code, String message, String link, Exception exception)	{
+	public StatusMessage(int status,int code, String message, String link, Exception exception)	{
 		super();
         this.status=status;
 		this.code=code;
@@ -87,7 +87,7 @@ public class ErrorMessage {
 		}
 	}
 
-	public ErrorMessage() {
+	public StatusMessage() {
 		super();
 	}
 

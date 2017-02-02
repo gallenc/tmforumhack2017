@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.openoss.karaf.features.tmforum.spm.ri;
+package org.openoss.karaf.features.tmforum.spm.impl.service.rest;
 
 import java.util.HashSet;
 import java.util.Set;
