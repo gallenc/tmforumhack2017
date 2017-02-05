@@ -18,6 +18,7 @@ package org.openoss.karaf.features.tmforum.spm.api.service;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -37,6 +38,20 @@ import javax.xml.bind.annotation.XmlType;
 public class StatusMessage {
 	
 
+	/** contains the same HTTP Status code returned by the server */
+	private int status=0;
+
+	/** application specific error code */
+	private int code=0;
+
+	/** message describing the error*/
+	private String message=null;
+
+	/** link point to page where the error message is documented */
+	private String link=null;
+
+	/** extra information that might useful for developers */
+	private String developerMessage=null;
 
 	/**
 	 * Helper constructor to build an error reply 
@@ -58,6 +73,7 @@ public class StatusMessage {
 		this.message=message;
 		this.link=link;
 		this.developerMessage=developerMessage;
+		
 	}
 	
 	/**
@@ -86,25 +102,68 @@ public class StatusMessage {
 			this.developerMessage = sw.toString();
 		}
 	}
+	
+	/**
+	 * Helper constructor to build an error reply 
+	 * (Error handling suggestion taken from http://www.codingpedia.org/ama/error-handling-in-rest-api-with-jersey/)
+	 * @param status holds redundantly the HTTP error status code, so that the developer can â€œseeâ€� 
+	 *        it without having to analyze the responseâ€™s header
+	 * @param code this is an internal code specific to the API (should be more relevant for business exceptions)
+	 * @param message short description of the error, what might have cause it and possibly a â€œfixingâ€� proposal
+	 * @param link points to an online resource, where more details can be found about the error
+	 * @param exception is converted to stacktrace and appended as developer message
+	 * @return StatusMessage jaxb object to include in the xml reply
+	 */
+
+	public StatusMessage(Status status,int code, String message, String link, Exception exception)	{
+		super();
+        this.status=status.getStatusCode();
+		this.code=code;
+		this.message=message;
+		this.link=link;
+		
+		// generate stacktrace for Exception
+		if (exception!=null){
+			StringWriter sw = new StringWriter();
+			sw.append("Reported Exception:");
+			exception.printStackTrace(new PrintWriter(sw));
+			this.developerMessage = sw.toString();
+		}
+	}
+	
+
+	/**
+	 * Helper constructor to build an error reply using Status type
+	 * (Error handling suggestion taken from http://www.codingpedia.org/ama/error-handling-in-rest-api-with-jersey/)
+	 * @param status holds redundantly the HTTP error status code, so that the developer can â€œseeâ€� 
+	 *        it without having to analyze the responseâ€™s header
+	 * @param code this is an internal code specific to the API (should be more relevant for business exceptions)
+	 * @param message short description of the error, what might have cause it and possibly a â€œfixingâ€� proposal
+	 * @param link points to an online resource, where more details can be found about the error
+	 * @param developerMessage detailed message, containing additional data that might be relevant to the developer. 
+	 *       This should only be available when the â€œdebugâ€� mode is 
+	 *       switched on and could potentially contain stack trace information or something similar
+	 * @return EventGatewayErrorMessage jaxb object to include in the xml reply
+	 */	
+	public StatusMessage(Status status, int code, String message, String link, String developerMessage)	{
+		super();
+		this.status=status.getStatusCode();
+		this.code=code;
+		this.message=message;
+		this.link=link;
+		this.developerMessage=developerMessage;		
+	}
+	
+	public StatusMessage(Status status)	{
+		super();
+		this.status=status.getStatusCode();
+		this.message=status.getReasonPhrase();
+	}
 
 	public StatusMessage() {
 		super();
 	}
 
-	/** contains the same HTTP Status code returned by the server */
-	private int status;
-
-	/** application specific error code */
-	private int code;
-
-	/** message describing the error*/
-	private String message;
-
-	/** link point to page where the error message is documented */
-	private String link;
-
-	/** extra information that might useful for developers */
-	private String developerMessage;
 
 	/**
 	 * @return the status

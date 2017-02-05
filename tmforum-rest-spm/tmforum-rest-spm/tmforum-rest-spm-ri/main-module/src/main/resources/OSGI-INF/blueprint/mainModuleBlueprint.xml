@@ -69,9 +69,10 @@
 
   <bean id="serviceProblemRestApplication" class="org.openoss.karaf.features.tmforum.spm.impl.service.rest.ServiceProblemRestApplication" />
 
-  <!-- setServiceProblemService(ServiceProblemService serviceProblemService) -->
+  <!-- setServiceProblemService(ServiceProblemService serviceProblemService, boolean errorReply) -->
   <bean id="serviceLoader" class="org.openoss.karaf.features.tmforum.spm.impl.service.rest.ServiceLoader">
     <argument ref="serviceProblemServiceImpl" />
+    <argument value="true" />
   </bean>
 
   <bean id="serviceProblemServiceImpl" class="org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemServiceImpl" />

@@ -10,6 +10,7 @@ import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemA
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemEventRecordsResponse;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemGroupRequest;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemGroupResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemResponse;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUnAckRequest;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUnAckResponse;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUngroupRequest;
@@ -28,7 +29,7 @@ public interface ServiceProblemService {
 	 * @param 
 	 * @return
 	 */
-	ServiceProblemsResponse getServiceProblem(String id, List<String> fields);
+	ServiceProblemResponse getServiceProblem(String id, List<String> fields);
 
 	/**
 	 * GET /api/serviceProblem/?{filter}&{attributeSelector}

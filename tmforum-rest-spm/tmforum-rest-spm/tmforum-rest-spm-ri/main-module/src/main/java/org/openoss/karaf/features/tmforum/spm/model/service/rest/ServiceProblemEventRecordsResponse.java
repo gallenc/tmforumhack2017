@@ -5,9 +5,9 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.openoss.karaf.features.tmforum.spm.api.service.Reply;
 import org.openoss.karaf.features.tmforum.spm.api.service.StatusMessage;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblemEventRecord;
 
@@ -15,7 +15,7 @@ import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblemEventRe
 
 @XmlRootElement()
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class ServiceProblemEventRecordsResponse {
+public class ServiceProblemEventRecordsResponse implements Reply {
 
 	List<ServiceProblemEventRecord> serviceProblemEventRecord=null;
 	
@@ -31,16 +31,17 @@ public class ServiceProblemEventRecordsResponse {
 
     
 	// NOT IN STANDARD
-	StatusMessage reportedError=null;
-	
+	StatusMessage statusMessage=null;
 
-	public StatusMessage getReportedError() {
-		return reportedError;
+	@Override()
+	public StatusMessage getStatusMessage() {
+		return statusMessage;
 	}
 
 	@XmlElement()
-	public void setReportedError(StatusMessage reportedError) {
-		this.reportedError = reportedError;
+	@Override()
+	public void setStatusMessage(StatusMessage statusMessage) {
+		this.statusMessage = statusMessage;
 	}
 
 

@@ -35,15 +35,20 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.codehaus.jettison.json.JSONArray;
+import org.openoss.karaf.features.tmforum.spm.api.service.Reply;
+import org.openoss.karaf.features.tmforum.spm.api.service.ServiceProblemService;
+import org.openoss.karaf.features.tmforum.spm.api.service.StatusMessage;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblemEventRecord;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemAckRequest;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemAckResponse;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemGroupRequest;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemGroupResponse;
+import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemResponse;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemRestService;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUnAckRequest;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUnAckResponse;
@@ -55,7 +60,8 @@ import org.slf4j.LoggerFactory;
 
 @Path("/spm")
 public class ServiceProblemRestServiceImpl implements ServiceProblemRestService {
-	private static final Logger LOG = LoggerFactory.getLogger(ServiceProblemRestServiceImpl.class);
+	// note the class loader cannot find this logger so using ServiceLoader log instead
+	// private static final Logger LOG = LoggerFactory.getLogger(ServiceProblemRestServiceImpl.class);
 
 	// curl -H Accept:application/json http://localhost:8181/serviceProblemManagement/rest/v1-0/spm/api/serviceProblem/10
 
@@ -67,13 +73,27 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response getServiceProblem(@PathParam("id") String id){
-		LOG.debug("getServiceProblem id="+id);
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+" getServiceProblem id="+id);
+		try {
+			List<String> fields=null; //TODO FIELDS
+			ServiceProblemResponse serviceProblemResponse = serviceProblemService.getServiceProblem(id, fields);
+			StatusMessage statusMessage = serviceProblemResponse.getStatusMessage();
+			if (! ServiceLoader.getErrorReply()){
+				serviceProblemResponse.setStatusMessage(null);
+			}
+			return Response.status(statusMessage.getCode()).entity(serviceProblemResponse).build();
 
-		ServiceProblem sp = new ServiceProblem();
-		sp.setId(id);
-		sp.setHref("serviceProblem/"+id);
-		// TODO Auto-generated method stub
-		return Response.status(200).entity(sp).build();
+		} catch (Exception exception){
+			//return status 500 Error
+			Reply reply= new ServiceProblemResponse();
+			reply.setStatusMessage(new StatusMessage(Status.INTERNAL_SERVER_ERROR, 0, "internal error in getServiceProblem", null, exception));
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(reply).build();
+		}
+		
+
 	}
 
 	// curl -H Accept:application/json http://localhost:8181/serviceProblemManagement/rest/v1-0/spm/api/serviceProblem/?id=10
@@ -87,12 +107,16 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response getServiceProblems(@Context UriInfo info, @HeaderParam("Range") String range) {
-		LOG.debug("getServiceProblems range="+range+" requestUri="+info.getRequestUri());
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"getServiceProblems range="+range+" requestUri="+info.getRequestUri());
 
 		//MultivaluedMap<String, String> queryParams = info.getQueryParameters();
-		
-		
-		
+
+
+
 		// TODO Auto-generated method stub
 		ServiceProblem sp = new ServiceProblem();
 		sp.setId(Integer.toString(10));
@@ -113,8 +137,8 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 
 		// see http://stackoverflow.com/questions/27643822/marshal-un-marshal-list-objects-in-jersey-jax-rs-using-jaxb
 		// does this work with json?
-//		GenericEntity<List<ServiceProblem>> gelist = new GenericEntity<List<ServiceProblem>>(splist) {};
-//		return Response.status(200).entity(gelist).build();
+		//		GenericEntity<List<ServiceProblem>> gelist = new GenericEntity<List<ServiceProblem>>(splist) {};
+		//		return Response.status(200).entity(gelist).build();
 
 		//or try array http://stackoverflow.com/questions/10849526/return-jsonarray-instead-of-jsonobject-jersey-jax-rs
 		//ServiceProblem[] sparray= (ServiceProblem[]) splist.toArray();
@@ -136,11 +160,15 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response postServiceProblem(ServiceProblem serviceProblem) {
-		LOG.debug("postServiceProblem called");
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"postServiceProblem called");
 		// TODO Auto-generated method stub
 		// change id
 		ServiceProblem newServiceProblem = serviceProblem;
-		
+
 		return Response.status(201).entity(newServiceProblem).build();
 	}
 
@@ -155,10 +183,14 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response putServiceProblem(String id, ServiceProblem serviceProblem) {
-		LOG.debug("putServiceProblem id="+id);
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"putServiceProblem id="+id);
 		// TODO Auto-generated method stub
 		ServiceProblem newServiceProblem = serviceProblem;
-		
+
 		return Response.status(201).entity(newServiceProblem).build();
 	}
 
@@ -197,7 +229,11 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response deleteServiceProblem(@PathParam("id") String id){
-		LOG.debug("deleteServiceProblem called for id="+id);
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"deleteServiceProblem called for id="+id);
 		// TODO Auto-generated method stub
 		return Response.status(200).build();
 	}
@@ -211,7 +247,11 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response ackServiceProblem(ServiceProblemAckRequest serviceProblemAckRequest) {
-		LOG.debug("ackServiceProblem called");
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"ackServiceProblem called");
 
 		// TODO Auto-generated method stub
 		ServiceProblem sp = new ServiceProblem();
@@ -242,7 +282,11 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response unackServiceProblem(ServiceProblemUnAckRequest serviceProblemUnAckRequest) {
-		LOG.debug("unackServiceProblem called");
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"unackServiceProblem called");
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		ServiceProblem sp = new ServiceProblem();
@@ -272,9 +316,13 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response groupServiceProblem(ServiceProblemGroupRequest groupRequest) {
-		LOG.debug("groupServiceProblem called");
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"groupServiceProblem called");
 		// TODO Auto-generated method stub
-		
+
 		ServiceProblemGroupResponse serviceProblemGroupResponse = new ServiceProblemGroupResponse();
 		return Response.status(200).entity(serviceProblemGroupResponse).build();
 	}
@@ -288,7 +336,10 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response ungroupServiceProblem(ServiceProblemUngroupRequest unGroupRequest) {
-		LOG.debug("ungroupServiceProblem called");
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		ServiceLoader.getLog().debug("ungroupServiceProblem called");
 		// TODO Auto-generated method stub
 		ServiceProblemUngroupResponse serviceProblemUngroupResponse = new ServiceProblemUngroupResponse();
 		return Response.status(200).entity(serviceProblemUngroupResponse).build();
@@ -304,7 +355,11 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response getServiceProblemEventRecords(@Context UriInfo info, @HeaderParam("Range") String range) {
-		LOG.debug("getServiceProblemEventRecords range="+range+" requestUri="+info.getRequestUri());
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"getServiceProblemEventRecords range="+range+" requestUri="+info.getRequestUri());
 		// TODO Auto-generated method stub
 		ServiceProblemEventRecord sper = new ServiceProblemEventRecord();
 		List<ServiceProblemEventRecord> sperlist= new ArrayList<ServiceProblemEventRecord>();
@@ -320,7 +375,11 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response getServiceProblemEventRecord(@PathParam("id") String id){
-		LOG.debug("getServiceProblemEventRecord called");
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"getServiceProblemEventRecord called");
 		// TODO Auto-generated method stub
 		ServiceProblemEventRecord sper = new ServiceProblemEventRecord();
 		return Response.status(200).entity(sper).build();

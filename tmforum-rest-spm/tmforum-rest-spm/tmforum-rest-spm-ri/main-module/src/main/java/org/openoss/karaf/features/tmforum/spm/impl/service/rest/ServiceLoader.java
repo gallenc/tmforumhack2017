@@ -15,7 +15,11 @@
 
 package org.openoss.karaf.features.tmforum.spm.impl.service.rest;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.openoss.karaf.features.tmforum.spm.api.service.ServiceProblemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** used to statically pass service references to Jersey ReST classes
  * 
@@ -23,8 +27,11 @@ import org.openoss.karaf.features.tmforum.spm.api.service.ServiceProblemService;
  *
  */
 public class ServiceLoader {
-	
+	private static final Logger LOG = LoggerFactory.getLogger(ServiceLoader.class);
+
 	private static ServiceProblemService serviceProblemService=null;
+
+	private static AtomicBoolean errorReply = new AtomicBoolean(true);
 
 	public static synchronized ServiceProblemService getServiceProblemService() {
 		return serviceProblemService;
@@ -38,10 +45,27 @@ public class ServiceLoader {
 		super();
 	}
 
-	public ServiceLoader(ServiceProblemService serviceProblemService){
+	public ServiceLoader(ServiceProblemService serviceProblemService, boolean errorReply){
 		super();
 		setServiceProblemService(serviceProblemService);
+		setErrorReply(errorReply);
 
+	}
+
+	/**
+	 * used to provide logging in jersey restlet - avoiding problems with class loading of logger
+	 * @return
+	 */
+	public static Logger getLog() {
+		return LOG;
+	}
+
+	public static boolean getErrorReply() {
+		return errorReply.get();
+	}
+
+	public static void setErrorReply(boolean errorReply) {
+		ServiceLoader.errorReply.set(errorReply);;
 	}
 
 

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.openoss.karaf.features.tmforum.spm.api.service.Reply;
 import org.openoss.karaf.features.tmforum.spm.api.service.StatusMessage;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem;
 import org.openoss.karaf.features.tmforum.spm.model.entity.TrackingRecord;
@@ -16,7 +17,7 @@ import org.openoss.karaf.features.tmforum.spm.model.entity.TrackingRecord;
 
 @XmlRootElement()
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class ServiceProblemsResponse {
+public class ServiceProblemsResponse implements Reply{
 
 	List<ServiceProblem> problems=null;
 
@@ -32,16 +33,18 @@ public class ServiceProblemsResponse {
 	}
     
 	// NOT IN STANDARD
-	StatusMessage reportedError=null;
-	
+	StatusMessage statusMessage=null;
 
-	public StatusMessage getReportedError() {
-		return reportedError;
+	@Override()
+	public StatusMessage getStatusMessage() {
+		return statusMessage;
 	}
 
 	@XmlElement()
-	public void setReportedError(StatusMessage reportedError) {
-		this.reportedError = reportedError;
+	@Override()
+	public void setStatusMessage(StatusMessage statusMessage) {
+		this.statusMessage = statusMessage;
 	}
+
 	
 }
