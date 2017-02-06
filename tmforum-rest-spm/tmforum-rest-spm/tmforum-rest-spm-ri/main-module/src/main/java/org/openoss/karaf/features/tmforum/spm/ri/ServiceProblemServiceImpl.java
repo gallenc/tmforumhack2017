@@ -19,21 +19,23 @@ import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemU
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUngroupRequest;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemUngroupResponse;
 import org.openoss.karaf.features.tmforum.spm.model.service.rest.ServiceProblemsResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ServiceProblemServiceImpl implements ServiceProblemService {
+	private static final Logger LOG = LoggerFactory.getLogger(ServiceProblemServiceImpl.class);
 
 	@Override
-	public ServiceProblemResponse getServiceProblem(String id,
-			List<String> fields) {
-
+	public ServiceProblemResponse getServiceProblem(String id,	List<String> fields) {
+		LOG.debug("getServiceProblem called for id="+id);
 		ServiceProblem problem = new ServiceProblem();
 		problem.setId(id);
 		problem.setHref("serviceProblem/"+id);
 		ServiceProblemResponse serviceProblemResponse=new ServiceProblemResponse();
 		serviceProblemResponse.setProblem(problem);
 
-		StatusMessage statusMessage=
-				new StatusMessage(Status.OK);
+		StatusMessage statusMessage= new StatusMessage(Status.OK);
+		LOG.debug("getServiceProblem response status="+statusMessage.getStatus());
 		serviceProblemResponse.setStatusMessage(statusMessage);
 
 		return serviceProblemResponse;

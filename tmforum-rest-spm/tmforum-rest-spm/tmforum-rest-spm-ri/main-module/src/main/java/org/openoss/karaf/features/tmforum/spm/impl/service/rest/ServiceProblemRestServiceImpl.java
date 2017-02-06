@@ -84,15 +84,15 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 			if (! ServiceLoader.getErrorReply()){
 				serviceProblemResponse.setStatusMessage(null);
 			}
-			return Response.status(statusMessage.getCode()).entity(serviceProblemResponse).build();
-
+			return Response.status(statusMessage.getStatus()).entity(serviceProblemResponse).build();
 		} catch (Exception exception){
 			//return status 500 Error
+			if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+" getServiceProblem exception",exception);
+			StatusMessage statusMessage=new StatusMessage(Status.INTERNAL_SERVER_ERROR, 0, "internal error in getServiceProblem", null, exception);
 			Reply reply= new ServiceProblemResponse();
-			reply.setStatusMessage(new StatusMessage(Status.INTERNAL_SERVER_ERROR, 0, "internal error in getServiceProblem", null, exception));
+			reply.setStatusMessage(statusMessage);
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(reply).build();
 		}
-		
 
 	}
 
