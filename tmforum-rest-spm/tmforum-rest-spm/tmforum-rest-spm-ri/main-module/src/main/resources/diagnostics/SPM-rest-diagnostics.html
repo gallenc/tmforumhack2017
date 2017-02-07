@@ -33,7 +33,15 @@
 		var deleteURL_1_data_data = "NOT DEFINED";
 
 		var postURL_1_url = "/spm/api/serviceProblem/";
-		var postURL_1_data_data = "{ \"id\" : \"problemxxxx0000\", \"href\" : \"http://api/serviceProblem/problemxxxx0000\" }";
+		
+		var postURL_1_data_data = "{ \"description\" : \"trouble in the internet connection\", "
+			+"\n  \"category\": \"serviceProvider.declared\","
+			+"\n  \"originatorParty\" : {"
+			+"\n     \"role\" : \"Service Provider\", "
+			+"\n     \"id\" : \"SP1\","
+			+"\n     \"href\": \"http://api/party/SP1\" "
+			+"\n    }"
+			+"\n  }"
 
 		var putURL_1_url = "/spm/api/serviceProblem/{id}";
 		var putURL_1_data_data = "{ \"id\" : \"problemxxxx0000\", \"href\" : \"http://api/serviceProblem/problemxxxx0000\" }";
@@ -84,6 +92,10 @@
 	function sendPATCHXMLDoc(postRequest, xmlMessage) {
 		sendCOMMANDXmlDoc(postRequest, xmlMessage, "PATCH")
 	}
+	
+	function sendDELETEXMLDoc(postRequest, xmlMessage) {
+		sendCOMMANDXmlDoc(postRequest, xmlMessage, "DELETE")
+	}
 
 	function sendCOMMANDXmlDoc(postRequest, xmlMessage, commandtype) {
 
@@ -133,7 +145,7 @@
 		var base_url = document.getElementById('base_url').value;
 		var postRequest = base_url+document.getElementById('deleteURL_1').value;
 		var xmlMessage = "";
-		sendGETXMLDoc(postRequest, xmlMessage);
+		sendDELETEXMLDoc(postRequest, xmlMessage);
 	}
 
 	function postURL_1_button() {
