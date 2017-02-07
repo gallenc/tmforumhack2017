@@ -39,6 +39,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.codehaus.jettison.json.JSONArray;
+import org.openoss.karaf.features.tmforum.spm.api.service.PATCH;
 import org.openoss.karaf.features.tmforum.spm.api.service.Reply;
 import org.openoss.karaf.features.tmforum.spm.api.service.ServiceProblemService;
 import org.openoss.karaf.features.tmforum.spm.api.service.StatusMessage;
@@ -113,27 +114,44 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 		Logger logger = ServiceLoader.getLog();
 		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"getServiceProblems range="+range+" requestUri="+info.getRequestUri());
 
+		try {
+			List<String> fields=null; //TODO FIELDS
+			MultivaluedMap<String, String> queryParams=null; //TODO
+			Integer lowRange=null;//TODO
+			Integer hiRange=null;//TODO
+			ServiceProblemsResponse serviceProblemsResponse = serviceProblemService.getServiceProblems(queryParams, fields, lowRange, hiRange);
+			StatusMessage statusMessage = serviceProblemsResponse.getStatusMessage();
+			if (! ServiceLoader.getErrorReply()){
+				serviceProblemsResponse.setStatusMessage(null);
+			}
+			return Response.status(statusMessage.getStatus()).entity(serviceProblemsResponse).build();
+		} catch (Exception exception){
+			//return status 500 Error
+			if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+" getServiceProblems exception",exception);
+			StatusMessage statusMessage=new StatusMessage(Status.INTERNAL_SERVER_ERROR, 0, "internal error in getServiceProblems", null, exception);
+			Reply reply= new ServiceProblemsResponse();
+			reply.setStatusMessage(statusMessage);
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(reply).build();
+		}
 		//MultivaluedMap<String, String> queryParams = info.getQueryParameters();
 
-
-
 		// TODO Auto-generated method stub
-		ServiceProblem sp = new ServiceProblem();
-		sp.setId(Integer.toString(10));
-		sp.setHref("serviceProblem/"+10);
-		ServiceProblem sp2 = new ServiceProblem();
-		sp2.setId(Integer.toString(11));
-		sp2.setHref("serviceProblem/"+11);
+		//		ServiceProblem sp = new ServiceProblem();
+		//		sp.setId(Integer.toString(10));
+		//		sp.setHref("serviceProblem/"+10);
+		//		ServiceProblem sp2 = new ServiceProblem();
+		//		sp2.setId(Integer.toString(11));
+		//		sp2.setHref("serviceProblem/"+11);
+		//
+		//		List<ServiceProblem> splist= new ArrayList<ServiceProblem>();
+		//		splist.add(sp);
+		//		splist.add(sp2);
+		//
+		//
+		//		ServiceProblemsResponse serviceProblemResponse= new ServiceProblemsResponse();
+		//		serviceProblemResponse.setProblems(splist);
 
-		List<ServiceProblem> splist= new ArrayList<ServiceProblem>();
-		splist.add(sp);
-		splist.add(sp2);
-
-
-		ServiceProblemsResponse serviceProblemResponse= new ServiceProblemsResponse();
-		serviceProblemResponse.setProblems(splist);
-
-		return Response.status(200).entity(serviceProblemResponse).build();
+		//		return Response.status(200).entity(serviceProblemResponse).build();
 
 		// see http://stackoverflow.com/questions/27643822/marshal-un-marshal-list-objects-in-jersey-jax-rs-using-jaxb
 		// does this work with json?
@@ -162,14 +180,33 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	public Response postServiceProblem(ServiceProblem serviceProblem) {
 		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
 		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
-
 		Logger logger = ServiceLoader.getLog();
-		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"postServiceProblem called");
-		// TODO Auto-generated method stub
-		// change id
-		ServiceProblem newServiceProblem = serviceProblem;
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"postServiceProblem ");
 
-		return Response.status(201).entity(newServiceProblem).build();
+		try {
+			ServiceProblemResponse serviceProblemResponse = serviceProblemService.postServiceProblem(serviceProblem);
+			StatusMessage statusMessage = serviceProblemResponse.getStatusMessage();
+			if (! ServiceLoader.getErrorReply()){
+				serviceProblemResponse.setStatusMessage(null);
+			}
+			return Response.status(statusMessage.getStatus()).entity(serviceProblemResponse).build();
+		} catch (Exception exception){
+			//return status 500 Error
+			if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+" postServiceProblem exception",exception);
+			StatusMessage statusMessage=new StatusMessage(Status.INTERNAL_SERVER_ERROR, 0, "internal error in postServiceProblem", null, exception);
+			ServiceProblemResponse reply= new ServiceProblemResponse();
+			reply.setStatusMessage(statusMessage);
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(reply).build();
+		}
+
+
+		//		Logger logger = ServiceLoader.getLog();
+		//		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"postServiceProblem called");
+		//		// TODO Auto-generated method stub
+		//		// change id
+		//		ServiceProblem newServiceProblem = serviceProblem;
+		//
+		//		return Response.status(201).entity(newServiceProblem).build();
 	}
 
 
@@ -178,20 +215,33 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#putServiceProblem(java.lang.String, org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem)
 	 */
 	@PUT
-	@Path("/api/serviceProblem/")
+	@Path("/api/serviceProblem/{id}")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
-	public Response putServiceProblem(String id, ServiceProblem serviceProblem) {
+	public Response putServiceProblem(@PathParam("id") String id, ServiceProblem serviceProblem) {
 		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
 		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
 
 		Logger logger = ServiceLoader.getLog();
 		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"putServiceProblem id="+id);
-		// TODO Auto-generated method stub
-		ServiceProblem newServiceProblem = serviceProblem;
 
-		return Response.status(201).entity(newServiceProblem).build();
+		try {
+			ServiceProblemResponse serviceProblemResponse = serviceProblemService.putServiceProblem(id, serviceProblem);
+			StatusMessage statusMessage = serviceProblemResponse.getStatusMessage();
+			if (! ServiceLoader.getErrorReply()){
+				serviceProblemResponse.setStatusMessage(null);
+			}
+			return Response.status(statusMessage.getStatus()).entity(serviceProblemResponse).build();
+		} catch (Exception exception){
+			//return status 500 Error
+			if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+" putServiceProblem exception",exception);
+			StatusMessage statusMessage=new StatusMessage(Status.INTERNAL_SERVER_ERROR, 0, "internal error in putServiceProblem", null, exception);
+			Reply reply= new ServiceProblemResponse();
+			reply.setStatusMessage(statusMessage);
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(reply).build();
+		}
+
 	}
 
 
@@ -209,16 +259,34 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	 * @param id
 	 * @return
 	 */
-	//@PATCH
-	//	@Path("/api/serviceProblem/")
-	//	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	//	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	//	@Override
-	//	public Response patchServiceProblem(String id, ServiceProblem serviceProblem) {
-	//		LOG.debug("patchServiceProblem called");
-	//		// TODO Auto-generated method stub
-	//		return Response.status(200).build();
-	//	}
+	@PATCH
+	@Path("/api/serviceProblem/{id}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Override
+	public Response patchServiceProblem(@PathParam("id") String id, ServiceProblem serviceProblem) {
+		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
+		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
+
+		Logger logger = ServiceLoader.getLog();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"patchServiceProblem id="+id);
+
+		try {
+			ServiceProblemResponse serviceProblemResponse = serviceProblemService.patchServiceProblem(id, serviceProblem);
+			StatusMessage statusMessage = serviceProblemResponse.getStatusMessage();
+			if (! ServiceLoader.getErrorReply()){
+				serviceProblemResponse.setStatusMessage(null);
+			}
+			return Response.status(statusMessage.getStatus()).entity(serviceProblemResponse).build();
+		} catch (Exception exception){
+			//return status 500 Error
+			if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+" patchServiceProblem exception",exception);
+			StatusMessage statusMessage=new StatusMessage(Status.INTERNAL_SERVER_ERROR, 0, "internal error in patchServiceProblem", null, exception);
+			Reply reply= new ServiceProblemResponse();
+			reply.setStatusMessage(statusMessage);
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(reply).build();
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see org.openoss.karaf.features.tmforum.spm.ri.ServiceProblemService#deleteServiceProblem(java.lang.String)
@@ -229,13 +297,28 @@ public class ServiceProblemRestServiceImpl implements ServiceProblemRestService 
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Override
 	public Response deleteServiceProblem(@PathParam("id") String id){
+
 		ServiceProblemService serviceProblemService = ServiceLoader.getServiceProblemService();
 		if (serviceProblemService==null) throw new RuntimeException("ServiceLoader.getServiceProblemService() cannot be null.");
-
 		Logger logger = ServiceLoader.getLog();
-		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+"deleteServiceProblem called for id="+id);
-		// TODO Auto-generated method stub
-		return Response.status(200).build();
+		if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+" deleteServiceProblem id="+id);
+		try {
+			Reply reply = serviceProblemService.deleteServiceProblem(id);
+			StatusMessage statusMessage = reply.getStatusMessage();
+			if (! ServiceLoader.getErrorReply()){
+				reply.setStatusMessage(null);
+			}
+			return Response.status(statusMessage.getStatus()).entity(reply).build();
+		} catch (Exception exception){
+			//return status 500 Error
+			if (logger.isDebugEnabled()) logger.debug(this.getClass().getSimpleName()+" deleteServiceProblem exception",exception);
+			StatusMessage statusMessage=new StatusMessage(Status.INTERNAL_SERVER_ERROR, 0, "internal error in deleteServiceProblem", null, exception);
+			Reply reply= new ServiceProblemResponse();
+			reply.setStatusMessage(statusMessage);
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(reply).build();
+		}
+
+
 	}
 
 	/* (non-Javadoc)

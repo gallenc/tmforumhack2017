@@ -1,5 +1,8 @@
 ## OpenNMS Elasticsearch 2 ReST Plugin
 
+URL:
+http://localhost:8181/tmforum-spm-ri/diagnostics/SPM-rest-diagnostics.html
+
 ### Maven Project
 ~~~~
 project groupId: org.opennms.plugins

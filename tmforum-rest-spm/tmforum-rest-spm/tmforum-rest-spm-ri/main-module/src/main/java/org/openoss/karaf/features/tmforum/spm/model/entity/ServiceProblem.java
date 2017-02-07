@@ -283,5 +283,38 @@ public class ServiceProblem {
 	
 	
 	
+	
+	@Override
+	public String toString() {
+		return "ServiceProblem [href=" + href + ", id=" + id
+				+ ", correlationID=" + correlationID + ", originatingsystem="
+				+ originatingsystem + ", category=" + category
+				+ ", impactImportanceFactor=" + impactImportanceFactor
+				+ ", priority=" + priority + ", description=" + description
+				+ ", problemEscalation=" + problemEscalation + ", timeRaised="
+				+ timeRaised + ", timechanged=" + timechanged
+				+ ", statusChangeDate=" + statusChangeDate
+				+ ", resolutionDate=" + resolutionDate
+				+ ", statusChangeReason=" + statusChangeReason + ", reason="
+				+ reason + ", impactPattern=" + impactPattern
+				+ ", relatedEvent=" + relatedEvent + ", exensioninfo="
+				+ exensioninfo + ", firstAlert=" + firstAlert + ", trackingId="
+				+ trackingId + ", comment=" + comment + ", parentProblem="
+				+ parentProblem + ", underlyingProblem=" + underlyingProblem
+				+ ", originatorParty=" + originatorParty + ", relatedParty="
+				+ relatedParty + ", responsibleParty=" + responsibleParty
+				+ ", affectedLocation=" + affectedLocation
+				+ ", affectedResource=" + affectedResource
+				+ ", rootCauseResource=" + rootCauseResource
+				+ ", affectedService=" + affectedService
+				+ ", rootCauseService=" + rootCauseService + ", relatedObject="
+				+ relatedObject + ", associatedTroubleTicket="
+				+ associatedTroubleTicket + ", underLyingAlarm="
+				+ underLyingAlarm + ", associatedSLAviolation="
+				+ associatedSLAviolation + "]";
+	}
+	
+	
+	
 
 }

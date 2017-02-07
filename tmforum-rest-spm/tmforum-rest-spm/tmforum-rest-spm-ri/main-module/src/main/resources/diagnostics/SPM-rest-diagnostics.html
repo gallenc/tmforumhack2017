@@ -27,19 +27,19 @@
 		var base_url = "http://localhost:8181/serviceProblemManagement/rest/v1-0"
 
 		var getURL_1_url = "/spm/api/serviceProblem/{id}";
-		var getURL_1_data = "NOT DEFINED";
+		var getURL_1_data_data = "NOT DEFINED";
 
 		var deleteURL_1_url = "/spm/api/serviceProblem/{id}";
-		var deleteURL_1_data = "NOT DEFINED";
+		var deleteURL_1_data_data = "NOT DEFINED";
 
-		var postURL_1_url = "/spm/api/serviceProblem/{id}";
-		var postURL_1_data = "TBD3";
+		var postURL_1_url = "/spm/api/serviceProblem/";
+		var postURL_1_data_data = "{ \"id\" : \"problemxxxx0000\", \"href\" : \"http://api/serviceProblem/problemxxxx0000\" }";
 
 		var putURL_1_url = "/spm/api/serviceProblem/{id}";
-		var putURL_1_data = "TBD4";
+		var putURL_1_data_data = "{ \"id\" : \"problemxxxx0000\", \"href\" : \"http://api/serviceProblem/problemxxxx0000\" }";
 
 		var patchURL_1_url = "/spm/api/serviceProblem/{id}";
-		var patchURL_1_data = "TBD5";
+		var patchURL_1_data_data = "{ \"id\" : \"problemxxxx0000\", \"href\" : \"http://api/serviceProblem/problemxxxx0000\" }";
 
 		// username password default
 		document.getElementById('user').value = user;
@@ -48,10 +48,20 @@
 
 		//post command values
 		document.getElementById('getURL_1').value = getURL_1_url;
+		
 		document.getElementById('deleteURL_1').value = deleteURL_1_url;
+		
 		document.getElementById('postURL_1').value = postURL_1_url;
+		document.getElementById('postURL_1_data').value = postURL_1_data_data;
+		
 		document.getElementById('putURL_1').value = putURL_1_url;
+		document.getElementById('putURL_1_data').value = putURL_1_data_data;
+		
 		document.getElementById('patchURL_1').value = patchURL_1_url;
+		document.getElementById('patchURL_1_data').value = patchURL_1_data_data;
+		
+		
+		
 
 	}
 
@@ -107,7 +117,7 @@
 		xmlhttp.setRequestHeader("Content-type", "application/json");
 		xmlhttp.setRequestHeader("Authorization", "Basic "
 				+ Base64.encode(user + ":" + password));
-		xmlhttp.send(JSON.stringify(xmlMessage));
+		xmlhttp.send(xmlMessage);
 	}
 
 	// button specific post requests

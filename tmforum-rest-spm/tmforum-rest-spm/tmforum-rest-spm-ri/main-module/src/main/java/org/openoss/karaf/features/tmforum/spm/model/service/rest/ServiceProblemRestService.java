@@ -17,6 +17,7 @@ import javax.ws.rs.core.UriInfo;
 
 import io.swagger.annotations.*;
 
+import org.openoss.karaf.features.tmforum.spm.api.service.PATCH;
 import org.openoss.karaf.features.tmforum.spm.model.entity.ServiceProblem;
 
 @Api(value="/serviceProblem", description = "Service Problem Management Api")
@@ -107,11 +108,11 @@ public interface ServiceProblemRestService {
 	 * @param id
 	 * @return
 	 */
-	//@PATCH
-	//	@Path("/api/serviceProblem/{id}")
-	//	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	//	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	//	public Response patchServiceProblem(@PathParam("id") String id,  ServiceProblem serviceProblem);
+	@PATCH
+	@Path("/api/serviceProblem/{id}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response patchServiceProblem(@PathParam("id") String id,  ServiceProblem serviceProblem);
 
 	/**
 	 * DELETE api/serviceProblem/{ID}

@@ -54,7 +54,7 @@ public interface ServiceProblemService {
 	 *            )
 	 * @return
 	 */
-	StatusMessage postServiceProblem(ServiceProblem serviceProblem);
+	ServiceProblemResponse postServiceProblem(ServiceProblem serviceProblem);
 
 	/**
 	 * PUT api/serviceProblem/{ID}
@@ -63,7 +63,16 @@ public interface ServiceProblemService {
 	 * @param id
 	 * @return
 	 */
-	StatusMessage putServiceProblem(String id, ServiceProblem serviceProblem);
+	ServiceProblemResponse putServiceProblem(String id, ServiceProblem serviceProblem);
+	
+	/**
+	 * PATCH api/serviceProblem/{ID}
+	 * Complete Update of an Entity PUT must be used to completely update a resource identified by its resource URI
+	 * 
+	 * @param id
+	 * @return
+	 */
+	ServiceProblemResponse patchServiceProblem(String id, ServiceProblem serviceProblem);
 
 	/**
 	 * DELETE api/serviceProblem/{ID}
@@ -73,7 +82,7 @@ public interface ServiceProblemService {
 	 * @param id
 	 * @return
 	 */
-	StatusMessage deleteServiceProblem(String id);
+	Reply deleteServiceProblem(String id);
 
 	/**
 	 * POST api/serviceProblem/ack
