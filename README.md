@@ -1,8 +1,5 @@
 # tmforumhack2017
-TM Forum hackathon with solent students 2017
+TM Forum hackathon events with solent students 2017
 
-## tmforum rest-spm-ctk
-test kit for tmforum rest spm interface
+2 events have been attended one in Lisbon and ne in Nice 
 
-## tmforum rest-spm-ri
-reference implementation tmforum rest spm interface
