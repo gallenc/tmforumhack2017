@@ -1,0 +1,155 @@
+POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/productSpecification
+Content-Type: application/json
+{
+	"productNumber": "I42-340-DX",
+	"version": "2.0",
+	"name": "iPhone 42",
+	"description": "Siri works on this iPhone",
+	"isBundle": true,
+	"brand": "Apple",
+	"lifecycleStatus": "Active",
+	"validFor":  {
+		"startDateTime": "2013-06-19T00:00:00.0Z",
+		"endDateTime": "2013-10-19T16:42:23.0Z"
+	},
+	"relatedParty": 
+	[
+		{
+
+			"id": "1234",
+			"href": "http ://serverLocation:port/partyManagement/partyRole/1234",
+			"role": "Owner"
+		}
+	],
+
+	"attachment": 
+	[
+		{
+			"id": "22",
+			"href": "http://serverlocation:port/documentManagement/attachment/22",
+			"type": "Picture",
+			"url": "http://xxxxx"
+		}
+	],
+
+	"bundledProductSpecification": 
+	[
+		{
+			"id": "15",
+			"href": "http://serverlocation:port/productCatalogManagement/productSpecification/15",
+			"lifecycleStatus": "Active",
+			"name": "Product specification 15"
+		},
+
+		{
+
+			"id": "64",
+			"href": "http://serverlocation:port/productCatalogManagement/productSpecification/64",
+			"lifecycleStatus": "Active",
+			"name": "Product specification 64"
+		}
+	],
+	"productSpecificationRelationship": 
+	[
+		{
+
+			"id": "23",
+			"href": "http://serverlocation:port/productCatalogManagement/productSpecification/23",
+			"type": "dependency",
+			"validFor": 
+			{
+				"startDateTime": "2013-04-19T16:42:23.0Z"
+			}
+		}
+	],
+
+	"serviceSpecification": 
+	[
+		{
+			"id": "13",
+			"href": "http://serverlocation:port/serviceCatalogManagement/serviceSpecification/13",
+			"name": "specification 13",
+			"version": "1.1"
+		}
+	],
+
+	"resourceSpecification": 
+	[
+		{
+			"id": "13",
+			"href": "http://serverlocation:port/resourceCatalogManagement/resourceSpecification/13",
+			"name": "specification 13",
+			"version": "1.1"
+		}
+	],
+	"productSpecCharacteristic": 
+	[
+		{
+			"name": "Screen Size",
+			"description": "Screen size",
+			"valueType": "number",
+			"configurable": false,
+			"validFor": 
+			{
+				"startDateTime": "2013-04-19T16:42:23.0Z"
+			},
+	               "productSpecCharacteristicValue": 
+			[
+				{
+					"valueType": "number",
+					"default": true,
+					"value": "4.2",
+					"unitOfMeasure": "inches",
+					"valueFrom": "",
+					"valueTo": "",
+					"validFor": 
+					{
+						"startDateTime": "2013-04-19T16:42:23.0Z"
+					}
+				}
+			]
+		},
+		{
+			"name": "Colour",
+			"description": "Colour",
+			"valueType": "string",
+			"configurable": true,
+			"productSpecCharacteristicValue": 
+			[
+				{
+					"valueType": "string",
+					"default": true,
+					"value": "Black",
+					"unitOfMeasure": "",
+					"valueFrom": "",
+					"valueTo": "",
+					"validFor": 
+					{
+						"startDateTime": "2013-04-19T16:42:23.0Z"
+					}
+				},
+
+				{
+					"valueType": "string",
+					"default": false,
+					"value": "White",
+					"unitOfMeasure": "",
+					"valueFrom": "",
+					"valueTo": "",
+					"validFor": 
+					{
+						"startDateTime": "2013-04-19T16:42:23.0Z"
+					}
+				}
+			],
+
+			"validFor": 
+			{
+				"startDateTime": "2013-04-19T16:42:23.0Z"
+			}
+		}
+
+
+	]
+
+}

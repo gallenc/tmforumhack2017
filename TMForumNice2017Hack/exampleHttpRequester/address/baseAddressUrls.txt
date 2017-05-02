@@ -1,0 +1,6 @@
+
+http://139.162.227.142:8080/addressManagement/
+http://139.162.227.142:8080/addressManagement/api/admin/address
+http://139.162.227.142:8080/addressManagement/subscriber/api/history
+
+http://139.162.227.142:8080/addressManagement/subscriber/ui/#/list
