@@ -1,0 +1,1 @@
+## OpenNMS configurations for demo
