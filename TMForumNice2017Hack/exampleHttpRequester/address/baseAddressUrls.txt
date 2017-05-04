@@ -1,6 +1,34 @@
 
 http://139.162.227.142:8080/addressManagement/
-http://139.162.227.142:8080/addressManagement/api/admin/address
+
+
+Subscriber notifications API
+
 http://139.162.227.142:8080/addressManagement/subscriber/api/history
 
 http://139.162.227.142:8080/addressManagement/subscriber/ui/#/list
+
+Query api
+
+GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address/214
+
+GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?streetNr=30&streetNrSuffix=Birth
+
+GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?streetName=Itchen Quays
+Returns array of addresses near itchen keys
+
+GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?geoCode.latitude=50.894058&geoCode.longitude=-1.420931
+Unfortunately GIS has to be an exact match and &fuzzy=true makes no difference
+So finding location by searching near to GIS will be difficult 
+
+Administration api
+
+GET http://139.162.227.142:8080/addressManagement/api/admin/address
+returns array of all addresses
+
+note to data fill post array of addresses as shown in addressDatafill.json
+(NOTE unfortunately the href is incorrect in the datafilled address if poste this way)
+
+to delete all addresses
+DELETE http://139.162.227.142:8080/addressManagement/api/admin/address
+
