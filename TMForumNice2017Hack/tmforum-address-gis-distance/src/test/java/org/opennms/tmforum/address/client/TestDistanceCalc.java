@@ -2,44 +2,22 @@ package org.opennms.tmforum.address.client;
 
 import static org.junit.Assert.*;
 
-import org.geotools.geometry.jts.JTS;
-import org.geotools.referencing.GeodeticCalculator;
-import org.geotools.referencing.crs.DefaultGeographicCRS;
-import org.junit.Test;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
-import org.opengis.referencing.operation.TransformException;
 
-import com.vividsolutions.jts.geom.Coordinate;
+import org.junit.Test;
+
+import org.opennms.tmforum.address.gis.rest.DistanceCalculator;
 
 public class TestDistanceCalc {
 
 	@Test
 	public void test() {
 
-		// The World Geodetic System (WGS84) is the reference coordinate system used by the Global Positioning System
-		CoordinateReferenceSystem crs = DefaultGeographicCRS.WGS84;
-		// the following code is based on JTS.orthodromicDistance( start, end, crs )
-	    GeodeticCalculator gc = new GeodeticCalculator(crs);
-
-	    // {"streetNr" : "31", "streetNrSuffix" : "Birth", "streetName" : "Itchen Quays", "streetType" : "Warf", "locality" : "Multi Deck RoRo Terminal", "city" : "Southampton", "stateOrProvince" : "Hampshire", "country" : "UK",   "geoCode" : { "latitude" : "50.889311", "longitude" : "-1.391915" } },
-	  //  {"streetNr" : "32", "streetNrSuffix" : "Birth", "streetName" : "Itchen Quays", "streetType" : "Warf", "locality" : "Multi Deck RoRo Terminal", "city" : "Southampton", "stateOrProvince" : "Hampshire", "country" : "UK",   "geoCode" : { "latitude" : "50.891099", "longitude" : "-1.390925" } },
-
-	    
-	  //  "latitude" : "50.889311", "longitude" : "-1.391915" 
-	  // { "latitude" : "50.891099", "longitude" : "-1.390925" } },
-	    
-		Coordinate start = new Coordinate(50.889311, -1.391915);
-		Coordinate end =  new Coordinate(50.891099, -1.390925);
-		try {
-			gc.setStartingPosition( JTS.toDirectPosition( start, crs ) );
-			gc.setDestinationPosition( JTS.toDirectPosition( end, crs ) );
-			
-		} catch (TransformException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	    double distance = gc.getOrthodromicDistance();
+		String latitude_a="50.889311";
+		String longitude_a="-1.391915";
+		String latitude_b="50.891099";
+		String longitude_b="-1.390925";
+		
+		double distance = DistanceCalculator.distance(latitude_a, longitude_a, latitude_b, longitude_b);
 	    
 	    int totalmeters = (int) distance;
 	    int km = totalmeters / 1000;
