@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace='http://orange.com/api/addressManagement/tmf/v1/model/business' attributeFormDefault='unqualified' elementFormDefault='qualified' xmlns='http://orange.com/api/addressManagement/tmf/v1/model/business' xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+  <xsd:annotation id='sidTag'>
+    <xsd:appinfo></xsd:appinfo>
+  </xsd:annotation>
+  <xsd:element name='Address' type='Address' />
+  <xsd:element name='GeoCode' type='GeoCode' />
+  <xsd:element name='SubAddress' type='SubAddress' />
+  <xsd:element name='SubAddressRef' type='SubAddressRef' />
+  <xsd:element name='Area' type='Area' />
+  <xsd:element name='Characteristic' type='Characteristic' />
+  <xsd:element name='Street' type='Street' />
+  <xsd:element name='AddressRef' type='AddressRef' />
+  <xsd:element name='StreetSegment' type='StreetSegment' />
+  <xsd:complexType name='Address'>
+    <xsd:annotation>
+      <xsd:documentation source='apidesigner/Description'>Structured textual way of describing how to find a Property in an urban area (country properties are often defined differently).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='subAddress' type='SubAddressRef' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+      <xsd:element name='streetNr' type='xsd:string' minOccurs='0' />
+      <xsd:element name='streetNrSuffix' type='xsd:string' minOccurs='0' />
+      <xsd:element name='streetNrLast' type='xsd:string' minOccurs='0' />
+      <xsd:element name='streetNrLastSuffix' type='xsd:string' minOccurs='0' />
+      <xsd:element name='streetName' type='xsd:string' minOccurs='0' />
+      <xsd:element name='streetType' type='xsd:string' minOccurs='0' />
+      <xsd:element name='streetSuffix' type='xsd:string' minOccurs='0' />
+      <xsd:element name='postcode' type='xsd:string' minOccurs='0' />
+      <xsd:element name='locality' type='xsd:string' minOccurs='0' />
+      <xsd:element name='city' type='xsd:string' minOccurs='0' />
+      <xsd:element name='stateOrProvince' type='xsd:string' minOccurs='0' />
+      <xsd:element name='country' type='xsd:string' minOccurs='0' />
+      <xsd:element name='geoCode' type='GeoCode' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='GeoCode'>
+    <xsd:annotation>
+      <xsd:documentation source='apidesigner/Description'>Geographic coordinates to point to the address</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='latitude' type='xsd:string' minOccurs='0' />
+      <xsd:element name='longitude' type='xsd:string' minOccurs='0' />
+      <xsd:element name='geographicDatum' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='SubAddress'>
+    <xsd:annotation>
+      <xsd:documentation source='apidesigner/Description'>It is used for addressing within a property in an urban area (country properties are often defined differently). It may refer to a building, a building cluster, or a floor of a multistory building.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='type' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+      <xsd:element name='name' type='xsd:string' minOccurs='0' />
+      <xsd:element name='subUnitType' type='xsd:string' minOccurs='0' />
+      <xsd:element name='subUnitNumber' type='xsd:string' minOccurs='0' />
+      <xsd:element name='levelType' type='xsd:string' minOccurs='0' />
+      <xsd:element name='levelNumber' type='xsd:string' minOccurs='0' />
+      <xsd:element name='buildingName' type='xsd:string' minOccurs='0' />
+      <xsd:element name='privateStreetNumber' type='xsd:string' minOccurs='0' />
+      <xsd:element name='privateStreetName' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='SubAddressRef'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='type' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Area'>
+    <xsd:annotation>
+      <xsd:documentation source='apidesigner/Description'>It is used to represent areas defined on maps that relate to areas of settlement.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='name' type='xsd:string' minOccurs='0' />
+      <xsd:element name='type' type='xsd:string' minOccurs='0' />
+      <xsd:element name='characteristic' type='Characteristic' minOccurs='0' maxOccurs='unbounded' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Characteristic'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='name' type='xsd:string' minOccurs='0' />
+      <xsd:element name='value' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='Street'>
+    <xsd:annotation>
+      <xsd:documentation source='apidesigner/Description'>It is used to represent streets within an Area.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='type' type='xsd:string' minOccurs='0' />
+      <xsd:element name='name' type='xsd:string' minOccurs='0' />
+      <xsd:element name='characteristic' type='Characteristic' minOccurs='0' maxOccurs='unbounded' />
+      <xsd:element name='address' type='AddressRef' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='AddressRef'>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='href' type='xsd:string' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name='StreetSegment'>
+    <xsd:annotation>
+      <xsd:documentation source='apidesigner/Description'>It is used to represent segments in a given street: this can be directly street numbers (22), or group of numbers materializing a geographic address, e.g. 22-24.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence minOccurs='1' maxOccurs='1'>
+      <xsd:element name='id' type='xsd:string' minOccurs='0' />
+      <xsd:element name='number' type='xsd:string' minOccurs='0' />
+      <xsd:element name='numberSuffix' type='xsd:string' minOccurs='0' />
+      <xsd:element name='numberLast' type='xsd:string' minOccurs='0' />
+      <xsd:element name='numberLastSuffix' type='xsd:string' minOccurs='0' />
+      <xsd:element name='address' type='AddressRef' minOccurs='0' />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
