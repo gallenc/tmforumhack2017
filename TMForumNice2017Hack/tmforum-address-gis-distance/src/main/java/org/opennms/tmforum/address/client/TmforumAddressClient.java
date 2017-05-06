@@ -46,6 +46,7 @@ public class TmforumAddressClient {
 		this.password=password;
 	}
 
+	@SuppressWarnings("unused")
 	private TmforumAddressClient(){
 		super();
 	}

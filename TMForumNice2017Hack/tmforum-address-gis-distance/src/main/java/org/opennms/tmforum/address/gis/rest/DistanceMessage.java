@@ -91,6 +91,13 @@ public class DistanceMessage {
 	public void setLongitude_finish(String longitude_finish) {
 		this.longitude_finish = longitude_finish;
 	}
+	
+	@Override
+	public String toString() {
+		return "DistanceMessage [distance=" + distance + ", address_start=" + address_start + ", address_finish="
+				+ address_finish + ", latitude_start=" + latitude_start + ", longitude_start=" + longitude_start
+				+ ", latitude_finish=" + latitude_finish + ", longitude_finish=" + longitude_finish + "]";
+	}
 
 
 
