@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.opennms.tmforum.address.client.TmforumAddressClient;
 import org.opennms.tmforum.address.gis.rest.DistanceMessage;
 import org.opennms.tmforum.address.gis.rest.NearestAddressFinder;
-import org.opennms.tmforum.address.model.Address;
 
 public class NearestAddressFinderTest {
 
@@ -30,7 +29,7 @@ public class NearestAddressFinderTest {
 		Map<String, String> queryParams=null;
 
 		// { "latitude" : "50.883794", "longitude" : "-1.393093" } },
-		String latitude="50.883794";
+		String latitude="50.883793";
 		String longitude="-1.393093";
 
 		DistanceMessage foundDistance = nearestAddressFinder.findNearestAddress(latitude, longitude, queryParams);

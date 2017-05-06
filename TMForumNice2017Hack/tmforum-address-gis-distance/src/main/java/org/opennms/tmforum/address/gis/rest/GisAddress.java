@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.opennms.tmforum.address.client.TmforumAddressClient;
 import org.opennms.tmforum.address.model.Address;
 import org.opennms.tmforum.address.model.GeoCode;
 
@@ -23,6 +24,15 @@ import org.opennms.tmforum.address.model.GeoCode;
 
 @Path("/api/v1")
 public class GisAddress {
+	
+	// change to match server address you are testing against
+	private static final  String TMFORUM_ADDRESS_URI="http://139.162.227.142:8080/addressManagement/api/addressManagement/v1";
+
+	private NearestAddressFinder getNearestAddressFinder(){
+		TmforumAddressClient addressClient = new TmforumAddressClient(TMFORUM_ADDRESS_URI);
+		NearestAddressFinder nearestAddressFinder = new NearestAddressFinder(addressClient);
+		return nearestAddressFinder;
+	}
 
 	/**
 	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/nearestAddress?latitude_start=50.889311&longitude_start=-1.391915&latitude_finish=50.891099&longitude_finish=-1.390925
@@ -54,6 +64,7 @@ public class GisAddress {
 			if(latitude_start==null || latitude_start.isEmpty() || longitude_start==null || longitude_start.isEmpty()) 
 				throw new IllegalArgumentException("Query parameters latitude and longitude must be set");
 
+			//TODO ADD NEAREST ADDRESS FINDER 
 			List<Address> resultList = new ArrayList<Address>();
 			Address a = new Address();
 			GeoCode geocode = new GeoCode();
