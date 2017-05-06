@@ -32,15 +32,15 @@ import org.opennms.tmforum.address.model.Address;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType (propOrder={"distance", "latitude_a", "longitude_a", "latitude_b", "longitude_b", "address_a", "address_b",})
+//@XmlType (propOrder={"distance", "latitude_a", "longitude_a", "latitude_b", "longitude_b", "address_a", "address_b",})
 public class DistanceMessage {
 
 	String distance=null;
 
-	@XmlElement(nillable = true)
+	//@XmlElement(nillable = true)
 	Address address_a=null;
 	
-	@XmlElement(nillable = true)
+	//@XmlElement(nillable = true)
 	Address address_b=null;
 
 	String latitude_a;

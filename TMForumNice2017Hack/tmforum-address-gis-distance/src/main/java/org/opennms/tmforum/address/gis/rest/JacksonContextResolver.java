@@ -23,7 +23,8 @@ public class JacksonContextResolver implements ContextResolver<ObjectMapper> {
         this.objectMapper = new ObjectMapper();
     this.objectMapper
         .configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        .configure(SerializationConfig.Feature.INDENT_OUTPUT, true);
+        .configure(SerializationConfig.Feature.INDENT_OUTPUT, true)
+        .configure(SerializationConfig.Feature.WRITE_NULL_PROPERTIES, false);
     }
 
     @Override
