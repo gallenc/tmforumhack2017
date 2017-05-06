@@ -1,4 +1,4 @@
-package org.opennms.tmforum.address.client;
+package org.opennms.tmforum.address.gis;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import org.opennms.tmforum.address.gis.rest.DistanceCalculator;
 
-public class TestDistanceCalc {
+public class DistanceCalcTest {
 
 	@Test
 	public void test() {
