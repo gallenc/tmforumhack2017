@@ -32,22 +32,22 @@ import org.opennms.tmforum.address.model.Address;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-//@XmlType (propOrder={"distance", "latitude_a", "longitude_a", "latitude_b", "longitude_b", "address_a", "address_b",})
+//@XmlType (propOrder={"distance", "latitude_start", "longitude_start", "latitude_finish", "longitude_finish", "address_start", "address_finish",})
 public class DistanceMessage {
 
 	String distance=null;
 
 	//@XmlElement(nillable = true)
-	Address address_a=null;
+	Address address_start=null;
 	
 	//@XmlElement(nillable = true)
-	Address address_b=null;
+	Address address_finish=null;
 
-	String latitude_a;
-	String longitude_a; 
+	String latitude_start;
+	String longitude_start; 
 
-	String latitude_b;
-	String longitude_b;
+	String latitude_finish;
+	String longitude_finish;
 
 	public String getDistance() {
 		return distance;
@@ -55,41 +55,41 @@ public class DistanceMessage {
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}
-	public Address getAddress_a() {
-		return address_a;
+	public Address getAddress_start() {
+		return address_start;
 	}
-	public void setAddress_a(Address address_a) {
-		this.address_a = address_a;
+	public void setAddress_start(Address address_start) {
+		this.address_start = address_start;
 	}
-	public Address getAddress_b() {
-		return address_b;
+	public Address getAddress_finish() {
+		return address_finish;
 	}
-	public void setAddress_b(Address address_b) {
-		this.address_b = address_b;
+	public void setAddress_finish(Address address_finish) {
+		this.address_finish = address_finish;
 	}
-	public String getLatitude_a() {
-		return latitude_a;
+	public String getLatitude_start() {
+		return latitude_start;
 	}
-	public void setLatitude_a(String latitude_a) {
-		this.latitude_a = latitude_a;
+	public void setLatitude_start(String latitude_start) {
+		this.latitude_start = latitude_start;
 	}
-	public String getLongitude_a() {
-		return longitude_a;
+	public String getLongitude_start() {
+		return longitude_start;
 	}
-	public void setLongitude_a(String longitude_a) {
-		this.longitude_a = longitude_a;
+	public void setLongitude_start(String longitude_start) {
+		this.longitude_start = longitude_start;
 	}
-	public String getLatitude_b() {
-		return latitude_b;
+	public String getLatitude_finish() {
+		return latitude_finish;
 	}
-	public void setLatitude_b(String latitude_b) {
-		this.latitude_b = latitude_b;
+	public void setLatitude_finish(String latitude_finish) {
+		this.latitude_finish = latitude_finish;
 	}
-	public String getLongitude_b() {
-		return longitude_b;
+	public String getLongitude_finish() {
+		return longitude_finish;
 	}
-	public void setLongitude_b(String longitude_b) {
-		this.longitude_b = longitude_b;
+	public void setLongitude_finish(String longitude_finish) {
+		this.longitude_finish = longitude_finish;
 	}
 
 

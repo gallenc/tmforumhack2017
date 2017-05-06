@@ -1,7 +1,7 @@
 POST http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/distance-address
 Content-Type: application/json
 {
-  "address_a" : 
+  "address_start" : 
 	{
 		"streetNr": "31",
 		"streetNrSuffix": "Birth",
@@ -16,7 +16,7 @@ Content-Type: application/json
 			"longitude": "-1.391915"
 		}
 	},
-  "address_b" : {
+  "address_finish" : {
 		"streetNr": "32",
 		"streetNrSuffix": "Birth",
 		"streetName": "Itchen Quays",
