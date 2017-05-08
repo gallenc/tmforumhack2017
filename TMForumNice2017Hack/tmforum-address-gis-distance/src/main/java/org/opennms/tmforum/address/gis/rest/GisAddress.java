@@ -84,6 +84,7 @@ public class GisAddress {
 	/**
 	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/closestAddresses?latitude_start=50.889311&longitude_start=-1.391915&maxReturnAddresses=5
 	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/closestAddresses?latitude_start=50.889311&longitude_start=-1.391915&streetName=Itchen%20Quays
+	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/closestAddresses?latitude_start=50.889311&longitude_start=-1.391915&maxReturnAddresses=3
 	 * @param latitude_start
 	 * @param longitude_start
 	 * @return

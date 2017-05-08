@@ -132,7 +132,7 @@ public class NearestAddressFinder {
 		
 		int i=0;
 		for (Double distance : distanceMap.keySet()){
-			if(i>=maxReturnAddresses) break;
+			if(maxReturnAddresses!=null && i>=maxReturnAddresses) break;
 			closestAddresses.add(distanceMap.get(distance));
 			i++;
 		}
