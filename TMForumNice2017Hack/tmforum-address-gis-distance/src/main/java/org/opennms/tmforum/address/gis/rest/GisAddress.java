@@ -1,41 +1,35 @@
 
 package org.opennms.tmforum.address.gis.rest;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedHashMap;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
-import org.opennms.tmforum.address.client.TmforumAddressClient;
 import org.opennms.tmforum.address.model.Address;
-import org.opennms.tmforum.address.model.GeoCode;
+
 
 
 
 @Path("/api/v1")
 public class GisAddress {
-	
-	// change to match server address you are testing against
-	private static final  String TMFORUM_ADDRESS_URI="http://139.162.227.142:8080/addressManagement/api/addressManagement/v1";
 
-	private NearestAddressFinder getNearestAddressFinder(){
-		TmforumAddressClient addressClient = new TmforumAddressClient(TMFORUM_ADDRESS_URI);
-		NearestAddressFinder nearestAddressFinder = new NearestAddressFinder(addressClient);
-		return nearestAddressFinder;
-	}
+
 
 	/**
-	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/nearestAddress?latitude_start=50.889311&longitude_start=-1.391915&latitude_finish=50.891099&longitude_finish=-1.390925
+	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/nearestAddress?latitude_start=50.889311&longitude_start=-1.391915
 	 * @param latitude_start
 	 * @param longitude_start
 	 * @return 
@@ -56,7 +50,12 @@ public class GisAddress {
 	@GET
 	@Path("/nearestAddress")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response jsonWorld(@QueryParam("latitude_start") String latitude_start, @QueryParam("longitude_start") String longitude_start) {
+	public Response jsonWorld(@QueryParam("latitude_start") String latitude_start, @QueryParam("longitude_start") String longitude_start,  @Context UriInfo uriInfo) {
+
+		// get query params and remove latitude parameters
+		MultivaluedMap<String, String> queryParams = new MultivaluedHashMap<String, String> (uriInfo.getQueryParameters()); 
+		queryParams.remove("latitude_start");
+		queryParams.remove("longitude_start");
 
 		Response response = null;
 
@@ -64,24 +63,72 @@ public class GisAddress {
 			if(latitude_start==null || latitude_start.isEmpty() || longitude_start==null || longitude_start.isEmpty()) 
 				throw new IllegalArgumentException("Query parameters latitude and longitude must be set");
 
-			//TODO ADD NEAREST ADDRESS FINDER 
-			List<Address> resultList = new ArrayList<Address>();
-			Address a = new Address();
-			GeoCode geocode = new GeoCode();
-			geocode.setLatitude(latitude_start);
-			geocode.setLongitude(longitude_start);
-			a.setGeoCode(geocode);
-			resultList.add(a);
+			NearestAddressFinder nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
 
-			response = Response.ok(resultList).build();
-		}
+			DistanceMessage foundDistance = nearestAddressFinder.findNearestAddress(latitude_start, longitude_start, queryParams );
 
-		catch (Exception exception) {
+			response = Response.ok(foundDistance).build();
+		} catch (Exception exception) {
 			Status status = Status.BAD_REQUEST;
 			int code = 0;
-			String message = "error";
+			String message = "error in /nearestAddress";
 			String link = null;
-			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception.getMessage());
+			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception);
+			response = Response.status(status).entity(statusmsg).build();
+		}
+
+		return response;
+
+	}
+
+	/**
+	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/closestAddresses?latitude_start=50.889311&longitude_start=-1.391915&maxReturnAddresses=5
+	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/closestAddresses?latitude_start=50.889311&longitude_start=-1.391915&streetName=Itchen%20Quays
+	 * @param latitude_start
+	 * @param longitude_start
+	 * @return
+	 */
+	@GET
+	@Path("/closestAddresses")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response jsonClosestAddresses(@QueryParam("latitude_start") String latitude_start,
+			@QueryParam("longitude_start") String longitude_start, 
+			@QueryParam("maxReturnAddresses") String maxReturnAddressesStr, 
+			@Context UriInfo uriInfo) {
+
+
+		// get query params and remove latitude parameters
+		MultivaluedMap<String, String> queryParams = new MultivaluedHashMap<String, String> (uriInfo.getQueryParameters()); 
+		queryParams.remove("latitude_start");
+		queryParams.remove("longitude_start");
+		queryParams.remove("maxReturnAddresses");
+
+		Response response = null;
+
+		try {
+			if(latitude_start==null || latitude_start.isEmpty() || longitude_start==null || longitude_start.isEmpty()) 
+				throw new IllegalArgumentException("Query parameters latitude and longitude must be set");
+
+			Integer maxReturnAddresses=null;
+			if (maxReturnAddressesStr !=null){
+				try{
+					maxReturnAddresses=Integer.parseInt(maxReturnAddressesStr);
+				} catch (NumberFormatException nfe){
+					throw new IllegalArgumentException("maxReturnAddresses cannot be parsed as integer", nfe);
+				}
+			}
+
+			NearestAddressFinder nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
+
+			Set<DistanceMessage> foundDistances = nearestAddressFinder.findClosestAddresses(latitude_start, longitude_start, maxReturnAddresses, queryParams);
+
+			response = Response.ok(foundDistances).build();
+		} catch (Exception exception) {
+			Status status = Status.BAD_REQUEST;
+			int code = 0;
+			String message = "error in /nearestAddress";
+			String link = null;
+			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception);
 			response = Response.status(status).entity(statusmsg).build();
 		}
 

@@ -4,9 +4,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 
 /**
  * used to force pretty print of output
@@ -22,9 +24,10 @@ public class JacksonContextResolver implements ContextResolver<ObjectMapper> {
     public JacksonContextResolver() throws Exception {
         this.objectMapper = new ObjectMapper();
     this.objectMapper
-        .configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        .configure(SerializationConfig.Feature.INDENT_OUTPUT, true)
-        .configure(SerializationConfig.Feature.WRITE_NULL_PROPERTIES, false);
+        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,false)
+        .configure(SerializationFeature.INDENT_OUTPUT,true)
+        .configure(SerializationFeature.WRITE_NULL_MAP_VALUES,false)
+        .configure(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS,true);
     }
 
     @Override

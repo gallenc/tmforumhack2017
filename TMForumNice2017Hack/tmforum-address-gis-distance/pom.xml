@@ -10,7 +10,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jersey.version>2.15</jersey.version>
     <jackson.version>1.9.13</jackson.version>
-    <jerseymedia.version>2.7</jerseymedia.version>
+    <jerseymedia.version>2.9</jerseymedia.version>
     <geotools.version>15.1</geotools.version>
   </properties>
 

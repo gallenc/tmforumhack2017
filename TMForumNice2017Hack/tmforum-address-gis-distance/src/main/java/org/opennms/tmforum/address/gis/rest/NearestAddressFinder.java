@@ -2,18 +2,23 @@ package org.opennms.tmforum.address.gis.rest;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.ws.rs.core.MultivaluedMap;
+
 import org.opennms.tmforum.address.client.TmforumAddressClient;
 import org.opennms.tmforum.address.model.Address;
 import org.opennms.tmforum.address.model.GeoCode;
 
-
+/**
+ * Nearest address finder caches address list for 5 minutes unless the query params change
+ * @author cgallen
+ *
+ */
 public class NearestAddressFinder {
 
 	// slf4j not in glassfish?
@@ -31,7 +36,7 @@ public class NearestAddressFinder {
 
 	private Set<Address> addressCache= new LinkedHashSet<Address>();
 	private long addressCacheLastRefresh = new Date().getTime();
-	
+	private String cachedQueryParamsStr="";
 	
 	public NearestAddressFinder(TmforumAddressClient addressClient){
 		super();
@@ -44,14 +49,15 @@ public class NearestAddressFinder {
 
 	}
 
-	private Set<Address> getAddressCache(Map<String,String> queryParams) {
-		if (addressCache.isEmpty() 
+	private Set<Address> getAddressCache(MultivaluedMap<String,String> queryParams) {
+		
+		String queryParamsStr = (queryParams==null) ? "" : queryParams.toString();
+		if (!queryParamsStr.equals(cachedQueryParamsStr)
+				||	addressCache.isEmpty() 
 				|| (new Date().getTime() - addressCacheLastRefresh > MAX_ADDRESS_AGE) ){
-
-			Map<String, String> queryMap = null;
 			try{
 				debugLog("trying to load new address cache");
-				Set<Address> addressCacheNew = addressClient.getAddresses(queryMap );
+				Set<Address> addressCacheNew = addressClient.getAddresses(queryParams);
 				addressCache=addressCacheNew;
 			} catch (Exception e){
 				debugLog("problem loading new address cache",e);
@@ -60,7 +66,7 @@ public class NearestAddressFinder {
 		return addressCache;
 	}
 	
-	public synchronized SortedMap<Double, DistanceMessage> getDistanceMap(String latitude_start, String longitude_start, Map<String,String> queryParams){
+	public synchronized SortedMap<Double, DistanceMessage> getDistanceMap(String latitude_start, String longitude_start, MultivaluedMap<String,String> queryParams){
 		SortedMap<Double, DistanceMessage> distanceMap = new TreeMap<Double, DistanceMessage>();
 		
 		Set<Address> addresslist = getAddressCache(queryParams);
@@ -99,10 +105,12 @@ public class NearestAddressFinder {
 	 * @param queryParams query parameters to pass to address client to limit search
 	 * @return DistanceMessage containing the address and the distance from the point
 	 */
-	public synchronized DistanceMessage findNearestAddress(String latitude_start, String longitude_start, Map<String,String> queryParams){
+	public synchronized DistanceMessage findNearestAddress(String latitude_start, String longitude_start, MultivaluedMap<String,String> queryParams){
 		DistanceMessage distanceMessage=null;
 		
 		SortedMap<Double, DistanceMessage> distanceMap = getDistanceMap( latitude_start,  longitude_start, queryParams);
+		
+		if(distanceMap.isEmpty()) return null;
 		
 		distanceMessage=distanceMap.get(distanceMap.firstKey());
 
@@ -117,13 +125,16 @@ public class NearestAddressFinder {
 	 * @param maxReturnAddresses maximum number of addresses to return
 	 * @return
 	 */
-	public  synchronized Set<DistanceMessage> findClosestAddresses(String latitude_start, String longitude_start, Integer maxReturnAddresses, Map<String,String> queryParams){
+	public  synchronized Set<DistanceMessage> findClosestAddresses(String latitude_start, String longitude_start, Integer maxReturnAddresses, MultivaluedMap<String,String> queryParams){
 		Set<DistanceMessage> closestAddresses = new LinkedHashSet<DistanceMessage>();
 
 		SortedMap<Double, DistanceMessage> distanceMap = getDistanceMap( latitude_start,  longitude_start, queryParams);
 		
+		int i=0;
 		for (Double distance : distanceMap.keySet()){
+			if(i>=maxReturnAddresses) break;
 			closestAddresses.add(distanceMap.get(distance));
+			i++;
 		}
 			
 		return closestAddresses;

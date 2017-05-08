@@ -5,6 +5,8 @@ import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
+
 @ApplicationPath("gisaddress")
 public class Application extends ResourceConfig {
 
