@@ -1,0 +1,1 @@
+Tests in packages ending in .manual are not run during build

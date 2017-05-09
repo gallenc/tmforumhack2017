@@ -1,9 +1,11 @@
-package org.opennms.tmforum.address.client.manual;
+package org.opennms.tmforum.address.gis.client.manual;
 
 import static org.junit.Assert.*;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.ws.rs.core.MultivaluedHashMap;
@@ -15,15 +17,42 @@ import org.opennms.tmforum.address.gis.rest.NearestAddressFinder;
 import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 
 public class NearestAddressFinderTest {
+	
+	// change to match server address you are testing against or put in properties file
+	public static final String DEFAULT_TMFORUM_ADDRESS_URI="/addressManagement/api/addressManagement/v1";
+	public static final String TMFORUM_ADDRESS_URI_PROPERTY_NAME="tmforum.address.uri";
 
-	// change to match server address you are testing against
-	private static final  String TMFORUM_ADDRESS_URI="http://139.162.227.142:8080/addressManagement/api/addressManagement/v1";
+	public static final String TMFORUM_ADDRESS_SERVER_PROPERTY_NAME="tmforum.address.server";
+	public static final String DEFAULT_TMFORUM_ADDRESS_SERVER="http://localhost:8080";
+	
+	private static Properties testProperties = null;
+	
+	private static Properties getTestProperties(){
+		if (testProperties==null){
+			Properties systemProps = System.getProperties();
+			InputStream stream = NearestAddressFinderTest.class.getClassLoader().getResourceAsStream("test.properties");
+			try {
+				if(stream!=null) {
+					systemProps.load(stream);
+				} else System.out.println("cannot load test properties file. Using defaults." );
+                testProperties=systemProps;
+			} catch (Exception e) {
+				System.out.println("cannot load test properties file "+e);
+			}
+		}
+		return testProperties;
+	}
+	
+	private static String tmforumServerUri = getTestProperties().getProperty(TMFORUM_ADDRESS_SERVER_PROPERTY_NAME, DEFAULT_TMFORUM_ADDRESS_SERVER);
+	private static String tmforumAddressUri = getTestProperties().getProperty(TMFORUM_ADDRESS_URI_PROPERTY_NAME, DEFAULT_TMFORUM_ADDRESS_URI);
+	private static String tmforumAddressAPI= tmforumServerUri + tmforumAddressUri;
 
 	private static NearestAddressFinder nearestAddressFinder=null;
 
 	private static NearestAddressFinder getNearestAddressFinder(){
 		if (nearestAddressFinder==null) {
-			TmforumAddressClient addressClient = new TmforumAddressClient(TMFORUM_ADDRESS_URI);
+			System.out.println("using address: "+tmforumAddressAPI);
+			TmforumAddressClient addressClient = new TmforumAddressClient( tmforumAddressAPI);
 			nearestAddressFinder = new NearestAddressFinder(addressClient);
 		}
 		return nearestAddressFinder;

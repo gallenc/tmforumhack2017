@@ -1,8 +1,10 @@
 package org.opennms.tmforum.address.client.manual;
 import static org.junit.Assert.*;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import javax.ws.rs.core.MultivaluedHashMap;
@@ -14,15 +16,42 @@ import org.opennms.tmforum.address.model.Address;
 
 public class TmforumAddressClientTest {
 	
-	// change to match server address you are testing against
-	private static final  String TMFORUM_ADDRESS_URI="http://139.162.227.142:8080/addressManagement/api/addressManagement/v1";
+	// change to match server address you are testing against or put in properties file
+	public static final String DEFAULT_TMFORUM_ADDRESS_URI="/addressManagement/api/addressManagement/v1";
+	public static final String TMFORUM_ADDRESS_URI_PROPERTY_NAME="tmforum.address.uri";
+
+	public static final String TMFORUM_ADDRESS_SERVER_PROPERTY_NAME="tmforum.address.server";
+	public static final String DEFAULT_TMFORUM_ADDRESS_SERVER="http://localhost:8080";
+	
+	private static Properties testProperties = null;
+	
+	private static Properties getTestProperties(){
+		if (testProperties==null){
+			Properties systemProps = System.getProperties();
+			InputStream stream = TmforumAddressClientTest.class.getClassLoader().getResourceAsStream("test.properties");
+			try {
+				if(stream!=null) {
+					systemProps.load(stream);
+				} else System.out.println("cannot load test properties file. Using defaults." );
+                testProperties=systemProps;
+			} catch (Exception e) {
+				System.out.println("cannot load test properties file "+e);
+			}
+		}
+		return testProperties;
+	}
+	
+	private String tmforumServerUri = getTestProperties().getProperty(TMFORUM_ADDRESS_SERVER_PROPERTY_NAME, DEFAULT_TMFORUM_ADDRESS_SERVER);
+	private String tmforumAddressUri = getTestProperties().getProperty(TMFORUM_ADDRESS_URI_PROPERTY_NAME, DEFAULT_TMFORUM_ADDRESS_URI);
+	private String tmforumAddressAPI= tmforumServerUri + tmforumAddressUri;
 
 	// get all addresses
 	@Test
 	public void getAddressestest1() {
 		System.out.println("START OF getAddressestest1()");
 		
-		TmforumAddressClient addressClient = new TmforumAddressClient(TMFORUM_ADDRESS_URI);
+		System.out.println("using address: "+tmforumAddressAPI);
+		TmforumAddressClient addressClient = new TmforumAddressClient(tmforumAddressAPI);
 
 		MultivaluedMap<String, String> queryMap=null;
 		Set<Address> addressList= addressClient.getAddresses(queryMap);
@@ -39,7 +68,8 @@ public class TmforumAddressClientTest {
 		System.out.println("START OF getAddressestest2()");
 		// GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?streetName=Itchen Quays
 		
-		TmforumAddressClient addressClient = new TmforumAddressClient(TMFORUM_ADDRESS_URI);
+		System.out.println("using address: "+tmforumAddressAPI);
+		TmforumAddressClient addressClient = new TmforumAddressClient(tmforumAddressAPI);
 		
         MultivaluedMap<String, String> queryMap=new  MultivaluedHashMap<String, String>();
         
@@ -60,7 +90,8 @@ public class TmforumAddressClientTest {
 		// GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?streetNr=30
 		// http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?streetNr=30&streetNr=31
 		
-		TmforumAddressClient addressClient = new TmforumAddressClient(TMFORUM_ADDRESS_URI);
+		System.out.println("using address: "+tmforumAddressAPI);
+		TmforumAddressClient addressClient = new TmforumAddressClient(tmforumAddressAPI);
 		
 		MultivaluedMap<String, String> queryMap=new MultivaluedHashMap<String, String>();
 		List<String> list = Arrays.asList("30","31");
@@ -80,7 +111,8 @@ public class TmforumAddressClientTest {
 		System.out.println("START OF getAddressTest()");
 		// GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address/214
 		
-		TmforumAddressClient addressClient = new TmforumAddressClient(TMFORUM_ADDRESS_URI);
+		System.out.println("using address: "+tmforumAddressAPI);
+		TmforumAddressClient addressClient = new TmforumAddressClient(tmforumAddressAPI);
 		
 		String id = "214"; // CHANGE TO MATCH A REAL ADDRESS
 		Address address= addressClient.getAddress(id );
