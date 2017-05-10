@@ -8,6 +8,8 @@ import java.util.Set;
 import org.geotools.geometry.jts.GeometryBuilder;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.geometry.jts.JTSFactoryFinder;
+import org.opennms.tmforum.address.gis.rest.NearestAddressFinder;
+import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 import org.opennms.tmforum.address.model.Address;
 import org.opennms.tmforum.address.model.GeoCode;
 
@@ -26,6 +28,13 @@ public class PathModel {
 		return addressRegions;
 	}
 
+	/** 
+	 * creates address regions following order of static list of addresses
+	 * 
+	 * @param addresses
+	 * @param radius
+	 * @param nsides
+	 */
 	public void createAddressRegions(Set<Address> addresses, double radius, int nsides){
 		for(Address address: addresses){
 			GeoCode geocode = address.getGeoCode();
@@ -36,6 +45,32 @@ public class PathModel {
 				addressRegions.add(circle);
 			}
 		}
+	}
+	
+	/**
+	 * creates address regions trying to find shortest path between regions
+	 * start address may be contained in address collection or not but will always be in final path
+	 * @param addresses
+	 * @param radius
+	 * @param nsides
+	 */
+	public void createSortedAddressRegions(Address startAddress, Set<Address> addresses, double radius, int nsides){
+		NearestAddressFinder naf = new NearestAddressFinder();
+		Set<Address> unsortedAddresses = new LinkedHashSet<Address>(addresses);
+		Set<Address> sortedAddresses = new LinkedHashSet<Address>();
+		
+		Address start=startAddress;
+		sortedAddresses.add(startAddress);
+		if(unsortedAddresses.contains(startAddress)) unsortedAddresses.remove(startAddress);
+		while (! unsortedAddresses.isEmpty()){
+			naf.setAddressCache(unsortedAddresses);
+			DistanceMessage distanceMessage = naf.findNearestAddress(start);
+			Address nearestAddress = distanceMessage.getAddress_finish();
+			sortedAddresses.add(nearestAddress);
+			unsortedAddresses.remove(nearestAddress);
+		}
+		
+		createAddressRegions(sortedAddresses, radius, nsides);
 	}
 
 	/**

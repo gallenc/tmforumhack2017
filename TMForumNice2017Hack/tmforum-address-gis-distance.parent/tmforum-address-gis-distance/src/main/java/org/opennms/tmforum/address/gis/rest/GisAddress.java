@@ -2,6 +2,7 @@
 package org.opennms.tmforum.address.gis.rest;
 
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
@@ -18,8 +19,12 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.opennms.tmforum.address.gis.path.PathModel;
 import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 import org.opennms.tmforum.address.model.Address;
+import org.opennms.tmforum.address.model.GeoCode;
+
+import com.vividsolutions.jts.geom.Coordinate;
 
 
 
@@ -358,6 +363,98 @@ public class GisAddress {
 
 		return response;
 
+	}
+	/**
+	 * POST http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?areaRadius=10&nsides=5&splineFit=0.0
+	 * @param startAddress
+	 * @param areaRadiusStr
+	 * @param nsidesStr
+	 * @param splineFitStr
+	 * @param uriInfo
+	 * @return
+	 */
+	@POST
+	@Path("/waypath")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	public Response waypath(Address startAddress, 
+			@QueryParam("areaRadius") String areaRadiusStr,
+			@QueryParam("nsides") String nsidesStr,
+			@QueryParam("splineFit") String splineFitStr,
+			@Context UriInfo uriInfo) {
+
+		// get query params and remove latitude parameters
+		MultivaluedMap<String, String> queryParams = new MultivaluedHashMap<String, String> (uriInfo.getQueryParameters()); 
+		queryParams.remove("areaRadius");
+		queryParams.remove("nsides");
+		queryParams.remove("splinefit");
+
+		Response response = null;
+
+		try {
+
+			PathModel pathModel= new PathModel();
+
+			double radius = 10;
+			int nsides = 5;
+			double splineFit=0.0;
+
+			if(nsidesStr!=null) try{
+				nsides = Integer.parseInt(nsidesStr);
+			} catch (NumberFormatException nfe){
+				throw new IllegalArgumentException("cannot parse query parameter nsides",nfe);
+			}
+
+			if(areaRadiusStr!=null) try{
+				radius = Double.parseDouble(areaRadiusStr);
+			} catch (NumberFormatException nfe){
+				throw new IllegalArgumentException("cannot parse query parameter areaRadius",nfe);
+			}
+
+			if(splineFitStr!=null) try{
+				splineFit = Double.parseDouble(splineFitStr);
+				if(splineFit<0.0 || splineFit>1.0) throw new IllegalArgumentException("query parameter splineFit must be in range 0.0 to 1.0");
+			} catch (NumberFormatException nfe){
+				throw new IllegalArgumentException("cannot parse query parameter areaRadius",nfe);
+			}
+
+			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
+			Set<Address> pathData = nearestAddressFinder.getAddressCache(queryParams);
+
+			if( pathData.isEmpty() ) throw new IllegalArgumentException("cannot retreive any addresses for path using given params");
+
+			if( startAddress==null ) {
+				startAddress=pathData.iterator().next();
+			};
+
+			pathModel.createSortedAddressRegions(startAddress, pathData, radius, nsides);
+
+			Set<Coordinate> pathCoordinates = pathModel.directPathCoordinates();
+			System.out.println(" number of points in raw line ="+pathCoordinates.size());
+
+			Set<Coordinate> coords = PathModel.getSplineCoordinates(pathCoordinates,splineFit);
+
+			Set<GeoCode> waypath = new LinkedHashSet<GeoCode>();
+			for(Coordinate coord: coords){
+				GeoCode gcode= new GeoCode();
+				double lat = coord.x;
+				double lon = coord.y;
+				gcode.setLatitude(Double.toString(lat));
+				gcode.setLongitude(Double.toString(lon));
+				waypath.add(gcode);
+			}
+
+			response = Response.ok(waypath).build();
+		} catch (Exception exception) {
+			Status status = Status.BAD_REQUEST;
+			int code = 0;
+			String message = "error";
+			String link = null;
+			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception.getMessage());
+			response = Response.status(status).entity(statusmsg).build();
+		}
+
+		return response;
 	}
 
 }

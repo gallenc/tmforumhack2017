@@ -44,7 +44,7 @@ public class PathModelTestDisplay {
 	public void test() {
 		SimpleFeatureCollection simpleFeatureCollection = new DefaultFeatureCollection("internal");
 
-		Set<Coordinate> pathCoordinates = new PathModelTest().createRegiontSplinePath();
+		Set<Coordinate> pathCoordinates = new PathModelTest().createRegionSplinePath();
 		System.out.println("pathCoordinates created:"+pathCoordinates.size());
 		
 		SimpleFeature feature = createFeature( pathCoordinates);

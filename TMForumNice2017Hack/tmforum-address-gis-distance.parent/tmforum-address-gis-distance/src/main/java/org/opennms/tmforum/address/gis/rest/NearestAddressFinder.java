@@ -38,7 +38,7 @@ public class NearestAddressFinder {
 	}
 	
 	
-	public synchronized SortedMap<Double, DistanceMessage> getDistanceMap(String latitude_start, String longitude_start){
+	public  SortedMap<Double, DistanceMessage> getDistanceMap(String latitude_start, String longitude_start){
 		SortedMap<Double, DistanceMessage> distanceMap = new TreeMap<Double, DistanceMessage>();
 		
 		Set<Address> addresslist = getAddressCache();
@@ -76,7 +76,7 @@ public class NearestAddressFinder {
 	 * @param longitude
 	 * @return DistanceMessage containing the address and the distance from the point
 	 */
-	public synchronized DistanceMessage findNearestAddress(String latitude_start, String longitude_start){
+	public  DistanceMessage findNearestAddress(String latitude_start, String longitude_start){
 		DistanceMessage distanceMessage=null;
 		
 		SortedMap<Double, DistanceMessage> distanceMap = getDistanceMap( latitude_start,  longitude_start);
@@ -87,6 +87,19 @@ public class NearestAddressFinder {
 
 		return distanceMessage;
 	}
+	
+	/**
+	 * Finds the address nearest to given address
+	 * @param latitude
+	 * @param longitude
+	 * @return DistanceMessage containing the address and the distance from the point
+	 */
+	public  DistanceMessage findNearestAddress(Address address){
+		if(address.getGeoCode()==null) throw new IllegalArgumentException("address geocode cannot be null");
+		String latitude_start = address.getGeoCode().getLatitude();
+		String longitude_start = address.getGeoCode().getLongitude();
+		return findNearestAddress(latitude_start, longitude_start);
+	}
 
 	/**
 	 * Returns list of distance messages ordered by distance from given point. Closest first.
@@ -95,7 +108,7 @@ public class NearestAddressFinder {
 	 * @param maxReturnAddresses maximum number of addresses to return
 	 * @return
 	 */
-	public  synchronized Set<DistanceMessage> findClosestAddresses(String latitude_start, String longitude_start, Integer maxReturnAddresses){
+	public   Set<DistanceMessage> findClosestAddresses(String latitude_start, String longitude_start, Integer maxReturnAddresses){
 		Set<DistanceMessage> closestAddresses = new LinkedHashSet<DistanceMessage>();
 
 		SortedMap<Double, DistanceMessage> distanceMap = getDistanceMap( latitude_start,  longitude_start);
@@ -108,6 +121,19 @@ public class NearestAddressFinder {
 		}
 			
 		return closestAddresses;
+	}
+	
+	/**
+	 * Returns list of distance messages ordered by distance from given address. Closest first.
+	 * @param address
+	 * @param maxReturnAddresses
+	 * @return
+	 */
+	public   Set<DistanceMessage> findClosestAddresses(Address address, Integer maxReturnAddresses){
+		if(address.getGeoCode()==null) throw new IllegalArgumentException("address geocode cannot be null");
+		String latitude_start = address.getGeoCode().getLatitude();
+		String longitude_start = address.getGeoCode().getLongitude();
+		return findClosestAddresses(latitude_start, longitude_start, maxReturnAddresses);
 	}
 
 
