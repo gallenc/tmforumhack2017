@@ -13,7 +13,7 @@ import javax.ws.rs.core.MultivaluedMap;
 
 import org.junit.Test;
 import org.opennms.tmforum.address.client.TmforumAddressClient;
-import org.opennms.tmforum.address.gis.rest.NearestAddressFinder;
+import org.opennms.tmforum.address.gis.rest.NearestAddressFinderCache;
 import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 
 public class NearestAddressFinderTest {
@@ -47,13 +47,13 @@ public class NearestAddressFinderTest {
 	private static String tmforumAddressUri = getTestProperties().getProperty(TMFORUM_ADDRESS_URI_PROPERTY_NAME, DEFAULT_TMFORUM_ADDRESS_URI);
 	private static String tmforumAddressAPI= tmforumServerUri + tmforumAddressUri;
 
-	private static NearestAddressFinder nearestAddressFinder=null;
+	private static NearestAddressFinderCache nearestAddressFinder=null;
 
-	private static NearestAddressFinder getNearestAddressFinder(){
+	private static NearestAddressFinderCache getNearestAddressFinder(){
 		if (nearestAddressFinder==null) {
 			System.out.println("using address: "+tmforumAddressAPI);
 			TmforumAddressClient addressClient = new TmforumAddressClient( tmforumAddressAPI);
-			nearestAddressFinder = new NearestAddressFinder(addressClient);
+			nearestAddressFinder = new NearestAddressFinderCache(addressClient);
 		}
 		return nearestAddressFinder;
 	}
@@ -66,7 +66,7 @@ public class NearestAddressFinderTest {
 	}
 	
 	private void findNearestAddress(){
-		NearestAddressFinder nearestAddressFinder=getNearestAddressFinder();
+		NearestAddressFinderCache nearestAddressFinder=getNearestAddressFinder();
 
 		// "city" : "Southampton"
 		MultivaluedMap<String, String> queryParams=new  MultivaluedHashMap<String, String>();
@@ -89,7 +89,7 @@ public class NearestAddressFinderTest {
 	@Test
 	public void findClosestAddressesTest() {
 		System.out.println("Start of findClosestAddressesTest()");
-		NearestAddressFinder nearestAddressFinder=getNearestAddressFinder();
+		NearestAddressFinderCache nearestAddressFinder=getNearestAddressFinder();
 
 		// "city" : "Southampton"
 		MultivaluedMap<String, String> queryParams=new  MultivaluedHashMap<String, String>();

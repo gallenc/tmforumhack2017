@@ -64,7 +64,7 @@ public class GisAddress {
 			if(latitude_start==null || latitude_start.isEmpty() || longitude_start==null || longitude_start.isEmpty()) 
 				throw new IllegalArgumentException("Query parameters latitude and longitude must be set");
 
-			NearestAddressFinder nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
+			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
 
 			DistanceMessage foundDistance = nearestAddressFinder.findNearestAddress(latitude_start, longitude_start, queryParams );
 
@@ -120,7 +120,7 @@ public class GisAddress {
 				}
 			}
 
-			NearestAddressFinder nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
+			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
 
 			Set<DistanceMessage> foundDistances = nearestAddressFinder.findClosestAddresses(latitude_start, longitude_start, maxReturnAddresses, queryParams);
 

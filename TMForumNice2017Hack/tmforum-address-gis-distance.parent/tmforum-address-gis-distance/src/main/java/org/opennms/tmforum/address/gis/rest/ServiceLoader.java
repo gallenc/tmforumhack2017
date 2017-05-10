@@ -24,7 +24,7 @@ public class ServiceLoader {
 	//tmforum.address.uri = /addressManagement/api/addressManagement/v1
 	//tmforum.address.server = http://localhost:8080
 
-	private static NearestAddressFinder nearestAddressFinder=null;
+	private static NearestAddressFinderCache nearestAddressFinder=null;
 
 	private static Properties systemProps=null;
 
@@ -33,33 +33,33 @@ public class ServiceLoader {
 			systemProps = System.getProperties();
 			String propertiesFileLocation=systemProps.getProperty(PROPERTIES_FILE_LOCATION_PROPERTY);
 			if(propertiesFileLocation==null){
-				Logger.getLogger(NearestAddressFinder.class.getName()).log(Level.INFO, "system property :"+PROPERTIES_FILE_LOCATION_PROPERTY+ 
+				Logger.getLogger(NearestAddressFinderCache.class.getName()).log(Level.INFO, "system property :"+PROPERTIES_FILE_LOCATION_PROPERTY+ 
 						" not set. using default settings");
 				propertiesFileLocation=DEFAULT_PROPERTIES_FILE_PROPERTY;
 			}
-			Logger.getLogger(NearestAddressFinder.class.getName()).log(Level.INFO, "loading properties from:"+propertiesFileLocation);
+			Logger.getLogger(NearestAddressFinderCache.class.getName()).log(Level.INFO, "loading properties from:"+propertiesFileLocation);
 			InputStream stream = ServiceLoader.class.getClassLoader().getResourceAsStream(propertiesFileLocation);
 			if(stream!=null) {
 				systemProps.load(stream);
 			} else {
-				Logger.getLogger(NearestAddressFinder.class.getName()).log(Level.INFO, "not found:"+propertiesFileLocation);
+				Logger.getLogger(NearestAddressFinderCache.class.getName()).log(Level.INFO, "not found:"+propertiesFileLocation);
 			}
-			Logger.getLogger(NearestAddressFinder.class.getName()).log(Level.INFO, "systemProperties:"+systemProps.toString());
+			Logger.getLogger(NearestAddressFinderCache.class.getName()).log(Level.INFO, "systemProperties:"+systemProps.toString());
 		} catch (Exception e){
-			Logger.getLogger(NearestAddressFinder.class.getName()).log(Level.SEVERE, "problem loading properties");
+			Logger.getLogger(NearestAddressFinderCache.class.getName()).log(Level.SEVERE, "problem loading properties");
 		}
 		return systemProps;
 	}
 
 
-	public static NearestAddressFinder getNearestAddressFinder(){
+	public static NearestAddressFinderCache getNearestAddressFinder(){
 		if (nearestAddressFinder==null) {
 			String tmforumServerUri = getProperties().getProperty(TMFORUM_ADDRESS_SERVER_PROPERTY_NAME, DEFAULT_TMFORUM_ADDRESS_SERVER);
 			String tmforumAddressUri = getProperties().getProperty(TMFORUM_ADDRESS_URI_PROPERTY_NAME, DEFAULT_TMFORUM_ADDRESS_URI);
 			String tmforumAddressAPI= tmforumServerUri + tmforumAddressUri;
-			Logger.getLogger(NearestAddressFinder.class.getName()).log(Level.INFO, "using tmforum address api at :"+tmforumAddressAPI);
+			Logger.getLogger(NearestAddressFinderCache.class.getName()).log(Level.INFO, "using tmforum address api at :"+tmforumAddressAPI);
 			TmforumAddressClient addressClient = new TmforumAddressClient(tmforumAddressAPI);
-			nearestAddressFinder = new NearestAddressFinder(addressClient);
+			nearestAddressFinder = new NearestAddressFinderCache(addressClient);
 		}
 		return nearestAddressFinder;
 	}

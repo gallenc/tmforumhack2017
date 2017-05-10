@@ -43,6 +43,7 @@
 
       <plugin>
         <!-- http://www.mojohaus.org/jaxb2-maven-plugin/Documentation/v2.2/xjc-mojo.html -->
+        <!-- generating equals tostring etc http://stackoverflow.com/questions/9062539/generating-hashcode-and-equals-when-creating-java-classes-using-mojo-jaxb2 -->
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>jaxb2-maven-plugin</artifactId>
         <version>2.2</version>
