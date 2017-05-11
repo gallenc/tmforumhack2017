@@ -35,3 +35,4 @@ app.config(require('./routes.js').default);
  * Controllers
  */
 app.controller('HomepageController', require('./controllers/HomepageController.js').default);
+app.controller('DroneController', require('./controllers/DroneController.js').default)
