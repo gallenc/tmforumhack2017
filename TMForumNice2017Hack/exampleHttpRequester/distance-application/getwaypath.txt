@@ -1,0 +1,47 @@
+http://139.162.227.142:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?streetName=Itchen Quays
+
+POST http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?streetName=Itchen Quays
+Content-Type: application/json
+{
+    "id" : "214",
+    "subAddress" : [ ],
+    "href" : "http://139.162.227.142:8080/addressManagement/api/admin/address//214",
+    "streetNr" : "30",
+    "streetNrSuffix" : "Birth",
+    "streetNrLast" : null,
+    "streetNrLastSuffix" : null,
+    "streetName" : "Itchen Quays",
+    "streetType" : "Warf",
+    "streetSuffix" : null,
+    "postcode" : null,
+    "locality" : "Multi Deck RoRo Terminal",
+    "city" : "Southampton",
+    "stateOrProvince" : "Hampshire",
+    "country" : "UK",
+    "geoCode" : {
+      "latitude" : "50.889311",
+      "longitude" : "-1.391915",
+      "geographicDatum" : null
+    }
+  }
+  
+  
+POST http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/distance
+Content-Type: application/json
+{
+  "latitude_start" : "50.889311",
+  "longitude_start" : "-1.391915",
+  "latitude_finish" : "50.891099",
+  "longitude_finish" : "-1.390925"
+}
+
+@return json message containing coordinates and distance
+{
+  "distance" : "227.10552897619243",
+  "latitude_start" : "50.889311",
+  "longitude_start" : "-1.391915",
+  "latitude_finish" : "50.891099",
+  "longitude_finish" : "-1.390925"
+}
+	 */
+ 

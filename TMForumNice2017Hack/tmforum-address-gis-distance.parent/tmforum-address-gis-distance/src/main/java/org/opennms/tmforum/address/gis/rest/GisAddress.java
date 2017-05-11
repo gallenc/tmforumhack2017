@@ -364,10 +364,41 @@ public class GisAddress {
 		return response;
 
 	}
+	
+	
 	/**
 	 * POST http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?areaRadius=10&nsides=5&splineFit=0.0
 	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?streetName=Itchen Quays
 	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?streetName=Itchen Quays&areaRadius=10&nsides=5&splineFit=0.0
+	 * 
+POST http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?streetName=Itchen Quays
+Content-Type: application/json
+{
+    "id" : "214",
+    "subAddress" : [ ],
+    "href" : "http://139.162.227.142:8080/addressManagement/api/admin/address//214",
+    "streetNr" : "30",
+    "streetNrSuffix" : "Birth",
+    "streetNrLast" : null,
+    "streetNrLastSuffix" : null,
+    "streetName" : "Itchen Quays",
+    "streetType" : "Warf",
+    "streetSuffix" : null,
+    "postcode" : null,
+    "locality" : "Multi Deck RoRo Terminal",
+    "city" : "Southampton",
+    "stateOrProvince" : "Hampshire",
+    "country" : "UK",
+    "geoCode" : {
+      "latitude" : "50.889311",
+      "longitude" : "-1.391915",
+      "geographicDatum" : null
+    }
+  }
+	 * 
+	 * 
+	 * 
+	 * 
 	 * @param startAddress
 	 * @param areaRadiusStr
 	 * @param nsidesStr
