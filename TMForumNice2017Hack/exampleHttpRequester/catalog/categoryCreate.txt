@@ -11,7 +11,3 @@ Content-Type: application/json
 	"name": "Cloud Services",
 	"description": "A category to hold all available cloud service offers"
 }
-
-
-
-

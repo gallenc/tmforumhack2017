@@ -1,0 +1,13 @@
+POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/
+Content-Type: application/json
+{
+	"version": "1.0",
+	"lifecycleStatus": "Active",
+	"validFor": {
+		"startDateTime": "2013-04-19T16:42:23-04:00",
+		"endDateTime": ""
+	},
+	"isRoot": true,
+	"name": "Food",
+	"description": "A category to hold food products."
+}
