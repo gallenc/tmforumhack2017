@@ -366,6 +366,8 @@ public class GisAddress {
 	}
 	/**
 	 * POST http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?areaRadius=10&nsides=5&splineFit=0.0
+	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?streetName=Itchen Quays
+	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/waypath?streetName=Itchen Quays&areaRadius=10&nsides=5&splineFit=0.0
 	 * @param startAddress
 	 * @param areaRadiusStr
 	 * @param nsidesStr
