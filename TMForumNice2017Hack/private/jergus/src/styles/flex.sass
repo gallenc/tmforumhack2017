@@ -1,0 +1,37 @@
+.flex
+    display: flex
+
+    &.flex-center
+        justify-content: center
+        align-items: center
+
+    &.flex-start
+        justify-content: flex-start
+
+    &.flex-end
+        justify-content: flex-end
+
+    &.flex-between
+        justify-content: space-between
+
+    &.flex-around
+        justify-content: space-around
+
+    &.flex-justify-center
+        justify-content: center
+
+    &.flex-align-center
+        align-items: center
+
+    &.flex-column
+        flex-direction: column
+
+    &.flex-row
+        flex-direction: row
+
+    &.flex-wrap
+        flex-wrap: wrap
+
+@for $i from 1 through 12
+    .flex-#{$i}
+        flex: $i
