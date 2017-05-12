@@ -8,7 +8,7 @@ export default function ($q, $http) {
                 .then(collections => {
                     return {
                         base: _.filter(collections, { streetName: 'DroneBase' })[0],
-                        collections:  _.uniqBy(collections, 'streetName').filter(p => p.streetName != 'DroneBase').map(p => p.streetName),
+                        collections:  _.uniqBy(collections, 'streetName').filter(p => p.streetName != 'DroneBase'),
                     };
                 });
         },
@@ -31,8 +31,8 @@ export default function ($q, $http) {
                         return resolve(collections);
                     }
 
-                    this.geyWaypath(collections[index], base).then(points => {
-                        collections[index] = points;
+                    this.geyWaypath(collections[index].streetName, base).then(waypath => {
+                        collections[index].waypath = waypath;
 
                         load(index + 1);
                     });

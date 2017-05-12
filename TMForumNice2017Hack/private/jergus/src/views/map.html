@@ -6,6 +6,17 @@
     </div>
     <div class="x_content">
 
+        <h2>Display/hide:</h2>
+
+        <ul class="list-inline">
+            <li ng-repeat="collection in vm.collections">
+                <strong ng-hide="collection.hide" ng-click="collection.hide = !collection.hide">{{ collection.streetName }}</strong>
+                <span ng-show="collection.hide" ng-click="collection.hide = !collection.hide">{{ collection.streetName }}</span>
+            </li>
+        </ul>
+
+        <hr>
+
         <ui-gmap-google-map center="vm.map.center" zoom="vm.map.zoom">
             <ui-gmap-polyline ng-repeat="p in vm.polylines" path="p.path" stroke="p.stroke" visible="p.visible" geodesic="p.geodesic" fit="false" icons="p.icons"></ui-gmap-polyline>
 
