@@ -34,7 +34,7 @@ module.exports = {
                 })
             },
             {
-                test: /\.(eot|ttf|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                test: /\.(jpe?g|png|gif|svg|eot|ttf|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: 'file-loader'
             },
             {

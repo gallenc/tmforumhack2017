@@ -1,13 +1,16 @@
 import angular from 'angular';
+import _ from 'lodash';
 
 /**
  * Vendor
  */
 import 'angular-route';
 import 'angular-ui-router';
+import 'angular-google-maps';
+import 'angular-simple-logger';
 
 const app = angular.module('app', [
-    'ngRoute', 'ui.router',
+    'ngRoute', 'ui.router', 'uiGmapgoogle-maps',
 ]);
 
 app.config(function ($qProvider) {
@@ -35,3 +38,10 @@ app.config(require('./routes.js').default);
  * Controllers
  */
 app.controller('HomepageController', require('./controllers/HomepageController.js').default);
+app.controller('MapController', require('./controllers/MapController.js').default);
+
+/**
+ * Services
+ */
+app.service('Map', require('./services/Map.js').default);
+app.service('Api', require('./services/Api.js').default);

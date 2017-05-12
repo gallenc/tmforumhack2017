@@ -1,0 +1,14 @@
+<div class="dashboard_graph x_panel">
+    <div class="row x_title">
+        <div class="col-xs-12">
+            <h3>Map</h3>
+        </div>
+    </div>
+    <div class="x_content">
+
+        <ui-gmap-google-map center="vm.map.center" zoom="vm.map.zoom">
+            <ui-gmap-polyline ng-repeat="p in vm.polylines" path="p.path" stroke="p.stroke" visible="p.visible" geodesic="p.geodesic" fit="false" icons="p.icons"></ui-gmap-polyline>
+        </ui-gmap-google-map>
+
+    </div>
+</div>
