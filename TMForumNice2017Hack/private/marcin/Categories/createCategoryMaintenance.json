@@ -8,6 +8,6 @@ Content-Type: application/json
 		"endDateTime": ""
 	},
 	"isRoot": true,
-	"name": "Maintanance",
+	"name": "Maintenance",
 	"description": "A category to hold maintanance related products."
 }
