@@ -1,0 +1,49 @@
+POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/productOffering
+Content-Type: application/json
+{
+	"version": "1.0",
+	"name": "test",
+	"description": "test",
+	"isBundle": false,
+	"lifecycleStatus": "Active",
+	"validFor": {
+		"startDateTime": "2013-04-19T16:42:23-04:00",
+		"endDateTime": "2013-06-19T00:00:00-04:00"
+	},
+	"category": [
+		{
+			"id": "179",
+			"href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/179",
+			"version": "2.0",
+			"name": "Water"
+		}
+	],
+	"productSpecification": {
+		"id": "233",
+		"href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/productSpecification/233",
+		"version": "2.0",
+		"name": "Sparkling Water"
+	},
+	"productOfferingPrice": [
+		{
+			"name": "Price per liter",
+			"description": "per liter",
+			"validFor":
+			{
+				"startDateTime": "2013-04-19T16:42:23.0Z",
+				"endDateTime": "2013-06-19T00:00:00.0Z"
+			},
+			"priceType": "one time",
+			"unitOfMeasure": "liter",
+			"price": 
+			{
+				"taxIncludedAmount": 12,
+				"dutyFreeAmount": 0,
+				"taxRate": 20,
+				"currencyCode": "EUR",
+				"percentage": 0
+			},
+			"recurringChargePeriod": ""
+		}
+	]
+}

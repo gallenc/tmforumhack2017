@@ -12,29 +12,29 @@ Content-Type: application/json
 	},
 	"category": [
 		{
-			"id": "155",
-			"href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/155",
+			"id": "183",
+			"href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/183",
 			"version": "2.0",
-			"name": "Food offerings"
+			"name": "Pollution"
 		}
 	],
 	"productSpecification": {
-		"id": "177",
-		"href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/productSpecification/177",
+		"id": "223",
+		"href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/productSpecification/223",
 		"version": "2.0",
-		"name": "Pork Sausage"
+		"name": "Amber Certificate"
 	},
 	"productOfferingPrice": [
 		{
-			"name": "Liter price",
-			"description": "perliter",
+			"name": "Price per item",
+			"description": "per item",
 			"validFor":
 			{
 				"startDateTime": "2013-04-19T16:42:23.0Z",
 				"endDateTime": "2013-06-19T00:00:00.0Z"
 			},
-			"priceType": "usage",
-			"unitOfMeasure": "liter",
+			"priceType": "one time",
+			"unitOfMeasure": "",
 			"price": 
 			{
 				"taxIncludedAmount": 12,
@@ -45,6 +45,5 @@ Content-Type: application/json
 			},
 			"recurringChargePeriod": ""
 		}
-	],
-	
+	]
 }

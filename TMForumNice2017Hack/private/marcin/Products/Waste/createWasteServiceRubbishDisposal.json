@@ -3,8 +3,8 @@ Content-Type: application/json
 {
 	"version": "2.0",
 	"lastUpdate": "2013-04-19T16:42:23.0Z",
-	"name": "Waste removal",
-	"description": "Waste removal",
+	"name": "Rubbish disposal",
+	"description": "rubbish disposal",
 	"brand": "",
 	"lifecycleStatus": "Active"
 }
