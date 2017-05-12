@@ -1,9 +1,11 @@
 package org.opennms.tmforum.address.client;
 
 import java.io.IOException;
-
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.Set;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -19,6 +21,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TmforumAddressClient {
+
+	// slf4j not in glassfish?
+	private static void debugLog(String msg){
+		Logger.getLogger(TmforumAddressClient.class.getName()).log(Level.INFO, msg);
+	}
+
+	private static void debugLog(String msg,Exception thrown ){
+		Logger.getLogger(TmforumAddressClient.class.getName()).log(Level.INFO, msg, thrown);
+	}
 
 	private String tmforumAddressUriStr;
 	private String username=null;
@@ -59,7 +70,7 @@ public class TmforumAddressClient {
 
 		ClientConfig clientConfig=new  ClientConfig();
 		// .register( LoggingFilter.class ) if you want to log responses
-		
+
 		if(username!=null){
 			HttpAuthenticationFeature authFeature = HttpAuthenticationFeature.basic(username, password);
 			clientConfig.register(authFeature);
@@ -72,22 +83,22 @@ public class TmforumAddressClient {
 	/**
 	 * get list of tmforum addresses using query parameters in supplied map<name value> ?name=value
 	 * e.g. http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?streetNr=30
-	 * @param queryMap query parameters or null
+	 * @param queryParams query parameters or null
 	 * @return set of addresses
 	 */
-	public Set<Address> getAddresses(MultivaluedMap<String, String> queryMap){
+	public Set<Address> getAddresses(MultivaluedMap<String, String> queryParams){
 
 		Client client = getClient();
 
 		WebTarget webTarget = (client.target(tmforumAddressUriStr).path("address"));
 
-		if (queryMap != null) 
-			for (Entry<String, List<String>> entry: queryMap.entrySet()){
+		if (queryParams != null) 
+			for (Entry<String, List<String>> entry: queryParams.entrySet()){
 				for(String value : entry.getValue())
 					webTarget = webTarget.queryParam(entry.getKey(),value );
 			}
 
-		// System.out.println("getAddressesURI="+webTarget.getUri());
+		debugLog("client getAddressesURI="+webTarget.getUri());
 
 		Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.get();
@@ -95,21 +106,24 @@ public class TmforumAddressClient {
 		if ( response.getStatus() != Response.Status.OK.getStatusCode() ) {
 			throw new RuntimeException("remote responded with status: "+response.getStatusInfo());
 		}
-		
+
 		String responseString = response.readEntity(String.class);
-		
+
 		//using objectmapper outside of jersey because of classpath problems in glassfish
 		ObjectMapper objectMapper = new ObjectMapper();
-		
-		Set<Address> addressList;
+
+		Set<Address> addressSet;
 		try {
-			 addressList = objectMapper.readValue(responseString, new TypeReference<Set<Address>>(){});
+			// place values in received order in set
+			List<Address> addressList = objectMapper.readValue(responseString, new TypeReference<List<Address>>(){});
+			addressSet= new LinkedHashSet<Address>(addressList);
 		} catch (IOException e) {
-			throw new RuntimeException("error parsing get addresses reponse: ",e);
+			debugLog("error parsing getAddresses reponse: ",e);
+			throw new RuntimeException("error parsing getAddresses reponse: ",e);
 		}
-		
+
 		//Set<Address> addressList = response.readEntity(new GenericType<Set<Address>>() {});
-		return addressList;
+		return addressSet;
 	}
 
 	/**
@@ -124,24 +138,27 @@ public class TmforumAddressClient {
 
 		WebTarget webTarget = (client.target(tmforumAddressUriStr).path("address").path(id));
 
+		debugLog("client getAddressesURI="+webTarget.getUri());
+
 		Invocation.Builder invocationBuilder =  webTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.get();
 
 		if ( response.getStatus() != Response.Status.OK.getStatusCode() ) {
 			return null;
 		}
-		
+
 		String responseString = response.readEntity(String.class);
-		
+
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		Address address;
 		try {
 			address = objectMapper.readValue(responseString, Address.class);
 		} catch (IOException e) {
+			debugLog("error parsing get getAddress reponse: ",e);
 			throw new RuntimeException("error parsing get addresses reponse: ",e);
 		}
-		
+
 		//Address address = response.readEntity(Address.class);
 		return address;
 	}
