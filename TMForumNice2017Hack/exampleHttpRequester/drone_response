@@ -1,0 +1,98 @@
+```
+{
+  "battery": {
+    "current": 32.57,
+    "voltage": 12.143,
+    "level": 94
+  },
+  "groundspeed": 0.06386163085699081,
+  "is_armable": true,
+  "attitude": {
+    "yaw": 0.32213181257247925,
+    "roll": 0.21836361289024353,
+    "pitch": 0.5561045408248901
+  },
+  "last_heartbeat": 0.8655819920240901,
+  "armed": true,
+  "id": "ef10b1cf",
+  "global_relative_frame": {
+    "lat": 51.4352742,
+    "alt": 73.75,
+    "lon": -1.2880576
+  },
+  "vehicleType": "simulated",
+  "zone": {
+    "shape": {
+      "lat": 51.4352742,
+      "lon": -1.2880576,
+      "name": "circle"
+    }
+  },
+  "airspeed": 0.05099019408226013,
+  "version": "APM:Copter-3.5.0-dev0",
+  "gps_0": {
+    "epv": 121,
+    "fix_type": 3,
+    "eph": 121,
+    "satellites_visible": 10
+  },
+  "_links": {
+    "action": {
+      "href": "http://droneapi.ddns.net:1235/vehicle/ef10b1cf/action",
+      "title": "Get the actions  for this vehicle."
+    },
+    "self": {
+      "href": "http://droneapi.ddns.net:1235/vehicle/ef10b1cf/",
+      "title": "Get status for vehicle ef10b1cf."
+    },
+    "homeLocation": {
+      "href": "http://droneapi.ddns.net:1235/vehicle/ef10b1cf/homeLocation",
+      "title": "Get the home location for this vehicle"
+    },
+    "mission": {
+      "href": "http://droneapi.ddns.net:1235/vehicle/ef10b1cf/mission",
+      "title": "Get the current mission commands from the vehicle."
+    },
+    "simulator": {
+      "href": "http://droneapi.ddns.net:1235/vehicle/ef10b1cf/simulator",
+      "title": "Get the current simulator parameters from the vehicle."
+    }
+  },
+  "gimbal": {
+    "yaw": null,
+    "roll": null,
+    "pitch": null
+  },
+  "ekf_ok": true,
+  "rangefinder": {
+    "distance": null,
+    "voltage": null
+  },
+  "name": "MyDroneTest",
+  "global_frame": {
+    "lat": 51.4352742,
+    "alt": 178.81,
+    "lon": -1.2880576
+  },
+  "system_status": "ACTIVE",
+  "mode": "GUIDED",
+  "local_frame": {
+    "down": -75.42920684814453,
+    "east": 1172.0069580078125,
+    "north": 3376.60986328125
+  },
+  "velocity": [
+    -0.05,
+    0.02,
+    0
+  ],
+  "_actions": [
+    {
+      "href": "http://droneapi.ddns.net:1235/vehicle/ef10b1cf",
+      "method": "DELETE",
+      "title": "Delete connection to vehicle ef10b1cf"
+    }
+  ],
+  "heading": 18
+}
+```
