@@ -1,6 +1,5 @@
 export default function (uiGmapGoogleMapApi) {
     return {
-
         southampton() {
             return {
                 center: {
@@ -8,6 +7,16 @@ export default function (uiGmapGoogleMapApi) {
                     longitude: -1.42,
                 },
                 zoom: 14,
+            };
+        },
+
+        base(base) {
+            return {
+                id: 'droneBase',
+                coords: base.geoCode,
+                options: {
+                    icon: require('../img/base.png'),
+                },
             };
         },
 
@@ -42,6 +51,5 @@ export default function (uiGmapGoogleMapApi) {
                 '#16a085', '#27ae60', '#2980b9', '#8e44ad', '#2c3e50',
             ][index];
         }
-
     };
 };
