@@ -1,1 +1,26 @@
-<p>we are in the drone controller</p>
+<h3> Current available drones </h3>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Drone </th>
+        <th>id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="drone in vm.drones">
+
+        <td>{{drone.name}}</td>
+        <td>{{drone.id}}</td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+
+
+<!-- <ng-repeat drone in vm.drones>
+
+    {{drone}}
+
+</ng-repeat> -->
