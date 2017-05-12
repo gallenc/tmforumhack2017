@@ -7,7 +7,7 @@ Content-Type: application/json
 		"startDateTime": "2013-04-19T16:42:23-04:00",
 		"endDateTime": ""
 	},
-	"isRoot": false,
-	"name": "Water",
-	"description": "A category to hold water related products."
+	"isRoot": true,
+	"name": "Fuel",
+	"description": "A category to hold fuel related products."
 }

@@ -7,7 +7,7 @@ Content-Type: application/json
 		"startDateTime": "2013-04-19T16:42:23-04:00",
 		"endDateTime": ""
 	},
-	"isRoot": false,
-	"name": "Electricity",
-	"description": "A category to hold available electricity related products."
+	"isRoot": true,
+	"name": "Pollution",
+	"description": "A category to hold pollution related products."
 }

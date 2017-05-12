@@ -8,6 +8,6 @@ Content-Type: application/json
 		"endDateTime": ""
 	},
 	"isRoot": true,
-	"name": "Fuel",
-	"description": "A category to hold available fuel related products."
+	"name": "Waste",
+	"description": "A category to hold waste related products."
 }
