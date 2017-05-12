@@ -18,6 +18,7 @@
   <modules>
     <module>model-client</module>
     <module>tmforum-address-gis-distance</module>
+    <module>iot-data-collection-simulator</module>
   </modules>
 
   <build>
