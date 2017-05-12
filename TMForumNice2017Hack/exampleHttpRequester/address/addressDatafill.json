@@ -52,7 +52,8 @@ Content-Type: application/json
 {"streetNr" : "1", "streetNrSuffix" : "Birth", "streetName" : "SMC Marchwood", "streetType" : "Warf", "locality" : "", "city" : "Southampton", "stateOrProvince" : "Hampshire", "country" : "UK",   "geoCode" : { "latitude" : "50.89502", "longitude" : "-1.422191" } },
 {"streetNr" : "2", "streetNrSuffix" : "Birth", "streetName" : "SMC Marchwood", "streetType" : "Warf", "locality" : "", "city" : "Southampton", "stateOrProvince" : "Hampshire", "country" : "UK",   "geoCode" : { "latitude" : "50.894655", "longitude" : "-1.421697" } },
 {"streetNr" : "3", "streetNrSuffix" : "Birth", "streetName" : "SMC Marchwood", "streetType" : "Warf", "locality" : "Rail Terminal", "city" : "Southampton", "stateOrProvince" : "Hampshire", "country" : "UK",   "geoCode" : { "latitude" : "50.894058", "longitude" : "-1.420931" } },
-{"streetNr" : "4", "streetNrSuffix" : "Birth", "streetName" : "SMC Marchwood", "streetType" : "Warf", "locality" : "Rail Terminal", "city" : "Southampton", "stateOrProvince" : "Hampshire", "country" : "UK",   "geoCode" : { "latitude" : "50.893341", "longitude" : "-1.420556" } }
+{"streetNr" : "4", "streetNrSuffix" : "Birth", "streetName" : "SMC Marchwood", "streetType" : "Warf", "locality" : "Rail Terminal", "city" : "Southampton", "stateOrProvince" : "Hampshire", "country" : "UK",   "geoCode" : { "latitude" : "50.893341", "longitude" : "-1.420556" } },
+{"streetNr" : "1000", "streetNrSuffix" : "DroneBase", "streetName" : "DroneBase", "streetType" : "", "locality" : "", "city" : "Southampton", "stateOrProvince" : "Hampshire", "country" : "UK",   "geoCode" : { "latitude" : "50.905515", "longitude" : "-1.428529" } }
 
 
 
