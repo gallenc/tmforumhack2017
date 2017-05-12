@@ -1,6 +1,5 @@
 package org.opennms.tmforum.address.gis.rest;
 
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.SortedMap;
@@ -8,50 +7,41 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ws.rs.core.MultivaluedMap;
-
 import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 import org.opennms.tmforum.address.model.Address;
 import org.opennms.tmforum.address.model.GeoCode;
 
 /**
- * 
+ * Nearest address finder
  * @author cgallen
  *
  */
-
-//TODO REFERENCE nearestAddressfinder instead of duplicating code
-public class NearestAddressFinderCache {
+public class NearestAddressFinder {
 
 	// slf4j not in glassfish?
 	private static void debugLog(String msg){
-		Logger.getLogger(NearestAddressFinderCache.class.getName()).log(Level.INFO, msg);
+		Logger.getLogger(NearestAddressFinder.class.getName()).log(Level.INFO, msg);
 	}
 
 	private static void debugLog(String msg,Exception thrown ){
-		Logger.getLogger(NearestAddressFinderCache.class.getName()).log(Level.INFO, msg, thrown);
+		Logger.getLogger(NearestAddressFinder.class.getName()).log(Level.INFO, msg, thrown);
 	}
 
-	private AddressCache addressCache;
-
-	public NearestAddressFinderCache(AddressCache addressCache ){
-		super();
-		this.addressCache = addressCache ;
+	private Set<Address> addressCache=null;
+	
+	public Set<Address> getAddressCache() {
+		return addressCache;
 	}
 
-	@SuppressWarnings("unused")
-	private  NearestAddressFinderCache(){
-		super();
+	public void setAddressCache(Set<Address> addressCache) {
+		this.addressCache = addressCache;
 	}
 	
-	public Set<Address> getCachedAddresses(MultivaluedMap<String, String> queryParams) {
-		return addressCache.getCachedAddresses(queryParams);
-	}
-
-	public SortedMap<Double, DistanceMessage> getDistanceMap(String latitude_start, String longitude_start, MultivaluedMap<String,String> queryParams){
+	
+	public  SortedMap<Double, DistanceMessage> getDistanceMap(String latitude_start, String longitude_start){
 		SortedMap<Double, DistanceMessage> distanceMap = new TreeMap<Double, DistanceMessage>();
 		
-		Set<Address> addresslist = addressCache.getCachedAddresses(queryParams);
+		Set<Address> addresslist = getAddressCache();
 		
 		for(Address address:addresslist){
 			GeoCode geocode = address.getGeoCode();
@@ -84,13 +74,12 @@ public class NearestAddressFinderCache {
 	 * Finds the address nearest to given point
 	 * @param latitude
 	 * @param longitude
-	 * @param queryParams query parameters to pass to address client to limit search
 	 * @return DistanceMessage containing the address and the distance from the point
 	 */
-	public DistanceMessage findNearestAddress(String latitude_start, String longitude_start, MultivaluedMap<String,String> queryParams){
+	public  DistanceMessage findNearestAddress(String latitude_start, String longitude_start){
 		DistanceMessage distanceMessage=null;
 		
-		SortedMap<Double, DistanceMessage> distanceMap = getDistanceMap( latitude_start,  longitude_start, queryParams);
+		SortedMap<Double, DistanceMessage> distanceMap = getDistanceMap( latitude_start,  longitude_start);
 		
 		if(distanceMap.isEmpty()) return null;
 		
@@ -105,25 +94,24 @@ public class NearestAddressFinderCache {
 	 * @param longitude
 	 * @return DistanceMessage containing the address and the distance from the point
 	 */
-	public  DistanceMessage findNearestAddress(Address address, MultivaluedMap<String,String> queryParams){
+	public  DistanceMessage findNearestAddress(Address address){
 		if(address.getGeoCode()==null) throw new IllegalArgumentException("address geocode cannot be null");
 		String latitude_start = address.getGeoCode().getLatitude();
 		String longitude_start = address.getGeoCode().getLongitude();
-		return findNearestAddress(latitude_start, longitude_start, queryParams);
+		return findNearestAddress(latitude_start, longitude_start);
 	}
 
 	/**
 	 * Returns list of distance messages ordered by distance from given point. Closest first.
 	 * @param latitude
 	 * @param longitude
-	 * @param queryParams query parameters to pass to address client to limit search
 	 * @param maxReturnAddresses maximum number of addresses to return
 	 * @return
 	 */
-	public Set<DistanceMessage> findClosestAddresses(String latitude_start, String longitude_start, Integer maxReturnAddresses, MultivaluedMap<String,String> queryParams){
+	public   Set<DistanceMessage> findClosestAddresses(String latitude_start, String longitude_start, Integer maxReturnAddresses){
 		Set<DistanceMessage> closestAddresses = new LinkedHashSet<DistanceMessage>();
 
-		SortedMap<Double, DistanceMessage> distanceMap = getDistanceMap( latitude_start,  longitude_start, queryParams);
+		SortedMap<Double, DistanceMessage> distanceMap = getDistanceMap( latitude_start,  longitude_start);
 		
 		int i=0;
 		for (Double distance : distanceMap.keySet()){
@@ -141,14 +129,12 @@ public class NearestAddressFinderCache {
 	 * @param maxReturnAddresses
 	 * @return
 	 */
-	public Set<DistanceMessage> findClosestAddresses(Address address, Integer maxReturnAddresses, MultivaluedMap<String,String> queryParams){
+	public   Set<DistanceMessage> findClosestAddresses(Address address, Integer maxReturnAddresses){
 		if(address.getGeoCode()==null) throw new IllegalArgumentException("address geocode cannot be null");
 		String latitude_start = address.getGeoCode().getLatitude();
 		String longitude_start = address.getGeoCode().getLongitude();
-		return findClosestAddresses(latitude_start, longitude_start, maxReturnAddresses, queryParams);
+		return findClosestAddresses(latitude_start, longitude_start, maxReturnAddresses);
 	}
-
-
 
 
 }
