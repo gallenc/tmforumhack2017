@@ -54,9 +54,29 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-google-maps@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/angular-google-maps/-/angular-google-maps-2.4.1.tgz#a0479f3a99cda690b72df536cf1c77d11e18ee23"
+  dependencies:
+    angular "1.2 - 1.6"
+    angular-simple-logger ">=0.0.1"
+    google-maps-utility-library-v3-infobox "1.1.14"
+    google-maps-utility-library-v3-keydragzoom "2.0.9"
+    google-maps-utility-library-v3-markerwithlabel "git://github.com/nmccready/google-maps-utility-library-v3-markerwithlabel.git"
+    js-rich-marker "git://github.com/MikaFima/js-rich-marker.git#0383f4bbdad4ddf154772fedbdd27e464600e943"
+    lodash "3.X - 4.X"
+    markerclustererplus "2.1.4"
+
 angular-route@^1.6.0:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/angular-route/-/angular-route-1.6.4.tgz#7bb216fcda746a1b8c452054b05900a7074ecc62"
+
+angular-simple-logger@>=0.0.1, angular-simple-logger@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/angular-simple-logger/-/angular-simple-logger-0.1.7.tgz#4ae48e5eac0973f577845918e56d4933cf66f041"
+  dependencies:
+    angular "^1.2"
+    debug "^2.2.0"
 
 angular-ui-router@^0.4.0:
   version "0.4.2"
@@ -64,7 +84,7 @@ angular-ui-router@^0.4.0:
   dependencies:
     angular "^1.0.8"
 
-angular@^1.0.8, angular@^1.6.0:
+"angular@1.2 - 1.6", angular@^1.0.8, angular@^1.2, angular@^1.6.0:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.4.tgz#03b7b15c01a0802d7e2cf593240e604054dc77fb"
 
@@ -894,6 +914,10 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
+coffee-script@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.10.0.tgz#12938bcf9be1948fa006f92e0c4c9e81705108c0"
+
 color-convert@^1.3.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.0.tgz#1accf97dd739b983bf994d56fec8f95853641b7a"
@@ -1671,6 +1695,22 @@ globule@^1.0.0:
     lodash "~4.16.4"
     minimatch "~3.0.2"
 
+google-maps-utility-library-v3-infobox@1.1.14:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/google-maps-utility-library-v3-infobox/-/google-maps-utility-library-v3-infobox-1.1.14.tgz#69c888cef8bff869c32275e3413d90cc09392914"
+  dependencies:
+    coffee-script "1.10.0"
+
+google-maps-utility-library-v3-keydragzoom@2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/google-maps-utility-library-v3-keydragzoom/-/google-maps-utility-library-v3-keydragzoom-2.0.9.tgz#2dfa05fed2976d82fc1cc39fcc6175c01ec06477"
+  dependencies:
+    coffee-script "1.10.0"
+
+"google-maps-utility-library-v3-markerwithlabel@git://github.com/nmccready/google-maps-utility-library-v3-markerwithlabel.git":
+  version "1.1.10"
+  resolved "git://github.com/nmccready/google-maps-utility-library-v3-markerwithlabel.git#1e1ae841596ce41fb5cfaff301477393c5621d3d"
+
 graceful-fs@^4.1.2:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
@@ -2070,6 +2110,10 @@ js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
 
+"js-rich-marker@git://github.com/MikaFima/js-rich-marker.git#0383f4bbdad4ddf154772fedbdd27e464600e943":
+  version "1.0.0"
+  resolved "git://github.com/MikaFima/js-rich-marker.git#0383f4bbdad4ddf154772fedbdd27e464600e943"
+
 js-tokens@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.1.tgz#08e9f132484a2c45a30907e9dc4d5567b7f114d7"
@@ -2203,7 +2247,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.6, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0:
+"lodash@3.X - 4.X", lodash@^4.0.0, lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -2246,6 +2290,10 @@ macaddress@^0.2.8:
 map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
+
+markerclustererplus@2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/markerclustererplus/-/markerclustererplus-2.1.4.tgz#901225180dd5d5fc0827753a18eee35afcf9c4f7"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"

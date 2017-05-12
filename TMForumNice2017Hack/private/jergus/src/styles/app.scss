@@ -4,3 +4,10 @@
 @import './flex';
 
 
+[ng-click] {
+    cursor: pointer;
+}
+
+.angular-google-map-container {
+    height: 800px;
+}

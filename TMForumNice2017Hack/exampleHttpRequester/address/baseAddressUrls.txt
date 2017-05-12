@@ -14,6 +14,8 @@ GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/addre
 
 GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?streetNr=30&streetNrSuffix=Birth
 
+GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?streetName=DroneBase
+
 GET http://139.162.227.142:8080/addressManagement/api/addressManagement/v1/address?streetName=Itchen Quays
 Returns array of addresses near itchen keys
 
@@ -31,4 +33,6 @@ note to data fill post array of addresses as shown in addressDatafill.json
 
 to delete all addresses
 DELETE http://139.162.227.142:8080/addressManagement/api/admin/address
+
+
 

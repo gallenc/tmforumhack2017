@@ -8,6 +8,6 @@ public class ServiceLoaderTest {
 	@Test
 	public void test(){
 		System.out.println("Properties: "+ServiceLoader.getProperties());
-		ServiceLoader.getNearestAddressFinder();
+		ServiceLoader.getNearestAddressFinderCache();
 	}
 }

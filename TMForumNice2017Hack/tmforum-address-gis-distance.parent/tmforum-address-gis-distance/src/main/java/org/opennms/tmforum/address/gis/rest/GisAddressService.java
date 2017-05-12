@@ -30,7 +30,7 @@ import com.vividsolutions.jts.geom.Coordinate;
 
 
 @Path("/api/v1")
-public class GisAddress {
+public class GisAddressService {
 
 
 
@@ -56,7 +56,7 @@ public class GisAddress {
 	@GET
 	@Path("/nearestAddress")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response jsonWorld(@QueryParam("latitude_start") String latitude_start, @QueryParam("longitude_start") String longitude_start,  @Context UriInfo uriInfo) {
+	public Response jsonNearestAddress(@QueryParam("latitude_start") String latitude_start, @QueryParam("longitude_start") String longitude_start,  @Context UriInfo uriInfo) {
 
 		// get query params and remove latitude parameters
 		MultivaluedMap<String, String> queryParams = new MultivaluedHashMap<String, String> (uriInfo.getQueryParameters()); 
@@ -69,7 +69,7 @@ public class GisAddress {
 			if(latitude_start==null || latitude_start.isEmpty() || longitude_start==null || longitude_start.isEmpty()) 
 				throw new IllegalArgumentException("Query parameters latitude and longitude must be set");
 
-			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
+			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinderCache();
 
 			DistanceMessage foundDistance = nearestAddressFinder.findNearestAddress(latitude_start, longitude_start, queryParams );
 
@@ -77,7 +77,7 @@ public class GisAddress {
 		} catch (Exception exception) {
 			Status status = Status.BAD_REQUEST;
 			int code = 0;
-			String message = "error in /nearestAddress";
+			String message = "error in Get /nearestAddress";
 			String link = null;
 			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception);
 			response = Response.status(status).entity(statusmsg).build();
@@ -125,7 +125,7 @@ public class GisAddress {
 				}
 			}
 
-			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
+			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinderCache();
 
 			Set<DistanceMessage> foundDistances = nearestAddressFinder.findClosestAddresses(latitude_start, longitude_start, maxReturnAddresses, queryParams);
 
@@ -133,7 +133,43 @@ public class GisAddress {
 		} catch (Exception exception) {
 			Status status = Status.BAD_REQUEST;
 			int code = 0;
-			String message = "error in /nearestAddress";
+			String message = "error in Get /closestAddresses";
+			String link = null;
+			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception);
+			response = Response.status(status).entity(statusmsg).build();
+		}
+
+		return response;
+
+	}
+	
+	
+	/**
+	 * returns cached address list for given filter
+	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/cachedAddresses
+	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/cachedAddresses?streetName=Itchen%20Quays
+	 * @param latitude_start
+	 * @param longitude_start
+	 * @return
+	 */
+	@GET
+	@Path("/cachedAddresses")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response jsonCachedAddresses(@Context UriInfo uriInfo) {
+		// get query params
+		MultivaluedMap<String, String> queryParams = new MultivaluedHashMap<String, String> (uriInfo.getQueryParameters()); 
+		Response response = null;
+		try {
+		
+			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinderCache();
+
+			Set<Address> foundAddresses = nearestAddressFinder.getCachedAddresses(queryParams);
+
+			response = Response.ok(foundAddresses).build();
+		} catch (Exception exception) {
+			Status status = Status.BAD_REQUEST;
+			int code = 0;
+			String message = "error in /cachedAddresses";
 			String link = null;
 			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception);
 			response = Response.status(status).entity(statusmsg).build();
@@ -410,7 +446,7 @@ Content-Type: application/json
 	@Path("/waypath")
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-	public Response waypath(Address startAddress, 
+	public Response waypathPOST(Address startAddress, 
 			@QueryParam("areaRadius") String areaRadiusStr,
 			@QueryParam("nsides") String nsidesStr,
 			@QueryParam("splineFit") String splineFitStr,
@@ -451,8 +487,8 @@ Content-Type: application/json
 				throw new IllegalArgumentException("cannot parse query parameter areaRadius",nfe);
 			}
 
-			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinder();
-			Set<Address> pathData = nearestAddressFinder.getAddressCache(queryParams);
+			NearestAddressFinderCache nearestAddressFinder= ServiceLoader.getNearestAddressFinderCache();
+			Set<Address> pathData = nearestAddressFinder.getCachedAddresses(queryParams);
 
 			if( pathData.isEmpty() ) throw new IllegalArgumentException("cannot retreive any addresses for path using given params");
 
@@ -489,5 +525,27 @@ Content-Type: application/json
 
 		return response;
 	}
+	
+	/**
+	 * Same as post waypath but without start address
+	 * @param areaRadiusStr
+	 * @param nsidesStr
+	 * @param splineFitStr
+	 * @param uriInfo
+	 * @return
+	 */
+	@GET
+	@Path("/waypath")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	public Response waypathGET( 
+			@QueryParam("areaRadius") String areaRadiusStr,
+			@QueryParam("nsides") String nsidesStr,
+			@QueryParam("splineFit") String splineFitStr,
+			@Context UriInfo uriInfo) {
+		
+		return waypathPOST(null, areaRadiusStr, nsidesStr, splineFitStr, uriInfo);
+	}
+
 
 }

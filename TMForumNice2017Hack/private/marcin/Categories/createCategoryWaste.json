@@ -8,6 +8,6 @@ Content-Type: application/json
 		"endDateTime": ""
 	},
 	"isRoot": true,
-	"name": "Shipment",
-	"description": "A category to hold all items available to ships"
+	"name": "Waste",
+	"description": "A category to hold waste related products."
 }

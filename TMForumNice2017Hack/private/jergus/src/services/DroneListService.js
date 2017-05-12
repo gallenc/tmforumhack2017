@@ -6,7 +6,7 @@ export default function () {
 
         add_drone :  (drone) =>  {
 
-            
+
         }
 
     }

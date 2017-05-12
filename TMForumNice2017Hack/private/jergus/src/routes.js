@@ -6,9 +6,10 @@ export default function ($stateProvider, $urlRouterProvider) {
         templateUrl: '/views/dashboard.html',
     });
 
-    $stateProvider.state('example', {
-        url: '/example',
-        templateUrl: '/views/example.html',
+    $stateProvider.state('map', {
+        url: '/map',
+        templateUrl: '/views/map.html',
+        controller: 'MapController as vm'
     });
 
     $stateProvider.state('drone', {

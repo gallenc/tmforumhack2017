@@ -1,4 +1,5 @@
 import angular from 'angular';
+import _ from 'lodash';
 
 
 /**
@@ -6,9 +7,11 @@ import angular from 'angular';
  */
 import 'angular-route';
 import 'angular-ui-router';
+import 'angular-google-maps';
+import 'angular-simple-logger';
 
 const app = angular.module('app', [
-    'ngRoute', 'ui.router',
+    'ngRoute', 'ui.router', 'uiGmapgoogle-maps',
 ]);
 
 app.config(function ($qProvider) {
@@ -37,6 +40,7 @@ app.config(require('./routes.js').default);
  */
 app.controller('HomepageController', require('./controllers/HomepageController.js').default);
 app.controller('DroneController', require('./controllers/DroneController.js').default);
+app.controller('MapController', require('./controllers/MapController.js').default);
 
 /**
  * App Services
@@ -44,8 +48,6 @@ app.controller('DroneController', require('./controllers/DroneController.js').de
 
 app.service('DroneHTTPService', require('./services/DroneHTTPService.js').default);
 app.service('DroneListService', require('./services/DroneListService').default);
-
-
-
-
+app.service('Map', require('./services/Map.js').default);
+app.service('Api', require('./services/Api.js').default);
 

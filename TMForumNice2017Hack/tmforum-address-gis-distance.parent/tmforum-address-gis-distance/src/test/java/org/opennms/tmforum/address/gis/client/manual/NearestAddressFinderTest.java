@@ -13,6 +13,7 @@ import javax.ws.rs.core.MultivaluedMap;
 
 import org.junit.Test;
 import org.opennms.tmforum.address.client.TmforumAddressClient;
+import org.opennms.tmforum.address.gis.rest.AddressCache;
 import org.opennms.tmforum.address.gis.rest.NearestAddressFinderCache;
 import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 
@@ -53,7 +54,8 @@ public class NearestAddressFinderTest {
 		if (nearestAddressFinder==null) {
 			System.out.println("using address: "+tmforumAddressAPI);
 			TmforumAddressClient addressClient = new TmforumAddressClient( tmforumAddressAPI);
-			nearestAddressFinder = new NearestAddressFinderCache(addressClient);
+			AddressCache addressCache = new AddressCache(addressClient);
+			nearestAddressFinder = new NearestAddressFinderCache(addressCache);
 		}
 		return nearestAddressFinder;
 	}

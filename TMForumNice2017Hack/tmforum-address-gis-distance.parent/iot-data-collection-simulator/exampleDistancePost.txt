@@ -1,0 +1,34 @@
+POST http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/distance-address
+Content-Type: application/json
+{
+  "address_start" : 
+	{
+		"streetNr": "31",
+		"streetNrSuffix": "Birth",
+		"streetName": "Itchen Quays",
+		"streetType": "Warf",
+		"locality": "Multi Deck RoRo Terminal",
+		"city": "Southampton",
+		"stateOrProvince": "Hampshire",
+		"country": "UK",
+		"geoCode": {
+			"latitude": "50.889311",
+			"longitude": "-1.391915"
+		}
+	},
+  "address_finish" : {
+		"streetNr": "32",
+		"streetNrSuffix": "Birth",
+		"streetName": "Itchen Quays",
+		"streetType": "Warf",
+		"locality": "Multi Deck RoRo Terminal",
+		"city": "Southampton",
+		"stateOrProvince": "Hampshire",
+		"country": "UK",
+		"geoCode": {
+			"latitude": "50.891099",
+			"longitude": "-1.390925"
+		}
+	}
+}
+
