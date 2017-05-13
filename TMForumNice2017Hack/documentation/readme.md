@@ -13,6 +13,10 @@ https://github.com/FIWARE-TMForum/DSPRODUCTINVENTORY
 
 spec: https://github.com/tmforum/TMFORUMAPISPECS14.5/blob/master/TMF620_Product_Catalog_Management_API_REST_Specification_R14.5.0-6.docx
 
+## Glassfish instance
+http://139.162.227.142:8080
+admin https://139.162.227.142:4848/
+
 
 ## OpenNMS instance
 http://demo1.opennms.co.uk:8980/opennms/login.jsp
