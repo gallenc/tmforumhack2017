@@ -2,6 +2,7 @@ import angular from 'angular';
 import _ from 'lodash';
 import env from './.env';
 
+
 /**
  * Vendor
  */
@@ -45,10 +46,15 @@ app.config(require('./routes.js').default);
  * Controllers
  */
 app.controller('HomepageController', require('./controllers/HomepageController.js').default);
+app.controller('DroneController', require('./controllers/DroneController.js').default);
 app.controller('MapController', require('./controllers/MapController.js').default);
 
 /**
- * Services
+ * App Services
  */
+
+app.service('DroneHTTPService', require('./services/DroneHTTPService.js').default);
+app.service('DroneListService', require('./services/DroneListService').default);
 app.service('Map', require('./services/Map.js').default);
 app.service('Api', require('./services/Api.js').default);
+

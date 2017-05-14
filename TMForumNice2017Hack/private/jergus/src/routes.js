@@ -11,4 +11,10 @@ export default function ($stateProvider, $urlRouterProvider) {
         templateUrl: '/views/map.html',
         controller: 'MapController as vm'
     });
+
+    $stateProvider.state('drone', {
+        url: '/drone',
+        templateUrl: '/views/drone.html',
+        controller: 'DroneController as vm'
+    });
 };
