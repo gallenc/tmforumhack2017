@@ -15,6 +15,8 @@ import org.opennms.tmforum.address.model.GeoCode;
 public class IotData {
 	
 	String id = null;
+	
+	String deviceLabel = null;
 
 	GeoCode geocode = new GeoCode();
 	
@@ -52,5 +54,13 @@ public class IotData {
 
 	public void setParameters(List<NameValuePair> parameters) {
 		this.parameters = parameters;
+	}
+
+	public String getDeviceLabel() {
+		return deviceLabel;
+	}
+
+	public void setLabel(String deviceLabel) {
+		this.deviceLabel = deviceLabel;
 	}
 }

@@ -228,6 +228,9 @@ public class IotSimulatorService {
 		try {
 			IotData iotData = new  IotData();
 			iotData.setId(id);
+			
+			iotData.setLabel("label_"+id);
+			
 			iotData.setTimestamp(Long.toString(new Date().getTime()));
 			GeoCode geocode = new GeoCode();
 
@@ -243,9 +246,9 @@ public class IotSimulatorService {
            parameters.addAll(polutionIndex.getParameters());
 
 			// fixed point parameters
-			parameters.add(new NameValuePair("Water_Litres","100.00"));
-			parameters.add(new NameValuePair("Waste_Water_Litres","100.00"));
-			parameters.add(new NameValuePair("Electricity_KwH","100.00"));
+			parameters.add(new NameValuePair("potable_Water_Litres","100.00"));
+			parameters.add(new NameValuePair("waste_Water_Litres","100.00"));
+			parameters.add(new NameValuePair("electricity_KwH","100.00"));
 			
 
 			iotData.setParameters(parameters );
