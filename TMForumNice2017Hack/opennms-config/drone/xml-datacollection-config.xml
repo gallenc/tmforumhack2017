@@ -29,7 +29,7 @@
     <!-- <xml-source url="http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsample/xhttp://{ipaddr}:9200/_cluster/stats"> -->
 
     <xml-source url="http://{ipaddr}:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsample">
-      <import-groups>xml-iotdevice-stats.xml</import-groups>
+      <import-groups>xml-datacollection/xml-iotdevice-stats.xml</import-groups>
     </xml-source>
   </xml-collection>
 </xml-datacollection-config>
