@@ -27,6 +27,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.opennms.iotsim.model.IotData;
 import org.opennms.iotsim.model.NameValuePair;
+import org.opennms.iotsim.model.PolutionIndex;
 import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 import org.opennms.tmforum.address.model.Address;
 import org.opennms.tmforum.address.model.GeoCode;
@@ -237,7 +238,16 @@ public class IotSimulatorService {
 			iotData.setGeocode(geocode );
 
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-			parameters.add(new NameValuePair("smoke","100.00"));
+
+           PolutionIndex polutionIndex= new PolutionIndex();
+           parameters.add(polutionIndex);
+
+			// fixed point parameters
+			parameters.add(new NameValuePair("Water_Litres","100.00"));
+			parameters.add(new NameValuePair("Waste_Water_Litres","100.00"));
+			parameters.add(new NameValuePair("Electricity_KwH","100.00"));
+			
+
 			iotData.setParameters(parameters );
 			response = Response.ok(iotData).build();
 		}
