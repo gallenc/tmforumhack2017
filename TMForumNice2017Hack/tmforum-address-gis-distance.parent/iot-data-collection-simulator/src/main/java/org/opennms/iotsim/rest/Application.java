@@ -7,7 +7,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 
 
-@ApplicationPath("gisaddress")
+@ApplicationPath("iotsimulator")
 public class Application extends ResourceConfig {
 
     public Application() {

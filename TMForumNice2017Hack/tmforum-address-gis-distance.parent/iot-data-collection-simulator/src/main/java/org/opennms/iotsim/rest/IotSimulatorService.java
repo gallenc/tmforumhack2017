@@ -118,46 +118,46 @@ public class IotSimulatorService {
 	 *   "longitude_finish" : "-1.390925"
 	 * }
 	 */
-//	@GET
-//	@Path("/distance")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response jsonDistance(@QueryParam("latitude_start") String latitude_start, 
-//			@QueryParam("longitude_start") String longitude_start, 
-//			@QueryParam("latitude_finish") String latitude_finish, 
-//			@QueryParam("longitude_finish") String longitude_finish) {
-//
-//		Response response = null;
-//
-//		try {
-//			if(latitude_start==null || latitude_start.isEmpty() || longitude_start==null || longitude_start.isEmpty()) 
-//				throw new IllegalArgumentException("Query parameters latitude_start and longitude_start must be set");
-//			if(latitude_finish==null || latitude_finish.isEmpty() || longitude_finish==null || longitude_finish.isEmpty()) 
-//				throw new IllegalArgumentException("Query parameters latitude_finish and longitude_finish must be set");
-//
-//			DistanceMessage replyDistanceMsg= new DistanceMessage();
-//			replyDistanceMsg.setLatitude_start(latitude_start);
-//			replyDistanceMsg.setLatitude_finish(latitude_finish);
-//			replyDistanceMsg.setLongitude_start(longitude_start);
-//			replyDistanceMsg.setLongitude_finish(longitude_finish);
-//
-//			double distance = DistanceCalculator.distance(latitude_start, longitude_start, latitude_finish, longitude_finish);
-//
-//			replyDistanceMsg.setDistance(Double.toString(distance));
-//			response = Response.ok(replyDistanceMsg).build();
-//		}
-//
-//		catch (Exception exception) {
-//			Status status = Status.BAD_REQUEST;
-//			int code = 0;
-//			String message = "error";
-//			String link = null;
-//			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception.getMessage());
-//			response = Response.status(status).entity(statusmsg).build();
-//		}
-//
-//		return response;
-//
-//	}
+	@GET
+	@Path("/distance")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response jsonDistance(@QueryParam("latitude_start") String latitude_start, 
+			@QueryParam("longitude_start") String longitude_start, 
+			@QueryParam("latitude_finish") String latitude_finish, 
+			@QueryParam("longitude_finish") String longitude_finish) {
+
+		Response response = null;
+
+		try {
+			if(latitude_start==null || latitude_start.isEmpty() || longitude_start==null || longitude_start.isEmpty()) 
+				throw new IllegalArgumentException("Query parameters latitude_start and longitude_start must be set");
+			if(latitude_finish==null || latitude_finish.isEmpty() || longitude_finish==null || longitude_finish.isEmpty()) 
+				throw new IllegalArgumentException("Query parameters latitude_finish and longitude_finish must be set");
+
+			DistanceMessage replyDistanceMsg= new DistanceMessage();
+			replyDistanceMsg.setLatitude_start(latitude_start);
+			replyDistanceMsg.setLatitude_finish(latitude_finish);
+			replyDistanceMsg.setLongitude_start(longitude_start);
+			replyDistanceMsg.setLongitude_finish(longitude_finish);
+
+			double distance = DistanceCalculator.distance(latitude_start, longitude_start, latitude_finish, longitude_finish);
+
+			replyDistanceMsg.setDistance(Double.toString(distance));
+			response = Response.ok(replyDistanceMsg).build();
+		}
+
+		catch (Exception exception) {
+			Status status = Status.BAD_REQUEST;
+			int code = 0;
+			String message = "error";
+			String link = null;
+			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception.getMessage());
+			response = Response.status(status).entity(statusmsg).build();
+		}
+
+		return response;
+
+	}
 
 	/**
 	 * Calculate the distance between 2 points a and b given lat and long gis coordinates for a and b
