@@ -1,6 +1,14 @@
 
+## server
 server http://139.162.227.142:8080
 
+## home page
 http://139.162.227.142:8080/iot-data-data-collection-simulator/
+
+## distance between points
+ Calculate the distance between 2 points a and b given lat and long gis coordinates for a and b
+example call http://localhost:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/distance?latitude_start=50.889311&longitude_start=-1.391915&latitude_finish=50.891099&longitude_finish=-1.390925
+http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/distance
+
 
 http://139.162.227.142:8080/iot-data-data-collection-simulator/gisaddress/api/v1/iotsample/1

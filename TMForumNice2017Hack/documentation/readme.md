@@ -17,6 +17,9 @@ spec: https://github.com/tmforum/TMFORUMAPISPECS14.5/blob/master/TMF620_Product_
 http://139.162.227.142:8080
 admin https://139.162.227.142:4848/
 
+to deploy using curl
+curl --verbose  -H 'Accept: application/json' -X POST  -H 'X-Requested-By: dummy'   -F id=@/home/admin/devel/gitrepos/tmforumhack2017/TMForumNice2017Hack/tmforum-address-gis-distance.parent/iot-data-collection-simulator/target/iot-data-data-collection-simulator.war  -F force=true  --user admin:xxxx --insecure https://localhost:4848/management/domain/applications/application
+
 
 ## OpenNMS instance
 http://demo1.opennms.co.uk:8980/opennms/login.jsp

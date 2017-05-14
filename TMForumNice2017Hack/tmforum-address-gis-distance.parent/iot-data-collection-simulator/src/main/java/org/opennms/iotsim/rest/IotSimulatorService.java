@@ -51,55 +51,55 @@ public class IotSimulatorService {
 	 * @param longitude_start
 	 * @return
 	 */
-//	@GET
-//	@Path("/closestAddresses")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response jsonClosestAddresses(@QueryParam("latitude_start") String latitude_start,
-//			@QueryParam("longitude_start") String longitude_start, 
-//			@QueryParam("maxReturnAddresses") String maxReturnAddressesStr, 
-//			@Context UriInfo uriInfo) {
-//
-//
-//		// get query params and remove latitude parameters
-//		MultivaluedMap<String, String> queryParams = new MultivaluedHashMap<String, String> (uriInfo.getQueryParameters()); 
-//		queryParams.remove("latitude_start");
-//		queryParams.remove("longitude_start");
-//		queryParams.remove("maxReturnAddresses");
-//
-//		Response response = null;
-//		
-//		Properties Properties = ServiceLoader.getProperties();
-//
-//		try {
-//			if(latitude_start==null || latitude_start.isEmpty() || longitude_start==null || longitude_start.isEmpty()) 
-//				throw new IllegalArgumentException("Query parameters latitude and longitude must be set");
-//
-//			Integer maxReturnAddresses=null;
-//			if (maxReturnAddressesStr !=null){
-//				try{
-//					maxReturnAddresses=Integer.parseInt(maxReturnAddressesStr);
-//				} catch (NumberFormatException nfe){
-//					throw new IllegalArgumentException("maxReturnAddresses cannot be parsed as integer", nfe);
-//				}
-//			}
-//
-//			Properties = ServiceLoader.getProperties();
-//
-//		//	Set<DistanceMessage> foundDistances = nearestAddressFinder.findClosestAddresses(latitude_start, longitude_start, maxReturnAddresses, queryParams);
-//
-//		//	response = Response.ok(foundDistances).build();
-//		} catch (Exception exception) {
-//			Status status = Status.BAD_REQUEST;
-//			int code = 0;
-//			String message = "error in /nearestAddress";
-//			String link = null;
-//			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception);
-//			response = Response.status(status).entity(statusmsg).build();
-//		}
-//
-//		return response;
-//
-//	}
+	//	@GET
+	//	@Path("/closestAddresses")
+	//	@Produces(MediaType.APPLICATION_JSON)
+	//	public Response jsonClosestAddresses(@QueryParam("latitude_start") String latitude_start,
+	//			@QueryParam("longitude_start") String longitude_start, 
+	//			@QueryParam("maxReturnAddresses") String maxReturnAddressesStr, 
+	//			@Context UriInfo uriInfo) {
+	//
+	//
+	//		// get query params and remove latitude parameters
+	//		MultivaluedMap<String, String> queryParams = new MultivaluedHashMap<String, String> (uriInfo.getQueryParameters()); 
+	//		queryParams.remove("latitude_start");
+	//		queryParams.remove("longitude_start");
+	//		queryParams.remove("maxReturnAddresses");
+	//
+	//		Response response = null;
+	//		
+	//		Properties Properties = ServiceLoader.getProperties();
+	//
+	//		try {
+	//			if(latitude_start==null || latitude_start.isEmpty() || longitude_start==null || longitude_start.isEmpty()) 
+	//				throw new IllegalArgumentException("Query parameters latitude and longitude must be set");
+	//
+	//			Integer maxReturnAddresses=null;
+	//			if (maxReturnAddressesStr !=null){
+	//				try{
+	//					maxReturnAddresses=Integer.parseInt(maxReturnAddressesStr);
+	//				} catch (NumberFormatException nfe){
+	//					throw new IllegalArgumentException("maxReturnAddresses cannot be parsed as integer", nfe);
+	//				}
+	//			}
+	//
+	//			Properties = ServiceLoader.getProperties();
+	//
+	//		//	Set<DistanceMessage> foundDistances = nearestAddressFinder.findClosestAddresses(latitude_start, longitude_start, maxReturnAddresses, queryParams);
+	//
+	//		//	response = Response.ok(foundDistances).build();
+	//		} catch (Exception exception) {
+	//			Status status = Status.BAD_REQUEST;
+	//			int code = 0;
+	//			String message = "error in /nearestAddress";
+	//			String link = null;
+	//			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception);
+	//			response = Response.status(status).entity(statusmsg).build();
+	//		}
+	//
+	//		return response;
+	//
+	//	}
 
 
 	/**
@@ -181,56 +181,74 @@ public class IotSimulatorService {
 	 *   "longitude_finish" : "-1.390925"
 	 * }
 	 */
-//	@POST
-//	@Path("/distance")
-//	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-//	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-//	public Response jsonPostDistance(DistanceMessage requestDistanceMsg) {
-//
-//		Response response = null;
-//
-//		try {
-//			if( requestDistanceMsg==null ) 
-//				throw new IllegalArgumentException("request json DistanceMessage must not be null");
-//			response = jsonDistance(requestDistanceMsg.getLatitude_start(), 
-//					requestDistanceMsg.getLongitude_start(),requestDistanceMsg.getLatitude_finish(), requestDistanceMsg.getLongitude_finish());
-//		}
-//
-//		catch (Exception exception) {
-//			Status status = Status.BAD_REQUEST;
-//			int code = 0;
-//			String message = "error";
-//			String link = null;
-//			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception.getMessage());
-//			response = Response.status(status).entity(statusmsg).build();
-//		}
-//
-//		return response;
-//
-//	}
-	
-	
+	//	@POST
+	//	@Path("/distance")
+	//	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	//	@Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	//	public Response jsonPostDistance(DistanceMessage requestDistanceMsg) {
+	//
+	//		Response response = null;
+	//
+	//		try {
+	//			if( requestDistanceMsg==null ) 
+	//				throw new IllegalArgumentException("request json DistanceMessage must not be null");
+	//			response = jsonDistance(requestDistanceMsg.getLatitude_start(), 
+	//					requestDistanceMsg.getLongitude_start(),requestDistanceMsg.getLatitude_finish(), requestDistanceMsg.getLongitude_finish());
+	//		}
+	//
+	//		catch (Exception exception) {
+	//			Status status = Status.BAD_REQUEST;
+	//			int code = 0;
+	//			String message = "error";
+	//			String link = null;
+	//			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception.getMessage());
+	//			response = Response.status(status).entity(statusmsg).build();
+	//		}
+	//
+	//		return response;
+	//
+	//	}
+
+
 	@Path("/iotsample/{id}")
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-	public IotData getIotSample(@PathParam("id") String id){
-		IotData iotData = new  IotData();
-		iotData.setId(id);
-		iotData.setTimestamp(Long.toString(new Date().getTime()));
-		GeoCode geocode = new GeoCode();
-		
-		// latitude_start=50.889311&longitude_start=-1.391915
-		geocode.setLatitude("50.889311");
-		
-		geocode.setLongitude("-1.391915");
-		iotData.setGeocode(geocode );
-		
-		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-		parameters.add(new NameValuePair("smoke","100.00"));
-		iotData.setParameters(parameters );
-		
-		
-		
-		return iotData;
+	public Response getIotSample(@PathParam("id") String id){
+
+
+		Response response = null;
+
+		try {
+			IotData iotData = new  IotData();
+			iotData.setId(id);
+			iotData.setTimestamp(Long.toString(new Date().getTime()));
+			GeoCode geocode = new GeoCode();
+
+			// latitude_start=50.889311&longitude_start=-1.391915
+			geocode.setLatitude("50.889311");
+
+			geocode.setLongitude("-1.391915");
+			iotData.setGeocode(geocode );
+
+			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+			parameters.add(new NameValuePair("smoke","100.00"));
+			iotData.setParameters(parameters );
+		}
+
+		catch (Exception exception) {
+			Status status = Status.BAD_REQUEST;
+			int code = 0;
+			String message = "error";
+			String link = null;
+			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception.getMessage());
+			response = Response.status(status).entity(statusmsg).build();
+		}
+
+		return response;
+
+
+
+
+
 	}
 
 
