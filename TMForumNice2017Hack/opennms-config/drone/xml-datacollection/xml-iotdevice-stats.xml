@@ -3,7 +3,7 @@
     <!-- IOT device stats -->
     <!-- http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsample/x -->
 
-  <xml-group name="device" resource-type="node" resource-xpath="/x">
+  <xml-group name="device" resource-type="node" resource-xpath="/">
     <xml-object name="id" type="STRING" xpath="id" />
     <xml-object name="deviceLabel" type="STRING" xpath="deviceLabel" />
     <xml-object name="latitude" type="GAUGE" xpath="geocode/latitude" />
