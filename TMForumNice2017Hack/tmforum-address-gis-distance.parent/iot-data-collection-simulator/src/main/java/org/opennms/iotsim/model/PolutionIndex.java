@@ -32,11 +32,11 @@ public class PolutionIndex {
 	public List<NameValuePair> getParameters(){
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 		// mobile parameters
-		parameters.add(new NameValuePair("ozone_μg_m3","241")); // 8 hr mean
-		parameters.add(new NameValuePair("nitrogenDioxide_μg_m3","601")); //1 hr mean
-		parameters.add(new NameValuePair("sulphurDioxide_μg_m3","1065")); // 15 min mean
-		parameters.add(new NameValuePair("pM2.5Particles_μg_m3","71")); // 24 hr mean
-		parameters.add(new NameValuePair("pM10Particles_μg_m3","101")); // 24 hr mean
+		parameters.add(new NameValuePair("ozone_ug_m3","241")); // 8 hr mean
+		parameters.add(new NameValuePair("nitrogenDioxide_ug_m3","601")); //1 hr mean
+		parameters.add(new NameValuePair("sulphurDioxide_ug_m3","1065")); // 15 min mean
+		parameters.add(new NameValuePair("pM2.5Particles_ug_m3","71")); // 24 hr mean
+		parameters.add(new NameValuePair("pM10Particles_ug_m3","101")); // 24 hr mean
 
 		// 1-10
 		parameters.add(new NameValuePair("estimated_UK_Polution_index","10")); //0-10

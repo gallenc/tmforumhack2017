@@ -6,8 +6,8 @@
   <xml-group name="device" resource-type="node" resource-xpath="/x">
     <xml-object name="id" type="STRING" xpath="id" />
     <xml-object name="deviceLabel" type="STRING" xpath="deviceLabel" />
-    <xml-object name="latitude" type="GUAGE" xpath="geocode/latitude" />
-    <xml-object name="longitude" type="GUAGE" xpath="geocode/longitude" />
+    <xml-object name="latitude" type="GAUGE" xpath="geocode/latitude" />
+    <xml-object name="longitude" type="GAUGE" xpath="geocode/longitude" />
   </xml-group>
 
 <!--
@@ -22,23 +22,23 @@
     "timestamp": "1494745385913",
     "parameters": [
         {
-            "name": "ozone_μg_m3",
+            "name": "ozone_ug_m3",
             "value": "241"
         },
         {
-            "name": "nitrogenDioxide_μg_m3",
+            "name": "nitrogenDioxide_ug_m3",
             "value": "601"
         },
         {
-            "name": "sulphurDioxide_μg_m3",
+            "name": "sulphurDioxide_ug_m3",
             "value": "1065"
         },
         {
-            "name": "pM2.5Particles_μg_m3",
+            "name": "pM2.5Particles_ug_m3",
             "value": "71"
         },
         {
-            "name": "pM10Particles_μg_m3",
+            "name": "pM10Particles_ug_m3",
             "value": "101"
         },
         {
