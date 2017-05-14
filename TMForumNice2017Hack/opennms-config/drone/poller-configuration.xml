@@ -290,7 +290,7 @@
     <service name="IotDevice" interval="300000" user-defined="false" status="on">
       <parameter key="retry" value="1"/>
       <parameter key="timeout" value="3000"/>
-      <parameter key="port" value="9200"/>
+      <parameter key="port" value="8080"/>
       <parameter key="url" value="/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsample"/>
       <parameter key="response" value="200-202,299"/>
 <!--       <parameter key="response-text" value="~.*status.:.green.*"/> -->
