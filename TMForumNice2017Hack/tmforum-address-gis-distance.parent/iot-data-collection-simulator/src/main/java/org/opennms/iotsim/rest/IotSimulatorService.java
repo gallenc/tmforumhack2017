@@ -240,7 +240,7 @@ public class IotSimulatorService {
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
            PolutionIndex polutionIndex= new PolutionIndex();
-           parameters.add(polutionIndex);
+           parameters.addAll(polutionIndex.getParameters());
 
 			// fixed point parameters
 			parameters.add(new NameValuePair("Water_Litres","100.00"));
