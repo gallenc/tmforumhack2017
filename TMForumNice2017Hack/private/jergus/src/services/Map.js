@@ -1,4 +1,4 @@
-export default function (uiGmapGoogleMapApi) {
+export default function () {
     return {
         southampton() {
             return {
@@ -13,22 +13,24 @@ export default function (uiGmapGoogleMapApi) {
         base(base) {
             return {
                 id: 'droneBase',
-                coords: base.geoCode,
+                coords: base,
                 options: {
                     icon: require('../img/base.png'),
                 },
             };
         },
 
-        ready() {
-            return uiGmapGoogleMapApi;
+        waypathsToPolylines(waypaths) {
+            return waypaths.map((path, index) => {
+                return this.polyline(path.points, this.colors(index));
+            });
         },
 
-        polyline(path, index) {
+        polyline(path, color) {
             return {
                 path: path,
                 stroke: {
-                    color: this.colors(index || 0),
+                    color: color,
                     weight: 3
                 },
                 geodesic: true,
@@ -39,7 +41,7 @@ export default function (uiGmapGoogleMapApi) {
                     },
                     offset: '25px',
                     repeat: '50px'
-                }]
+                }],
             };
         },
 

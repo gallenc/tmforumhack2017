@@ -1,24 +1,11 @@
-export default function ($scope, Map, Api) {
-    this.polylines = [];
-    this.collections = [];
+export default function (Map, Api) {
     this.map = Map.southampton();
 
-    $scope.$watch('vm.collections', collections => {
-        this.polylines = [];
+    Api.getDroneBase().then(coords => {
+        this.base = Map.base(coords);
+    });
 
-        collections.filter(c => c.hide != true).forEach((collection, index) => {
-            this.polylines.push(Map.polyline(collection.waypath, index));
-        });
-    }, true);
-
-    Map.ready().then(() => {
-        Api.getCollections()
-            .then(({ collections, base }) => {
-                Api.getWaypaths(collections, base).then(collections => {
-                    this.collections = collections;
-                });
-
-                this.base = Map.base(base);
-            });
+    Api.getWaypaths().then(waypaths => {
+        this.polylines = Map.waypathsToPolylines(waypaths);
     });
 };
