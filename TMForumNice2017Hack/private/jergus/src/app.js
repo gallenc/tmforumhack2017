@@ -1,5 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
+import env from './.env';
 
 /**
  * Vendor
@@ -15,6 +16,12 @@ const app = angular.module('app', [
 
 app.config(function ($qProvider) {
     $qProvider.errorOnUnhandledRejections(false);
+});
+
+app.config(function (uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        key: env.GOOGLE_MAP_KEY
+    });
 });
 
 /**
