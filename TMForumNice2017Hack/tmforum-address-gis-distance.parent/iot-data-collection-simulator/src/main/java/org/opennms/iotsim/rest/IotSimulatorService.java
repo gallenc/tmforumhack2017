@@ -209,7 +209,14 @@ public class IotSimulatorService {
 	//
 	//	}
 
+	@GET
+	@Path("/iotsample/")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	public Response getIotSampleQuery(@QueryParam("id") String id){
+		return getIotSample(id);
+	}
 
+	@GET
 	@Path("/iotsample/{id}")
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Response getIotSample(@PathParam("id") String id){
@@ -232,6 +239,7 @@ public class IotSimulatorService {
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 			parameters.add(new NameValuePair("smoke","100.00"));
 			iotData.setParameters(parameters );
+			response = Response.ok(iotData).build();
 		}
 
 		catch (Exception exception) {
