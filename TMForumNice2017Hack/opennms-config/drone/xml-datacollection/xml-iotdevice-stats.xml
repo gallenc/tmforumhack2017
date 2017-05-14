@@ -2,12 +2,30 @@
 
     <!-- IOT device stats -->
     <!-- http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsample/x -->
+   <!-- EXAMPLE  <xml-object name="zoneName" type="string" xpath="@name" />
+      <xml-object name="nproc" type="GAUGE" xpath="parameter[@key='nproc']/@value" />
+       "name" : "global",
+       "timestamp" : 1299258742,
+       "parameter" : [
+         { "key" : "nproc", "value" : "245" },
+         { "key" : "nlwp", "value" : "1455" }, -->
 
   <xml-group name="device" resource-type="node" resource-xpath="/">
     <xml-object name="id" type="STRING" xpath="id" />
     <xml-object name="deviceLabel" type="STRING" xpath="deviceLabel" />
     <xml-object name="latitude" type="GAUGE" xpath="geocode/latitude" />
     <xml-object name="longitude" type="GAUGE" xpath="geocode/longitude" />
+    <xml-object name="timestamp" type="GAUGE" xpath="timestamp" />
+    <xml-object name="ozone_ug_m3" type="GAUGE" xpath="parameters[@name='ozone_ug_m3']/@value" />
+    <xml-object name="no2_ug_m3" type="GAUGE" xpath="parameters[@name='nitrogenDioxide_ug_m3']/@value" />
+    <xml-object name="so2_ug_m3" type="GAUGE" xpath="parameters[@name='sulphurDioxide_ug_m3']/@value" />
+    <xml-object name="pM2_5_ug_m3" type="GAUGE" xpath="parameters[@name='pM2_5Particles_ug_m3']/@value" />
+    <xml-object name="pM10_ug_m3" type="GAUGE" xpath="parameters[@name='pM10Particles_ug_m3']/@value" />
+    <xml-object name="UKAirPollutnIndex" type="GAUGE" xpath="parameters[@name='estimated_UK_Polution_index']/@value" />
+    <xml-object name="UKAirPollutnBand" type="STRING" xpath="parameters[@name='estimated_UK_Air_pollution_banding']/@value" />
+    <xml-object name="potable_Water_Ltr" type="GAUGE" xpath="parameters[@name='potable_Water_Litres']/@value" />
+    <xml-object name="waste_Water_Ltr" type="GAUGE" xpath="parameters[@name='waste_Water_Litres']/@value" />
+    <xml-object name="electricity_KwH" type="GAUGE" xpath="parameters[@name='electricity_KwH']/@value" />
   </xml-group>
 
 <!--
