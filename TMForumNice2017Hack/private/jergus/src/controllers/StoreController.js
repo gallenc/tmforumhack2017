@@ -1,7 +1,11 @@
-export default function (SalesForceService, $uibModal) {
+export default function (HuaweiHTTPService,SalesForceService, $uibModal) {
 
     this.basket = [];
     let modalInstance;
+
+    HuaweiHTTPService.get_balance((x) => {
+        console.log(x.data);
+    })
 
     this.open = function () {
        let modalInstance = $uibModal.open({
