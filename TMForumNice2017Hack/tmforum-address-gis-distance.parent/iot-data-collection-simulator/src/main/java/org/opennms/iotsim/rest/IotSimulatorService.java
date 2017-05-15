@@ -27,7 +27,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.opennms.iotsim.model.IotData;
-import org.opennms.iotsim.model.NameValuePair;
+import org.opennms.iotsim.model.KeyValuePair;
 import org.opennms.iotsim.model.PollutionIndex;
 import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 import org.opennms.tmforum.address.model.Address;
@@ -247,7 +247,7 @@ public class IotSimulatorService {
 			geocode.setLongitude("-1.391915");
 			iotData.setGeocode(geocode );
 
-			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+			List<KeyValuePair> parameters = new ArrayList<KeyValuePair>();
 
 			PollutionIndex polutionIndex= new PollutionIndex();
 			polutionIndex.setNormalisedMeasures(10);
@@ -262,10 +262,10 @@ public class IotSimulatorService {
 			String datastr = Integer.toString(data.getAndAdd(100)); 
 
 
-			parameters.add(new NameValuePair("potable_Water_Litres",waterstr));
-			parameters.add(new NameValuePair("waste_Water_Litres",wastestr ));
-			parameters.add(new NameValuePair("electricity_KwH",electricitystr));
-			parameters.add(new NameValuePair("dataConsumption_Gb",datastr));
+			parameters.add(new KeyValuePair("potable_Water_Litres",waterstr));
+			parameters.add(new KeyValuePair("waste_Water_Litres",wastestr ));
+			parameters.add(new KeyValuePair("electricity_KwH",electricitystr));
+			parameters.add(new KeyValuePair("dataConsumption_Gb",datastr));
 
 
 			iotData.setParameters(parameters );

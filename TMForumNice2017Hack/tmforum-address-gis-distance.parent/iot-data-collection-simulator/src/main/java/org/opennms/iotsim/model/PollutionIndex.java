@@ -195,18 +195,18 @@ public class PollutionIndex {
 		return polutionBanding;
 	}
 
-	public List<NameValuePair> getAirPollutionParameters(){
-		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+	public List<KeyValuePair> getAirPollutionParameters(){
+		List<KeyValuePair> parameters = new ArrayList<KeyValuePair>();
 
-		if (ozone!=null) parameters.add(new NameValuePair("ozone_ug_m3",Double.toString(ozone))); // 8 hr mean
-		if (nitrogenDioxide!=null) parameters.add(new NameValuePair("nitrogenDioxide_ug_m3",Double.toString(nitrogenDioxide))); //1 hr mean
-		if (sulphurDioxide!=null) parameters.add(new NameValuePair("sulphurDioxide_ug_m3",Double.toString(sulphurDioxide))); // 15 min mean
-		if (pM2_5Particles!=null) parameters.add(new NameValuePair("pM2_5Particles_ug_m3",Double.toString(pM2_5Particles))); // 24 hr mean
-		if (pM10Particles!=null) parameters.add(new NameValuePair("pM10Particles_ug_m3", Double.toString(pM10Particles))); // 24 hr mean
+		if (ozone!=null) parameters.add(new KeyValuePair("ozone_ug_m3",Double.toString(ozone))); // 8 hr mean
+		if (nitrogenDioxide!=null) parameters.add(new KeyValuePair("nitrogenDioxide_ug_m3",Double.toString(nitrogenDioxide))); //1 hr mean
+		if (sulphurDioxide!=null) parameters.add(new KeyValuePair("sulphurDioxide_ug_m3",Double.toString(sulphurDioxide))); // 15 min mean
+		if (pM2_5Particles!=null) parameters.add(new KeyValuePair("pM2_5Particles_ug_m3",Double.toString(pM2_5Particles))); // 24 hr mean
+		if (pM10Particles!=null) parameters.add(new KeyValuePair("pM10Particles_ug_m3", Double.toString(pM10Particles))); // 24 hr mean
 
-		parameters.add(new NameValuePair("estimated_UK_Polution_index",Integer.toString(getEstimated_UK_Polution_index()))); //1-10
-		parameters.add(new NameValuePair("estimated_UK_Air_pollution_banding",getPolutionBandingString()));
-		parameters.add(new NameValuePair("estimated_UK_Air_pollution_banding_Int",Integer.toString(getPolutionBandingValue())));
+		parameters.add(new KeyValuePair("estimated_UK_Polution_index",Integer.toString(getEstimated_UK_Polution_index()))); //1-10
+		parameters.add(new KeyValuePair("estimated_UK_Air_pollution_banding",getPolutionBandingString()));
+		parameters.add(new KeyValuePair("estimated_UK_Air_pollution_banding_Int",Integer.toString(getPolutionBandingValue())));
 
 		return parameters;
 	}
