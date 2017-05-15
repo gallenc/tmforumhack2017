@@ -4,10 +4,10 @@ Content-Type: application/json
 	"version": "1.0",
 	"lifecycleStatus": "Active",
 	"validFor": {
-		"startDateTime": "2013-04-19T16:42:23-04:00",
+		"startDateTime": "",
 		"endDateTime": ""
 	},
 	"isRoot": true,
-	"name": "Maintenance",
-	"description": "A category to hold maintanance related products."
+	"name": "Catering",
+	"description": "A category to hold catering products/services."
 }
