@@ -1,0 +1,26 @@
+<h1>Storefront</h1>
+
+<h3>Avaliable Services</h3>
+<h4>Items in basket: {{basket.length}}</h4>
+<table class="table table-bordered">
+    <th>
+        Category
+    </th>
+    <th>
+        Name
+    </th>
+    <th>
+        Price Per Unit
+    </th>
+    <th>
+        Actions
+    </th>
+
+    <tr ng-repeat="product in vm.products | orderBy : 'category_name'">
+        <td>{{product.category_name}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.version}}</td>
+        <td><a class="btn btn-default btn-xs" ng-click="vm.add(product)">Add</a> </td>
+    </tr>
+
+</table>
