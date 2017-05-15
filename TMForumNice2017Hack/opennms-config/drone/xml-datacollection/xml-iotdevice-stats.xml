@@ -16,16 +16,16 @@
     <xml-object name="latitude" type="GAUGE" xpath="geocode/latitude" />
     <xml-object name="longitude" type="GAUGE" xpath="geocode/longitude" />
     <xml-object name="timestamp" type="GAUGE" xpath="timestamp" />
-    <xml-object name="ozone_ug_m3" type="GAUGE" xpath="parameters[@name='ozone_ug_m3']/@value" />
-    <xml-object name="no2_ug_m3" type="GAUGE" xpath="parameters[@name='nitrogenDioxide_ug_m3']/@value" />
-    <xml-object name="so2_ug_m3" type="GAUGE" xpath="parameters[@name='sulphurDioxide_ug_m3']/@value" />
-    <xml-object name="pM2_5_ug_m3" type="GAUGE" xpath="parameters[@name='pM2_5Particles_ug_m3']/@value" />
-    <xml-object name="pM10_ug_m3" type="GAUGE" xpath="parameters[@name='pM10Particles_ug_m3']/@value" />
-    <xml-object name="UKAirPollutnIndex" type="GAUGE" xpath="parameters[@name='estimated_UK_Polution_index']/@value" />
-    <xml-object name="UKAirPollutnBand" type="STRING" xpath="parameters[@name='estimated_UK_Air_pollution_banding']/@value" />
-    <xml-object name="potable_Water_Ltr" type="GAUGE" xpath="parameters[@name='potable_Water_Litres']/@value" />
-    <xml-object name="waste_Water_Ltr" type="GAUGE" xpath="parameters[@name='waste_Water_Litres']/@value" />
-    <xml-object name="electricity_KwH" type="GAUGE" xpath="parameters[@name='electricity_KwH']/@value" />
+    <xml-object name="ozone_ug_m3" type="GAUGE" xpath="parameters[@key='ozone_ug_m3']/@value" />
+    <xml-object name="no2_ug_m3" type="GAUGE" xpath="parameters[@key='nitrogenDioxide_ug_m3']/@value" />
+    <xml-object name="so2_ug_m3" type="GAUGE" xpath="parameters[@key='sulphurDioxide_ug_m3']/@value" />
+    <xml-object name="pM2_5_ug_m3" type="GAUGE" xpath="parameters[@key='pM2_5Particles_ug_m3']/@value" />
+    <xml-object name="pM10_ug_m3" type="GAUGE" xpath="parameters[@key='pM10Particles_ug_m3']/@value" />
+    <xml-object name="UKAirPollutnIndex" type="GAUGE" xpath="parameters[@key='estimated_UK_Polution_index']/@value" />
+    <xml-object name="UKAirPollutnBand" type="STRING" xpath="parameters[@key='estimated_UK_Air_pollution_banding']/@value" />
+    <xml-object name="potable_Water_Ltr" type="GAUGE" xpath="parameters[@key='potable_Water_Litres']/@value" />
+    <xml-object name="waste_Water_Ltr" type="GAUGE" xpath="parameters[@key='waste_Water_Litres']/@value" />
+    <xml-object name="electricity_KwH" type="GAUGE" xpath="parameters[@key='electricity_KwH']/@value" />
   </xml-group>
 
 <!--

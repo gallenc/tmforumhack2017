@@ -8,22 +8,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class NameValuePair {
  
-	public NameValuePair(String name, String value) {
+	public NameValuePair(String key, String value) {
 		super();
-		this.name = name;
+		this.key = key;
 		this.value = value;
 	}
 	
 	public NameValuePair() {
 	}
 
-	String name = null;
+	String key = null;
 	String value = null;
-	public String getName() {
-		return name;
+	public String getKey() {
+		return key;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String key) {
+		this.key = key;
 	}
 	public String getValue() {
 		return value;
