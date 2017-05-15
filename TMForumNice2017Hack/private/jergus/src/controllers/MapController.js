@@ -14,6 +14,10 @@ export default function ($interval, Map, Api) {
             this.updateDrones();
         }, 1000);
 
+        $interval(() => {
+            Api.ping();
+        }, 1000 * 30);
+
         Api.getDrones().then(drones => {
             this.drones = Map.drones(drones);
         });

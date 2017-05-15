@@ -2,6 +2,10 @@ import env from '../.env';
 
 export default function ($http) {
     return {
+        ping() {
+            return $http.get(env.API_URL + '/ping');
+        },
+
         getDroneBase() {
             return $http.get(env.API_URL + '/drone-base').then(response => response.data);
         },
