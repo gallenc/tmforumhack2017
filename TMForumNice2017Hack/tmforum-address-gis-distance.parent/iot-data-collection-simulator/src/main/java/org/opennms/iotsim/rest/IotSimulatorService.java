@@ -41,9 +41,9 @@ import com.vividsolutions.jts.geom.Coordinate;
 @Path("/api/v1")
 public class IotSimulatorService {
 
-	private AtomicInteger water = new AtomicInteger(0);
-	private AtomicInteger waste = new AtomicInteger(0);
-	private AtomicInteger electricity = new AtomicInteger(0);
+	private static AtomicInteger water = new AtomicInteger(0);
+	private static AtomicInteger waste = new AtomicInteger(0);
+	private static AtomicInteger electricity = new AtomicInteger(0);
 	
 
 	/**
@@ -255,9 +255,9 @@ public class IotSimulatorService {
 
 			// fixed point parameters
 
-			String waterstr = Integer.toString(water.getAndAdd(10));
-			String wastestr = Integer.toString(waste.getAndAdd(10));
-			String electricitystr = Integer.toString(electricity.getAndAdd(10)); 
+			String waterstr = Integer.toString(water.getAndAdd(100));
+			String wastestr = Integer.toString(waste.getAndAdd(100));
+			String electricitystr = Integer.toString(electricity.getAndAdd(100)); 
 
 
 			parameters.add(new NameValuePair("potable_Water_Litres",waterstr));

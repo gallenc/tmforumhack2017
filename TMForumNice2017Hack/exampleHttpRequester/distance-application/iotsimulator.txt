@@ -11,4 +11,4 @@ example call http://localhost:8080/iot-data-data-collection-simulator/iotsimulat
 http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/distance
 
 
-http://139.162.227.142:8080/iot-data-data-collection-simulator/gisaddress/api/v1/iotsample/1
+http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsample/1
