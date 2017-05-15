@@ -10,9 +10,11 @@ import 'angular-route';
 import 'angular-ui-router';
 import 'angular-google-maps';
 import 'angular-simple-logger';
+import 'angular-ui-bootstrap'
+
 
 const app = angular.module('app', [
-    'ngRoute', 'ui.router', 'uiGmapgoogle-maps',
+    'ui.bootstrap','ngRoute', 'ui.router', 'uiGmapgoogle-maps',
 ]);
 
 app.config(function ($qProvider) {
