@@ -1,4 +1,4 @@
-package org.opennms.tmforum.address.gis;
+package org.opennms.iotsim.rest.test;
 
 import org.junit.Test;
 import org.opennms.iotsim.rest.ServiceLoader;

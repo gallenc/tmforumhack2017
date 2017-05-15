@@ -1,4 +1,4 @@
-package org.opennms.tmforum.address.gis;
+package org.opennms.iotsim.rest.test;
 
 import static org.junit.Assert.*;
 

@@ -1,0 +1,9 @@
+<model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" date-stamp="2017-05-14T10:26:48.729Z" foreign-source="test-iot" last-import="2017-05-14T10:27:21.216Z">
+   <node foreign-id="test-iot" node-label="iothub">
+      <interface descr="glassfish" ip-addr="139.162.227.142" status="1" snmp-primary="P">
+         <monitored-service service-name="HTTP-8080"/>
+         <monitored-service service-name="ICMP"/>
+         <monitored-service service-name="IotDevice"/>
+      </interface>
+   </node>
+</model-import> 
