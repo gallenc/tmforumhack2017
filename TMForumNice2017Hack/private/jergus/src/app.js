@@ -56,9 +56,6 @@ app.controller('StoreController', require('./controllers/StoreController.js').de
 /**
  * App Services
  */
-
-
-app.service('DroneHTTPService', require('./services/DroneHTTPService.js').default);
 app.service('SalesForceService', require('./services/SalesForceService.js').default);
 app.service('Map', require('./services/Map.js').default);
 app.service('Api', require('./services/Api.js').default);
