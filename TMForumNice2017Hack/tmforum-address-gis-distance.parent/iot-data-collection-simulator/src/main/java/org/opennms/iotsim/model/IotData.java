@@ -93,15 +93,15 @@ public class IotData {
 
 				Double lat = Double.parseDouble(geocode.getLatitude());
 				String latStr = df.format(lat);
-				String[] s = latStr.split("\\.");
-				this.setLatitudeFractionalDigits(s[1]);
-				this.setLatitudeIntegerDigits(s[0]);
+				String[] latSplit = latStr.split("\\.");
+				this.setLatitudeFractionalDigits(latSplit[1]);
+				this.setLatitudeIntegerDigits(latSplit[0]);
 
 				Double lon = Double.parseDouble(geocode.getLongitude());
 				String lonStr = df.format(lon);
-				String[] s2 = latStr.split("\\.");
-				this.setLongitudeFractionalDigits(s[1]);
-				this.setLongitudeIntegerDigits(s[0]);
+				String[] lonSplit = latStr.split("\\.");
+				this.setLongitudeFractionalDigits(lonSplit[1]);
+				this.setLongitudeIntegerDigits(lonSplit[0]);
 			} catch (Exception e){
 				throw new IllegalArgumentException("cannot parse geocode lat and long correctly ",e);
 			}
