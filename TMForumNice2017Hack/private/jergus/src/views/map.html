@@ -6,10 +6,6 @@
     </div>
     <div class="x_content">
 
-        <select ng-options="w as w.name for w in vm.waypaths" ng-model="selectedWaypath"></select>
-
-        <button ng-click="vm.run(selectedWaypath)">run</button>
-
         <ui-gmap-google-map center="vm.map.center" zoom="vm.map.zoom">
             <ui-gmap-polyline ng-repeat="p in vm.polylines" path="p.path" stroke="p.stroke" visible="p.visible" geodesic="p.geodesic" fit="false" icons="p.icons"></ui-gmap-polyline>
 
