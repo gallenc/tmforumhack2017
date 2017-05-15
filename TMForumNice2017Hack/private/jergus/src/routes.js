@@ -17,4 +17,10 @@ export default function ($stateProvider, $urlRouterProvider) {
         templateUrl: '/views/drone.html',
         controller: 'DroneController as vm'
     });
+
+    $stateProvider.state('store', {
+       url: '/store',
+       templateUrl: '/views/store.html',
+       controller: 'StoreController as vm'
+    });
 };

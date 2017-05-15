@@ -1,2 +1,3 @@
 http://139.162.227.142:8080/DSProductInventory/api/productInventory/v2/product/
 http://139.162.227.142:8080/DSProductInventory/subscriber/ui/#/list
+http://139.162.227.142:8080/DSProductInventory/api/admin/product

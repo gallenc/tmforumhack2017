@@ -1,0 +1,33 @@
+POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/productSpecification
+{
+	"version": "1.0",
+	"name": "Pollution Certificate for Low Emmissions",
+	"description": "Permit for Level of Red Pollution Emmissions",
+	"lifecycleStatus": "Active",
+	"validFor": 
+	{
+		"startDateTime": "2017-05-16T08:00.0Z",
+		"endDateTime": "2018-04-01T00:00:00.0Z"
+	},
+
+	"productSpecCharacteristic": 
+	[
+		{
+			"name": "Maximum Pollution Level",
+			"description": "the maximum level of pollution allowed",
+			"valueType": "number",
+			"configurable": false,
+			"productSpecCharacteristicValue": 
+			[
+				{
+					"valueType": "number",
+					"default": true,
+					"value": "10",
+					"unitOfMeasure": "Air Index",
+					"valueFrom": "",
+					"valueTo": ""
+				}				
+			]
+		}
+	]
+}

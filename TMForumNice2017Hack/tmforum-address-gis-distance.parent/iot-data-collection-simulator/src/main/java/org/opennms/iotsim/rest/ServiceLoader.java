@@ -5,6 +5,8 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.opennms.iotsim.model.IotDeviceDAO;
+
 
 public class ServiceLoader {
 
@@ -20,7 +22,14 @@ public class ServiceLoader {
 	public static final String DEFAULT_TMFORUM_ADDRESS_SERVER="http://localhost:8080";
 
 
+	private static IotDeviceDAO iotDeviceDao = new IotDeviceDAO();
+	
 	private static Properties systemProps=null;
+	
+	
+	public static IotDeviceDAO getIotDeviceDao(){
+		return iotDeviceDao;
+	}
 
 	public static Properties getProperties(){
 		if(systemProps==null) try{

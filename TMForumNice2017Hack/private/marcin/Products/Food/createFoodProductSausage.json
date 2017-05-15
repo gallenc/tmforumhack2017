@@ -4,8 +4,8 @@ Content-Type: application/json
 	"productNumber": "I42-340-DX",
 	"version": "2.0",
 	"lastUpdate": "2013-04-19T16:42:23.0Z",
-	"name": "Milk",
-	"description": "Milk",
+	"name": "Sausage",
+	"description": "Sausage",
 	"isBundle": false,
 	"brand": "",
 	"lifecycleStatus": "Active"

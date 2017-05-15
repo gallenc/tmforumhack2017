@@ -10,9 +10,11 @@ import 'angular-route';
 import 'angular-ui-router';
 import 'angular-google-maps';
 import 'angular-simple-logger';
+import 'angular-ui-bootstrap'
+
 
 const app = angular.module('app', [
-    'ngRoute', 'ui.router', 'uiGmapgoogle-maps',
+    'ui.bootstrap','ngRoute', 'ui.router', 'uiGmapgoogle-maps',
 ]);
 
 app.config(function ($qProvider) {
@@ -48,11 +50,13 @@ app.config(require('./routes.js').default);
 app.controller('HomepageController', require('./controllers/HomepageController.js').default);
 app.controller('DroneController', require('./controllers/DroneController.js').default);
 app.controller('MapController', require('./controllers/MapController.js').default);
+app.controller('StoreController', require('./controllers/StoreController').default);
 
 /**
  * App Services
  */
 
+app.service('SalesForceService', require('./services/SalesForceService').default);
 app.service('Map', require('./services/Map.js').default);
 app.service('Api', require('./services/Api.js').default);
 

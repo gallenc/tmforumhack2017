@@ -1,0 +1,106 @@
+POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/productOffering
+{
+	"version": "1.0",
+	"name": "Low Level Pollution Permit",
+	"description": "Low level of pollution permit",
+	"isBundle": true,
+	"lifecycleStatus": "Active",
+	"category": 
+	[
+		{
+	    	"id": "284",
+	    	"version": "1.0",
+	    	"href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/284:(1.0)",
+			"name": "Pollution",
+	  	}
+	],
+
+	"bundledProductOffering": 
+	[
+		{
+			"id": "15",
+			"href": "http://serverlocation:port/productCatalogManagement/productOffering/15",
+			"lifecycleStatus": "Active",
+			"name": "Offering 15"
+		},
+
+		{
+			"id": "64",
+			"href": "http://serverlocation:port/productCatalogManagement/productOffering/64",
+			"lifecycleStatus": "Active",
+			"name": "Offering 64"
+		}
+	],
+
+	"serviceLevelAgreement": 
+	{
+		"id": "28",
+		"href": "http://serverlocation:port/slaManagement/serviceLevelAgreement/28",
+		"name": "Standard SLA"
+	},
+
+	"productSpecification": 
+		{
+			"id": "13",
+			"href": "http://serverlocation:port/productCatalogManagement/productSpecification/13",
+			"version": "2.0",
+			"name": "specification product 1"
+		},
+
+	"serviceCandidate": 
+		{
+			"id": "13",
+			"href": "http://serverlocation:port/serviceCatalogManagement/serviceCandidate/13",
+			"version": "2.0",
+			"name": "specification service 1"
+		},
+
+	"resourceCandidate": 
+		{
+			"id": "13",
+			"href": "http://serverlocation:port/resourceCatalogManagement/resourceCandidate/13",
+			"version": "2.0",
+			"name": "specification resource 1"
+		},
+
+	"productOfferingTerm": 
+	[
+		{
+			"name": "12 Month",
+			"description": "12 month contract",
+			"duration": "12",
+			"validFor": 
+			{
+				"startDateTime": "2013-04-19T16:42:23.0Z",
+				"endDateTime": "2013-06-19T00:00:00.0Z"
+			}
+		}
+	],
+
+	"productOfferingPrice": 
+	[
+		{
+			
+			"name": "Usage Price",
+			"description": "usageprice",
+			"validFor": 
+			{
+				"startDateTime": "2013-04-19T16:42:23.0Z",
+				"endDateTime": "2013-06-19T00:00:00.0Z"
+			},
+
+			"priceType": "usage",
+			"unitOfMeasure": "second",
+			"price": 
+			{
+				"taxIncludedAmount": 12,
+				"dutyFreeAmount": 10,
+				"taxRate": 20,
+				"currencyCode": "EUR",
+				"percentage": 0
+			},
+
+			"recurringChargePeriod": "",
+		}
+	]
+}

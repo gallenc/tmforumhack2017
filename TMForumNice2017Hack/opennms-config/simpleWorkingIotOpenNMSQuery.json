@@ -1,0 +1,18 @@
+POST http://demo1.opennms.co.uk:8980/opennms/rest/measurements/
+Accept: application/json
+Content-Type: application/json
+{
+    "start": 1494835901652,
+    "end": 1494843101652,
+    "step": 10000,
+    "maxrows": 30,
+    "source": [
+        {
+            "aggregation": "AVERAGE",
+            "attribute": "UKAirPollutnIndex",
+            "label": "UKAirPollutnIndex",
+            "resourceId": "nodeSource[test-iot%3A1494711883941].nodeSnmp[]",
+            "transient": "false"
+        }
+    ]
+}

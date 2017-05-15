@@ -1,0 +1,1 @@
+curl https://login.salesforce.com/services/oauth2/token -d "grant_type=password" -d "client_id=3MVG9HxRZv05HarRJbA6ZWwQ8zmyrGk3zdE1BqxFurzhW8v5UG48EAZSGjTGAjddaIy7x2aG2OKTbeIbbIW7f" -d "client_secret=5085724114244904297" -d "username=michael@tmfhack.team7" -d "password=loaderkid96"

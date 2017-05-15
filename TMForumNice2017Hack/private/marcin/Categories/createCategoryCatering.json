@@ -1,0 +1,13 @@
+POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/
+Content-Type: application/json
+{
+	"version": "1.0",
+	"lifecycleStatus": "Active",
+	"validFor": {
+		"startDateTime": "",
+		"endDateTime": ""
+	},
+	"isRoot": true,
+	"name": "Catering",
+	"description": "A category to hold catering products/services."
+}
