@@ -50,15 +50,21 @@ app.config(require('./routes.js').default);
 app.controller('HomepageController', require('./controllers/HomepageController.js').default);
 app.controller('DroneController', require('./controllers/DroneController.js').default);
 app.controller('MapController', require('./controllers/MapController.js').default);
-app.controller('StoreController', require('./controllers/StoreController').default);
+app.controller('StoreController', require('./controllers/StoreController.js').default);
+
 
 /**
  * App Services
  */
 
 app.service('DroneHTTPService', require('./services/DroneHTTPService.js').default);
-app.service('DroneListService', require('./services/DroneListService').default);
-app.service('SalesForceService', require('./services/SalesForceService').default);
+app.service('DroneListService', require('./services/DroneListService.js').default);
+app.service('SalesForceService', require('./services/SalesForceService.js').default);
 app.service('Map', require('./services/Map.js').default);
 app.service('Api', require('./services/Api.js').default);
 
+
+/**
+ * Components
+ */
+app.component('amountModalComponent', require('./components/AmountModalComponet.js').default);
