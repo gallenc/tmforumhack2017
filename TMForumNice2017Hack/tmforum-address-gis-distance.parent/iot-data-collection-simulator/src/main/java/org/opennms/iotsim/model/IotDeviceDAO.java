@@ -1,11 +1,19 @@
 package org.opennms.iotsim.model;
 
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.opennms.iotsim.rest.ServiceLoader;
+
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class IotDeviceDAO   {
 	
@@ -21,6 +29,7 @@ public class IotDeviceDAO   {
 		for (String deviceType :IotDeviceType.ALLOWED_VALUES){
 			iotDevices.put(deviceType, new ConcurrentHashMap<String,IotDevice>());
 		}
+		initialise();
 	}
     
 	
@@ -122,6 +131,22 @@ public class IotDeviceDAO   {
 		}
 	}
 	
-
+	private void initialise(){
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		try {
+			InputStream stream = ServiceLoader.class.getClassLoader().getResourceAsStream("test-device_data.json");
+			
+			if(stream==null){
+				Logger.getLogger(ServiceLoader.class.getName()).log(Level.WARNING, "unable to find test-device_data.json");
+			} else {
+			List<IotDevice> loadedDevices = objectMapper.readValue(stream, new TypeReference<List<IotDevice>>(){});
+			createDevices(loadedDevices);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("error loading test-device_data.json: ",e);
+		}
+		
+	}
 
 }
