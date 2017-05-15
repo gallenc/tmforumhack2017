@@ -2,13 +2,13 @@
 
 namespace App;
 
-use GuzzleHttp\Client;
+use App\HttpClient;
 
 class RawQuery
 {
     protected $client;
 
-    public function __construct(Client $client)
+    public function __construct(HttpClient $client)
     {
         $this->client = $client;
         $this->glassfish = config('app.glassfish');
@@ -17,12 +17,12 @@ class RawQuery
 
     public function getDroneBase()
     {
-        return $this->get($this->glassfish.'/addressManagement/api/addressManagement/v1/address?streetName=DroneBase')[0];
+        return $this->client->get($this->glassfish.'/addressManagement/api/addressManagement/v1/address?streetName=DroneBase')[0];
     }
 
     public function getAddresses()
     {
-        return collect($this->get($this->glassfish.'/addressManagement/api/addressManagement/v1/address'))
+        return collect($this->client->get($this->glassfish.'/addressManagement/api/addressManagement/v1/address'))
             ->reject(function ($address) {
                 return $address['streetName'] == 'DroneBase';
             })->values();
@@ -43,7 +43,7 @@ class RawQuery
 
     public function getWaypathPoints($from, $to)
     {
-        return $this->post($this->glassfish.'/tmforum-address-gis-distance/gisaddress/api/v1/waypath?streetName='.$from['streetName'], $to);
+        return $this->client->post($this->glassfish.'/tmforum-address-gis-distance/gisaddress/api/v1/waypath?streetName='.$from['streetName'], $to);
     }
 
     public function getNodes()
@@ -52,23 +52,9 @@ class RawQuery
             config('app.opennms.username'), config('app.opennms.password'),
         ];
 
-        return collect($this->get($this->opennms.'/opennms/rest/nodes.json', $credentials)['node'])
+        return collect($this->client->get($this->opennms.'/opennms/rest/nodes.json', $credentials)['node'])
             ->filter(function ($node) {
                 return $node['foreignSource'] == 'southampton-port';
             });
-    }
-
-    private function get($url, $auth = [])
-    {
-        $response = $this->client->request('GET', $url, compact('auth'))->getBody();
-
-        return json_decode($response, true);
-    }
-
-    private function post($url, $json)
-    {
-        $response = $this->client->request('POST', $url, compact('json'))->getBody();
-
-        return json_decode($response, true);
     }
 }

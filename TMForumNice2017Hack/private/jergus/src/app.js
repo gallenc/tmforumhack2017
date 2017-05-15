@@ -53,8 +53,6 @@ app.controller('MapController', require('./controllers/MapController.js').defaul
  * App Services
  */
 
-app.service('DroneHTTPService', require('./services/DroneHTTPService.js').default);
-app.service('DroneListService', require('./services/DroneListService').default);
 app.service('Map', require('./services/Map.js').default);
 app.service('Api', require('./services/Api.js').default);
 

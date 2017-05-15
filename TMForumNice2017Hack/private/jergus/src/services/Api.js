@@ -9,5 +9,9 @@ export default function ($http) {
         getWaypaths() {
             return $http.get(env.API_URL + '/waypaths').then(response => response.data);
         },
+
+        getDrones() {
+            return $http.get(env.API_URL + '/drones').then(response => response.data);
+        },
     };
 };
