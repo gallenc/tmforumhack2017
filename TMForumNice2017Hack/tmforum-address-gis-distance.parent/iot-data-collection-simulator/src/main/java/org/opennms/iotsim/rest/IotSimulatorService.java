@@ -44,6 +44,7 @@ public class IotSimulatorService {
 	private static AtomicInteger water = new AtomicInteger(0);
 	private static AtomicInteger waste = new AtomicInteger(0);
 	private static AtomicInteger electricity = new AtomicInteger(0);
+	private static AtomicInteger data = new AtomicInteger(0);
 	
 
 	/**
@@ -258,11 +259,13 @@ public class IotSimulatorService {
 			String waterstr = Integer.toString(water.getAndAdd(100));
 			String wastestr = Integer.toString(waste.getAndAdd(100));
 			String electricitystr = Integer.toString(electricity.getAndAdd(100)); 
+			String datastr = Integer.toString(data.getAndAdd(100)); 
 
 
 			parameters.add(new NameValuePair("potable_Water_Litres",waterstr));
 			parameters.add(new NameValuePair("waste_Water_Litres",wastestr ));
 			parameters.add(new NameValuePair("electricity_KwH",electricitystr));
+			parameters.add(new NameValuePair("dataConsumption_Gb",datastr));
 
 
 			iotData.setParameters(parameters );
