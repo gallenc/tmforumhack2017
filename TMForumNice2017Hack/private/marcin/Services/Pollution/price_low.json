@@ -1,0 +1,25 @@
+{
+	"productOfferingPrice":	
+	[
+		{
+			"name": "lowprice",
+			"description": "Low emission price",
+			"validFor": 
+			{
+				"startDateTime": "",
+				"endDateTime": "2018-06-19T00:00:00.0Z"
+			},
+			"priceType": "recurring",
+			"unitOfMeasure": "",
+			"price":
+			{
+				"taxIncludedAmount": 12,
+				"dutyFreeAmount": 10,
+				"taxRate": 20,
+				"currencyCode": "EUR",
+				"percentacge": 0
+			},
+			"recurringChargePeriod": "monthly"
+		}
+	]
+}

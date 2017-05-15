@@ -1,35 +1,53 @@
+POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/catalog
+Content-Type: application/json
 {
-	"id": "1",
-	"href": "http://serverlocation:port/catalogManagement/catalog/10",
-	"version": "2.0",
-	"lastUpdate": "2013-­‐04-­‐19T16:42:23.0Z",
-	"type": "Catalog",
+	"version": "1.0",
+	"lastUpdate": "",
+	"type": "Service Catalog",
 	"category": 
 	[
 		{
-			"id": "1",
-			"href": "http://serverlocation:port/catalogManagement/category/1",
-			"version": "2.0",
-			"name": "Cloud Offerings"
-		}
+		    "id": "280",
+		    "version": "1.0",
+		    "href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/280:(1.0)",
+		    "name": "Catering",
+		    "description": "A category to hold catering products/services."
+		  },
+		  {
+		    "id": "282",
+		    "version": "1.0",
+		    "href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/282:(1.0)",
+		    "name": "Communication",
+		    "description": "A category to hold comms products/services."
+		  },
+		  {
+		    "id": "284",
+		    "version": "1.0",
+		    "href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/284:(1.0)",
+		    "name": "Pollution",
+		    "description": "A category to hold pollution related products/services."
+		  },
+		  {
+		    "id": "286",
+		    "version": "1.0",
+		    "href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/286:(1.0)",
+		    "name": "Waste",
+		    "description": "A category to hold waste related products/services."
+		  },
+		  {
+		    "id": "288",
+		    "version": "1.0",
+		    "href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/288:(1.0)",
+		    "name": "Water",
+		    "description": "A category to hold water related products/services."
+		  }
+		
 	],
-	"name":	"Catalog Wholesale Business",
+	"name":	"Port Services",
 	"lifecycleStatus": "Active",
 	"validFor":
 	{
-		"startDateTime": "2013-­‐04-­‐19T16:42:23.0Z",
-		"endDateTime": "2013-­‐06-­‐19T00:00:00.0Z"
-	},
-	"relatedParty":
-	[
-		{
-			"id": "1234",
-			"href": "http://serverLocation:port/partyManagement/partyRole/1234",
-			"role": "Owner"
-		},
-		{
-			"role": "Reviser",
-			"name": "Roger Collins"
-		}
-	]
+		"startDateTime": "",
+		"endDateTime": "2018-06-19T00:00:00.0Z"
+	}
 }
