@@ -48,6 +48,7 @@ app.config(require('./routes.js').default);
 app.controller('HomepageController', require('./controllers/HomepageController.js').default);
 app.controller('DroneController', require('./controllers/DroneController.js').default);
 app.controller('MapController', require('./controllers/MapController.js').default);
+app.controller('StoreController', require('./controllers/StoreController').default);
 
 /**
  * App Services
@@ -55,6 +56,7 @@ app.controller('MapController', require('./controllers/MapController.js').defaul
 
 app.service('DroneHTTPService', require('./services/DroneHTTPService.js').default);
 app.service('DroneListService', require('./services/DroneListService').default);
+app.service('SalesForceService', require('./services/SalesForceService').default);
 app.service('Map', require('./services/Map.js').default);
 app.service('Api', require('./services/Api.js').default);
 
