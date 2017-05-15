@@ -57,7 +57,7 @@ app.controller('StoreController', require('./controllers/StoreController.js').de
  * App Services
  */
 
-<<<<<<< HEAD
+
 app.service('DroneHTTPService', require('./services/DroneHTTPService.js').default);
 app.service('DroneListService', require('./services/DroneListService.js').default);
 app.service('SalesForceService', require('./services/SalesForceService.js').default);
