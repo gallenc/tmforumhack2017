@@ -17,7 +17,7 @@ public class IotDeviceDAO   {
 	/* (non-Javadoc)
 	 * @see org.opennms.iotsim.model.IotDeviceApi#IotService()
 	 */
-	public void IotService(){
+	public IotDeviceDAO(){
 		for (String deviceType :IotDeviceType.ALLOWED_VALUES){
 			iotDevices.put(deviceType, new ConcurrentHashMap<String,IotDevice>());
 		}
