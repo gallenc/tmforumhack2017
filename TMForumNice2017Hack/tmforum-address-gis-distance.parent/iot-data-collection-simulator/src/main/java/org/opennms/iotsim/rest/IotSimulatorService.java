@@ -27,7 +27,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.opennms.iotsim.model.IotData;
 import org.opennms.iotsim.model.NameValuePair;
-import org.opennms.iotsim.model.PolutionIndex;
+import org.opennms.iotsim.model.PollutionIndex;
 import org.opennms.tmforum.address.gis.rest.model.DistanceMessage;
 import org.opennms.tmforum.address.model.Address;
 import org.opennms.tmforum.address.model.GeoCode;
@@ -236,14 +236,15 @@ public class IotSimulatorService {
 
 			// latitude_start=50.889311&longitude_start=-1.391915
 			geocode.setLatitude("50.889311");
-
 			geocode.setLongitude("-1.391915");
 			iotData.setGeocode(geocode );
 
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
-           PolutionIndex polutionIndex= new PolutionIndex();
-           parameters.addAll(polutionIndex.getParameters());
+           PollutionIndex polutionIndex= new PollutionIndex();
+           polutionIndex.setNormalisedMeasures(10);
+           
+           parameters.addAll(polutionIndex.getAirPollutionParameters());
 
 			// fixed point parameters
 			parameters.add(new NameValuePair("potable_Water_Litres","100.00"));
@@ -265,10 +266,6 @@ public class IotSimulatorService {
 		}
 
 		return response;
-
-
-
-
 
 	}
 
