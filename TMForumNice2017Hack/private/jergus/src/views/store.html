@@ -1,26 +1,33 @@
-<h1>Storefront</h1>
+<h1 class="text-center"> Port Services </h1>
+<div class="row">
+    <div  ng-repeat="product in vm.products | orderBy:'category_name'"  class="col-md-4 col-sm-4 col-xs-4">
+        <div class="col-sm-12 col-md-12 product">
+            <div class="thumbnail">
+                <img src="{{product.image}}" class="img-responsive">
+                <div class="caption">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 product-details">
+                            <h3 class="text-center">{{product.name}}</h3>
+                            <p>{{product.description}}</p>
+                        </div>
+                        <div class="col-md-12 col-xs-12 price">
+                            <h3>{{product.version}}</h3>
+                        </div>
+                    </div>
+                    <div class="row">
 
-<h3>Avaliable Services</h3>
-<h4>Items in basket: {{basket.length}}</h4>
-<table class="table table-bordered">
-    <th>
-        Category
-    </th>
-    <th>
-        Name
-    </th>
-    <th>
-        Price Per Unit
-    </th>
-    <th>
-        Actions
-    </th>
+                        <button type="button" class="btn btn-primary btn-warning btn-block"> <span glyphicon glyphicon-shopping-cart></span> Buy</button>
 
-    <tr ng-repeat="product in vm.products | orderBy : 'category_name'">
-        <td>{{product.category_name}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.version}}</td>
-        <td><a class="btn btn-default btn-xs" ng-click="vm.add(product)">Add</a> </td>
-    </tr>
 
-</table>
+                    </div>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
