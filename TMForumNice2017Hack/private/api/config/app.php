@@ -3,6 +3,7 @@
 return [
 
     'glassfish' => env('GLASSFISH_URL'),
+    'drone_api' => env('DRONE_API_URL'),
 
     'opennms' => [
         'url' => env('OPENNMS_URL'),
