@@ -1,0 +1,97 @@
+POST http://demo1.opennms.co.uk:8980/opennms/rest/measurements/
+Accept: application/json
+Content-Type: application/json
+{
+	"start": 1494835901652,
+	"end": 1494843101652,
+	"step": 10000,
+	"maxrows": 30,
+	"source": [
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "latitude",
+			"label": "latitude",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "longitude",
+			"label": "longitude",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "timestamp",
+			"label": "timestamp",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "ozone_ug_m3",
+			"label": "ozone_ug_m3",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "no2_ug_m3",
+			"label": "no2_ug_m3",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "so2_ug_m3",
+			"label": "so2_ug_m3",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "pM2_5_ug_m3",
+			"label": "pM2_5_ug_m3",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "pM10_ug_m3",
+			"label": "pM10_ug_m3",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "UKAirPollutnIndex",
+			"label": "UKAirPollutnIndex",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "potable_Water_Ltr",
+			"label": "potable_Water_Ltr",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "waste_Water_Ltr",
+			"label": "waste_Water_Ltr",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		},
+		{
+			"aggregation": "AVERAGE",
+			"attribute": "electricity_KwH",
+			"label": "electricity_KwH",
+			"resourceId": "nodeSource[test-iot:1494711883941].nodeSnmp[]",
+			"transient": "false"
+		}
+	]
+}
+
+  

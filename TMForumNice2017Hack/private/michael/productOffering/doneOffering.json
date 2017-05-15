@@ -1,0 +1,47 @@
+POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/productOffering
+{
+	"version": "1.0",
+	"name": "Low Level Pollution Permit",
+	"description": "Low level of pollution permit",
+	"isBundle": true,
+	"lifecycleStatus": "Active",
+	"category": 
+	[
+		{
+	    	"id": "284",
+	    	"version": "1.0",
+	    	"href": "http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/category/284:(1.0)",
+			"name": "Pollution",
+	  	}
+	],
+
+	"productSpecification": 
+		{
+			"id": "13",
+			"href": "http://serverlocation:port/productCatalogManagement/productSpecification/13",
+			"version": "2.0",
+			"name": "specification product 1"
+		},
+
+	"productOfferingPrice": 
+	[
+		{
+			
+			"name": "Usage Price",
+			"description": "usageprice",
+
+			"priceType": "usage",
+			"unitOfMeasure": "second",
+			"price": 
+			{
+				"taxIncludedAmount": 0,
+				"dutyFreeAmount": 0,
+				"taxRate": 20,
+				"currencyCode": "EUR",
+				"percentage": 0
+			},
+
+			"recurringChargePeriod": "true",
+		}
+	]
+}

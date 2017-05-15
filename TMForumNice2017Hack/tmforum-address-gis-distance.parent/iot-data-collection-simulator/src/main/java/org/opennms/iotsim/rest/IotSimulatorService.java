@@ -9,6 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -40,9 +41,10 @@ import com.vividsolutions.jts.geom.Coordinate;
 @Path("/api/v1")
 public class IotSimulatorService {
 
-
-
-
+	private static AtomicInteger water = new AtomicInteger(0);
+	private static AtomicInteger waste = new AtomicInteger(0);
+	private static AtomicInteger electricity = new AtomicInteger(0);
+	
 
 	/**
 	 * http://localhost:8080/tmforum-address-gis-distance/gisaddress/api/v1/closestAddresses?latitude_start=50.889311&longitude_start=-1.391915&maxReturnAddresses=5
@@ -217,22 +219,27 @@ public class IotSimulatorService {
 		return getIotSample(id);
 	}
 
+
+
 	@GET
 	@Path("/iotsample/{id}")
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Response getIotSample(@PathParam("id") String id){
-
 
 		Response response = null;
 
 		try {
 			IotData iotData = new  IotData();
 			iotData.setId(id);
-			
+
 			iotData.setLabel("label_"+id);
-			
-			iotData.setTimestamp(Long.toString(new Date().getTime()));
+
+			long timestamp = new Date().getTime();
+			iotData.setTimestamp(Long.toString(timestamp));
 			GeoCode geocode = new GeoCode();
+			
+			//double offset = Math.floorMod(timestamp, 1000) / 10000 ;
+			
 
 			// latitude_start=50.889311&longitude_start=-1.391915
 			geocode.setLatitude("50.889311");
@@ -241,16 +248,22 @@ public class IotSimulatorService {
 
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 
-           PollutionIndex polutionIndex= new PollutionIndex();
-           polutionIndex.setNormalisedMeasures(10);
-           
-           parameters.addAll(polutionIndex.getAirPollutionParameters());
+			PollutionIndex polutionIndex= new PollutionIndex();
+			polutionIndex.setNormalisedMeasures(10);
+
+			parameters.addAll(polutionIndex.getAirPollutionParameters());
 
 			// fixed point parameters
-			parameters.add(new NameValuePair("potable_Water_Litres","100.00"));
-			parameters.add(new NameValuePair("waste_Water_Litres","100.00"));
-			parameters.add(new NameValuePair("electricity_KwH","100.00"));
-			
+
+			String waterstr = Integer.toString(water.getAndAdd(100));
+			String wastestr = Integer.toString(waste.getAndAdd(100));
+			String electricitystr = Integer.toString(electricity.getAndAdd(100)); 
+
+
+			parameters.add(new NameValuePair("potable_Water_Litres",waterstr));
+			parameters.add(new NameValuePair("waste_Water_Litres",wastestr ));
+			parameters.add(new NameValuePair("electricity_KwH",electricitystr));
+
 
 			iotData.setParameters(parameters );
 			response = Response.ok(iotData).build();
