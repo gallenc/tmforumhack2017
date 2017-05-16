@@ -45,7 +45,77 @@ import com.vividsolutions.jts.geom.Coordinate;
 public class IotSimulatorService {
 
 	@GET
-	@Path("/iotsample/")
+	@Path("/iotsamplelabel")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	public Response getIotSampleDeviceLabelQuery(@QueryParam("label") String label){
+		return getIotDeviceLabelQuery(label);
+	}
+
+	@GET
+	@Path("/iotsamplelabel/{label}")
+	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+	public Response getIotDeviceLabelQuery(@PathParam("label") String label){
+		Response response = null;
+
+		try {
+			if (label==null) throw new IllegalArgumentException("cannot use null device label="+label);
+
+			IotData iotData=null;
+
+			IotDeviceDAO iotDeviceDAO = ServiceLoader.getIotDeviceDao();
+
+			List<IotDevice> iotDevices = iotDeviceDAO.getDevices(null); // all devices
+
+			IotDevice iotDevice=null;
+			for (IotDevice device:iotDevices){
+				if(label.equals(device.getLabel())) {
+					iotDevice=device;
+					break;
+				}
+			}
+			if (iotDevice==null) throw new IllegalArgumentException("cannot get sample for unknown device label="+label);
+
+			iotData= getSample(iotDevice);
+
+			response = Response.ok(iotData).build();
+		} catch (Exception exception) {
+			Status status = Status.BAD_REQUEST;
+			int code = 0;
+			String message = "error";
+			String link = null;
+			StatusMessage statusmsg = new StatusMessage(status.getStatusCode(), code, message, link, exception.getMessage());
+			response = Response.status(status).entity(statusmsg).build();
+		}
+
+		return response;
+
+	}
+
+
+	IotData getSample(IotDevice iotDevice){
+
+		IotData	iotData=null;
+		String deviceType = iotDevice.getIotDevicetype();
+
+		if(IotDeviceType.FIXED.equals(deviceType)) {
+
+			iotData = ServiceLoader.getFixedDeviceSimulator().getIotSample(iotDevice);
+
+		} else if(IotDeviceType.MOBILE.equals(deviceType)) {
+
+			iotData = ServiceLoader.getMobiledevicesimulator().getIotSample(iotDevice);
+
+		} else if(IotDeviceType.SIMULATION.equals(deviceType)) {
+
+			iotData = ServiceLoader.getSimulationDeviceSimulator().getIotSample(iotDevice);
+
+		} else  throw new IllegalStateException("unknow device type "+deviceType+ " for device label="+iotDevice.getLabel());
+
+		return iotData;
+	}
+
+	@GET
+	@Path("/iotsample")
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
 	public Response getIotSampleQuery(@QueryParam("id") String id){
 		return getIotSample(id);
@@ -62,30 +132,30 @@ public class IotSimulatorService {
 
 		try {
 			if (id==null) throw new IllegalArgumentException("cannot use null device id="+id);
-			
+
 			IotData iotData=null;
-			
+
 			IotDeviceDAO iotDeviceDAO = ServiceLoader.getIotDeviceDao();
-			
+
 			IotDevice iotDevice = iotDeviceDAO.getDevice(id);
 			if (iotDevice==null) throw new IllegalArgumentException("cannot get sample for unknown device id="+id);
-			
+
 			String deviceType = iotDevice.getIotDevicetype();
-	
+
 			if(IotDeviceType.FIXED.equals(deviceType)) {
-				
+
 				iotData = ServiceLoader.getFixedDeviceSimulator().getIotSample(iotDevice);
-				
+
 			} else if(IotDeviceType.MOBILE.equals(deviceType)) {
-				
+
 				iotData = ServiceLoader.getMobiledevicesimulator().getIotSample(iotDevice);
-				
+
 			} else if(IotDeviceType.SIMULATION.equals(deviceType)) {
-				
+
 				iotData = ServiceLoader.getSimulationDeviceSimulator().getIotSample(iotDevice);
-				
+
 			} else  throw new IllegalStateException("unknow device type "+deviceType+ " for device id="+id);
-			
+
 			response = Response.ok(iotData).build();
 		}
 

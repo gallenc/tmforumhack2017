@@ -26,7 +26,7 @@ public class IotDevice {
 
 	GeoCode geocode = new GeoCode();
 	
-	Date timestamp = new Date();
+	String timestamp = Long.toString(new Date().getTime());
 	
 	List<KeyValuePair> parameters = new ArrayList<KeyValuePair>();
 	
@@ -77,12 +77,12 @@ public class IotDevice {
 		this.geocode = geocode;
 	}
 
-	public Date getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
 	@XmlElement
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 

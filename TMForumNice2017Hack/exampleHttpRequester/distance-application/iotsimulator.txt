@@ -10,5 +10,14 @@ http://139.162.227.142:8080/iot-data-data-collection-simulator/
 example call http://localhost:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/distance?latitude_start=50.889311&longitude_start=-1.391915&latitude_finish=50.891099&longitude_finish=-1.390925
 http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/distance
 
-
+## sample api
 http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsample/1
+http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsamplelabel/fixedIoT
+http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsamplelabel?label=fixedIoT
+
+http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsamplelabel?label=fixedIoT
+
+## device api
+http://localhost:8080/iot-data-data-collection-simulator/iotsimulator/device/api/v1/devices?deviceType=mobile
+http://localhost:8080/iot-data-data-collection-simulator/iotsimulator/device/api/v1/devices?deviceType=fixed
+http://localhost:8080/iot-data-data-collection-simulator/iotsimulator/device/api/v1/devices?deviceType=simulation
