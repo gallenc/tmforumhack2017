@@ -1,0 +1,184 @@
+{
+   "id":"42",
+   "href":"http://serverlocation:port/orderManagement/productOrder/42",
+   "externalId":"NiceNameForTheConsumer_42",
+   "priority":"1",
+   "description":"A wonderful 42 order for brand new products",
+   "category":"residential",
+   "state":"InProgress",
+   "orderDate":"2013-04-12T16:42:23-04:00",
+   "completionDate":"2013-04-19T16:42:23-04:00",
+   "requestedStartDate":"2013-04-12T16:42:23-04:00",
+   "requestedCompletionDate":"2013-04-19T16:42:23-04:00",
+   "expectedCompletionDate":"2013-04-19T16:42:23-04:00",
+   "notificationContact":"emailAddr-myAddress@hotmail.com",
+   "note":[
+      {
+         "text":"A free text detailing the note",
+         "date":"2013-04-12T16:42:23-04:00",
+         "author":"name"
+      }
+   ],
+   "relatedParty":[
+      {
+         "role":"customer",
+         "id":"345221",
+         "href":"http://serverlocation:port/partyManagement/customer/345221",
+         "name":"John Doe"
+      },
+      {
+         "role":"partner",
+         "id":"42",
+         "href":"http://serverlocation:port/partyManagement/partner/42"
+      },
+      {
+         "role":"seller",
+         "id":"4563",
+         "href":"http://serverlocation:port/partnerManagement/partner/4563"
+      }
+   ],
+   "orderItem":[
+      {
+         "id":"1",
+         "action":"add",
+         "state":"Acknowledged",
+         "billingAccount":[{
+               "id":"123456",
+               "href":"http://serverlocation:port/billingManagement/billingAccount/123456"
+         }],
+
+         "appointment":"http://www.doodle.com/1WCV5647438",
+         "productOffering":{
+            "id":"42",
+            "href":"http: //serverlocation: port/catalogManagement/productOffering/42"
+         },
+         "product":{
+	         "place":{
+	            "href":"http://map.google.com/.../1234112GDE",
+	            "role":"DeliveryPlace"
+	         },
+            "productCharacteristic":[
+               {
+                  "name":"Colour",
+                  "value":"White"
+               },
+               {
+                  "name":"Memory",
+                  "value":"16"
+               }
+            ]
+         }
+      },
+      {
+         "id":"2",
+         "action":"modify",
+         "state":"InProgress",
+         "productOffering":{
+            "id":"43",
+            "href":"http: //serverlocation: port/catalogManagement/productOffering/43"
+         },
+         "product":{
+            "id":"456",
+            "href":"http: //serverlocation: port/inventoryManagement/product/456",
+            "productCharacteristic":[
+               {
+                  "name":"anotherCharacteristic",
+                  "value":"itsValue"
+               }
+            ],
+            "relatedParty":[
+               {
+                  "role":"user",
+                  "id":"5667443",
+                  "href":"http://serverlocation:port/partyManagement/user/5667443",
+                  "name":"Jimmy Doe"
+               }
+            ]
+         }
+      },
+      {
+         "id":"3",
+         "action":"add",
+         "state":"InProgress",
+         "billingAccount":[{
+               "id":"123456",
+               "href":"http://serverlocation:port/billingManagement/billingAccount/123456"
+         }],
+         "productOffering":{
+            "id":"51",
+            "href":"http: //serverlocation: port/catalogManagement/productOffering/51"
+         },
+         "product":{
+            "id":"511",
+            "href":"http: //serverlocation: port/inventoryManagement/product/456",
+            "productCharacteristic":[
+               {
+                  "name":"anotherCharacteristic",
+                  "value":"itsValue"
+               }
+            ],
+            "productRelationship":[
+               {
+                  "type":"reliesOn",
+                  "product":{
+                     "productCharacteristic":[
+                        {
+                           "name":"MSISDN",
+                           "value":"003467488299002"
+                        }
+                     ]
+                  }
+               }
+            ]
+         }
+      },
+      {
+         "id":"4",
+         "action":"add",
+         "state":"InProgress",
+         "billingAccount":[{
+               "id":"1789",
+               "href":"http://serverlocation:port/billingManagement/billingAccount/1789"
+         }],
+         "productOffering":{
+            "id":"44",
+            "href":"http://serverlocation:port/catalogManagement/productOffering/Bundle44",
+            "bundledProductOffering":[
+               {
+                     "id":" BundledPSTN444",
+                     "href":"http://serverlocation:port/catalogManagement/productOffering/BundledPSTN444"                      },
+
+               {
+                     "id":" Bundled Mobile443",
+                     "href":"http://serverlocation:port/catalogManagement/productOffering/BundledMobile443"                      }
+            ]
+         },
+         "product":{
+            "productRelationship":[
+               {
+                  "type":"bundled",
+                  "product":{
+                     "productCharacteristic":[
+                        {
+                           "name":"PSTNNumber",
+                           "value":"003427488299002"
+                        }
+                     ]
+                  }
+               },
+               {
+                  "type":"bundled",
+                  "product":{
+                     "productCharacteristic":[
+                        {
+                           "name":"MobileNumber",
+                           "value":"003464553000300"
+                        }
+                     ]
+                  }
+               }
+            ]
+         }
+      }
+   ]
+}
