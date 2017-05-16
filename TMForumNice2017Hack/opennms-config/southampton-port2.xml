@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="southampton-port">
+    <node node-label="Berth_30_Sensor" foreign-id="Berth_30_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="latitude" value="50.889"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address2" value="Multi Deck RoRo Terminal"/>
+        <asset name="longitude" value="-1.392"/>
+        <asset name="address1" value="Itchen Quays"/>
+        <asset name="building" value="30"/>
+    </node>
+    <node node-label="Berth_31_Sensor" foreign-id="Berth_31_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="latitude" value="50.889"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address2" value="Multi Deck RoRo Terminal"/>
+        <asset name="longitude" value="-1.392"/>
+        <asset name="address1" value="Itchen Quays"/>
+        <asset name="building" value="31"/>
+    </node>
+    <node node-label="Berth_32_Sensor" foreign-id="Berth_32_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address2" value="Multi Deck RoRo Terminal"/>
+        <asset name="longitude" value="-1.391"/>
+        <asset name="latitude" value="50.891"/>
+        <asset name="building" value="32"/>
+        <asset name="address1" value="Itchen Quays"/>
+    </node>
+    <node node-label="Berth_33_Sensor" foreign-id="Berth_33_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address2" value="Multi Deck RoRo Terminal"/>
+        <asset name="longitude" value="-1.391"/>
+        <asset name="latitude" value="50.891"/>
+        <asset name="building" value="33"/>
+        <asset name="address1" value="Itchen Quays"/>
+    </node>
+    <node node-label="Berth_34_Sensor" foreign-id="Berth_34_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="latitude" value="50.886"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address2" value="Multi Deck RoRo Terminal"/>
+        <asset name="longitude" value="-1.393"/>
+        <asset name="address1" value="Itchen Quays"/>
+        <asset name="building" value="34"/>
+    </node>
+    <node node-label="Berth_35_Sensor" foreign-id="Berth_35_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="longitude" value="-1.393"/>
+        <asset name="address1" value="Itchen Quays"/>
+        <asset name="building" value="35"/>
+        <asset name="latitude" value="50.885"/>
+        <asset name="address2" value="Grain Terminal"/>
+    </node>
+    <node node-label="Berth_36_Sensor" foreign-id="Berth_36_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="36"/>
+        <asset name="longitude" value="-1.393"/>
+        <asset name="address1" value="Itchen Quays"/>
+        <asset name="latitude" value="50.884"/>
+    </node>
+    <node node-label="Berth_20_Sensor" foreign-id="Berth_20_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="latitude" value="50.892"/>
+        <asset name="longitude" value="-1.396"/>
+        <asset name="address1" value="Empress Dock"/>
+        <asset name="building" value="20"/>
+    </node>
+    <node node-label="Berth_21_Sensor" foreign-id="Berth_21_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="latitude" value="50.891"/>
+        <asset name="building" value="21"/>
+        <asset name="longitude" value="-1.396"/>
+        <asset name="address1" value="Empress Dock"/>
+    </node>
+    <node node-label="Berth_22_Sensor" foreign-id="Berth_22_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="latitude" value="50.89"/>
+        <asset name="building" value="22"/>
+        <asset name="longitude" value="-1.396"/>
+        <asset name="address1" value="Empress Dock"/>
+    </node>
+    <node node-label="Berth_23_Sensor" foreign-id="Berth_23_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="latitude" value="50.889"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Empress Dock"/>
+        <asset name="building" value="23"/>
+        <asset name="longitude" value="-1.395"/>
+    </node>
+    <node node-label="Berth_24_Sensor" foreign-id="Berth_24_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="latitude" value="50.889"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Empress Dock"/>
+        <asset name="building" value="24"/>
+        <asset name="longitude" value="-1.394"/>
+    </node>
+    <node node-label="Berth_25_Sensor" foreign-id="Berth_25_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="25"/>
+        <asset name="latitude" value="50.89"/>
+        <asset name="address1" value="Empress Dock"/>
+        <asset name="longitude" value="-1.394"/>
+    </node>
+    <node node-label="Berth_26_Sensor" foreign-id="Berth_26_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="26"/>
+        <asset name="latitude" value="50.89"/>
+        <asset name="address1" value="Empress Dock"/>
+        <asset name="longitude" value="-1.394"/>
+    </node>
+    <node node-label="Berth_27_Sensor" foreign-id="Berth_27_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="27"/>
+        <asset name="latitude" value="50.892"/>
+        <asset name="longitude" value="-1.396"/>
+        <asset name="address1" value="Empress Dock"/>
+    </node>
+    <node node-label="Berth_29_Sensor" foreign-id="Berth_29_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="building" value="29"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="longitude" value="-1.39"/>
+        <asset name="address1" value="Test Quays (Eastern Docks)"/>
+        <asset name="address2" value="RoRo Terminal"/>
+        <asset name="latitude" value="50.893"/>
+    </node>
+    <node node-label="Berth_37_Sensor" foreign-id="Berth_37_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="37"/>
+        <asset name="address1" value="Dock Head"/>
+        <asset name="longitude" value="-1.394"/>
+        <asset name="latitude" value="50.883"/>
+    </node>
+    <node node-label="Berth_38_Sensor" foreign-id="Berth_38_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="38"/>
+        <asset name="address1" value="Test Quays (Eastern Docks)"/>
+        <asset name="address2" value="QEII Cruise Terminal"/>
+        <asset name="longitude" value="-1.396"/>
+        <asset name="latitude" value="50.884"/>
+    </node>
+    <node node-label="Berth_39_Sensor" foreign-id="Berth_39_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Test Quays (Eastern Docks)"/>
+        <asset name="building" value="39"/>
+        <asset name="longitude" value="-1.397"/>
+        <asset name="address2" value="QEII Cruise Terminal"/>
+        <asset name="latitude" value="50.885"/>
+    </node>
+    <node node-label="Berth_40_Sensor" foreign-id="Berth_40_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="latitude" value="50.886"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Test Quays (Eastern Docks)"/>
+        <asset name="longitude" value="-1.397"/>
+        <asset name="building" value="40"/>
+    </node>
+    <node node-label="Berth_41_Sensor" foreign-id="Berth_41_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="latitude" value="50.887"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Test Quays (Eastern Docks)"/>
+        <asset name="building" value="41"/>
+        <asset name="longitude" value="-1.399"/>
+    </node>
+    <node node-label="Berth_42_Sensor" foreign-id="Berth_42_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="address2" value="Rail Terminal"/>
+        <asset name="latitude" value="50.889"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Test Quays (Eastern Docks)"/>
+        <asset name="longitude" value="-1.4"/>
+        <asset name="building" value="42"/>
+    </node>
+    <node node-label="Berth_48_Sensor" foreign-id="Berth_48_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="48"/>
+        <asset name="address1" value="Test Quays (Eastern Docks)"/>
+        <asset name="latitude" value="50.891"/>
+        <asset name="address2" value="Ocean Cruise Terminal"/>
+        <asset name="longitude" value="-1.401"/>
+    </node>
+    <node node-label="Berth_49_Sensor" foreign-id="Berth_49_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="49"/>
+        <asset name="address1" value="Test Quays (Eastern Docks)"/>
+        <asset name="latitude" value="50.892"/>
+        <asset name="address2" value="Ocean Cruise Terminal"/>
+        <asset name="longitude" value="-1.401"/>
+    </node>
+    <node node-label="Berth_43_Sensor" foreign-id="Berth_43_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="latitude" value="50.89"/>
+        <asset name="building" value="43"/>
+        <asset name="address1" value="Ocean Dock"/>
+        <asset name="longitude" value="-1.399"/>
+    </node>
+    <node node-label="Berth_44_Sensor" foreign-id="Berth_44_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="latitude" value="50.892"/>
+        <asset name="building" value="44"/>
+        <asset name="address1" value="Ocean Dock"/>
+        <asset name="longitude" value="-1.399"/>
+    </node>
+    <node node-label="Berth_45_Sensor" foreign-id="Berth_45_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="45"/>
+        <asset name="address1" value="Ocean Dock"/>
+        <asset name="longitude" value="-1.399"/>
+        <asset name="latitude" value="50.894"/>
+    </node>
+    <node node-label="Berth_46_Sensor" foreign-id="Berth_46_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="longitude" value="-1.4"/>
+        <asset name="address2" value="Ocean Cruise Terminal"/>
+        <asset name="address1" value="Ocean Dock"/>
+        <asset name="building" value="46"/>
+        <asset name="latitude" value="50.893"/>
+    </node>
+    <node node-label="Berth_47_Sensor" foreign-id="Berth_47_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="47"/>
+        <asset name="latitude" value="50.891"/>
+        <asset name="longitude" value="-1.4"/>
+        <asset name="address2" value="Ocean Cruise Terminal"/>
+        <asset name="address1" value="Ocean Dock"/>
+    </node>
+    <node node-label="Berth_101_Sensor" foreign-id="Berth_101_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="longitude" value="-1.414"/>
+        <asset name="latitude" value="50.9"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="building" value="101"/>
+        <asset name="address2" value="City Cruise Terminal"/>
+    </node>
+    <node node-label="Berth_102_Sensor" foreign-id="Berth_102_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="longitude" value="-1.416"/>
+        <asset name="country" value="UK"/>
+        <asset name="latitude" value="50.9"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="building" value="102"/>
+        <asset name="address2" value="City Cruise Terminal"/>
+    </node>
+    <node node-label="Berth_103_Sensor" foreign-id="Berth_103_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="longitude" value="-1.424"/>
+        <asset name="latitude" value="50.903"/>
+        <asset name="building" value="103"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="address2" value="Fruit Terminal"/>
+    </node>
+    <node node-label="Berth_104_Sensor" foreign-id="Berth_104_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="longitude" value="-1.424"/>
+        <asset name="latitude" value="50.903"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="building" value="104"/>
+        <asset name="address2" value="Fruit Terminal"/>
+    </node>
+    <node node-label="Berth_105_Sensor" foreign-id="Berth_105_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="longitude" value="-1.427"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="latitude" value="50.904"/>
+        <asset name="building" value="105"/>
+        <asset name="address2" value="Mayflower Cruise Terminal"/>
+    </node>
+    <node node-label="Berth_106_Sensor" foreign-id="Berth_106_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="building" value="106"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="latitude" value="50.905"/>
+        <asset name="address2" value="Mayflower Cruise Terminal"/>
+        <asset name="longitude" value="-1.431"/>
+    </node>
+    <node node-label="Berth_107_Sensor" foreign-id="Berth_107_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="building" value="107"/>
+        <asset name="longitude" value="-1.438"/>
+        <asset name="address2" value="Rail Terminal"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="latitude" value="50.908"/>
+    </node>
+    <node node-label="Berth_108_Sensor" foreign-id="Berth_108_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="longitude" value="-1.438"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="108"/>
+        <asset name="address2" value="Bulk Terminal"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="latitude" value="50.908"/>
+    </node>
+    <node node-label="Berth_109_Sensor" foreign-id="Berth_109_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="longitude" value="-1.438"/>
+        <asset name="country" value="UK"/>
+        <asset name="building" value="109"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address2" value="Bulk Terminal"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="latitude" value="50.908"/>
+    </node>
+    <node node-label="Berth_110_Sensor" foreign-id="Berth_110_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Western Docks"/>
+        <asset name="building" value="110"/>
+        <asset name="latitude" value="50.908"/>
+        <asset name="longitude" value="-1.442"/>
+    </node>
+    <node node-label="Berth_GVD_Sensor" foreign-id="Berth_GVD_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="GVD"/>
+        <asset name="latitude" value="50.906"/>
+        <asset name="longitude" value="-1.445"/>
+        <asset name="address1" value="King George V Dock"/>
+    </node>
+    <node node-label="Berth_SCT_5_Sensor" foreign-id="Berth_SCT_5_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="building" value="SCT_5"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Container Berths"/>
+        <asset name="latitude" value="50.906"/>
+        <asset name="longitude" value="-1.445"/>
+    </node>
+    <node node-label="Berth_203_Sensor" foreign-id="Berth_203_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="203"/>
+        <asset name="address1" value="Container Berths"/>
+        <asset name="latitude" value="50.906"/>
+        <asset name="longitude" value="-1.445"/>
+    </node>
+    <node node-label="Berth_SCT_4_Sensor" foreign-id="Berth_SCT_4_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="building" value="SCT_4"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Container Berths"/>
+        <asset name="latitude" value="50.905"/>
+        <asset name="longitude" value="-1.453"/>
+    </node>
+    <node node-label="Berth_SCT_3_Sensor" foreign-id="Berth_SCT_3_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="SCT_3"/>
+        <asset name="longitude" value="-1.457"/>
+        <asset name="latitude" value="50.907"/>
+        <asset name="address1" value="Container Berths"/>
+    </node>
+    <node node-label="Berth_SCT_2_Sensor" foreign-id="Berth_SCT_2_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="building" value="SCT_2"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="Container Berths"/>
+        <asset name="longitude" value="-1.461"/>
+        <asset name="latitude" value="50.909"/>
+    </node>
+    <node node-label="Berth_SCT_1_Sensor" foreign-id="Berth_SCT_1_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="latitude" value="50.91"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="SCT_1"/>
+        <asset name="address1" value="Container Berths"/>
+        <asset name="longitude" value="-1.464"/>
+    </node>
+    <node node-label="Berth_1_Sensor" foreign-id="Berth_1_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="SMC Marchwood"/>
+        <asset name="building" value="1"/>
+        <asset name="latitude" value="50.895"/>
+        <asset name="longitude" value="-1.422"/>
+    </node>
+    <node node-label="Berth_2_Sensor" foreign-id="Berth_2_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="address1" value="SMC Marchwood"/>
+        <asset name="building" value="2"/>
+        <asset name="latitude" value="50.895"/>
+        <asset name="longitude" value="-1.422"/>
+    </node>
+    <node node-label="Berth_3_Sensor" foreign-id="Berth_3_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="address2" value="Rail Terminal"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="3"/>
+        <asset name="address1" value="SMC Marchwood"/>
+        <asset name="longitude" value="-1.421"/>
+        <asset name="latitude" value="50.894"/>
+    </node>
+    <node node-label="Berth_4_Sensor" foreign-id="Berth_4_Sensor">
+        <interface ip-addr="139.162.227.142" snmp-primary="P">
+            <monitored-service service-name="ICMP"/>
+            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="IotDevice"/>
+        </interface>
+        <asset name="city" value="Southampton"/>
+        <asset name="address2" value="Rail Terminal"/>
+        <asset name="country" value="UK"/>
+        <asset name="category" value="Sensor"/>
+        <asset name="building" value="4"/>
+        <asset name="address1" value="SMC Marchwood"/>
+        <asset name="latitude" value="50.893"/>
+        <asset name="longitude" value="-1.421"/>
+    </node>
+</model-import>
