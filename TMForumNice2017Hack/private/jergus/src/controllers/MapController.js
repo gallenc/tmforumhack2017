@@ -9,6 +9,10 @@ export default function ($interval, Map, Api) {
         });
     };
 
+    Api.getNodes().then(ships => {
+        this.ships = Map.ships(ships);
+    });
+
     Map.ready().then(() => {
         $interval(() => {
             this.updateDrones();

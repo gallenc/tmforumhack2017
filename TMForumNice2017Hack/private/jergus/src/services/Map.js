@@ -10,7 +10,7 @@ export default function (uiGmapGoogleMapApi) {
                     latitude: 50.900,
                     longitude: -1.42,
                 },
-                zoom: 14,
+                zoom: 15,
             };
         },
 
@@ -69,6 +69,24 @@ export default function (uiGmapGoogleMapApi) {
                 options: {
                     visible: drone.active,
                     icon: require('../img/drone-icon.png'),
+                },
+            };
+        },
+
+        ships(ships) {
+            return ships.map(ship => this.ship(ship));
+        },
+
+        ship(ship) {
+            return {
+                id: ship.name,
+                coords: {
+                    latitude: ship.latitude,
+                    longitude: ship.longitude,
+                },
+                options: {
+                    visible: ship.active,
+                    icon: require('../img/ship-icon.png'),
                 },
             };
         }

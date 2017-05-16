@@ -12,6 +12,7 @@
             <ui-gmap-marker idKey="vm.base.id" coords="vm.base.coords" options="vm.base.options"></ui-gmap-marker>
 
             <ui-gmap-marker ng-repeat="d in vm.drones" idKey="d.id" coords="d.coords" options="d.options"></ui-gmap-marker>
+            <ui-gmap-marker ng-repeat="s in vm.ships" idKey="s.id" coords="s.coords" options="s.options"></ui-gmap-marker>
         </ui-gmap-google-map>
 
     </div>

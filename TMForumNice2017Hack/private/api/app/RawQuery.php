@@ -54,7 +54,7 @@ class RawQuery
 
         return collect($this->client->get($this->opennms.'/opennms/rest/nodes.json', $credentials)['node'])
             ->filter(function ($node) {
-                return $node['foreignSource'] == 'southampton-port';
+                return $node['foreignSource'] == 'southampton-port2';
             });
     }
 }
