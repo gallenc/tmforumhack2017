@@ -8,11 +8,10 @@
 </script>
 
 
-
 <h1 class="text-center"> Port Services </h1>
-{{vm}}
+
 <div class="row">
-    <div  ng-repeat="product in vm.products | orderBy:'category_name'"  class="col-md-4 col-sm-4 col-xs-4">
+    <div ng-repeat="product in vm.products | orderBy:'category_name'" class="col-md-4 col-sm-4 col-xs-4">
         <div class="col-sm-12 col-md-12 product">
             <div class="thumbnail">
                 <img src="{{product.image}}" class="img-responsive">
@@ -27,10 +26,9 @@
                         </div>
                     </div>
                     <div class="row">
-
-                        <button type="button"  ng-click="vm.open()" class="btn btn-primary btn-warning btn-block"> <span glyphicon glyphicon-shopping-cart></span> Buy</button>
-
-
+                        <button type="button" ng-click="vm.open()" class="btn btn-primary btn-warning btn-block"><span
+                                glyphicon glyphicon-shopping-cart></span> Buy
+                        </button>
                     </div>
 
                     <p></p>
