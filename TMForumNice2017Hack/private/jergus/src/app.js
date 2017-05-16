@@ -10,11 +10,13 @@ import 'angular-route';
 import 'angular-ui-router';
 import 'angular-google-maps';
 import 'angular-simple-logger';
-import 'angular-ui-bootstrap'
+import 'angular-ui-bootstrap';
+import 'angular-sanitize';
+import 'ng-toast'
 
 
 const app = angular.module('app', [
-    'ui.bootstrap','ngRoute', 'ui.router', 'uiGmapgoogle-maps',
+    'ui.bootstrap','ngRoute', 'ui.router', 'uiGmapgoogle-maps', 'ngToast'
 ]);
 
 app.config(function ($qProvider) {
@@ -31,7 +33,6 @@ app.config(function (uiGmapGoogleMapApiProvider) {
  * Something else
  */
 import './styles/app.scss';
-
 /**
  * Views
  */
