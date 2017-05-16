@@ -14,7 +14,7 @@
     <div ng-repeat="product in vm.products | orderBy:'category_name'" class="col-md-4 col-sm-4 col-xs-4">
         <div class="col-sm-12 col-md-12 product">
             <div class="thumbnail">
-                <img src="{{product.image}}" class="img-responsive">
+                <img ng-src="{{ product.image }}" class="img-responsive">
                 <div class="caption">
                     <div class="row">
                         <div class="col-md-12 col-xs-12 product-details">
