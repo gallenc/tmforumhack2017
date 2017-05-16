@@ -1,32 +1,35 @@
-export default function (HuaweiHTTPService,SalesForceService, $uibModal) {
+export default function (HuaweiHTTPService, SalesForceService, $uibModal) {
 
     this.basket = [];
-    let modalInstance;
 
     HuaweiHTTPService.get_balance((x) => {
         console.log(x.data);
     })
 
-    this.open = function () {
-       let modalInstance = $uibModal.open({
+    this.open = function (id) {
+
+        let product = this.products.find(product => id == product.Id);
+
+        let modalInstance = $uibModal.open({
             animation: true,
             component: 'amountModalComponent',
             resolve: {
                 items: function () {
-                    return 'foo';
+                    return {
+                        product:product
+                    }
                 }
             }
         });
 
         modalInstance.result.then(function (selectedItem) {
-           console.log(selectedItem);
+            console.log(selectedItem);
         }, function () {
 
         });
 
 
     }
-
 
 
     SalesForceService.get_products().then((response) => {

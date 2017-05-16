@@ -7,18 +7,15 @@ export default {
     },
     controller: function () {
         var $ctrl = this;
+        this.amount = 0;
 
         $ctrl.$onInit = function () {
             $ctrl.items = $ctrl.resolve.items;
             console.log($ctrl.items);
-            $ctrl.selected = {
-                item: $ctrl.items[0]
-            };
-
         };
 
         $ctrl.ok = function () {
-            $ctrl.close({$value: $ctrl.selected.item});
+            $ctrl.close({$value: this.amount});
         };
 
         $ctrl.cancel = function () {

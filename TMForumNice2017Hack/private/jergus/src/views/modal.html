@@ -1,10 +1,20 @@
-<div class="modal-header">
-    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+<div class="modal-header product-order-modal">
+    <h3 class="modal-title" id="modal-title">Please Confirm Your <span> {{$ctrl.items.product.name}}</span> Order</h3>
+
 </div>
 <div class="modal-body" id="modal-body">
-dsjdjdsdsjdsjdsjds
+
+    <h3>Number of units <span>({{$ctrl.items.product.version}}) Per Unit</span>: </h3>
+    <div class="form-group">
+        <div class="col-md-5">
+            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter amount">
+
+        </div>
+
+    </div>
 </div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+<div class="modal-footer" style="margin-top: 40px">
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Buy</button>
     <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
 </div>

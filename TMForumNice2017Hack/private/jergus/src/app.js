@@ -51,6 +51,7 @@ app.controller('HomepageController', require('./controllers/HomepageController.j
 app.controller('DroneController', require('./controllers/DroneController.js').default);
 app.controller('MapController', require('./controllers/MapController.js').default);
 app.controller('StoreController', require('./controllers/StoreController.js').default);
+app.controller('HeaderController', require('./controllers/HeaderController.js').default);
 
 
 /**
