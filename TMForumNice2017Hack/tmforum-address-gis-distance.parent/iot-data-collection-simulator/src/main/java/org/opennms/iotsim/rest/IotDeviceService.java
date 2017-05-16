@@ -24,7 +24,29 @@ public class IotDeviceService{
 	}
 
 	/**
-http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/device/api/v1/createdevice
+POST http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/device/api/v1/createdevice
+Content-Type: application/json
+{
+  "label" : "testIot1",
+  "iotDevicetype" : "fixed",
+  "geocode" : {
+    "latitude" : null,
+    "longitude" : null,
+    "geographicDatum" : null
+  },
+  "timestamp" : 1494862698726,
+  "parameters" : [ {
+    "key" : "key1",
+    "value" : "value1"
+  } ],
+  "mission" : [ {
+    "latitude" : "50.889311",
+    "longitude" : "-1.391915",
+    "geographicDatum" : null
+  } ],
+  "speed" : "100"
+}
+
 	 * @param iotDevice
 	 * @return
 	 */

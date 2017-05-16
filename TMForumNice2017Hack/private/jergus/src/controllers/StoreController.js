@@ -1,6 +1,33 @@
-export default function (SalesForceService) {
+export default function (HuaweiHTTPService,SalesForceService, $uibModal) {
 
     this.basket = [];
+    let modalInstance;
+
+    HuaweiHTTPService.get_balance((x) => {
+        console.log(x.data);
+    })
+
+    this.open = function () {
+       let modalInstance = $uibModal.open({
+            animation: true,
+            component: 'amountModalComponent',
+            resolve: {
+                items: function () {
+                    return 'foo';
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+           console.log(selectedItem);
+        }, function () {
+
+        });
+
+
+    }
+
+
 
     SalesForceService.get_products().then((response) => {
         this.products = response.data.map(product => {
@@ -12,8 +39,12 @@ export default function (SalesForceService) {
         });
     });
 
+    this.foo = function () {
+        console.log('foo has been called');
+    }
+
     this.add = function (item) {
         this.basket.push(item);
-    };
-};
+    }
+}
 

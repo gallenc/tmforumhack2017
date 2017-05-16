@@ -24,3 +24,5 @@ export default function ($stateProvider, $urlRouterProvider) {
        controller: 'StoreController as vm'
     });
 };
+
+
