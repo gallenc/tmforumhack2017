@@ -1,13 +1,5 @@
 export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToast) {
 
-    HuaweiHTTPService.get_balance((response) => {
-        console.log(reponse.data);
-    })
-
-    HuaweiHTTPService.charge_amount(this.total_amount).then((response) => {
-        console.log(reponse.data);
-    })
-
     this.open = function (id) {
 
         let product = this.products.find(product => id == product.Id);
@@ -25,7 +17,6 @@ export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToas
         });
 
         modalInstance.result.then(function (selectedItem) {
-            console.log(selectedItem);
             this.charge(selectedItem.item.product, selectedItem.quantity, selectedItem.total);
         }, function () {
 
