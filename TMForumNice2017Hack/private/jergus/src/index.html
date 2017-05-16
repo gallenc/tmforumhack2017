@@ -46,13 +46,13 @@
         </div>
 
         <!-- top navigation -->
-        <div class="top_nav" ng-controller="HeaderController">
+        <div class="top_nav" ng-controller="HeaderController as vm">
             <div class="nav_menu">
                 <nav>
-                    <span ng-if="">
-                    <h3>Balance: </h3>
-                    </span>
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a>Balance: £ {{vm.balance }}</a>
+                        </li>
                         <li>
                             <a ui-sref="dashboard">John Doe</a>
                         </li>

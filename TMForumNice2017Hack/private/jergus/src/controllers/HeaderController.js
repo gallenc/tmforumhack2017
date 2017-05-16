@@ -1,7 +1,8 @@
-export default function($state, HuaweiHTTPService, ShipCompany, $scope) {
+export default function ($state, HuaweiHTTPService, ShipCompany) {
 
-        HuaweiHTTPService.get_balance().then(response => {
-            response.data.remainedAmount.amount;
-        })
+    this.balance = 0;
+    HuaweiHTTPService.get_balance().then(response => {
+        this.balance = response.data.remainedAmount.amount;
+    })
 
 }
