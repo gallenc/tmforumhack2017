@@ -11,7 +11,7 @@ $router->post('/huawei/deduct', function (HuaweiQuery $query) {
         "identityNumber" => "3313810128531",
         "deductInfoList" => [[
             "accountType"=>"2000",
-            "unitValue"=>request()->get('amount'),
+            "unitValue"=> (float) number_format((float) request()->get('amount'), 2),
             "currencyID"=>"1049",
             "unitType"=>"0"
         ]],

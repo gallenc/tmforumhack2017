@@ -39,7 +39,9 @@ export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToas
     });
 
     this.charge = function ($product, $quantity, $amount) {
+        console.log('about to');
         HuaweiHTTPService.charge_amount($amount).then(reponse => {
+            console.log('done');
             ngToast.create("Amount "+$amount+" Charged for "+$quantity+" of "+$product.name);
         });
 
