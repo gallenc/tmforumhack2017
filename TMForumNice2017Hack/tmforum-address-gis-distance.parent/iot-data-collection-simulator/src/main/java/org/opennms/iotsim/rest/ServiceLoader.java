@@ -7,9 +7,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.opennms.iotsim.model.IotDeviceDAO;
-import org.opennms.iotsim.simulator.FixedDeviceSimulator;
-import org.opennms.iotsim.simulator.MobileDeviceSimulator;
-import org.opennms.iotsim.simulator.SimulationDeviceSimulator;
+import org.opennms.iotsim.simulator.FixedSensorSimulator;
+import org.opennms.iotsim.simulator.MobileSensorSimulator;
+import org.opennms.iotsim.simulator.EmissionSimulator;
 import org.opennms.tmforum.address.model.Address;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -31,11 +31,11 @@ public class ServiceLoader {
 	
 	private static Object sync1 = new Object();
 
-	private static FixedDeviceSimulator fixedDeviceSimulator = null;
+	private static FixedSensorSimulator fixedDeviceSimulator = null;
 	
-	private static MobileDeviceSimulator mobileDeviceSimulator = null;
+	private static MobileSensorSimulator mobileDeviceSimulator = null;
 	
-	private static SimulationDeviceSimulator simulationDeviceSimulator = null;
+	private static EmissionSimulator simulationDeviceSimulator = null;
 	
 	private  static IotDeviceDAO iotDeviceDao = new IotDeviceDAO();
 	
@@ -45,10 +45,10 @@ public class ServiceLoader {
 		return iotDeviceDao;
 	}
 
-	public static FixedDeviceSimulator getFixedDeviceSimulator() {
+	public static FixedSensorSimulator getFixedDeviceSimulator() {
 		if(fixedDeviceSimulator==null) synchronized (sync1) {
 			if(fixedDeviceSimulator==null) try {
-				fixedDeviceSimulator=new FixedDeviceSimulator();
+				fixedDeviceSimulator=new FixedSensorSimulator();
 				fixedDeviceSimulator.setIotDeviceDao(iotDeviceDao);
 			} catch (Exception e){
 				Logger.getLogger(ServiceLoader.class.getName()).log(Level.SEVERE, "problem loading FixedDeviceSimulator");
@@ -57,10 +57,10 @@ public class ServiceLoader {
 		return fixedDeviceSimulator;
 	}
 
-	public static SimulationDeviceSimulator getSimulationDeviceSimulator() {
+	public static EmissionSimulator getSimulationDeviceSimulator() {
 		if(simulationDeviceSimulator==null) synchronized (sync1) {
 			if(simulationDeviceSimulator==null) try {
-				simulationDeviceSimulator=new SimulationDeviceSimulator();
+				simulationDeviceSimulator=new EmissionSimulator();
 				simulationDeviceSimulator.setIotDeviceDao(iotDeviceDao);
 			} catch (Exception e){
 				Logger.getLogger(ServiceLoader.class.getName()).log(Level.SEVERE, "problem SimulationDeviceSimulator");
@@ -71,10 +71,10 @@ public class ServiceLoader {
 
 
 
-	public static MobileDeviceSimulator getMobiledevicesimulator() {
+	public static MobileSensorSimulator getMobiledevicesimulator() {
 		if(mobileDeviceSimulator==null) synchronized (sync1) {
 			if(mobileDeviceSimulator==null) try {
-				mobileDeviceSimulator=new MobileDeviceSimulator();
+				mobileDeviceSimulator=new MobileSensorSimulator();
 				mobileDeviceSimulator.setIotDeviceDao(iotDeviceDao);
 			} catch (Exception e){
 				Logger.getLogger(ServiceLoader.class.getName()).log(Level.SEVERE, "problem MobileDeviceSimulator");

@@ -1,0 +1,89 @@
+[
+	{
+		"label": "fixedIoT",
+		"iotDevicetype": "fixed",
+		"geocode": {
+			"latitude": "50.889311",
+			"longitude": "-1.391915",
+			"geographicDatum": null
+		},
+		"timestamp": null,
+		"parameters": [
+			{
+				"key": "potable_Water_LitresPerSec",
+				"value": "100"
+			},
+			{
+				"key": "waste_Water_LitresPerSec",
+				"value": "100"
+			},
+			{
+				"key": "electricity_Kw",
+				"value": "1000"
+			},
+			{
+				"key": "dataConsumption_GbPerSec",
+				"value": "10"
+			}
+		]
+	},
+	{
+		"label": "smokeEmitter1",
+		"iotDevicetype": "simulation",
+		"geocode": {
+			"latitude": "50.889311",
+			"longitude": "-1.391915",
+			"geographicDatum": null
+		},
+		"timestamp": null,
+		"parameters": [
+			{
+				"key": "polutionIndex",
+				"value": "10"
+			}
+		]
+	},
+	{
+		"label": "mobileIot1Sensor",
+		"iotDevicetype": "mobile",
+		"timestamp": null,
+		"parameters": null,
+		"mission": [
+			{
+				"latitude": "50.889311",
+				"longitude": "-1.391915",
+				"geographicDatum": null
+			},
+			{
+				"latitude": "50.889311",
+				"longitude": "-1.391915",
+				"geographicDatum": null
+			},
+			{
+				"latitude": "50.891099",
+				"longitude": "-1.390925",
+				"geographicDatum": null
+			},
+			{
+				"latitude": "50.891099",
+				"longitude": "-1.390925",
+				"geographicDatum": null
+			},
+			{
+				"latitude": "50.886211",
+				"longitude": "-1.39266",
+				"geographicDatum": null
+			}
+		],
+		"speed": "5"
+	}
+]
+
+
+
+
+
+
+
+
+
