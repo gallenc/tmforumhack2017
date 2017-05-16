@@ -1,5 +1,6 @@
 export default function ($timeout, HuaweiHTTPService, SalesForceService, $uibModal, ngToast) {
     this.balance = 0;
+
     HuaweiHTTPService.get_balance().then(response => {
         this.balance = response.data[0].remainedAmount.amount;
     })
@@ -41,14 +42,11 @@ export default function ($timeout, HuaweiHTTPService, SalesForceService, $uibMod
     this.charge = function ($product, $quantity, $amount) {
         $timeout(() => {
             ngToast.create("Amount £"+ (parseFloat($amount).toFixed(2)) +" Charged for "+$quantity+" of "+$product.name);
+
+            this.balance -= (parseFloat($amount).toFixed(2));
         }, 500);
 
         HuaweiHTTPService.charge_amount($amount)
-            .then(() => {
-                HuaweiHTTPService.get_balance().then(response => {
-                    this.balance = response.data[0].remainedAmount.amount;
-                })
-            });
     }
 }
 

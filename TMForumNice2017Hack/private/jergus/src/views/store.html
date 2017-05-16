@@ -3,7 +3,7 @@
         <h1>Port Services</h1>
     </div>
     <div class="pull-right text-right">
-        <h2>Balance: £{{ vm.balance }}</h2>
+        <h1>Balance: £{{ vm.balance | number }}</h1>
     </div>
 </div>
 
@@ -16,11 +16,10 @@
                     <div class="row">
                         <div class="col-md-12 col-xs-12 product-details">
                             <h3 class="text-center">{{product.name}}</h3>
-                            <p>{{product.description}}</p>
+                            <p class="text-center">{{product.description}}</p>
                         </div>
                         <div class="col-md-12 col-xs-12 price text-center">
                             <h3>{{product.version}}</h3>
-
                         </div>
                     </div>
                     <div class="row">
