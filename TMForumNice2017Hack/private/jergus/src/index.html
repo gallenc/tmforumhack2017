@@ -8,12 +8,13 @@
     <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=" type="image/png">
 </head>
 <body class="nav-md">
+<toast></toast>
 <div class="container body">
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><span>SmartPorts</span></a>
+                    <a href="index.html" class="site_title"><span>Port-o-matic</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -33,9 +34,9 @@
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
-                        <a ui-sref="dashboard"><h3>Dashboard</h3></a>
-                        <a ui-sref="store"><h3>Services</h3></a>
-                        <a href="https://portomatic.grafana.net/dashboard/db/port-o-matic"><h3>Measurements</h3></a>
+                        <a ui-sref="dashboard"><h3 style="margin: 15px 0; font-size: 16px">Dashboard</h3></a>
+                        <a ui-sref="store"><h3 style="margin: 15px 0; font-size: 16px">Services</h3></a>
+                        <a href="https://portomatic.grafana.net/dashboard/db/port-o-matic"><h3 style="margin: 15px 0; font-size: 16px">Measurements</h3></a>
                     </div>
 
                 </div>
@@ -45,9 +46,12 @@
         </div>
 
         <!-- top navigation -->
-        <div class="top_nav">
+        <div class="top_nav" ng-controller="HeaderController">
             <div class="nav_menu">
                 <nav>
+                    <span ng-if="">
+                    <h3>Balance: </h3>
+                    </span>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a ui-sref="dashboard">John Doe</a>

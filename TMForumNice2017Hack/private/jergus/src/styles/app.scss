@@ -1,5 +1,6 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-
+@import "~ng-toast/dist/ngToast.css";
+@import "~ng-toast/dist/ngToast-animations.css";
 @import './vendor.css';
 @import './flex';
 
@@ -15,7 +16,11 @@
 .product {
 
     .thumbnail {
-        height: 480px;
+        height: auto;
+
+        img {
+            height: 315px;
+        }
     }
 
     h3 {
@@ -32,5 +37,21 @@
        height: 110px;
 
     }
+
+}
+
+.product-order-modal {
+
+    h3 {
+        span {
+            color: #B94A48;
+        }
+
+    }
+
+    input[number] {
+        font-size: large;
+    }
+
 
 }

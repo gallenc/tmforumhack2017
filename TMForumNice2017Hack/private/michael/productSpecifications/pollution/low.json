@@ -22,7 +22,7 @@ POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/prod
 				{
 					"valueType": "number",
 					"default": true,
-					"value": "10",
+					"value": "3",
 					"unitOfMeasure": "Air Index",
 					"valueFrom": "",
 					"valueTo": ""
