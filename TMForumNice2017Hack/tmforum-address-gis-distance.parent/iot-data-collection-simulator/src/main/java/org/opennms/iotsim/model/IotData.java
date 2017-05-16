@@ -67,7 +67,7 @@ public class IotData {
 
 	String timestamp = Long.toString(new Date().getTime());
 
-	List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+	List<KeyValuePair> parameters = new ArrayList<KeyValuePair>();
 
 	public String getId() {
 		return id;
@@ -116,11 +116,11 @@ public class IotData {
 		this.timestamp = timestamp;
 	}
 
-	public List<NameValuePair> getParameters() {
+	public List<KeyValuePair> getParameters() {
 		return parameters;
 	}
 
-	public void setParameters(List<NameValuePair> parameters) {
+	public void setParameters(List<KeyValuePair> parameters) {
 		this.parameters = parameters;
 	}
 

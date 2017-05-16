@@ -3,8 +3,12 @@ export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToas
     ngToast.create('a toast message...');
     this.basket = [];
 
-    HuaweiHTTPService.get_balance((x) => {
-        console.log(x.data);
+    HuaweiHTTPService.get_balance((response) => {
+        console.log(reponse.data);
+    })
+
+    HuaweiHTTPService.charge_amount(this.total_amount).then((response) => {
+        console.log(reponse.data);
     })
 
     this.open = function (id) {
@@ -39,6 +43,8 @@ export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToas
             var components = product.description.split('|');
             product.description = components[0];
             product.image = components[1];
+            product.charge_per = components[2];
+            product.unit = components[3];
             return product;
         });
     });

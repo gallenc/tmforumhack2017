@@ -1,21 +1,10 @@
 export default function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider.state('dashboard', {
-        url: '/dashboard',
-        templateUrl: '/views/dashboard.html',
-    });
-
-    $stateProvider.state('map', {
-        url: '/map',
+        url: '/',
         templateUrl: '/views/map.html',
         controller: 'MapController as vm'
-    });
-
-    $stateProvider.state('drone', {
-        url: '/drone',
-        templateUrl: '/views/drone.html',
-        controller: 'DroneController as vm'
     });
 
     $stateProvider.state('store', {

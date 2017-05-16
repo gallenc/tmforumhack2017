@@ -1,8 +1,8 @@
 POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/productSpecification
 {
 	"version": "1.0",
-	"name": "Pollution Certificate for Low Emmissions",
-	"description": "Permit for Level of Red Pollution Emmissions",
+	"name": "Pollution Certificate for High Emmissions",
+	"description": "Permit for Level of High Pollution Emmissions",
 	"lifecycleStatus": "Active",
 	"validFor": 
 	{
@@ -22,7 +22,7 @@ POST http://139.162.227.142:8080/DSPRODUCTCATALOG2/api/catalogManagement/v2/prod
 				{
 					"valueType": "number",
 					"default": true,
-					"value": "3",
+					"value": "8",
 					"unitOfMeasure": "Air Index",
 					"valueFrom": "",
 					"valueTo": ""
