@@ -16,7 +16,11 @@
 .product {
 
     .thumbnail {
-        height: 480px;
+        height: auto;
+
+        img {
+            max-height: 315px;
+        }
     }
 
     h3 {
