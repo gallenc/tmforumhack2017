@@ -5,16 +5,17 @@
 <div class="modal-body" id="modal-body">
 
     <h3>Number of units <span>({{$ctrl.items.product.version}}) Per Unit</span>: </h3>
-    <div class="form-group">
-        <div class="col-md-5">
-            <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="Enter amount">
-
+    <div class="form-group" style="margin-top: 40px">
+        <div class="row">
+            <span class="col-md-4"><h2>£{{ ($ctrl.quantity || 0) *$ctrl.items.product.charge_per}}</h2></span>
+            <div class="col-md-6">
+                <input type="number" class="form-control col-md-6" placeholder="Enter amount" ng-model="$ctrl.quantity">
+            </div>
         </div>
 
     </div>
 </div>
-<div class="modal-footer" style="margin-top: 40px">
+<div class="modal-footer" style="margin-top: 10px">
     <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Buy</button>
     <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
 </div>

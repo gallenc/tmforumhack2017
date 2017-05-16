@@ -11,11 +11,14 @@ export default {
 
         $ctrl.$onInit = function () {
             $ctrl.items = $ctrl.resolve.items;
-            console.log($ctrl.items);
         };
 
         $ctrl.ok = function () {
-            $ctrl.close({$value: this.amount});
+            $ctrl.close({$value: {
+                item: $ctrl.items,
+                quantity: $ctrl.quantity,
+                total: ($ctrl.quantity * $ctrl.items.product.charge_per),
+            }});
         };
 
         $ctrl.cancel = function () {
