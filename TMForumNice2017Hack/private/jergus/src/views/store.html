@@ -1,14 +1,11 @@
-<script type="text/ng-template" id="amount-modal.html">
-    <div class="modal-header">
-        <h3 class="modal-title" id="modal-title-service">The {{name}} modal!</h3>
+<div class="clearfix">
+    <div class="pull-left">
+        <h1>Port Services</h1>
     </div>
-    <div class="modal-body" id="modal-body-service">
-        Having multiple modals open at once is probably bad UX but it's technically possible.
+    <div class="pull-right text-right">
+        <h2>Balance: £{{ vm.balance }}</h2>
     </div>
-</script>
-
-
-<h1 class="text-center"> Port Services </h1>
+</div>
 
 <div class="row">
     <div ng-repeat="product in vm.products | orderBy:'category_name'" class="col-md-4 col-sm-4 col-xs-4">
@@ -27,15 +24,8 @@
                         </div>
                     </div>
                     <div class="row">
-
-
-                        <button type="button"  ng-click="vm.open(product.Id)" class="btn btn-primary btn-warning btn-block"> <span glyphicon glyphicon-shopping-cart></span> Buy</button>
-
-
-
+                        <button type="button" ng-click="vm.open(product.Id)" class="btn btn-primary btn-warning btn-block">Buy</button>
                     </div>
-
-                    <p></p>
                 </div>
             </div>
         </div>
