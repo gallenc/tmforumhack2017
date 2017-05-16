@@ -16,7 +16,7 @@ export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToas
             }
         });
 
-        modalInstance.result.then(function (selectedItem) {
+        modalInstance.result.then( (selectedItem) => {
             this.charge(selectedItem.item.product, selectedItem.quantity, selectedItem.total);
         }, function () {
 

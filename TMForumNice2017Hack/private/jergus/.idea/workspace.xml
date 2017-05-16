@@ -15,11 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StoreController.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="StoreController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/controllers/StoreController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="647">
-              <caret line="41" column="39" lean-forward="false" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="39" />
+            <state relative-caret-position="306">
+              <caret line="18" column="52" lean-forward="false" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -35,7 +35,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HuaweiHTTPService.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HuaweiHTTPService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/services/HuaweiHTTPService.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
@@ -323,12 +323,12 @@
       <workItem from="1494509883766" duration="7355000" />
       <workItem from="1494579588891" duration="7867000" />
       <workItem from="1494768478135" duration="29009000" />
-      <workItem from="1494929243182" duration="3170000" />
+      <workItem from="1494929243182" duration="3340000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47401000" />
+    <option name="totallyTimeSpent" value="47571000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -713,18 +713,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/StoreController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="41" column="39" lean-forward="false" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/HuaweiHTTPService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="81" lean-forward="true" selection-start-line="8" selection-start-column="81" selection-end-line="8" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controllers/StoreController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="52" lean-forward="false" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
           <folding />
         </state>
       </provider>
