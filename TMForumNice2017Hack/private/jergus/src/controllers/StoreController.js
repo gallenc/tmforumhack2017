@@ -1,4 +1,4 @@
-export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToast) {
+export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToast, $document) {
 
     ngToast.create('a toast message...');
     this.basket = [];

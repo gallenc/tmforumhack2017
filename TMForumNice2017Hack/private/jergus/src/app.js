@@ -56,8 +56,9 @@ app.controller('HeaderController', require('./controllers/HeaderController.js').
  */
 app.service('Map', require('./services/Map.js').default);
 app.service('Api', require('./services/Api.js').default);
-app.service('HuaweiHTTPService', require('./services/HuaweiHTTPService.js').default)
+app.service('HuaweiHTTPService', require('./services/HuaweiHTTPService.js').default);
 app.service('SalesForceService', require('./services/SalesForceService.js').default);
+app.service('ShipCompany', require('./services/ShipCompany.js').default);
 
 /**
  * Components

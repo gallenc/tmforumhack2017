@@ -1,4 +1,7 @@
-export default function($state) {
-    console.log($state.current.name);
-    console.log('header controller');
+export default function($state, HuaweiHTTPService, ShipCompany, $scope) {
+
+        HuaweiHTTPService.get_balance().then(response => {
+            response.data.remainedAmount.amount;
+        })
+
 }
