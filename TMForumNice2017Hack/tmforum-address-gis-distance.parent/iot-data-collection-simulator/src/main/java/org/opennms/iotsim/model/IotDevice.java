@@ -26,9 +26,24 @@ public class IotDevice {
 
 	GeoCode geocode = new GeoCode();
 	
-	Date timestamp = new Date();
+	String timestamp = Long.toString(new Date().getTime());
 	
-	List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+	List<KeyValuePair> parameters = new ArrayList<KeyValuePair>();
+	
+	List<GeoCode> mission = new ArrayList<GeoCode>();
+	
+	String speed = null;
+	
+	public IotDevice(String iotDeviceType){
+		if(! IotDeviceType.ALLOWED_VALUES.contains(iotDeviceType))
+			throw new IllegalArgumentException("unknown iotDeviceType="+ iotDeviceType);
+		this.setIotDevicetype(iotDeviceType);
+		this.setId(newId());
+	}
+
+	public IotDevice() {
+		super();
+	}
 
 	public static String newId(){
 		return Integer.toString(idIterator.addAndGet(1));
@@ -62,21 +77,21 @@ public class IotDevice {
 		this.geocode = geocode;
 	}
 
-	public Date getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 
 	@XmlElement
-	public void setTimestamp(Date timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 
-	public List<NameValuePair> getParameters() {
+	public List<KeyValuePair> getParameters() {
 		return parameters;
 	}
 
 	@XmlElement
-	public void setParameters(List<NameValuePair> parameters) {
+	public void setParameters(List<KeyValuePair> parameters) {
 		this.parameters = parameters;
 	}
 
@@ -87,5 +102,25 @@ public class IotDevice {
 	@XmlElement
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+
+	public List<GeoCode> getMission() {
+		return mission;
+	}
+
+	@XmlElement
+	public void setMission(List<GeoCode> mission) {
+		this.mission = mission;
+	}
+
+
+	public String getSpeed() {
+		return speed;
+	}
+
+	@XmlElement
+	public void setSpeed(String speed) {
+		this.speed = speed;
 	}
 }

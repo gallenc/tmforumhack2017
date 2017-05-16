@@ -26,9 +26,9 @@
       <rra>RRA:MIN:0.5:288:366</rra>
     </rrd>
     <!-- {ipaddr} -->
-    <!-- <xml-source url="http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsample/xhttp://{ipaddr}:9200/_cluster/stats"> -->
+    <!-- <xml-source url="http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsamplelabel?label=fixedIoT"> -->
 
-    <xml-source url="http://{ipaddr}:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsample">
+    <xml-source url="http://{ipaddr}:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsamplelabel?label={foreignId}">
       <import-groups>xml-datacollection/xml-iotdevice-stats.xml</import-groups>
     </xml-source>
   </xml-collection>

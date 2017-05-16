@@ -1,5 +1,9 @@
-export default function () {
+export default function (uiGmapGoogleMapApi) {
     return {
+        ready() {
+            return uiGmapGoogleMapApi;
+        },
+
         southampton() {
             return {
                 center: {
@@ -52,6 +56,21 @@ export default function () {
                 '#f1c40f', '#e67e22', '#e74c3c', '#ecf0f1', '#95a5a6',
                 '#16a085', '#27ae60', '#2980b9', '#8e44ad', '#2c3e50',
             ][index];
+        },
+
+        drones(drones) {
+            return drones.map(drone => this.drone(drone));
+        },
+
+        drone(drone) {
+            return {
+                id: drone.id,
+                coords: drone.coords,
+                options: {
+                    visible: drone.active,
+                    icon: require('../img/drone-icon.png'),
+                },
+            };
         }
     };
 };

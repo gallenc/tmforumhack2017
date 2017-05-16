@@ -1,26 +1,41 @@
 package org.opennms.iotsim.model;
 
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class IotDeviceDAO {
+import org.opennms.iotsim.rest.ServiceLoader;
+
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class IotDeviceDAO   {
 	
 	
 	// map of iot device types
     private Map<String, Map<String, IotDevice>> iotDevices = new ConcurrentHashMap<String, Map<String, IotDevice>>();
 
 	
-	public void IotService(){
+	/* (non-Javadoc)
+	 * @see org.opennms.iotsim.model.IotDeviceApi#IotService()
+	 */
+	public IotDeviceDAO(){
 		for (String deviceType :IotDeviceType.ALLOWED_VALUES){
 			iotDevices.put(deviceType, new ConcurrentHashMap<String,IotDevice>());
 		}
+		initialise();
 	}
     
 	
+	/* (non-Javadoc)
+	 * @see org.opennms.iotsim.model.IotDeviceApi#createDevice(org.opennms.iotsim.model.IotDevice)
+	 */
 	public IotDevice createDevice(IotDevice iotDevice){
 		if(iotDevice.getId() !=null) throw new RuntimeException("id must be null when creating device");
 		if(iotDevice.getIotDevicetype()==null 
@@ -35,6 +50,9 @@ public class IotDeviceDAO {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.opennms.iotsim.model.IotDeviceApi#createDevices(java.util.List)
+	 */
 	public List<IotDevice> createDevices(List<IotDevice> iotDevices){
 		List<IotDevice> created = new ArrayList<IotDevice>();
 		for(IotDevice iotDevice: iotDevices){
@@ -43,6 +61,9 @@ public class IotDeviceDAO {
 		return created;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.opennms.iotsim.model.IotDeviceApi#deleteDevice(java.lang.String)
+	 */
 	public void deleteDevice(String id){
 		for(Entry<String, Map<String, IotDevice>> entry:iotDevices.entrySet()){
 			Map<String, IotDevice> iotDevicemap = entry.getValue();
@@ -53,6 +74,9 @@ public class IotDeviceDAO {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.opennms.iotsim.model.IotDeviceApi#deleteAllDevices()
+	 */
 	public void deleteAllDevices(){
 		for(Entry<String, Map<String, IotDevice>> entry:iotDevices.entrySet()){
 			entry.getValue().clear();
@@ -60,6 +84,9 @@ public class IotDeviceDAO {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.opennms.iotsim.model.IotDeviceApi#deleteAllDevices(java.lang.String)
+	 */
 	public void deleteAllDevices(String deviceType){
 		if(! iotDevices.containsKey(deviceType))
 			throw new RuntimeException("unknown iot device type="+deviceType);
@@ -69,6 +96,9 @@ public class IotDeviceDAO {
 	
 
 	
+	/* (non-Javadoc)
+	 * @see org.opennms.iotsim.model.IotDeviceApi#getDevice(java.lang.String)
+	 */
 	public IotDevice getDevice(String id){
 		IotDevice iotDevice =null;
 		for(Entry<String, Map<String, IotDevice>> entry:iotDevices.entrySet()){
@@ -82,13 +112,41 @@ public class IotDeviceDAO {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.opennms.iotsim.model.IotDeviceApi#getDevices(java.lang.String)
+	 */
 	public List<IotDevice> getDevices(String deviceType){
+		if(deviceType==null){
+			List<IotDevice> iotDevicesList = new ArrayList<IotDevice>();
+			for(Entry<String, Map<String, IotDevice>> entry:iotDevices.entrySet()){
+				Map<String, IotDevice> iotDevicemap = entry.getValue();
+				iotDevicesList.addAll(iotDevicemap.values());
+			}
+			return iotDevicesList;
+		} else {
 		if(! iotDevices.containsKey(deviceType))
 			throw new RuntimeException("unknown iot device type="+deviceType);
 		List<IotDevice> iotDevicesList = new ArrayList<IotDevice>(iotDevices.get(deviceType).values());
         return iotDevicesList;
+		}
 	}
 	
-
+	private void initialise(){
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		try {
+			InputStream stream = ServiceLoader.class.getClassLoader().getResourceAsStream("test-device_data.json");
+			
+			if(stream==null){
+				Logger.getLogger(ServiceLoader.class.getName()).log(Level.WARNING, "unable to find test-device_data.json");
+			} else {
+			List<IotDevice> loadedDevices = objectMapper.readValue(stream, new TypeReference<List<IotDevice>>(){});
+			createDevices(loadedDevices);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("error loading test-device_data.json: ",e);
+		}
+		
+	}
 
 }

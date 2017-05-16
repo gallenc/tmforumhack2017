@@ -7,8 +7,19 @@ export default function ($http) {
     return {
 
         get_products:  () => {
-           $http.defaults.headers.common.Authorization = env.SF_TOKE;
-           return $http.get(env.SF_URL + '/productOffering');
+           return $http.get(env.SF_URL + '/productOffering', {
+               headers : {
+                   'authorization' : env.SF_TOKE
+               }
+            });
+        },
+
+        get_product: (id) => {
+            return $http.get(env.SF_URL + '/productOffering/' + id, {
+                headers : {
+                    'authorization' : env.SF_TOKE
+                }
+            });
         },
 
         send_order: () => {

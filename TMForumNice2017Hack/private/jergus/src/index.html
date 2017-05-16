@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-    <title>¯\_(ツ)_/¯</title>
-
+    <title>Port-o-matic</title>
+    <link rel="icon" href="" type="image/x-icon">
     <meta charset="utf-8">
 
     <link rel="shortcut icon" href="data:;base64,iVBORw0KGgo=" type="image/png">
@@ -21,9 +21,11 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_info">
-                        <h2 class="text-center">Welcome, John Doe</h2>
+                        <image src="http://res.cloudinary.com/dft5jlu5u/image/upload/c_scale,w_50/v1494855155/placeholder_hxdu1k.png"></image>
+                        <h2 class="pull-right">Welcome, John Doe</h2>
                     </div>
                 </div>
+                <hr>
                 <!-- /menu profile quick info -->
 
                 <br/>
@@ -31,25 +33,9 @@
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
-                        <h3>General</h3>
-                        <ul class="nav side-menu">
-                            <li>
-                                <a ui-sref="dashboard"><i class="fa fa-home"></i> Home <span
-                                        class="fa fa-chevron-down"></span></a>
-                            </li>
-                            <li>
-
-                                <a ui-sref="example"><i class="fa fa-edit"></i> Forms <span
-                                        class="fa fa-chevron-down"></span></a>
-                                <a ui-sref="drone"><i class="fa fa-edit"></i> Drone Example<span
-                                        class="fa fa-chevron-down"></span></a>
-                                <a ui-sref="store"><i class="fa fa-edit"></i> Store<span
-                                        class="fa fa-chevron-down"></span></a>
-
-                                <a ui-sref="map"><i class="fa fa-edit"></i> Map <span class="fa fa-chevron-down"></span></a>
-
-                            </li>
-                        </ul>
+                        <a ui-sref="dashboard"><h3 style="margin: 15px 0; font-size: 16px">Dashboard</h3></a>
+                        <a ui-sref="store"><h3 style="margin: 15px 0; font-size: 16px">Services</h3></a>
+                        <a href="https://portomatic.grafana.net/dashboard/db/port-o-matic"><h3 style="margin: 15px 0; font-size: 16px">Measurements</h3></a>
                     </div>
 
                 </div>
@@ -64,7 +50,7 @@
                 <nav>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">John Doe</a>
+                            <a ui-sref="dashboard">John Doe</a>
                         </li>
                     </ul>
                 </nav>
