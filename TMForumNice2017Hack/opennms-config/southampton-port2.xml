@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="southampton-port">
+<model-import xmlns="http://xmlns.opennms.org/xsd/config/model-import" foreign-source="southampton-port2">
     <node node-label="Berth_30_Sensor" foreign-id="Berth_30_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -18,7 +18,7 @@
     <node node-label="Berth_31_Sensor" foreign-id="Berth_31_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -33,7 +33,7 @@
     <node node-label="Berth_32_Sensor" foreign-id="Berth_32_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -48,7 +48,7 @@
     <node node-label="Berth_33_Sensor" foreign-id="Berth_33_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -63,7 +63,7 @@
     <node node-label="Berth_34_Sensor" foreign-id="Berth_34_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -78,7 +78,7 @@
     <node node-label="Berth_35_Sensor" foreign-id="Berth_35_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -93,7 +93,7 @@
     <node node-label="Berth_36_Sensor" foreign-id="Berth_36_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -107,7 +107,7 @@
     <node node-label="Berth_20_Sensor" foreign-id="Berth_20_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -121,7 +121,7 @@
     <node node-label="Berth_21_Sensor" foreign-id="Berth_21_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -135,7 +135,7 @@
     <node node-label="Berth_22_Sensor" foreign-id="Berth_22_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -149,7 +149,7 @@
     <node node-label="Berth_23_Sensor" foreign-id="Berth_23_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -163,7 +163,7 @@
     <node node-label="Berth_24_Sensor" foreign-id="Berth_24_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -177,7 +177,7 @@
     <node node-label="Berth_25_Sensor" foreign-id="Berth_25_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -191,7 +191,7 @@
     <node node-label="Berth_26_Sensor" foreign-id="Berth_26_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -205,7 +205,7 @@
     <node node-label="Berth_27_Sensor" foreign-id="Berth_27_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -219,7 +219,7 @@
     <node node-label="Berth_29_Sensor" foreign-id="Berth_29_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -234,7 +234,7 @@
     <node node-label="Berth_37_Sensor" foreign-id="Berth_37_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -248,7 +248,7 @@
     <node node-label="Berth_38_Sensor" foreign-id="Berth_38_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -263,7 +263,7 @@
     <node node-label="Berth_39_Sensor" foreign-id="Berth_39_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -278,7 +278,7 @@
     <node node-label="Berth_40_Sensor" foreign-id="Berth_40_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -292,7 +292,7 @@
     <node node-label="Berth_41_Sensor" foreign-id="Berth_41_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -306,7 +306,7 @@
     <node node-label="Berth_42_Sensor" foreign-id="Berth_42_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -321,7 +321,7 @@
     <node node-label="Berth_48_Sensor" foreign-id="Berth_48_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -336,7 +336,7 @@
     <node node-label="Berth_49_Sensor" foreign-id="Berth_49_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -351,7 +351,7 @@
     <node node-label="Berth_43_Sensor" foreign-id="Berth_43_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -365,7 +365,7 @@
     <node node-label="Berth_44_Sensor" foreign-id="Berth_44_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -379,7 +379,7 @@
     <node node-label="Berth_45_Sensor" foreign-id="Berth_45_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -393,7 +393,7 @@
     <node node-label="Berth_46_Sensor" foreign-id="Berth_46_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -408,7 +408,7 @@
     <node node-label="Berth_47_Sensor" foreign-id="Berth_47_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -423,7 +423,7 @@
     <node node-label="Berth_101_Sensor" foreign-id="Berth_101_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -438,7 +438,7 @@
     <node node-label="Berth_102_Sensor" foreign-id="Berth_102_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -453,7 +453,7 @@
     <node node-label="Berth_103_Sensor" foreign-id="Berth_103_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -468,7 +468,7 @@
     <node node-label="Berth_104_Sensor" foreign-id="Berth_104_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -483,7 +483,7 @@
     <node node-label="Berth_105_Sensor" foreign-id="Berth_105_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -498,7 +498,7 @@
     <node node-label="Berth_106_Sensor" foreign-id="Berth_106_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -513,7 +513,7 @@
     <node node-label="Berth_107_Sensor" foreign-id="Berth_107_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -528,7 +528,7 @@
     <node node-label="Berth_108_Sensor" foreign-id="Berth_108_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -543,7 +543,7 @@
     <node node-label="Berth_109_Sensor" foreign-id="Berth_109_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -558,7 +558,7 @@
     <node node-label="Berth_110_Sensor" foreign-id="Berth_110_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -572,7 +572,7 @@
     <node node-label="Berth_GVD_Sensor" foreign-id="Berth_GVD_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -586,7 +586,7 @@
     <node node-label="Berth_SCT_5_Sensor" foreign-id="Berth_SCT_5_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -600,7 +600,7 @@
     <node node-label="Berth_203_Sensor" foreign-id="Berth_203_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -614,7 +614,7 @@
     <node node-label="Berth_SCT_4_Sensor" foreign-id="Berth_SCT_4_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -628,7 +628,7 @@
     <node node-label="Berth_SCT_3_Sensor" foreign-id="Berth_SCT_3_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -642,7 +642,7 @@
     <node node-label="Berth_SCT_2_Sensor" foreign-id="Berth_SCT_2_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -656,7 +656,7 @@
     <node node-label="Berth_SCT_1_Sensor" foreign-id="Berth_SCT_1_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -670,7 +670,7 @@
     <node node-label="Berth_1_Sensor" foreign-id="Berth_1_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -684,7 +684,7 @@
     <node node-label="Berth_2_Sensor" foreign-id="Berth_2_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -698,7 +698,7 @@
     <node node-label="Berth_3_Sensor" foreign-id="Berth_3_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
@@ -713,7 +713,7 @@
     <node node-label="Berth_4_Sensor" foreign-id="Berth_4_Sensor">
         <interface ip-addr="139.162.227.142" snmp-primary="P">
             <monitored-service service-name="ICMP"/>
-            <monitored-service service-name="HTTP"/>
+            <monitored-service service-name="HTTP-8080"/>
             <monitored-service service-name="IotDevice"/>
         </interface>
         <asset name="city" value="Southampton"/>
