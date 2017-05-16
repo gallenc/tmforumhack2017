@@ -1,4 +1,4 @@
-export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToast) {
+export default function ($timeout, HuaweiHTTPService, SalesForceService, $uibModal, ngToast) {
 
     this.open = function (id) {
 
@@ -39,10 +39,11 @@ export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToas
     });
 
     this.charge = function ($product, $quantity, $amount) {
-        HuaweiHTTPService.charge_amount($amount).then(reponse => {
+        $timeout(() => {
             ngToast.create("Amount "+$amount+" Charged for "+$quantity+" of "+$product.name);
-        });
+        }, 500);
 
+        HuaweiHTTPService.charge_amount($amount);
     }
 }
 
