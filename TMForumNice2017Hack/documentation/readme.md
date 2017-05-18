@@ -1,3 +1,6 @@
+# The final pitch for this project is 
+SolentTMForumFinalPres17May;0.2.pdf
+
 # specifications
 
 The core TM Forum specification documents and RI's for this project are
