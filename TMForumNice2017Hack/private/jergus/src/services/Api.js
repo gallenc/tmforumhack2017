@@ -17,5 +17,9 @@ export default function ($http) {
         getDrones() {
             return $http.get(env.API_URL + '/drones').then(response => response.data);
         },
+
+        getNodes() {
+            return $http.get(env.API_URL + '/sensors').then(response => response.data);
+        },
     };
 };

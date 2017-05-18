@@ -1,4 +1,9 @@
-export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToast) {
+export default function ($timeout, HuaweiHTTPService, SalesForceService, $uibModal, ngToast) {
+    this.balance = 0;
+
+    HuaweiHTTPService.get_balance().then(response => {
+        this.balance = response.data[0].remainedAmount.amount;
+    })
 
     this.open = function (id) {
 
@@ -18,11 +23,7 @@ export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToas
 
         modalInstance.result.then( (selectedItem) => {
             this.charge(selectedItem.item.product, selectedItem.quantity, selectedItem.total);
-        }, function () {
-
         });
-
-
     }
 
 
@@ -39,10 +40,13 @@ export default function (HuaweiHTTPService, SalesForceService, $uibModal, ngToas
     });
 
     this.charge = function ($product, $quantity, $amount) {
-        HuaweiHTTPService.charge_amount($amount).then(reponse => {
-            ngToast.create("Amount "+$amount+" Charged for "+$quantity+" of "+$product.name);
-        });
+        $timeout(() => {
+            ngToast.create("Amount £"+ (parseFloat($amount).toFixed(2)) +" Charged for "+$quantity+" of "+$product.name);
 
+            this.balance -= (parseFloat($amount).toFixed(2));
+        }, 500);
+
+        HuaweiHTTPService.charge_amount($amount)
     }
 }
 

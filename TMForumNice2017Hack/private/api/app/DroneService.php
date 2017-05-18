@@ -76,7 +76,7 @@ class DroneService
             $this->client->get($this->url.'/vehicle/48bb4f10'),
             $this->client->get($this->url.'/vehicle/8b4024aa'),
             $this->client->get($this->url.'/vehicle/ac80ec8a'),
-            $this->client->get($this->url.'/vehicle/0e1b383a'),
+            // $this->client->get($this->url.'/vehicle/0e1b383a'),
         ])->map(function ($drone) {
             return [
                 'id'       => $drone['id'],
