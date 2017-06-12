@@ -14,7 +14,7 @@
       <import-groups>xml-datacollection/elasticsearch-cluster-stats.xml</import-groups>
     </xml-source>
   </xml-collection>
-  
+
   <!-- collection for opennms node latitude and longitude -->
   <xml-collection name="xml-onms-node-latlon">
     <rrd step="300">
@@ -27,24 +27,6 @@
     <!-- <xml-source url="http://demo1.opennms.co.uk:8980/opennms/rest/nodes/southampton-port2:Berth_101_Sensor/assetRecord"> -->
     <xml-source url="http://localhost::8980/opennms/rest/nodes/{foreignSource}:{foreignId}/assetRecord">
       <import-groups>xml-datacollection/xml-onms-node-latlon.xml</import-groups>
-    </xml-source>
-  </xml-collection>
-
-  <!-- collection for drone / iot data 30 seconds poll -->
-  <xml-collection name="xml-iotdevice-stats">
-
-    <rrd step="30">
-      <rra>RRA:AVERAGE:0.5:1:2016</rra>
-      <rra>RRA:AVERAGE:0.5:12:1488</rra>
-      <rra>RRA:AVERAGE:0.5:288:366</rra>
-      <rra>RRA:MAX:0.5:288:366</rra>
-      <rra>RRA:MIN:0.5:288:366</rra>
-    </rrd>
-    <!-- {ipaddr} -->
-    <!-- <xml-source url="http://139.162.227.142:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsamplelabel?label=fixedIoT"> -->
-
-    <xml-source url="http://{ipaddr}:8080/iot-data-data-collection-simulator/iotsimulator/api/v1/iotsamplelabel?label={foreignId}">
-      <import-groups>xml-datacollection/xml-iotdevice-stats.xml</import-groups>
     </xml-source>
   </xml-collection>
 </xml-datacollection-config>

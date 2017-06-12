@@ -1,0 +1,17 @@
+<xml-groups>
+
+  <!-- OpenNMS Asset Table -->
+  <!-- http://demo1.opennms.co.uk:8980/opennms/rest/nodes/southampton-port2:Berth_101_Sensor/assetRecord -->
+  <!-- <assetRecord> -->
+  <!-- <lastModifiedDate>2017-05-16T11:04:28.899Z</lastModifiedDate> -->
+  <!-- <latitude>50.9</latitude> -->
+  <!-- <longitude>-1.414</longitude> -->
+  <!-- <node>95</node> -->
+  <!-- </assetRecord> -->
+
+  <xml-group name="device" resource-type="node" resource-xpath="/assetRecord">
+    <xml-object name="latitude" type="GAUGE" xpath="latitude" />
+    <xml-object name="longitude" type="GAUGE" xpath="longitude" />
+  </xml-group>
+
+</xml-groups>

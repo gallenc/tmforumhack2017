@@ -174,15 +174,9 @@
         <service name="OnmsNodeLatLon" interval="300000" user-defined="false" status="on">
             <parameter key="collection" value="xml-onms-node-latlon" />
         </service>
-
-        <service name="IotDevice" interval="300" user-defined="false" status="on">
-            <parameter key="collection" value="xml-iotdevice-stats" />
-            <parameter key="handler-class" value="org.opennms.protocols.json.collector.DefaultJsonCollectionHandler"/>
-        </service>
     </package>
 
     <collector service="OnmsNodeLatLon" class-name="org.opennms.protocols.xml.collector.XmlCollector"/>
-    <collector service="IotDevice" class-name="org.opennms.protocols.xml.collector.XmlCollector"/>
 
     <collector service="Elasticsearch" class-name="org.opennms.protocols.xml.collector.XmlCollector"/>
     <collector service="PostgreSQL" class-name="org.opennms.netmgt.collectd.JdbcCollector"/>
