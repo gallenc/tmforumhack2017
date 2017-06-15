@@ -24,8 +24,8 @@
       <rra>RRA:MAX:0.5:288:366</rra>
       <rra>RRA:MIN:0.5:288:366</rra>
     </rrd>
-    <!-- <xml-source url="http://demo1.opennms.co.uk:8980/opennms/rest/nodes/southampton-port2:Berth_101_Sensor/assetRecord"> -->
-    <xml-source url="http://localhost::8980/opennms/rest/nodes/{foreignSource}:{foreignId}/assetRecord">
+    <!-- admin:admin - change to opennms rest account / password -->
+    <xml-source url="http://admin:admin@127.0.0.1:8980/opennms/rest/nodes/{foreignSource}:{foreignId}/assetRecord">
       <import-groups>xml-datacollection/xml-onms-node-latlon.xml</import-groups>
     </xml-source>
   </xml-collection>
