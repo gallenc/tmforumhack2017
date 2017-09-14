@@ -26,28 +26,20 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.plugins.mqttclient;
+package org.opennms.plugins.messagenotifier;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * simple class to print startup message to karaf consol
- * @author cgallen
+ * Client interface used to register to receive MessageNotifications
+ * @author admin
  *
  */
-public class SayHello {
-	private static final Logger LOG = LoggerFactory.getLogger(SayHello.class);
+public interface NotificationClient {
+
+	public void sendMessageNotification(MessageNotification messageNotification);
+
+	public void init();
 	
-	public SayHello(){
-		super();
-		LOG.info("Hello - MqttClient started");
-		System.out.println("Hello - MqttClient started");
-	}
+	public void destroy();
 	
-	public void destroyMethod(){
-		LOG.info("Goodbye - Hello - MqttClient stopped");
-		System.out.println("Goodbye - Hello - MqttClient stopped");
-	}
 }

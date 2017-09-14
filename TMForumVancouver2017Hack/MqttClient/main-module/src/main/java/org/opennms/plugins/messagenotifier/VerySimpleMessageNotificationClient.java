@@ -26,28 +26,39 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.plugins.mqttclient;
-
+package org.opennms.plugins.messagenotifier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * simple class to print startup message to karaf consol
- * @author cgallen
+ * This class simply prints out the received notification. Used primarily for testing.
+ * @author admin
  *
  */
-public class SayHello {
-	private static final Logger LOG = LoggerFactory.getLogger(SayHello.class);
-	
-	public SayHello(){
-		super();
-		LOG.info("Hello - MqttClient started");
-		System.out.println("Hello - MqttClient started");
+public class VerySimpleMessageNotificationClient implements NotificationClient {
+	private static 	final Logger LOG = LoggerFactory.getLogger(MessageNotificationClientQueueImpl.class);
+
+	@Override
+	public void sendMessageNotification(MessageNotification messageNotification) {
+		if(LOG.isDebugEnabled()) LOG.debug("Notification received by VerySimpleMessageNotificationClient :\n topic:"+messageNotification.getTopic()
+				+ "\n qos:"+messageNotification.getQos()
+				+ "\n retained:"+messageNotification.getRetained()
+				+ "\n payload:"+messageNotification.getPayload());
+
 	}
-	
-	public void destroyMethod(){
-		LOG.info("Goodbye - Hello - MqttClient stopped");
-		System.out.println("Goodbye - Hello - MqttClient stopped");
+
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+
 	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+
+	}
+
 }

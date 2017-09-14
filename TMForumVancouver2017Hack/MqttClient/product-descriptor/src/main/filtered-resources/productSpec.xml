@@ -24,7 +24,7 @@
 	
   <organization>OpenNMS Project</organization>
   <productDescription>MQTT Receiver connects to an mqtt broker for messages</productDescription>
-  <productName>opennms-es-rest</productName>
+  <productName>${productName}</productName>
   <productUrl>http:\\opennms.co.uk</productUrl>
   <licenceKeyRequired>false</licenceKeyRequired>
   <licenceType>AGPL</licenceType>

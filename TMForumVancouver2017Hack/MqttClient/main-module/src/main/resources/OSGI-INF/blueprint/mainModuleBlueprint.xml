@@ -16,8 +16,7 @@
   </bean>
 
   <!-- Configuration properties -->
-  <cm:property-placeholder id="esEventForwarderProperties" persistent-id="org.opennms.plugin.elasticsearch.rest.forwarder"
-    update-strategy="reload">
+  <cm:property-placeholder id="mqttClientProperties" persistent-id="org.opennms.plugin.mqttclient" update-strategy="reload">
     <cm:default-properties>
       
     </cm:default-properties>

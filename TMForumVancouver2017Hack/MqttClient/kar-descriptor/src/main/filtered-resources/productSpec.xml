@@ -31,5 +31,5 @@
   <licenceType>See Plugin Documentation for ELUA</licenceType>
   
   <!-- a plugin marked as a system plugin will not be removable by the plugin manager -->
-  <systemPlugin>true</systemPlugin>
+  <systemPlugin>false</systemPlugin>
 </product>
