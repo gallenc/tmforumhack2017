@@ -2,6 +2,7 @@ package org.opennms.plugins.mqttclient;
 
 import java.sql.Timestamp;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -14,8 +15,10 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MQTTClient implements MqttCallback {
-	private static final Logger LOG = LoggerFactory.getLogger(MQTTClient.class);
+public class MQTTClientImpl implements MqttCallback {
+	private static final Logger LOG = LoggerFactory.getLogger(MQTTClientImpl.class);
+	
+	private AtomicInteger reconnectionCount = new AtomicInteger(0);
 
 	// Private instance variables
 	private MqttAsyncClient 	client;
@@ -43,7 +46,7 @@ public class MQTTClient implements MqttCallback {
 	 * @param password the password for the user
 	 * @param connectionRetryInterval   interval (ms) before re attempting connection.
 	 */
-	public MQTTClient(String brokerUrl, String clientId, String userName, String password, int connectionRetryInterval) {
+	public MQTTClientImpl(String brokerUrl, String clientId, String userName, String password, int connectionRetryInterval) {
 		this.brokerUrl = brokerUrl;
 		this.userName = userName;
 		this.password = password;
@@ -97,7 +100,8 @@ public class MQTTClient implements MqttCallback {
 			clientConnected.set(false);
 			return false;
 		}
-		LOG.debug("Connected to MQTT broker");
+		LOG.debug("Connected to MQTT broker (number of connection attempts since start="
+				+ reconnectionCount.incrementAndGet()+")");
 		clientConnected.set(true);
 		return true;
 	}
@@ -164,12 +168,22 @@ public class MQTTClient implements MqttCallback {
 			throw new RuntimeException("problem synchronously publishing message",e);
 		} 	
 	}
-	
+
 	public void subscribe(String topic, int qos){
 		try {
 			client.subscribe(topic,qos);
 		} catch (MqttException e) {
 			throw new RuntimeException("problem subscribing to topic:"+topic+ " qos "+qos,e);
+		}
+	}
+
+	public void destroy(){
+		try {
+			clientConnected.set(false);
+			stopConnectionRetryThead();
+			client.close();
+		} catch (MqttException e) {
+			LOG.error("problem closing client");
 		}
 	}
 
@@ -198,6 +212,7 @@ public class MQTTClient implements MqttCallback {
 	 */
 	public synchronized void startConnectionRetryThead(){
 		if (m_connectionRetryThread==null){
+			
 			if(connectionRetryInterval==null) throw new RuntimeException("retryInterval cannot be null");
 
 			m_connectionRetryThread = new Thread(new Runnable() {
@@ -279,6 +294,11 @@ public class MQTTClient implements MqttCallback {
 					"  Message:\t" + new String(message.getPayload()) +
 					"  QoS:\t" + message.getQos());
 		}
+		String time = new Timestamp(System.currentTimeMillis()).toString();
+		System.out.println("Time:\t" +time +
+				"  Topic:\t" + topic +
+				"  Message:\t" + new String(message.getPayload()) +
+				"  QoS:\t" + message.getQos());
 
 	}
 
