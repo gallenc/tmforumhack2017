@@ -18,94 +18,37 @@
   <!-- Configuration properties -->
   <cm:property-placeholder id="mqttClientProperties" persistent-id="org.opennms.plugin.mqttclient" update-strategy="reload">
     <cm:default-properties>
-      
+      <cm:property name="org.opennms.plugin.mqttclient.brokerUrl" value="tcp://localhost:1883" />
+      <cm:property name="org.opennms.plugin.mqttclient.clientId" value="opennms" />
+      <cm:property name="org.opennms.plugin.mqttclient.userName" value="" />
+      <cm:property name="org.opennms.plugin.mqttclient.password" value="" />
+      <cm:property name="org.opennms.plugin.mqttclient.connectionRetryInterval" value="30000" />
+      <cm:property name="org.opennms.plugin.mqttclient.eventtopic" value="eventtopic" />
     </cm:default-properties>
   </cm:property-placeholder>
 
-<!--   <reference id="nodeDao" interface="org.opennms.netmgt.dao.api.NodeDao" availability="mandatory" /> -->
-<!--   <reference id="transactionOperations" interface="org.springframework.transaction.support.TransactionOperations" availability="mandatory" /> -->
-
-<!--   <bean id="eventIpcManager" class="org.opennms.netmgt.events.api.EventIpcManagerFactory" factory-method="getIpcManager" /> -->
-
-<!--   <bean id="eventListener" class="org.opennms.plugins.elasticsearch.rest.ForwardingEventListener" init-method="init" destroy-method="destroy"> -->
-<!--     <property name="eventIpcManager" ref="eventIpcManager" /> -->
-<!--     <property name="eventForwarder" ref="eventForwarder" /> -->
-<!--   </bean> -->
-
-  <!-- <bean id="eventForwarder" class=" org.opennms.plugins.elasticsearch.rest.EventForwarderImpl"> -->
-  <!-- <property name="eventToIndex" ref="eventToIndex" /> -->
-  <!-- </bean> -->
-
-<!--   <bean id="eventForwarder" class=" org.opennms.plugins.elasticsearch.rest.EventForwarderQueueImpl" init-method="init" destroy-method="close"> -->
-<!--     <property name="batchSize" value="${batchSize}" /> -->
-<!--     <property name="batchInterval" value="${batchInterval}" /> -->
-<!--     <property name="eventToIndex" ref="eventToIndex" /> -->
-<!--     <property name="elasticSearchInitialiser" ref="elasticSearchInitialiser" /> -->
-<!--   </bean> -->
+  <!-- MQTTClientImpl(String brokerUrl, String clientId, String userName, String password, String connectionRetryInterval) -->
+  <bean id="mqttClientMessageNotifier" class="org.opennms.plugins.mqttclient.MQTTClientImpl" init-method="init" destroy-method="destroy">
+    <argument index="0" value="${org.opennms.plugin.mqttclient.brokerUrl}" />
+    <argument index="1" value="${org.opennms.plugin.mqttclient.clientId}" />
+    <argument index="2" value="${org.opennms.plugin.mqttclient.userName}" />
+    <argument index="3" value="${org.opennms.plugin.mqttclient.password}" />
+    <argument index="4" value="${org.opennms.plugin.mqttclient.connectionRetryInterval}" />
+  </bean>
 
 
-<!--   <bean id="nodeDataCache" class="org.opennms.plugins.elasticsearch.rest.NodeCacheImpl" init-method="init"> -->
-<!--     <property name="nodeDao" ref="nodeDao" /> -->
-<!--     <property name="transactionOperations" ref="transactionOperations" /> -->
-<!--     <property name="MAX_TTL" value="${cache_max_ttl}" /> -->
-<!--     <property name="MAX_SIZE" value="${cache_max_size}" /> -->
-<!--     <property name="archiveAssetData" value="${archiveAssetData}" /> -->
-<!--   </bean> -->
+  <bean id="messageNotifierClient" class="org.opennms.plugins.messagenotifier.MessageNotificationClientQueueImpl" init-method="init" destroy-method="destroy">
+    <property name="messageNotifier" ref="mqttClientMessageNotifier" />
+    <property name="maxQueueLength" value="1000" />
 
-<!--   <bean id="restClientFactory" class="org.opennms.plugins.elasticsearch.rest.RestClientFactory"> -->
-<!--     <argument value="${elasticsearchUrl}" /> -->
-<!--     <argument value="${esusername}" /> -->
-<!--     <argument value="${espassword}" /> -->
-<!--     <property name="timeout" value="${timeout}" /> -->
-<!--     <property name="retries" value="${retries}" /> -->
-<!--     <property name="socketTimeout" value="${socketTimeout}" /> -->
-<!--   </bean> -->
+    <property name="channelHandlingClients">
+      <map>
+        <entry key="mqtt_events" value-ref="verySimpleClient" />
+      </map>
+    </property>
+  </bean>
 
-
-<!--   <bean id="eventToIndex" class="org.opennms.plugins.elasticsearch.rest.EventToIndex" destroy-method="close"> -->
-<!--     <property name="restClientFactory" ref="restClientFactory" /> -->
-<!--     <property name="nodeCache" ref="nodeDataCache" /> -->
-<!--     <property name="indexNameFunction" ref="indexNameFunction" /> -->
-<!--     <property name="logEventDescription" value="${logEventDescription}" /> -->
-<!--     <property name="logAllEvents" value="${logAllEvents}" /> -->
-<!--     <property name="threads" value="${threads}" /> -->
-<!--     <property name="archiveRawEvents" value="${archiveRawEvents}" /> -->
-<!--     <property name="archiveAlarms" value="${archiveAlarms}" /> -->
-<!--     <property name="archiveAlarmChangeEvents" value="${archiveAlarmChangeEvents}" /> -->
-<!--     <property name="archiveOldAlarmValues" value="${archiveOldAlarmValues}" /> -->
-<!--     <property name="archiveNewAlarmValues" value="${archiveNewAlarmValues}" /> -->
-<!--   </bean> -->
-
-<!--   <bean id="indexNameFunction" class="org.opennms.plugins.elasticsearch.rest.IndexNameFunction"> -->
-<!--     <argument value="yyyy.MM" /> -->
-<!--   </bean> -->
-
-<!--   <bean id="elasticSearchInitialiser" class="org.opennms.plugins.elasticsearch.rest.ElasticSearchInitialiser" init-method="init" destroy-method="destroy"> -->
-<!--     <property name="restClientFactory" ref="restClientFactory" /> -->
-<!--     <property name="templateFiles"> -->
-<!--       map of template files to load: key = template name (must be lower case) value= json file to load -->
-<!--       <map> -->
-
-<!--         <entry key="eventsindextemplate" value="eventsIndexTemplate.json" /> -->
-<!--         <entry key=”alarmEventsIndexTemplate” value=”alarmEventsIndexTemplate.json” /> -->
-<!--         <entry key=”alarmsIndexTemplate” value=”alarmsIndexTemplate.json” /> -->
-<!--       </map> -->
-<!--     </property> -->
-<!--   </bean> -->
-
-<!--   <bean id="openNMSHistoricEventsToEs" class="org.opennms.plugins.elasticsearch.rest.archive.OpenNMSHistoricEventsToEs"> -->
-<!--     <property name="eventForwarder" ref="eventForwarder" /> -->
-<!--   </bean> -->
-
-  <!-- command line commands -->
-<!--   <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0"> -->
-
-    <!-- send events to Elasticsearch -->
-<!--     <command name="elastic-search/send-historic-events"> -->
-<!--       <action class="org.opennms.plugins.elasticsearch.rest.archive.cmd.SendEventsToEsCommand"> -->
-<!--         <property name="openNMSHistoricEventsToEs" ref="openNMSHistoricEventsToEs" /> -->
-<!--       </action> -->
-<!--     </command> -->
-<!--   </command-bundle> -->
+  <!-- used for testing only -->
+  <bean id="verySimpleClient" class="org.opennms.plugins.dbnotifier.VerySimpleNotificationClient" />
 
 </blueprint>

@@ -62,7 +62,7 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 	/**
 	 * @param topicHandlingClients the topicHandlingClients to set
 	 */
-	public void settopicHandlingClients(Map<String,NotificationClient> topicHandlingClients) {
+	public void setTopicHandlingClients(Map<String,NotificationClient> topicHandlingClients) {
 		this.topicHandlingClients.putAll(topicHandlingClients);
 	}
 
@@ -90,7 +90,7 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 
 	public void init(){
 		LOG.debug("initialising messageNotificationClientQueue with queue size "+maxQueueLength);
-		if (messageNotifier==null) throw new IllegalStateException("databaseChangeNotifier cannot be null");
+		if (messageNotifier==null) throw new IllegalStateException("messageNotifier cannot be null");
 		
 		queue= new LinkedBlockingQueue<MessageNotification>(maxQueueLength);
 		
@@ -105,10 +105,9 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 
 	public void destroy(){
 		LOG.debug("shutting down client");
-		if (messageNotifier==null) throw new IllegalStateException("databaseChangeNotifier cannot be null");
 
 		// stop listening for notifications
-		messageNotifier.removeMessageNotificationClient(this);
+		if (messageNotifier!=null) messageNotifier.removeMessageNotificationClient(this);
 
 		// signal consuming thread to stop
 		clientRunning.set(false);
@@ -116,15 +115,14 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 	}
 
 	@Override
-	public void sendMessageNotification(MessageNotification dbNotification) {
+	public void sendMessageNotification(MessageNotification messageNotification) {
 		if(LOG.isDebugEnabled()) LOG.debug("client received notification - adding notification to queue");
 		
-		if (! queue.offer(dbNotification)){
-			LOG.warn("Cannot queue any more dbNotification. dbNotification queue full. size="+queue.size());
+		if (! queue.offer(messageNotification)){
+			LOG.warn("Cannot queue any more messageNotifications. messageNotification queue full. size="+queue.size());
 		};
 
 	}
-
 
 
 	/*
@@ -142,8 +140,7 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 
 					if(LOG.isDebugEnabled()) LOG.debug("Notification received from queue by consumer thread :\n topic:"+messageNotification.getTopic()
 							+ "\n qos:"+messageNotification.getQos()
-							+ "\n retained:"+messageNotification.getRetained()
-							+ "\n payload:"+messageNotification.getPayload());
+							+ "\n payload:"+new String(messageNotification.getPayload()));
 					
 					// we look in hashtable for topic handling clients to handle this received notification
 					if(topicHandlingClients.isEmpty()) { 

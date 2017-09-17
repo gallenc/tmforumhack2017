@@ -1,6 +1,10 @@
 package org.opennms.plugins.mqttclient;
 
 import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -12,12 +16,15 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.opennms.plugins.messagenotifier.MessageNotification;
+import org.opennms.plugins.messagenotifier.MessageNotificationClient;
+import org.opennms.plugins.messagenotifier.MessageNotifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MQTTClientImpl implements MqttCallback {
+public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 	private static final Logger LOG = LoggerFactory.getLogger(MQTTClientImpl.class);
-	
+
 	private AtomicInteger reconnectionCount = new AtomicInteger(0);
 
 	// Private instance variables
@@ -34,10 +41,37 @@ public class MQTTClientImpl implements MqttCallback {
 
 	private AtomicBoolean clientConnected = new AtomicBoolean(false); 
 
+
 	private Thread m_connectionRetryThread=null;
 
 	// connectionRetryInterval   interval (ms) before re attempting connection.
 	private Integer connectionRetryInterval=30000;
+
+	private Set<MessageNotificationClient> messageNotificationClientList = Collections.synchronizedSet(new HashSet<MessageNotificationClient>());
+
+	/**
+	 * adds new MessageNotificationClient to list of clients which will be sent database notifications
+	 * @param MessageNotificationClient
+	 */
+	@Override
+	public void addMessageNotificationClient(MessageNotificationClient messageNotificationClient){
+		LOG.debug("adding messageNotificationClient:"+messageNotificationClient.toString());
+		messageNotificationClientList.add(messageNotificationClient);
+	}
+
+	/**
+	 * removes messageNotificationClient from list of clients which will be sent database notifications
+	 * @param messageNotificationClient
+	 */
+	@Override
+	public void removeMessageNotificationClient(MessageNotificationClient messageNotificationClient){
+		LOG.debug("removing messageNotificationClient:"+messageNotificationClient.toString());
+		messageNotificationClientList.remove(messageNotificationClient);
+	}
+
+	public boolean isClientConnected() {
+		return clientConnected.get();
+	}
 
 	/**
 	 * @param brokerUrl the url to connect to
@@ -46,11 +80,11 @@ public class MQTTClientImpl implements MqttCallback {
 	 * @param password the password for the user
 	 * @param connectionRetryInterval   interval (ms) before re attempting connection.
 	 */
-	public MQTTClientImpl(String brokerUrl, String clientId, String userName, String password, int connectionRetryInterval) {
+	public MQTTClientImpl(String brokerUrl, String clientId, String userName, String password, String connectionRetryInterval) {
 		this.brokerUrl = brokerUrl;
 		this.userName = userName;
 		this.password = password;
-		this.connectionRetryInterval=connectionRetryInterval;
+		this.connectionRetryInterval=Integer.parseInt(connectionRetryInterval);
 
 		MemoryPersistence persistence = new MemoryPersistence();
 
@@ -89,7 +123,9 @@ public class MQTTClientImpl implements MqttCallback {
 			clientConnected.set(true);
 			return true;
 		}
-		LOG.debug("Connecting to "+brokerUrl + " with client ID "+client.getClientId());
+		LOG.debug("Connecting to "+brokerUrl + " with client ID "+client.getClientId()
+				+" (number of connection attempts since start="
+				+ reconnectionCount.incrementAndGet()+")");
 		IMqttToken conToken;
 		try {
 			conToken = client.connect(conOpt,null,null);
@@ -100,8 +136,7 @@ public class MQTTClientImpl implements MqttCallback {
 			clientConnected.set(false);
 			return false;
 		}
-		LOG.debug("Connected to MQTT broker (number of connection attempts since start="
-				+ reconnectionCount.incrementAndGet()+")");
+		LOG.debug("Connected to MQTT broker");
 		clientConnected.set(true);
 		return true;
 	}
@@ -135,7 +170,7 @@ public class MQTTClientImpl implements MqttCallback {
 			IMqttDeliveryToken pubToken = client.publish(topicName, message, null, null);
 			pubToken.waitForCompletion();
 		} catch (MqttException e) {
-			throw new RuntimeException("problem synchronously publishing message",e);
+			throw new RuntimeException("problem synchronously publishing message.",e);
 		} 	
 		LOG.debug("Published");
 
@@ -155,7 +190,7 @@ public class MQTTClientImpl implements MqttCallback {
 
 		if (LOG.isDebugEnabled()){
 			String time = new Timestamp(System.currentTimeMillis()).toString();
-			LOG.debug("Publishing asynchronpus message at: "+time+ " to topic \""+topicName+"\" qos "+qos);
+			LOG.debug("Publishing asynchronous message at: "+time+ " to topic \""+topicName+"\" qos "+qos);
 		}
 
 		// Construct the message to send
@@ -177,14 +212,25 @@ public class MQTTClientImpl implements MqttCallback {
 		}
 	}
 
+	/** 
+	 * destroy method
+	 */
 	public void destroy(){
 		try {
 			clientConnected.set(false);
 			stopConnectionRetryThead();
+			client.disconnect();
 			client.close();
 		} catch (MqttException e) {
-			LOG.error("problem closing client");
+			LOG.error("problem closing client",e);
 		}
+	}
+
+	/**
+	 * init method
+	 */
+	public void init(){
+		startConnectionRetryThead();
 	}
 
 
@@ -194,14 +240,15 @@ public class MQTTClientImpl implements MqttCallback {
 	 * the disconnect completes.
 	 */
 	public synchronized void disconnect(){
-		clientConnected.set(false);
 		LOG.debug("Disconnecting from MQTT broker");
-		try {
-			IMqttToken discToken = client.disconnect(null, null);
-			discToken.waitForCompletion();
-		} catch (MqttException e1) {
-			// An exception is thrown if connect fails.
-			LOG.error("error when disconnecting from MQTT broker:",e1);
+		if(clientConnected.getAndSet(false)){
+			try {
+				IMqttToken discToken = client.disconnect(null, null);
+				discToken.waitForCompletion();
+			} catch (MqttException e1) {
+				// An exception is thrown if connect fails.
+				LOG.error("error when disconnecting from MQTT broker:",e1);
+			}
 		}
 		LOG.debug("Disconnected from MQTT broker");
 	}
@@ -210,10 +257,10 @@ public class MQTTClientImpl implements MqttCallback {
 	 * Starts trying to reconnect to the broker in a separate thread. 
 	 * the retry interval sets how long between connection attempts the client waits
 	 */
-	public synchronized void startConnectionRetryThead(){
+	private synchronized void startConnectionRetryThead(){
 		if (m_connectionRetryThread==null){
-			
-			if(connectionRetryInterval==null) throw new RuntimeException("retryInterval cannot be null");
+
+			if(connectionRetryInterval==null) throw new RuntimeException("connectionretryInterval cannot be null");
 
 			m_connectionRetryThread = new Thread(new Runnable() {
 
@@ -248,7 +295,7 @@ public class MQTTClientImpl implements MqttCallback {
 	}
 
 
-	public synchronized void stopConnectionRetryThead(){
+	private synchronized void stopConnectionRetryThead(){
 		clientConnected.set(false);
 		if (m_connectionRetryThread!=null){
 			m_connectionRetryThread.interrupt();
@@ -270,11 +317,9 @@ public class MQTTClientImpl implements MqttCallback {
 	 */
 	@Override
 	public void connectionLost(Throwable cause) {
-
 		clientConnected.set(false);
 		LOG.debug("Connection to " + brokerUrl + " lost!" + cause);
 		startConnectionRetryThead();
-
 	}
 
 	@Override
@@ -294,11 +339,23 @@ public class MQTTClientImpl implements MqttCallback {
 					"  Message:\t" + new String(message.getPayload()) +
 					"  QoS:\t" + message.getQos());
 		}
-		String time = new Timestamp(System.currentTimeMillis()).toString();
-		System.out.println("Time:\t" +time +
-				"  Topic:\t" + topic +
-				"  Message:\t" + new String(message.getPayload()) +
-				"  QoS:\t" + message.getQos());
+
+		byte[] payload = message.getPayload();
+		int qos = message.getQos();
+
+		MessageNotification dbn = new MessageNotification(topic, qos, payload);
+
+		// send notifications to registered clients - note each client must return quickly
+		synchronized(messageNotificationClientList) {
+			Iterator<MessageNotificationClient> i = messageNotificationClientList.iterator(); // Must be in synchronized block
+			while (i.hasNext()){
+				try{
+					i.next().sendMessageNotification(dbn);
+				} catch (Exception e){
+					LOG.error("Problem actioning message notification.",e);
+				}
+			}         
+		}
 
 	}
 

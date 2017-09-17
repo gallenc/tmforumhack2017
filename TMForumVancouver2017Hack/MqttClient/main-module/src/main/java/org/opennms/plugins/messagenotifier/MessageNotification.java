@@ -38,13 +38,11 @@ public class MessageNotification {
 	private String topic;
 	private byte[] payload;
 	private int qos;
-	private boolean retained;
 
-	public MessageNotification( String topic, byte[] payload, int qos, boolean retained){
+	public MessageNotification( String topic, int qos, byte[] payload){
 		this.topic=topic;
 		this.payload=payload;
 		this.qos=qos;
-		this.retained=retained;
 	}
 
 	public String getTopic() {
@@ -53,10 +51,6 @@ public class MessageNotification {
 
 	public int getQos() {
 		return qos;
-	}
-
-	public boolean getRetained() {
-		return retained;
 	}
 
 	public byte[] getPayload() {

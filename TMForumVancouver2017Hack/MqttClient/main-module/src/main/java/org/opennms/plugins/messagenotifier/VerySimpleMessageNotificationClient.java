@@ -39,12 +39,16 @@ import org.slf4j.LoggerFactory;
 public class VerySimpleMessageNotificationClient implements NotificationClient {
 	private static 	final Logger LOG = LoggerFactory.getLogger(MessageNotificationClientQueueImpl.class);
 
+	public VerySimpleMessageNotificationClient(){
+		LOG.debug("VerySimpleMessageNotificationClient initialised");
+	}
+	
+	
 	@Override
 	public void sendMessageNotification(MessageNotification messageNotification) {
 		if(LOG.isDebugEnabled()) LOG.debug("Notification received by VerySimpleMessageNotificationClient :\n topic:"+messageNotification.getTopic()
 				+ "\n qos:"+messageNotification.getQos()
-				+ "\n retained:"+messageNotification.getRetained()
-				+ "\n payload:"+messageNotification.getPayload());
+				+ "\n payload:"+new String(messageNotification.getPayload()));
 
 	}
 
