@@ -1,3 +1,31 @@
+/*******************************************************************************
+ * This file is part of OpenNMS(R).
+ *
+ * Copyright (C) 2002-2014 The OpenNMS Group, Inc.
+ * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
+ *
+ * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
+ *
+ * OpenNMS(R) is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License,
+ * or (at your option) any later version.
+ *
+ * OpenNMS(R) is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with OpenNMS(R).  If not, see:
+ *      http://www.gnu.org/licenses/
+ *
+ * For more information contact:
+ *     OpenNMS(R) Licensing <license@opennms.org>
+ *     http://www.opennms.org/
+ *     http://www.opennms.com/
+ *******************************************************************************/
+
 package org.opennms.plugins.mqttclient;
 
 import java.sql.Timestamp;
@@ -18,6 +46,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.opennms.plugins.messagenotifier.MessageNotification;
 import org.opennms.plugins.messagenotifier.MessageNotificationClient;
+import org.opennms.plugins.messagenotifier.MessageNotificationClientQueueImpl;
 import org.opennms.plugins.messagenotifier.MessageNotifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,29 +54,26 @@ import org.slf4j.LoggerFactory;
 public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 	private static final Logger LOG = LoggerFactory.getLogger(MQTTClientImpl.class);
 
-	private AtomicInteger reconnectionCount = new AtomicInteger(0);
-
-	// Private instance variables
-	private MqttAsyncClient 	client;
-
-	boolean connected= false;
-
-	private MqttConnectOptions 	conOpt;
-	private boolean clean=true;
-
+	// connectionRetryInterval   interval (ms) before re attempting connection.
+	private Integer connectionRetryInterval=30000;
 	private String brokerUrl;
 	private String password;
 	private String userName;
 
-	private AtomicBoolean clientConnected = new AtomicBoolean(false); 
+	private AtomicInteger reconnectionCount = new AtomicInteger(0);
 
+	// Private instance variables
+	private MqttAsyncClient 	client;
+	private MqttConnectOptions 	conOpt;
+	private boolean clean=true;
+
+	private AtomicBoolean clientConnected = new AtomicBoolean(false); 
 
 	private Thread m_connectionRetryThread=null;
 
-	// connectionRetryInterval   interval (ms) before re attempting connection.
-	private Integer connectionRetryInterval=30000;
-
 	private Set<MessageNotificationClient> messageNotificationClientList = Collections.synchronizedSet(new HashSet<MessageNotificationClient>());
+
+	private Set<MQTTTopicSubscription> topicList = Collections.synchronizedSet(new HashSet<MQTTTopicSubscription>());
 
 	/**
 	 * adds new MessageNotificationClient to list of clients which will be sent database notifications
@@ -67,6 +93,14 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 	public void removeMessageNotificationClient(MessageNotificationClient messageNotificationClient){
 		LOG.debug("removing messageNotificationClient:"+messageNotificationClient.toString());
 		messageNotificationClientList.remove(messageNotificationClient);
+	}
+
+	/**
+	 * adds a list of subscriptions which will be subscribed when the class connects to the broker
+	 * @param topicList
+	 */
+	public void setTopicList(Set<MQTTTopicSubscription> topicList){
+		this.topicList.addAll(topicList);
 	}
 
 	public boolean isClientConnected() {
@@ -132,7 +166,7 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 			conToken.waitForCompletion();
 		} catch (MqttException e1) {
 			// An exception is thrown if connect fails.
-			LOG.error("failed to connect to MQTT broker:",e1);
+			LOG.error("failed to connect to MQTT broker:"+ brokerUrl ,e1);
 			clientConnected.set(false);
 			return false;
 		}
@@ -204,6 +238,11 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 		} 	
 	}
 
+	/**
+	 * subscribe to topic - this is not persistent across disconnections
+	 * @param topic
+	 * @param qos
+	 */
 	public void subscribe(String topic, int qos){
 		try {
 			client.subscribe(topic,qos);
@@ -277,7 +316,20 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 								LOG.error("exception thrown when trying to start MQTT connection.",e);
 								throw new InterruptedException();
 							}
-							if(success) throw new InterruptedException();
+							if(success) {
+								// if connected then try to subscribe to topics. Try all topics and log failures
+								LOG.debug("connected to Mqtt broker. Trying to subscribe to pre-set topics "+topicList.size());
+								for(MQTTTopicSubscription subscription:topicList){
+									try{
+										LOG.debug(" subscribing to topic:"+subscription.getTopic()+" qos:"+subscription.getQos());
+										subscribe(subscription.getTopic(), Integer.parseInt(subscription.getQos()));
+									} catch(Exception e){
+										LOG.error("exception thrown when trying to subscribe to topic.",e);
+									}
+								}
+
+								throw new InterruptedException();
+							}
 							LOG.debug("waiting "+connectionRetryInterval
 									+ "ms before retrying to connect to Mqtt broker");
 							Thread.sleep(connectionRetryInterval);
@@ -293,7 +345,6 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 			LOG.info("connection retry thread started: retryInterval="+connectionRetryInterval);
 		}
 	}
-
 
 	private synchronized void stopConnectionRetryThead(){
 		clientConnected.set(false);
@@ -358,6 +409,7 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 		}
 
 	}
+
 
 	/****************************************************************/
 	/* End of Methods to implement the MqttCallback interface              */

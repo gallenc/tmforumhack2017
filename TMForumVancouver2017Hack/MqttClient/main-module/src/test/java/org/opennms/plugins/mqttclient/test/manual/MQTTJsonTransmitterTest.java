@@ -30,12 +30,16 @@ package org.opennms.plugins.mqttclient.test.manual;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -49,20 +53,18 @@ import org.opennms.plugins.mqttclient.MQTTClientImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MQTTClientJsonEventTests {
-	private static final Logger LOG = LoggerFactory.getLogger(MQTTClientJsonEventTests.class);
+public class MQTTJsonTransmitterTest {
+	private static final Logger LOG = LoggerFactory.getLogger(MQTTJsonTransmitterTest.class);
 
+	public static final String TEST_JSON_FILE="./src/test/resources/testData.json";
+	
 	//public static final String SERVER_URL = "tcp://localhost:1883";
 	public static final String SERVER_URL = "tcp://192.168.202.1:1883";
 	public static final String MQTT_USERNAME = "mqtt-user";
 	public static final String MQTT_PASSWORD = "mqtt-password";
-
-	public static final String CLIENT_ID = "receiver1";
-	public static final String CLIENT_ID2 = "transmitter1";
-	public static final String TOPIC_NAME = "mqtt-events";
-
-
 	
+	public static final String CLIENT_ID = "transmitter1";
+	public static final String TOPIC_NAME = "mqtt-events";
 	public static final int QOS_LEVEL = 0;
 
 	public static final String jsonTestMessage="{"
@@ -104,34 +106,19 @@ public class MQTTClientJsonEventTests {
 	}
 
 	@Test
-	public void testTopicConnection() {
-		LOG.debug("start of test testTopicConnection() ");
-
-		// set up receiver
-		Receiver receiver= new Receiver();
-		Thread thread = new Thread(receiver);
-		thread.start();
-
-		try {
-			Thread.sleep(5000);
-			assertTrue(receiver.isConnected());
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-		LOG.debug("Receiver is connected");
+	public void testMqttJsonTransmitter() {
+		LOG.debug("start of test testMqttJsonTransmitter() ");
 
 		// set up transmitter
 		String brokerUrl = SERVER_URL;
-		String clientId = CLIENT_ID2;
+		String clientId = CLIENT_ID;
 		String userName =MQTT_USERNAME;
 		String password =MQTT_PASSWORD;
 		String connectionRetryInterval= "1000" ;
 
-		MQTTClientImpl client = new MQTTClientImpl(brokerUrl, clientId, userName, password, connectionRetryInterval);
-
 		// will connect
-		brokerUrl = SERVER_URL;
-		client = new MQTTClientImpl(brokerUrl, clientId, userName, password, connectionRetryInterval);
+
+		MQTTClientImpl client = new MQTTClientImpl(brokerUrl, clientId, userName, password, connectionRetryInterval);
 
 		try{
 			client.init();
@@ -151,37 +138,33 @@ public class MQTTClientJsonEventTests {
 		String topic=TOPIC_NAME;
 		int qos=QOS_LEVEL;
 
-		// send text message
-		try{
-			String message="text message not json";
-			byte[] payload = message.getBytes();
-			client.publishSynchronous(topic, qos, payload);
-		} catch(Exception e){
-			LOG.debug("problem publishing message", e);
-		}
-
 		// send json message
-		try{
-			JSONObject jsonobj = parseJson(jsonTestMessage);
-			String message=jsonobj.toJSONString();
-			byte[] payload = message.getBytes();
-			client.publishSynchronous(topic, qos, payload);
-		} catch(Exception e){
-			LOG.debug("problem publishing json message", e);
-		}
+		//		try{
+		//			JSONObject jsonobj = parseJson(jsonTestMessage);
+		//			String message=jsonobj.toJSONString();
+		//			byte[] payload = message.getBytes();
+		//			client.publishSynchronous(topic, qos, payload);
+		//		} catch(Exception e){
+		//			LOG.debug("problem publishing json message", e);
+		//		}
 
-		// wait for received messages
-		try {
-			Thread.sleep(5000);
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
+		// send json messages from file
+		JSONArray jsonArray= this.readJsonFile();
+		for (Object obj : jsonArray){
+			try{
+				JSONObject jsonobj = (JSONObject) obj;
+				String message=jsonobj.toJSONString();
+				byte[] payload = message.getBytes();
+				client.publishSynchronous(topic, qos, payload);
+			} catch(Exception e){
+				LOG.debug("problem publishing json message", e);
+			}
 		}
 
 		//clean up
 		client.destroy();
-		receiver.close();
 
-		LOG.debug("end of test testTopicConnection() ");
+		LOG.debug("end of test testMqttJsonTransmitter() ");
 	}
 
 
@@ -198,75 +181,17 @@ public class MQTTClientJsonEventTests {
 		return jsonObject;
 	}
 
-
-	private class Receiver implements Runnable {
-
-		MQTTClientImpl client;
-		MessageNotificationClientQueueImpl messageNotificationClientQueueImpl;
-
-		public boolean isConnected(){
-			if(client!=null) return client.isClientConnected();
-			return false;
+	private JSONArray readJsonFile(){
+		JSONParser parser = new JSONParser();
+		try {
+			File f = new File(TEST_JSON_FILE);
+			LOG.debug("reading test data from file:"+f.getAbsolutePath());
+			JSONArray array = (JSONArray) parser.parse(new FileReader(f));
+			return array;
+		} catch (IOException | ParseException e) {
+			throw new RuntimeException("could not parse json file ",e);
 		}
-
-		public void close(){
-			LOG.debug("Receiver closing connection");
-			if (client!=null) client.destroy();
-			client=null;
-			if (messageNotificationClientQueueImpl!=null ) messageNotificationClientQueueImpl.destroy();
-		}
-
-		@Override
-		public void run() {
-			String brokerUrl = SERVER_URL;
-			String clientId = CLIENT_ID;
-			String userName =null;
-			String password =null;
-			String connectionRetryInterval= "1000" ;
-
-			LOG.debug("Receiver initiating connection");
-
-			client = new MQTTClientImpl(brokerUrl, clientId, userName, password, connectionRetryInterval);
-
-			messageNotificationClientQueueImpl = new MessageNotificationClientQueueImpl();
-
-			messageNotificationClientQueueImpl.setMessageNotifier(client);
-
-			messageNotificationClientQueueImpl.setMaxQueueLength(100);
-
-			Map<String, NotificationClient> topicHandlingClients = new HashMap<String, NotificationClient>();
-			NotificationClient notificationClient = new MqttEventNotificationClient();
-
-			topicHandlingClients.put(TOPIC_NAME, notificationClient);
-			messageNotificationClientQueueImpl.setTopicHandlingClients(topicHandlingClients);
-
-			try{
-				messageNotificationClientQueueImpl.init();
-				client.init();
-			} catch(Exception e){
-				LOG.debug("Receiver problem initialising reliable connection", e);
-			}
-
-			// wait for receiver to connect
-			try {
-				while (!Thread.currentThread().isInterrupted() && ! client.isClientConnected()){
-					Thread.sleep(100);
-				}
-			} catch(InterruptedException ex) {
-				Thread.currentThread().interrupt();
-			}
-
-			// try sending message
-			String topic=TOPIC_NAME;
-			int qos=QOS_LEVEL;
-			try{
-				client.subscribe(topic, qos);
-			} catch(Exception e){
-				LOG.debug("Receiver problem subscribing", e);
-			}
-			LOG.debug("Receiver connection initialised");
-		}
-
 	}
+
 
 }

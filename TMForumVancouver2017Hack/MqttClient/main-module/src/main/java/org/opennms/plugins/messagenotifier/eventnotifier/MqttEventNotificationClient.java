@@ -26,7 +26,7 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.plugins.messagenotifier.alarmnotifier;
+package org.opennms.plugins.messagenotifier.eventnotifier;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -51,10 +51,12 @@ public class MqttEventNotificationClient implements NotificationClient {
 
 	public static final String MQTT_JSON_EVENT = "uei.opennms.org/plugin/MqttReceiver/jsonPayloadEvent";
 	public static final String MQTT_TEXT_EVENT = "uei.opennms.org/plugin/MqttReceiver/stringPayloadEvent";
+	public static final String MQTT_DEFAULT_EVENT_SEVERITY = "Normal";
 
 	public static final String MQTT_PAYLOAD_STRING_PARAM = "mqtt-payload-string";
 	public static final String MQTT_TOPIC_PARAM = "mqtt-topic";
 	public static final String MQTT_QOS_PARAM = "mqtt-qos";
+	
 
 	EventProxy eventProxy = null;
 
@@ -97,6 +99,7 @@ public class MqttEventNotificationClient implements NotificationClient {
 			} else {
 				// if json then put each value in a param
 				EventBuilder eb= new EventBuilder(MQTT_JSON_EVENT, topic);
+				eb.setSeverity(MQTT_DEFAULT_EVENT_SEVERITY);
 				eb.addParam(MQTT_TOPIC_PARAM,topic);
 				eb.addParam(MQTT_QOS_PARAM,qosStr);
 				eb.addParam(MQTT_PAYLOAD_STRING_PARAM,payloadString);

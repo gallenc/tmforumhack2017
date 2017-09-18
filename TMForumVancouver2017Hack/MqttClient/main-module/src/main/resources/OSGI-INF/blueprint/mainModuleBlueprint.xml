@@ -11,6 +11,11 @@
 		http://aries.apache.org/schemas/blueprint-ext/blueprint-ext-1.1.xsd
 ">
 
+  <!-- opennms event proxy -->
+  <!-- note optional so that we can run tests outside of opennms -->
+  <reference id="eventProxy" interface="org.opennms.netmgt.events.api.EventProxy" availability="optional" timeout="100" />
+
+
   <!-- print startup message to karaf console -->
   <bean id="sayHello" class="org.opennms.plugins.mqttclient.SayHello" destroy-method="destroyMethod">
   </bean>
@@ -23,7 +28,9 @@
       <cm:property name="org.opennms.plugin.mqttclient.userName" value="" />
       <cm:property name="org.opennms.plugin.mqttclient.password" value="" />
       <cm:property name="org.opennms.plugin.mqttclient.connectionRetryInterval" value="30000" />
-      <cm:property name="org.opennms.plugin.mqttclient.eventtopic" value="eventtopic" />
+      <cm:property name="org.opennms.plugin.mqttclient.qos" value="0" />
+      <cm:property name="org.opennms.plugin.mqttclient.eventtopic" value="mqtt_events" />
+      <cm:property name="org.opennms.plugin.mqttclient.datatopic" value="mqtt_data" />
     </cm:default-properties>
   </cm:property-placeholder>
 
@@ -34,6 +41,20 @@
     <argument index="2" value="${org.opennms.plugin.mqttclient.userName}" />
     <argument index="3" value="${org.opennms.plugin.mqttclient.password}" />
     <argument index="4" value="${org.opennms.plugin.mqttclient.connectionRetryInterval}" />
+
+    <property name="topicList">
+      <list>
+        <bean class="org.opennms.plugins.mqttclient.MQTTTopicSubscription">
+          <property name="qos" value="${org.opennms.plugin.mqttclient.qos}" />
+          <property name="topic" value="${org.opennms.plugin.mqttclient.eventtopic}" />
+        </bean>
+        <bean class="org.opennms.plugins.mqttclient.MQTTTopicSubscription">
+          <property name="qos" value="${org.opennms.plugin.mqttclient.qos}" />
+          <property name="topic" value="${org.opennms.plugin.mqttclient.datatopic}" />
+        </bean>
+      </list>
+    </property>
+
   </bean>
 
 
@@ -41,14 +62,19 @@
     <property name="messageNotifier" ref="mqttClientMessageNotifier" />
     <property name="maxQueueLength" value="1000" />
 
-    <property name="channelHandlingClients">
+    <property name="topicHandlingClients">
       <map>
-        <entry key="mqtt_events" value-ref="verySimpleClient" />
+        <entry key="${org.opennms.plugin.mqttclient.eventtopic}" value-ref="mqttEventNotificationClient" />
       </map>
     </property>
   </bean>
 
+  <bean id="mqttEventNotificationClient" class="org.opennms.plugins.messagenotifier.eventnotifier.MqttEventNotificationClient" init-method="init"
+    destroy-method="destroy">
+    <property name="eventProxy" ref="eventProxy" />
+  </bean>
+
   <!-- used for testing only -->
-  <bean id="verySimpleClient" class="org.opennms.plugins.dbnotifier.VerySimpleNotificationClient" />
+  <!-- <bean id="verySimpleClient" class="org.opennms.plugins.dbnotifier.VerySimpleNotificationClient" /> -->
 
 </blueprint>

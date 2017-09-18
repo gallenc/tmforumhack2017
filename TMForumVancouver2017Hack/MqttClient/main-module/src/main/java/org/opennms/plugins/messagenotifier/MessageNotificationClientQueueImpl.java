@@ -47,7 +47,7 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 	private static final Logger LOG = LoggerFactory.getLogger(MessageNotificationClientQueueImpl.class);
 
 	private MessageNotifier messageNotifier;
-	
+
 	private Integer maxQueueLength=1000;
 
 	private LinkedBlockingQueue<MessageNotification> queue=null;
@@ -55,7 +55,7 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 
 	private RemovingConsumer removingConsumer = new RemovingConsumer();
 	private Thread removingConsumerThread = new Thread(removingConsumer);
-	
+
 	private Map<String,NotificationClient> topicHandlingClients = new HashMap<String, NotificationClient>();
 
 
@@ -64,6 +64,13 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 	 */
 	public void setTopicHandlingClients(Map<String,NotificationClient> topicHandlingClients) {
 		this.topicHandlingClients.putAll(topicHandlingClients);
+		if(LOG.isDebugEnabled()){
+			StringBuffer sb = new StringBuffer("registering clients for topics: " );
+			for(String topic: this.topicHandlingClients.keySet()){
+				sb.append("topic:"+topic+" client:"+topicHandlingClients.get(topic)+", ");
+			}
+			LOG.debug(sb.toString());
+		}
 	}
 
 	/**
@@ -79,7 +86,7 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 	public MessageNotifier getMessageNotifier() {
 		return messageNotifier;
 	}
-	
+
 	public Integer getMaxQueueLength() {
 		return maxQueueLength;
 	}
@@ -91,9 +98,9 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 	public void init(){
 		LOG.debug("initialising messageNotificationClientQueue with queue size "+maxQueueLength);
 		if (messageNotifier==null) throw new IllegalStateException("messageNotifier cannot be null");
-		
+
 		queue= new LinkedBlockingQueue<MessageNotification>(maxQueueLength);
-		
+
 		// start consuming thread
 		clientRunning.set(true);
 		removingConsumerThread.start();
@@ -117,7 +124,7 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 	@Override
 	public void sendMessageNotification(MessageNotification messageNotification) {
 		if(LOG.isDebugEnabled()) LOG.debug("client received notification - adding notification to queue");
-		
+
 		if (! queue.offer(messageNotification)){
 			LOG.warn("Cannot queue any more messageNotifications. messageNotification queue full. size="+queue.size());
 		};
@@ -141,7 +148,7 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 					if(LOG.isDebugEnabled()) LOG.debug("Notification received from queue by consumer thread :\n topic:"+messageNotification.getTopic()
 							+ "\n qos:"+messageNotification.getQos()
 							+ "\n payload:"+new String(messageNotification.getPayload()));
-					
+
 					// we look in hashtable for topic handling clients to handle this received notification
 					if(topicHandlingClients.isEmpty()) { 
 						LOG.warn("no topic handing clients have been set to receive notification");
@@ -150,11 +157,11 @@ public class MessageNotificationClientQueueImpl implements MessageNotificationCl
 						if (topicHandlingClient==null){
 							LOG.warn("no topic handing client has been set for topic:"+messageNotification.getTopic());
 						} else
-						try {
-							topicHandlingClient.sendMessageNotification(messageNotification);
-						} catch (Exception e){
-							LOG.error("problem processing messageNotification:",e);
-						}
+							try {
+								topicHandlingClient.sendMessageNotification(messageNotification);
+							} catch (Exception e){
+								LOG.error("problem processing messageNotification:",e);
+							}
 					}
 
 				} catch (InterruptedException e) { }

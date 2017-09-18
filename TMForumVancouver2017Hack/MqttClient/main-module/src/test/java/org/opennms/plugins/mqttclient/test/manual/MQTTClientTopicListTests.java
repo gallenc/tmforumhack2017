@@ -30,8 +30,13 @@ package org.opennms.plugins.mqttclient.test.manual;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 import org.opennms.plugins.messagenotifier.MessageNotification;
@@ -39,26 +44,36 @@ import org.opennms.plugins.messagenotifier.MessageNotificationClientQueueImpl;
 import org.opennms.plugins.messagenotifier.NotificationClient;
 import org.opennms.plugins.messagenotifier.VerySimpleMessageNotificationClient;
 import org.opennms.plugins.mqttclient.MQTTClientImpl;
+import org.opennms.plugins.mqttclient.MQTTTopicSubscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MQTTClientTopicTests {
-	private static final Logger LOG = LoggerFactory.getLogger(MQTTClientTopicTests.class);
+public class MQTTClientTopicListTests {
+	private static final Logger LOG = LoggerFactory.getLogger(MQTTClientTopicListTests.class);
 
-	public static final String SERVER_URL = "tcp://localhost:1883";
+	//public static final String SERVER_URL = "tcp://localhost:1883";
+	public static final String SERVER_URL = "tcp://192.168.202.1:1883";
 	public static final String MQTT_USERNAME = "mqtt-user";
 	public static final String MQTT_PASSWORD = "mqtt-password";
 
 	public static final String CLIENT_ID = "receiver1";
 	public static final String CLIENT_ID2 = "transmitter1";
-	public static final String TOPIC_NAME = "mqtt-events";
-	public static final int QOS_LEVEL = 0;
+	public static final String EVENT_TOPIC_NAME = "mqtt-events";
+	public static final String DATA_TOPIC_NAME = "mqtt-data";
+	public static final String QOS_LEVEL = "0";
+
+
+	// MQTTTopicSubscription(String topic, String qos)
+	Set<MQTTTopicSubscription> topicList = new HashSet<MQTTTopicSubscription>(Arrays.asList(
+			new MQTTTopicSubscription(EVENT_TOPIC_NAME, QOS_LEVEL),
+			new MQTTTopicSubscription(DATA_TOPIC_NAME, QOS_LEVEL)));
+
 
 	private class Receiver implements Runnable {
 
 		MQTTClientImpl client;
 		MessageNotificationClientQueueImpl messageNotificationClientQueueImpl;
-		
+
 		public boolean isConnected(){
 			if(client!=null) return client.isClientConnected();
 			return false;
@@ -80,8 +95,14 @@ public class MQTTClientTopicTests {
 			String connectionRetryInterval= "1000" ;
 
 			LOG.debug("Receiver initiating connection");
+			
+			LOG.debug("Receiver TOPIC LIST");
+			for(MQTTTopicSubscription sub:topicList){
+				LOG.debug("   qos:"+sub.getQos()+"   topic:"+sub.getTopic());
+			}
 
 			client = new MQTTClientImpl(brokerUrl, clientId, userName, password, connectionRetryInterval);
+			client.setTopicList(topicList);
 
 			messageNotificationClientQueueImpl = new MessageNotificationClientQueueImpl();
 
@@ -92,7 +113,7 @@ public class MQTTClientTopicTests {
 			Map<String, NotificationClient> topicHandlingClients = new HashMap<String, NotificationClient>();
 			NotificationClient notificationClient = new VerySimpleMessageNotificationClient();
 
-			topicHandlingClients.put(TOPIC_NAME, notificationClient);
+			topicHandlingClients.put(EVENT_TOPIC_NAME, notificationClient);
 			messageNotificationClientQueueImpl.setTopicHandlingClients(topicHandlingClients);
 
 			try{
@@ -101,24 +122,24 @@ public class MQTTClientTopicTests {
 			} catch(Exception e){
 				LOG.debug("Receiver problem initialising reliable connection", e);
 			}
-			
+
 			// wait for receiver to connect
 			try {
 				while (!Thread.currentThread().isInterrupted() && ! client.isClientConnected()){
-				Thread.sleep(100);
+					Thread.sleep(100);
 				}
 			} catch(InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
-			
-			// try sending message
-			String topic=TOPIC_NAME;
-			int qos=QOS_LEVEL;
-			try{
-				client.subscribe(topic, qos);
-			} catch(Exception e){
-				LOG.debug("Receiver problem subscribing", e);
-			}
+
+			// subscription already done
+			//			String topic=EVENT_TOPIC_NAME;
+			//			int qos=Integer.parseInt(QOS_LEVEL);
+			//			try{
+			//				client.subscribe(topic, qos);
+			//			} catch(Exception e){
+			//				LOG.debug("Receiver problem subscribing", e);
+			//			}
 			LOG.debug("Receiver connection initialised");
 		}
 
@@ -132,7 +153,7 @@ public class MQTTClientTopicTests {
 		Receiver receiver= new Receiver();
 		Thread thread = new Thread(receiver);
 		thread.start();
-	
+
 		try {
 			Thread.sleep(5000);
 			assertTrue(receiver.isConnected());
@@ -169,8 +190,8 @@ public class MQTTClientTopicTests {
 		}
 
 		// try sending messages
-		String topic=TOPIC_NAME;
-		int qos=QOS_LEVEL;
+		String topic=EVENT_TOPIC_NAME;
+		int qos=Integer.parseInt(QOS_LEVEL);
 
 		for (int count=0; count<20; count++){
 			try{
@@ -181,11 +202,11 @@ public class MQTTClientTopicTests {
 				LOG.debug("problem publishing message", e);
 			}
 		}
-		
+
 		// wait for received messages
 		try {
 			Thread.sleep(30000);
-			
+
 		} catch(InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}
