@@ -1,0 +1,105 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+  xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0"
+  xsi:schemaLocation="
+		http://www.osgi.org/xmlns/blueprint/v1.0.0
+		http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		
+		http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+		http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd
+		
+		http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.1.0
+		http://aries.apache.org/schemas/blueprint-ext/blueprint-ext-1.1.xsd
+">
+
+  <!-- Used for system properties -->
+  <ext:property-placeholder placeholder-prefix="$[" placeholder-suffix="]" />
+
+  <!-- print startup message to karaf console -->
+  <bean id="sayHello" class="org.opennms.plugins.sniffysimulator.SayHello" destroy-method="destroyMethod">
+  </bean>
+
+  <!-- Configuration properties -->
+  <cm:property-placeholder id="mqttClientProperties" persistent-id="org.opennms.plugin.sniffysimulator" update-strategy="reload">
+    <cm:default-properties>
+      <cm:property name="org.opennms.plugin.sniffysimulator.mqttclient.brokerUrl" value="tcp://localhost:1883" />
+      <cm:property name="org.opennms.plugin.sniffysimulator.mqttclient.clientId" value="$[karaf.name]" />
+      <cm:property name="org.opennms.plugin.sniffysimulator.mqttclient.userName" value="" />
+      <cm:property name="org.opennms.plugin.sniffysimulator.mqttclient.password" value="" />
+      <cm:property name="org.opennms.plugin.sniffysimulator.mqttclient.connectionRetryInterval" value="30000" />
+      <cm:property name="org.opennms.plugin.sniffysimulator.mqttclient.qos" value="0" />
+      <cm:property name="org.opennms.plugin.sniffysimulator.mqttclient.eventtopic" value="mqtt_events" />
+      <cm:property name="org.opennms.plugin.sniffysimulator.mqttclient.datatopic" value="mqtt_data" />
+    </cm:default-properties>
+  </cm:property-placeholder>
+
+  <!-- MQTTClientImpl(String brokerUrl, String clientId, String userName, String password, String connectionRetryInterval) -->
+  <bean id="mqttClientMessageNotifier" class="org.opennms.plugins.mqttclient.MQTTClientImpl" init-method="init" destroy-method="destroy">
+    <argument index="0" value="${org.opennms.plugin.sniffysimulator.mqttclient.brokerUrl}" />
+    <argument index="1" value="${org.opennms.plugin.sniffysimulator.mqttclient.clientId}" />
+    <argument index="2" value="${org.opennms.plugin.sniffysimulator.mqttclient.userName}" />
+    <argument index="3" value="${org.opennms.plugin.sniffysimulator.mqttclient.password}" />
+    <argument index="4" value="${org.opennms.plugin.sniffysimulator.mqttclient.connectionRetryInterval}" />
+
+    <property name="topicList">
+      <list>
+        <bean class="org.opennms.plugins.mqttclient.MQTTTopicSubscription">
+          <property name="qos" value="${org.opennms.plugin.sniffysimulator.mqttclient.qos}" />
+          <property name="topic" value="${org.opennms.plugin.sniffysimulator.mqttclient.eventtopic}" />
+        </bean>
+        <bean class="org.opennms.plugins.mqttclient.MQTTTopicSubscription">
+          <property name="qos" value="${org.opennms.plugin.sniffysimulator.mqttclient.qos}" />
+          <property name="topic" value="${org.opennms.plugin.sniffysimulator.mqttclient.datatopic}" />
+        </bean>
+      </list>
+    </property>
+
+  </bean>
+
+  <bean id="messageNotifierClient" class="org.opennms.plugins.messagenotifier.MessageNotificationClientQueueImpl" init-method="init" destroy-method="destroy">
+    <property name="messageNotifier" ref="mqttClientMessageNotifier" />
+    <property name="maxQueueLength" value="1000" />
+
+    <property name="topicHandlingClients">
+      <map>
+        <entry key="${org.opennms.plugin.sniffysimulator.mqttclient.eventtopic}" value-ref="verySimpleClient" />
+      </map>
+    </property>
+  </bean>
+
+  <!-- used for testing only -->
+  <bean id="verySimpleClient" class="org.opennms.plugins.messagenotifier.VerySimpleMessageNotificationClient" />
+
+  <bean id="sniffyDataCollector" class="org.opennms.plugins.sniffysimulator.SniffyDataSimulator" />
+
+  <bean id="sniffyController" class="org.opennms.plugins.sniffysimulator.SniffyController" init-method="init" destroy-method="destroy">
+    <property name="sniffyDataCollector" ref="sniffyDataCollector" />
+    <property name="mqttClient" ref="mqttClientMessageNotifier" />
+    <property name="id" value="clientId" />
+    <property name="cityName" value="cityName" />
+    <property name="stationName" value="stationName" />
+    <property name="longitude" value="longitude" />
+    <property name="averaging" value="averaging" />
+    <property name="collectionInterval" value="collectionInterval" />
+    <property name="topicName" value="topicName" />
+    <property name="qos" value="qos" />
+  </bean>
+
+  <bean id="serviceLoader" class="org.opennms.plugins.sniffysimulator.rest.ServiceLoader">
+    <property name="sniffyService" ref="sniffyController" />
+  </bean>
+
+  <!-- ReST Servelet configuration for jersey -->
+  <bean id="sniffyRestServlet" class="com.sun.jersey.spi.container.servlet.ServletContainer">
+    <argument ref="sniffyRestApplication" />
+  </bean>
+
+  <service interface="javax.servlet.Servlet" ref="sniffyRestServlet">
+    <service-properties>
+      <entry key="alias" value="/sniffy/rest/v1-0" />
+    </service-properties>
+  </service>
+
+  <bean id="sniffyRestApplication" class="org.opennms.plugins.sniffysimulator.rest.SniffyRestApplication" destroy-method="destroyMethod" />
+
+
+</blueprint>
