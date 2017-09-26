@@ -29,7 +29,7 @@ import org.opennms.plugins.sniffysimulator.SniffyService;
  */
 public class ServiceLoader {
 
-	private static AtomicReference<SniffyService> sniffyService = new AtomicReference<>();
+	private static AtomicReference<SniffyService> m_sniffyService = new AtomicReference<>();
 	
 
 	public ServiceLoader(){
@@ -45,14 +45,14 @@ public class ServiceLoader {
 	 * @return the sniffyService
 	 */
 	public static SniffyService getSniffyService() {
-		return sniffyService.get();
+		return m_sniffyService.get();
 	}
 
 	/**
 	 * @param sniffyService the sniffyService to set
 	 */
 	public static void setSniffyService(SniffyService sniffyService) {
-		ServiceLoader.sniffyService.set(sniffyService);
+		m_sniffyService.set(sniffyService);
 	}
 	
 

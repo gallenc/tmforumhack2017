@@ -17,6 +17,8 @@ package org.opennms.plugins.sniffysimulator.rest;
 
 import org.opennms.plugins.sniffysimulator.SniffyService;
 import org.opennms.plugins.sniffysimulator.jaxb.SniffyData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,23 +31,30 @@ import javax.ws.rs.core.Response;
 /**
  * REST service to retrieve sniffy data
  */
-@Path("/sniffy")
+@Path("/measurements")
 public class SniffyRestImpl {
+	private static final Logger LOG = LoggerFactory.getLogger(SniffyRestImpl.class);
 
 	/**
 	 * @return Returns latest Sniffy data (last sent using MQTT)
+	 * service will be at http://localhost:8181/sniffy/rest/v1-0/measurements/latest-measurement 
 	 */
 	@GET
 	@Path("/latest-measurement")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response  getLatestMeasurement() throws Exception {
+		LOG.debug("received rest call for /latest-measurement");
 
 		SniffyService sniffyService = ServiceLoader.getSniffyService();
 		if (sniffyService == null) throw new RuntimeException("ServiceLoader.getSniffyService() cannot be null.");
 
 		SniffyData sniffyData= sniffyService.getSniffyData();
-    
-		return Response.status(200).entity(sniffyData).build();  
+		if (sniffyData==null){
+			return Response.status(500).entity("Internal failure to collect sniffyData").build();  
+		} else {
+			LOG.debug("rest call for /latest-measurement returning sniffyData= "+sniffyData);
+			return Response.status(200).entity(sniffyData).build();  
+		}
 	}
 
 

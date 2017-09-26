@@ -27,8 +27,15 @@
             <goals>
               <goal>generate-features-xml</goal>
             </goals>
-            <configuration>
-            </configuration>
+            <!-- <configuration> -->
+            <!-- <importRepositories>false</importRepositories> -->
+            <!-- <importRepositoryExclusions> -->
+            <!-- </importRepositoryExclusions> -->
+            <!-- <features> -->
+            <!-- <feature>http</feature> -->
+            <!-- <feature>http-whiteboard</feature> -->
+            <!-- </features> -->
+            <!-- </configuration> -->
           </execution>
         </executions>
       </plugin>
@@ -75,6 +82,57 @@
     <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-json</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>jsr311-api</artifactId>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- jersey json depencencies -->
+
+    <!-- possibly needed? [INFO] +- com.sun.xml.bind:jaxb-impl:jar:2.2.3-1:provided [INFO] | \- javax.xml.bind:jaxb-api:jar:2.2.2:provided [INFO] | +- javax.xml.stream:stax-api:jar:1.0-2:provided 
+      [INFO] | \- javax.activation:activation:jar:1.1:provided -->
+    <!-- <dependency> -->
+    <!-- <groupId>javax.activation</groupId> -->
+    <!-- <artifactId>activation</artifactId> -->
+    <!-- <version>1.1</version> -->
+    <!-- <scope>compile</scope> -->
+    <!-- </dependency> -->
+    <dependency>
+      <groupId>org.codehaus.jettison</groupId>
+      <artifactId>jettison</artifactId>
+      <version>1.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-asl</artifactId>
+      <version>1.9.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-jaxrs</artifactId>
+      <version>1.9.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-xc</artifactId>
+      <version>1.9.2</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

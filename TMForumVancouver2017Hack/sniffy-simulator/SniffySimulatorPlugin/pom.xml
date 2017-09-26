@@ -31,6 +31,8 @@
     <maven.surefire.plugin.version>2.18</maven.surefire.plugin.version>
     <pahoVersion>1.0.2</pahoVersion>
     <jerseyVersion>1.19.3</jerseyVersion>
+    <jsr311Version>1.1.1</jsr311Version>
+    <servletApiVersion>3.1.0</servletApiVersion>
   </properties>
 
   <modules>
@@ -296,6 +298,18 @@
         <groupId>com.sun.jersey</groupId>
         <artifactId>jersey-json</artifactId>
         <version>${jerseyVersion}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.ws.rs</groupId>
+        <artifactId>jsr311-api</artifactId>
+        <version>${jsr311Version}</version>
+      </dependency>
+      
+     <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${servletApiVersion}</version>
       </dependency>
 
     </dependencies>

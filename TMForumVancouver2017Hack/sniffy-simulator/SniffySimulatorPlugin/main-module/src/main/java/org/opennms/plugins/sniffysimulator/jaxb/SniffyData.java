@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement()
-@XmlAccessorType(XmlAccessType.NONE)
+//@XmlAccessorType(XmlAccessType.NONE)
 public class SniffyData {
 	public static final String JSON_DATE_FORMAT="yyyy-MM-dd'T'HH:mm:ssz";
 	

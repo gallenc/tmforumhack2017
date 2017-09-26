@@ -3,11 +3,13 @@ README.txt
 GENERATED PROJECT
 -----------------
 project groupId: org.opennms.plugins
-project name:    MqttReceiver
+project name:    SniffySimulatorPlugin
 version:         0.0.1-SNAPSHOT
 
 NEXT STEPS
 ----------
+
+latest measurement url http://localhost:8181/sniffy/rest/v1-0/measurements/latest-measurement
 
 Once the archetype has completed you must remove the <modules> section from the parent pom.
 This is generated automatically by the archetype but is not needed as modules sections are
@@ -25,7 +27,7 @@ open karaf command prompt using
 ssh -p 8101 admin@localhost
 
 to install the feature in karaf use
-karaf@root> features:addurl mvn:org.opennms.plugins/MqttReceiver/0.0.1-SNAPSHOT/xml/features
+karaf@root> features:addurl mvn:org.opennms.plugins/SniffySimulatorPlugin/0.0.1-SNAPSHOT/xml/features
 karaf@root> features:install SniffySimulatorPlugin
 
 (or features:install SniffySimulatorPlugin/0.0.1-SNAPSHOT for a specific version of the feature)

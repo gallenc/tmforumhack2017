@@ -60,6 +60,7 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 	private String password;
 	private String userName;
 
+	private AtomicBoolean m_useMqtt = new AtomicBoolean(false); // use by default
 	private AtomicInteger reconnectionCount = new AtomicInteger(0);
 
 	// Private instance variables
@@ -105,6 +106,19 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 
 	public boolean isClientConnected() {
 		return clientConnected.get();
+	}
+	
+
+	public String getUseMqtt() {
+		return Boolean.toString(m_useMqtt.get());
+	}
+
+	/**
+	 * turns off or on mqtt
+	 * @param if true mqtt will try to connect to broker. If false, mqtt will not be used
+	 */
+	public void setUseMqtt(String useMqtt) {
+		this.m_useMqtt.set(Boolean.parseBoolean(useMqtt));
 	}
 
 	/**
@@ -234,7 +248,7 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 		try {
 			IMqttDeliveryToken pubToken = client.publish(topicName, message, null, null);
 		} catch (MqttException e) {
-			throw new RuntimeException("problem synchronously publishing message",e);
+			throw new RuntimeException("problem asynchronously publishing message",e);
 		} 	
 	}
 
@@ -269,7 +283,12 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 	 * init method
 	 */
 	public void init(){
-		startConnectionRetryThead();
+		if(m_useMqtt.get()) {
+			LOG.info("useMqtt = true trying to connect to MQTT broker");
+			startConnectionRetryThead();
+		}else {
+			LOG.info("useMqtt = false not using MQTT broker");
+		}
 	}
 
 
@@ -409,6 +428,7 @@ public class MQTTClientImpl implements MqttCallback, MessageNotifier {
 		}
 
 	}
+
 
 
 	/****************************************************************/

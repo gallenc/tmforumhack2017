@@ -20,6 +20,7 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,11 +34,13 @@ public class SniffyRestApplication extends Application {
 
 	// doing this because the com.sun.ws.rest.api.core.PackagesResourceConfig 
 	// class contains OSGi unfriendly classloader code
+	//org.codehaus.jackson.jaxrs
 	@Override
 	public Set<Class<?>> getClasses()
 	{
 		Set<Class<?>> s = new HashSet<Class<?>>();
 		s.add(SniffyRestImpl.class);
+		s.add(JacksonJaxbJsonProvider.class); //jackson
 		return s;
 	}
 

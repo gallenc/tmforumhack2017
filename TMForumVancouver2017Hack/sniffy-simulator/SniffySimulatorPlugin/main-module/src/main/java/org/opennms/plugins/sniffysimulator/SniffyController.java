@@ -1,12 +1,13 @@
 package org.opennms.plugins.sniffysimulator;
 
-import org.json.simple.JSONObject;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.opennms.plugins.mqttclient.MQTTClientImpl;
 import org.opennms.plugins.sniffysimulator.jaxb.SniffyData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SniffyController implements SniffyService{
+public class SniffyController implements SniffyService {
 	private static final Logger LOG = LoggerFactory.getLogger(SniffyController.class);
 
 	private final Object lock = new Object();
@@ -25,9 +26,11 @@ public class SniffyController implements SniffyService{
 	private String latitude=null;
 	private String longitude=null;
 	private String averaging=null;
+	private String topicName;
 	private Integer collectionInterval=10000; // collection inteval ms
-	protected String topicName;
-	protected int qos;
+
+
+	private int qos;
 	
 	public SniffyDataCollector getSniffyDataCollector() {
 		return sniffyDataCollector;
@@ -45,12 +48,12 @@ public class SniffyController implements SniffyService{
 		this.mqttClient = mqttClient;
 	}
 
-	public Integer getCollectionInterval() {
-		return collectionInterval;
+	public String getCollectionInterval() {
+		return Integer.toString(collectionInterval);
 	}
 
-	public void setCollectionInterval(Integer collectionInterval) {
-		this.collectionInterval = collectionInterval;
+	public void setCollectionInterval(String collectionInterval) {
+		this.collectionInterval = Integer.parseInt(collectionInterval);
 	}
 
 	public String getId() {
@@ -101,6 +104,22 @@ public class SniffyController implements SniffyService{
 		this.averaging = averaging;
 	}
 	
+	public String getTopicName() {
+		return topicName;
+	}
+
+	public void setTopicName(String topicName) {
+		this.topicName = topicName;
+	}
+
+	public int getQos() {
+		return qos;
+	}
+
+	public void setQos(int qos) {
+		this.qos = qos;
+	}
+	
 
 	@Override
 	public SniffyData getSniffyData() {
@@ -128,10 +147,12 @@ public class SniffyController implements SniffyService{
 	 * init method
 	 */
 	public void init(){
+		LOG.debug("sniffy starting data collection thread");
 		startDataCollectionThead();
 	}
 	
 	public void destroy(){
+		LOG.debug("sniffy stopping data collection thread");
 		stopDataCollectionThead();
 	}
 
@@ -150,8 +171,15 @@ public class SniffyController implements SniffyService{
 							LOG.debug("trying to collect measurement");
 							SniffyData sniffyData = getMeasurement();
 							
-							byte[] payload;
-							//mqttClient.publishAsynchronous(topicName, qos, payload); TODO
+							String json = sniffyDataToMQTTJson(sniffyData);
+							
+							byte[] payload=null;
+							try {
+								payload = json.getBytes("UTF8");
+								mqttClient.publishAsynchronous(topicName, qos, payload); 
+							} catch (Exception e) {
+								LOG.debug("problem publishing json="+json,e);
+							}
 							
 							LOG.debug("waiting "+collectionInterval+ "ms before next collection");
 							Thread.sleep(collectionInterval);
@@ -176,12 +204,16 @@ public class SniffyController implements SniffyService{
 		}
 	}
 	
-	private String sniffyDataToMQTTJson(SniffyData sniffyData){
-		JSONObject jsonObj = new JSONObject();
-		
-        return jsonObj.toJSONString();
+	public static String sniffyDataToMQTTJson(SniffyData sniffyData){
+		String result=null;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.setAnnotationIntrospector(new JaxbAnnotationIntrospector());
+			result = mapper.writeValueAsString(sniffyData);
+			return result;
+		} catch (Exception e) {
+			throw new RuntimeException("problem converting sniffyData to json:",e);
+		}
 	}
-
-
 
 }

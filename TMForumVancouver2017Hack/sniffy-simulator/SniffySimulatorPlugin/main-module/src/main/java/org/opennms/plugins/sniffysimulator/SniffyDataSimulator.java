@@ -11,12 +11,12 @@ public class SniffyDataSimulator implements SniffyDataCollector {
 	public SniffyData getMeasurement(){
 		
 		int hr = LocalDateTime.now().getHour(); // 0-23
-		//LocalDateTime.now().getMinute(); //0-60
+		int min = LocalDateTime.now().getMinute(); //0-60
 		
-		int x = (hr - 12)*(hr - 12) / 144; // highest at mid day
-		double pM1=x * 0.001;
-		double pM10=x * 0.0001;
-		double pM25=x * 0.00001;
+		double x =  Math.random() * 10 /(1+ (min-30)) + (1  + ((hr - 12)*(hr - 12)) )/ 144; // highest at mid day random hourly variations
+		double pM1=x * 0.01;
+		double pM10=x * 0.001;
+		double pM25=x * 0.0001;
 		
 		SniffyData sdata =new SniffyData();
 		sdata.setTime(SniffyData.jsonTime(new Date()));
