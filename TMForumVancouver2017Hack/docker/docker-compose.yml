@@ -1,0 +1,125 @@
+version: '2'
+
+services:
+
+  # KARAF 1 IS ACTIVE MQ / MQTT BROKER
+  # from https://hub.docker.com/r/mkroli/karaf/
+  karaf1:
+      image: mkroli/karaf:4.0 # 4.1 docker image broken
+      container_name: karaf1
+      ports:
+        - "11099:1099"
+        - "14444:44444"
+        - "18101:8101" # ssh consol
+        - "18181:8181" # web consol
+        - "1883:1883"  # active mq mqtt
+      volumes:
+        - ./karaf1/karaf-deploy:/deploy
+        - ./karaf1/karaf-log:/opt/karaf/data/log
+        - ./karaf1/karaf-config/org.ops4j.pax.logging.cfg:/opt/karaf/etc/org.ops4j.pax.logging.cfg
+        - ./karaf1/karaf-config/org.ops4j.pax.url.mvn.cfg:/opt/karaf/etc/org.ops4j.pax.url.mvn.cfg
+        - ./karaf1/karaf-config/activemq.xml:/opt/karaf/etc/activemq.xml
+        
+      #  - ./karaf-etc:/opt/karaf/etc
+      #  - ./karaf-data:/opt/karaf/data
+      # restart: always
+      env_file:
+        - karaf1/.karaf.env
+      networks:
+        - opennms-plugin-shop-network
+      entrypoint: /opt/karaf/bin/karaf
+
+ # from https://hub.docker.com/r/mkroli/karaf/
+  karaf2:
+      image: mkroli/karaf:4.0 # 4.1 docker image broken
+      container_name: karaf2
+      ports:
+        - "21099:1099"
+        - "24444:44444"
+        - "28101:8101" # ssh consol
+        - "28181:8181" # web consol
+      volumes:
+        - ./karaf2/karaf-deploy:/deploy
+        - ./karaf2/karaf-log:/opt/karaf/data/log
+        - ./karaf2/karaf-config/org.ops4j.pax.logging.cfg:/opt/karaf/etc/org.ops4j.pax.logging.cfg
+        - ./karaf2/karaf-config/org.ops4j.pax.url.mvn.cfg:/opt/karaf/etc/org.ops4j.pax.url.mvn.cfg
+        
+      #  - ./karaf-etc:/opt/karaf/etc
+      #  - ./karaf-data:/opt/karaf/data
+      # restart: always
+      env_file:
+        - karaf2/.karaf.env
+      networks:
+        - opennms-plugin-shop-network
+      entrypoint: /opt/karaf/bin/karaf
+      
+       # from https://hub.docker.com/r/mkroli/karaf/
+  karaf3:
+      image: mkroli/karaf:4.0 # 4.1 docker image broken
+      container_name: karaf3
+      ports:
+        - "31099:1099"
+        - "34444:44444"
+        - "38101:8101" # ssh consol
+        - "38181:8181" # web consol
+      volumes:
+        - ./karaf3/karaf-deploy:/deploy
+        - ./karaf3/karaf-log:/opt/karaf/data/log
+        - ./karaf3/karaf-config/org.ops4j.pax.logging.cfg:/opt/karaf/etc/org.ops4j.pax.logging.cfg
+        - ./karaf3/karaf-config/org.ops4j.pax.url.mvn.cfg:/opt/karaf/etc/org.ops4j.pax.url.mvn.cfg
+        
+      #  - ./karaf-etc:/opt/karaf/etc
+      #  - ./karaf-data:/opt/karaf/data
+      # restart: always
+      env_file:
+        - karaf3/.karaf.env
+      networks:
+        - opennms-plugin-shop-network
+      entrypoint: /opt/karaf/bin/karaf
+      
+       # from https://hub.docker.com/r/mkroli/karaf/
+  karaf4:
+      image: mkroli/karaf:4.0 # 4.1 docker image broken
+      container_name: karaf4
+      ports:
+        - "41099:1099"
+        - "44444:44444"
+        - "48101:8101" # ssh consol
+        - "48181:8181" # web consol
+      volumes:
+        - ./karaf4/karaf-deploy:/deploy
+        - ./karaf4/karaf-log:/opt/karaf/data/log
+        - ./karaf4/karaf-config/org.ops4j.pax.logging.cfg:/opt/karaf/etc/org.ops4j.pax.logging.cfg
+        - ./karaf4/karaf-config/org.ops4j.pax.url.mvn.cfg:/opt/karaf/etc/org.ops4j.pax.url.mvn.cfg
+        
+      #  - ./karaf-etc:/opt/karaf/etc
+      #  - ./karaf-data:/opt/karaf/data
+      # restart: always
+      env_file:
+        - karaf4/.karaf.env
+      networks:
+        - opennms-plugin-shop-network
+      entrypoint: /opt/karaf/bin/karaf
+      
+  
+  # nexus repo manager from https://github.com/sonatype/docker-nexus
+  # http://localhost:28081/nexus/
+  # Default credentials are: admin / admin123
+  nexus:
+    image: sonatype/nexus
+    volumes:
+        - "nexus-data:/sonatype-work"
+    ports:
+        - "28081:8081"# web consol and maven repo
+    networks:
+        - opennms-plugin-shop-network
+      
+networks:
+    opennms-plugin-shop-network:
+      driver: bridge
+      
+# data container for nexus - remember to remove if no longer needed (docker volume ls -f dangling=true)
+# note not using host volume because need to change owner id to 200
+volumes:
+    nexus-data: {}
+
