@@ -179,7 +179,7 @@
                   <pluginExecutionFilter>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <versionRange>[1.3.0,)</versionRange>
+                    <versionRange>[1.0,)</versionRange>
                     <goals>
                       <goal>java</goal>
                     </goals>

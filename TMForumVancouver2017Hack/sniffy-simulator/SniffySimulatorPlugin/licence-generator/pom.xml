@@ -42,7 +42,6 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
-        <version>1.3.2</version>
         <executions>
           <execution>
             <phase>generate-sources</phase>
@@ -110,11 +109,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <target>1.8</target>
-          <source>1.8</source>
-        </configuration>
       </plugin>
 
       <plugin>
@@ -149,7 +143,6 @@
     <dependency>
       <groupId>org.opennms.plugins</groupId>
       <artifactId>org.opennms.plugin.licencemanager</artifactId>
-      <version>${licencemanagerVersion}</version>
       <scope>provided</scope>
     </dependency>
     <!-- Note these dependencies match org.apache.karaf.shell.console 2.2.11 -->
@@ -157,19 +150,16 @@
     <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.core</artifactId>
-      <version>4.2.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.compendium</artifactId>
-      <version>4.2.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>${slf4jVersion}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
