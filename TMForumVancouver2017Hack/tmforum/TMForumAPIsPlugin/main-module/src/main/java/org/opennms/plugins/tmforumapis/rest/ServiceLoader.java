@@ -13,14 +13,12 @@
  * limitations under the License.
  */
 
-package org.opennms.plugins.sniffysimulator.rest;
+package org.opennms.plugins.tmforumapis.rest;
 
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.opennms.plugins.sniffysimulator.SniffyService;
-
-
+import org.opennms.plugins.tmforumapis.SniffyService;
 
 /** 
  * Used to statically pass service references to Jersey ReST classes.

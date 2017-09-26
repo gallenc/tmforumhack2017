@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package org.opennms.plugins.sniffysimulator.rest;
+package org.opennms.plugins.tmforumapis.rest;
 
 import java.util.HashSet;
 import java.util.Set;

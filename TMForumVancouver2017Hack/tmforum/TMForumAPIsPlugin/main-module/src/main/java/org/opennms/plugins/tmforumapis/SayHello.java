@@ -26,43 +26,28 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.plugins.messagenotifier;
+package org.opennms.plugins.tmforumapis;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class simply prints out the received notification. Used primarily for testing.
- * @author admin
+ * simple class to print startup message to karaf consol
+ * @author cgallen
  *
  */
-public class VerySimpleMessageNotificationClient implements NotificationClient {
-	private static 	final Logger LOG = LoggerFactory.getLogger(MessageNotificationClientQueueImpl.class);
-
-	public VerySimpleMessageNotificationClient(){
-		LOG.debug("VerySimpleMessageNotificationClient initialised");
+public class SayHello {
+	private static final Logger LOG = LoggerFactory.getLogger(SayHello.class);
+	
+	public SayHello(){
+		super();
+		LOG.info("Hello - TMForumAPIsPlugin started");
+		System.out.println("Hello - TMForumAPIsPlugin started");
 	}
 	
-	
-	@Override
-	public void sendMessageNotification(MessageNotification messageNotification) {
-		if(LOG.isDebugEnabled()) LOG.debug("Notification received by VerySimpleMessageNotificationClient :\n topic:"+messageNotification.getTopic()
-				+ "\n qos:"+messageNotification.getQos()
-				+ "\n payload:"+new String(messageNotification.getPayload()));
-
+	public void destroyMethod(){
+		LOG.info("Goodbye - Hello - TMForumAPIsPlugin stopped");
+		System.out.println("Goodbye - Hello - TMForumAPIsPlugin stopped");
 	}
-
-
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

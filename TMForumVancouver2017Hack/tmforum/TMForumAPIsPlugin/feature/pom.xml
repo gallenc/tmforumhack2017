@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.opennms.plugins</groupId>
-    <artifactId>SniffySimulatorPlugin.parent</artifactId>
+    <artifactId>TMForumAPIsPlugin.parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
   <!-- Feature Definition -->
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>SniffySimulatorPlugin</artifactId>
-  <name>SniffySimulatorPlugin</name>
-  <description>Feature definition for SniffySimulatorPlugin</description>
+  <artifactId>TMForumAPIsPlugin</artifactId>
+  <name>TMForumAPIsPlugin</name>
+  <description>Feature definition for TMForumAPIsPlugin</description>
   <packaging>pom</packaging>
 
   <build>

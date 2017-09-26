@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.opennms.plugins</groupId>
-    <artifactId>SniffySimulatorPlugin.parent</artifactId>
+    <artifactId>TMForumAPIsPlugin.parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
   <!-- LicenceAuthenticator -->
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>SniffySimulatorPlugin.licence-authenticator</artifactId>
-  <name>SniffySimulatorPlugin.licence-authenticator</name>
-  <description>Licence Authenticator for SniffySimulatorPlugin</description>
+  <artifactId>TMForumAPIsPlugin.licence-authenticator</artifactId>
+  <name>TMForumAPIsPlugin.licence-authenticator</name>
+  <description>Licence Authenticator for TMForumAPIsPlugin</description>
   <packaging>bundle</packaging>
 
   <build>

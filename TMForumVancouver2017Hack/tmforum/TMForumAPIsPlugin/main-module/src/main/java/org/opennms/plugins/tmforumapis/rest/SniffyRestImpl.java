@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-package org.opennms.plugins.sniffysimulator.rest;
+package org.opennms.plugins.tmforumapis.rest;
 
-import org.opennms.plugins.sniffysimulator.SniffyService;
-import org.opennms.plugins.sniffysimulator.jaxb.SniffyData;
+import org.opennms.plugins.tmforumapis.SniffyService;
+import org.opennms.plugins.tmforumapis.jaxb.SniffyData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ public class SniffyRestImpl {
 
 	/**
 	 * @return Returns latest Sniffy data (last sent using MQTT)
-	 * service will be at http://localhost:8181/sniffy/rest/v1-0/measurements/latest-measurement 
+	 * service will be at http://localhost:8181/tmforumapis/rest/v1-0/measurements/latest-measurement
 	 */
 	@GET
 	@Path("/latest-measurement")

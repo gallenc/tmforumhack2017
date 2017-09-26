@@ -1,4 +1,4 @@
-package org.opennms.plugins.sniffysimulator.jaxb;
+package org.opennms.plugins.tmforumapis.jaxb;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

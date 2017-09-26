@@ -1,4 +1,4 @@
-package org.opennms.plugins.mqttclient.test.manual;
+package org.opennms.plugins.tmforumapis.test.manual;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +11,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 import org.junit.Test;
-import org.opennms.plugins.sniffysimulator.jaxb.SniffyData;
+import org.opennms.plugins.tmforumapis.jaxb.SniffyData;
 
 public class SniffyDataJsonTest {
 

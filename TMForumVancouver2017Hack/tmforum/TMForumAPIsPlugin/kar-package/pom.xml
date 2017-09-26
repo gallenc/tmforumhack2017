@@ -4,12 +4,12 @@
 
   <parent>
     <groupId>org.opennms.plugins</groupId>
-    <artifactId>SniffySimulatorPlugin.parent</artifactId>
+    <artifactId>TMForumAPIsPlugin.parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>SniffySimulatorPlugin.kar-package</artifactId>
-  <name>SniffySimulatorPlugin.kar-package</name>
+  <artifactId>TMForumAPIsPlugin.kar-package</artifactId>
+  <name>TMForumAPIsPlugin.kar-package</name>
   <description>Generate kar for ${productName}</description>
   <packaging>kar</packaging>
 

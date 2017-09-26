@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.opennms.plugins</groupId>
-    <artifactId>SniffySimulatorPlugin.parent</artifactId>
+    <artifactId>TMForumAPIsPlugin.parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
   <!-- Feature Definition -->
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>SniffySimulatorPlugin.kar-descriptor</artifactId>
-  <name>SniffySimulatorPlugin.kar-descriptor</name>
+  <artifactId>TMForumAPIsPlugin.kar-descriptor</artifactId>
+  <name>TMForumAPIsPlugin.kar-descriptor</name>
   <description>Kar Descriptor for ${productName}</description>
   <packaging>bundle</packaging>
 

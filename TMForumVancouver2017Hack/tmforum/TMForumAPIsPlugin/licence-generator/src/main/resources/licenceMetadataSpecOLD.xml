@@ -9,14 +9,14 @@
   <!-- e.g. feature version="[2.5.6,4)" -->
   <!-- so this allows us to have a single licence which can cover a range of releases of the -->
   <!-- feature which implements the product. -->
-  <productId>SniffySimulatorPlugin/1.0-SNAPSHOT</productId>
+  <productId>TMForumAPIsPluginPlugin/1.0-SNAPSHOT</productId>
 
   <!-- featureRepository is expected to contain the url of the features repository -->
   <!-- which describes the Karaf feature using the concatenated form -->
   <!-- <groupId>/<artifactId>/<version>/xml/features -->
   <!-- such that the repository can be installed using features:addurl (Karaf 2.4.0) -->
   <!-- e.g. features:addurl mvn:org.apache.camel/camel-example-osgi/2.10.0/xml/features -->
-  <featureRepository>org.opennms.plugins/SniffySimulatorPlugin/1.0-SNAPSHOT/xml/features</featureRepository>
+  <featureRepository>org.opennms.plugins/TMForumAPIsPluginPlugin/1.0-SNAPSHOT/xml/features</featureRepository>
 
 
   <!-- licensee - the name & address of the person / organisation who is granted the licence -->
