@@ -15,19 +15,19 @@
   <!-- mvn:<groupId>/<artifactId>/<version>/xml/features -->
   <!-- such that the repository can be installed using features:addurl (Karaf 2.4.0) -->
   <!-- e.g. features:addurl mvn:org.apache.camel/camel-example-osgi/2.10.0/xml/features -->
-  <featureRepository>${productFeatureRepository}</featureRepository>
+  <featureRepository>mvn:${groupId}/${productName}/${project.version}/xml/features</featureRepository>
   
     
   <!-- packageingDescriptor describes the packaging of this feature. This gives an locator for the Karaf kar or rpm -->
   <!-- in which this feature was packaged for delivery. Null or empty if no packaging described. -->
-  <packageingDescriptor>This optional plugin is packaged as a kar</packageingDescriptor>
+  <packageingDescriptor>Not Defined</packageingDescriptor>
 	
   <organization>OpenNMS Project</organization>
-  <productDescription>Sniffy Simulator</productDescription>
+  <productDescription>TODO complete product description for ${productName}</productDescription>
   <productName>${productName}</productName>
   <productUrl>http:\\opennms.co.uk</productUrl>
   <licenceKeyRequired>true</licenceKeyRequired>
-  <licenceType>AGPL</licenceType>
+  <licenceType>See Plugin Documentation for ELUA</licenceType>
   
   <!-- a plugin marked as a system plugin will not be removable by the plugin manager -->
   <systemPlugin>false</systemPlugin>

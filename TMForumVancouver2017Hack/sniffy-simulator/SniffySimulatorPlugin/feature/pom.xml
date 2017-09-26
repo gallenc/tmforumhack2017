@@ -46,6 +46,11 @@
   <dependencies>
     <dependency>
       <groupId>org.opennms.plugins</groupId>
+      <artifactId>${productName}.licence-authenticator</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opennms.plugins</groupId>
       <artifactId>${productName}.product-descriptor</artifactId>
       <version>${project.version}</version>
     </dependency>
