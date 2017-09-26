@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.opennms.plugins</groupId>
-  <artifactId>SniffySimulatorPlugin.parent</artifactId>
+  <artifactId>TMForumAPIsPlugin.parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>SniffySimulatorPlugin.parent</name>
-  <description>SniffySimulatorPlugin Parent Project</description>
+  <name>TMForumAPIsPlugin.parent</name>
+  <description>TMForumAPIsPlugin Parent Project</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,8 +15,8 @@
     <!-- Note must set project.artifactId explicitly as karaf-pluginmanager-archetypeexpression is re-evaluated in each sub module !! -->
     <!-- <productId>org.opennms.plugins/karaf-pluginmanager-archetype/1.1.0-SNAPSHOT</productId> -->
     <!-- <productId>org.opennms.plugins/org.opennms.co.uk.newfeature/1.1.0-SNAPSHOT</productId> -->
-    <productId>SniffySimulatorPlugin/${project.version}</productId>
-    <productName>SniffySimulatorPlugin</productName>
+    <productId>TMForumAPIsPlugin/${project.version}</productId>
+    <productName>TMForumAPIsPlugin</productName>
     <productFeatureRepository>mvn:${project.groupId}/${productName}/${project.version}/xml/features</productFeatureRepository>
 
     <licencemanagerVersion>1.1.0-SNAPSHOT</licencemanagerVersion>
@@ -223,6 +223,28 @@
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
           <version>1.3.2</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.5.3</version>
+          <extensions>true</extensions>
+          <configuration>
+            <obrRepository>NONE</obrRepository>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.7</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.7</version>
         </plugin>
 
       </plugins>
