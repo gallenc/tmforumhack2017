@@ -39,7 +39,7 @@ docker ps -a
 
 and log in using
 
-docker exec -ti <conteiner id> /bin/bash
+docker exec -ti <container id> /bin/bash
 ```
 ## Container description
 
