@@ -1,0 +1,1 @@
+Karaf deploy directory for kar bundle and feature files
