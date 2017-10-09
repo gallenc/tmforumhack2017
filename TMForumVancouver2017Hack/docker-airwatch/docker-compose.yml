@@ -43,6 +43,8 @@ services:
       - opennms_data:rw
     volumes:
       - ./opennms-etc:/opt/opennms/etc
+      - ./opennms-etc:/opt/opennms/deploy
+      - ./opennms-logs:/opt/opennms/logs
     command: ["-s"]
     ports:
       - "8980:8980"

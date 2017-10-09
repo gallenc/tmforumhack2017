@@ -10,3 +10,5 @@ grafana-data
 grafana-plugins
 minion-data
 .settings
+/opennms-logs/
+/opennms-deploy/

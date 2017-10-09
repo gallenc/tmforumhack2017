@@ -1,0 +1,1 @@
+These files must be copied into OpenNMS etc directory to set up configuration
