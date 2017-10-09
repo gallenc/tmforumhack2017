@@ -12,3 +12,4 @@ minion-data
 .settings
 /opennms-logs/
 /opennms-deploy/
+/opennms-data/
