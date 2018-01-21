@@ -1,3 +1,7 @@
+# THE MqttClient REPO IS NOW IN A SEPARATE REPO
+# THIS BRANCH IS NO LONGER CURRENT
+# SEE https://github.com/gallenc/opennms-mqtt-plugin
+
 # Description
 This OpenNMS plugin adds the ability for OpenNMS to received streaming measurements and events from an IoT infrastructure. 
 The plugin supports MQTT messages and also asynchronous messages sent into OpenNMS from a ReST API.
